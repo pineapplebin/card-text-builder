@@ -6,21 +6,21 @@
                 border-bottom-left-radius: 15%; border-bottom-right-radius: 15%;"
          :style="{background: colors[color][2]}">
       <div style='font-family: Beleren, "FZCuSong-B09S", STSong, sans-serif; font-weight: normal;
-           font-size: 14pt; padding: 1px 3px; border: solid; border-width: 1px 2px;
+           font-size: 13pt; padding: 2px 5px; border: solid; border-width: 1px 2px;
            border-radius: 5px; box-shadow: -2px 1px 3px 0 black;
            display: flex; align-items: center; text-align: left;'
-           :style="{borderColor: colors[color][3], background: colors[color][1]}">
+           :style="{borderColor:  colors[color][3], background: colors[color][1]}">
         <span style="flex: 1 0 auto;">{{ name }}</span>
         <img v-for="c in cost" :src="$$images.mana[c]" v-if="c" style="width: 18px;
           height: 18px; margin-right: 2px; border-left: 1px solid black;
           border-bottom: 2px solid black; border-radius: 50%;">
       </div>
-      <div style="width: 275px; height: 200px; border: solid;
+      <div id="cardImage" style="width: 275px; height: 200px; border: solid;
            border-width: 1px 2px; border-radius: 1px; box-shadow: -2px 1px 3px 0 black;
            background: center -53px no-repeat; background-size: 330px; margin: 0 auto;"
            :style="{backgroundImage: card_image, borderColor: colors[color][3]}">
       </div>
-      <div style='font-family: Beleren, STKaiti, sans-serif; font-size: 11pt; font-weight: bold;
+      <div style='font-family: Beleren, STKaiti, sans-serif; font-size: 12pt; font-weight: normal;
            padding: 3px; border: solid; border-width: 1px 2px; border-radius: 5px;
            box-shadow: -2px 1px 3px 0 black; text-align: left; display: flex; align-items: center;'
            :style="{borderColor: colors[color][3], background: colors[color][1]}">
@@ -35,9 +35,9 @@
         <span v-html="effect_render">{{ effect_render }}</span>
       </div>
       <div style='float: right; right: -5px; bottom: 15px; margin-bottom: -28px;
-             font-family: Beleren, sans-serif; border: 2px solid #EEE; border-radius: 5px;
+             font-family: Beleren, sans-serif; border: 2px solid; border-radius: 5px;
              box-shadow: -2px 1px 3px 0 black; position: relative;'
-           :style="{background: colors[color][1]}" v-if="is_creature">
+           :style="{background: colors[color][1], borderColor: colors[color][0]}" v-if="is_creature">
           <span style="border-top: 2px solid #444; border-right: 2px solid #444;
                 border-radius: 5px; display: inline-block; padding: 0 10px;">{{ body[0]
             }}/{{ body[1] }}</span>
@@ -149,7 +149,8 @@
         border-radius: 5px;
         display: inline-block;
         padding: 2px 10px;
-        color: rgb(243, 243, 243);
+        color: rgb(250, 243, 184);
+        background: linear-gradient(to right, #FFF, #000);
       }
     }
   }
@@ -165,7 +166,17 @@
           B: ['#EEEEEE', '#CDC7C6', '#4F5149', '#000000'],
           R: ['#F0E6E1', '#F0D7C8', '#BD4E30', '#E95A39'],
           G: ['#DCE6E0', '#C4D2CB', '#7CA782', '#398246'],
-          AR: ['#D6DFE3', '#E0E7EB', '#9DB5C1', '#F3F3F3']
+          A: ['#D6DFE3', '#E0E7EB', '#9DB5C1', '#F3F3F3'],
+          WU: ['#EBEBEB', '#DBCA94', '#FAF3B8', '#FFFFFF #3888C8 #3888C8 #FFFFFF'],
+          UB: ['#EBEBEB', '#DBCA94', '#FAF3B8', '#3888C8 #000000 #000000 #3888C8'],
+          BR: ['#EBEBEB', '#DBCA94', '#FAF3B8', '#000000 #E95A39 #E95A39 #000000'],
+          RG: ['#EBEBEB', '#DBCA94', '#FAF3B8', '#E95A39 #398246 #398246 #E95A39'],
+          WG: ['#EBEBEB', '#DBCA94', '#FAF3B8', '#FFFFFF #398246 #398246 #FFFFFF'],
+          WB: ['#EBEBEB', '#DBCA94', '#FAF3B8', '#FFFFFF #000000 #000000 #FFFFFF'],
+          UR: ['#EBEBEB', '#DBCA94', '#FAF3B8', '#3888C8 #E95A39 #E95A39 #3888C8'],
+          BG: ['#EBEBEB', '#DBCA94', '#FAF3B8', '#000000 #398246 #398246 #000000'],
+          WR: ['#EBEBEB', '#DBCA94', '#FAF3B8', '#FFFFFF #E95A39 #E95A39 #FFFFFF'],
+          UG: ['#EBEBEB', '#DBCA94', '#FAF3B8', '#3888C8 #398246 #398246 #3888C8'],
         },
 //        color: 'R',
       }

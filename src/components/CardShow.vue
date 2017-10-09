@@ -16,7 +16,17 @@
           <option value="B">黑色</option>
           <option value="R">红色</option>
           <option value="G">绿色</option>
-          <option value="AR">神器</option>
+          <option value="A">神器</option>
+          <option value="WU">白蓝</option>
+          <option value="UB">蓝黑</option>
+          <option value="BR">黑红</option>
+          <option value="RG">红绿</option>
+          <option value="WG">白绿</option>
+          <option value="WB">白黑</option>
+          <option value="UR">蓝红</option>
+          <option value="BG">黑绿</option>
+          <option value="WR">白红</option>
+          <option value="UG">蓝绿</option>
         </select>
         <label for="rarity">稀有度</label>
         <select id="rarity" v-model="rarity">
@@ -104,6 +114,7 @@
         cost: [],
         cost_text: '',
         card_url: '',
+        url: '',
         type: '',
         effect: '',
         atk: 0,
