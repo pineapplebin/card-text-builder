@@ -23,18 +23,18 @@
   import domtoimage from 'dom-to-image';
 
   export default {
-    data() {
+    data () {
       return {
         output: ''
       }
     },
     methods: {
-      clickOutput() {
+      clickOutput () {
         const el = document.getElementById('card');
         console.log(el.outerHTML);
         this.output = el.outerHTML;
       },
-      clickToImage() {
+      clickToImage () {
         const self = this;
         const el = document.getElementById('card');
         const img = el.querySelector('#cardImage');
@@ -47,7 +47,7 @@
             xhr.onload = function () {
               const reader = new FileReader();
               reader.onloadend = function () {
-                img.style.backgroundImage = reader.result;
+                img.style.backgroundImage = `url(${reader.result})`;
                 res();
               };
               reader.readAsDataURL(xhr.response);
