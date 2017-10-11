@@ -6,7 +6,7 @@
                 border-bottom-left-radius: 15%; border-bottom-right-radius: 15%;"
          :style="{background: colors[color][2]}">
       <div style='font-family: Beleren, "FZCuSong-B09S", STSong, sans-serif; font-weight: normal;
-           font-size: 13pt; padding: 2px 5px; border: solid; border-width: 1px 2px;
+           font-size: 13pt; padding: 2px 5px; border: solid; border-width: 2px 3px;
            border-radius: 5px; box-shadow: -2px 1px 3px 0 black;
            display: flex; align-items: center; text-align: left;'
            :style="{borderColor:  colors[color][3], background: colors[color][1]}">
@@ -16,28 +16,30 @@
           border-bottom: 2px solid black; border-radius: 50%;">
       </div>
       <div id="cardImage" style="width: 275px; height: 200px; border: solid;
-           border-width: 1px 2px; border-radius: 1px; box-shadow: -2px 1px 3px 0 black;
+           border-width: 2px 3px; border-radius: 1px; box-shadow: -2px 1px 3px 0 black;
            background: center -53px no-repeat; background-size: 330px; margin: 0 auto;"
            :style="{backgroundImage: card_image, borderColor: colors[color][3]}">
       </div>
-      <div style='font-family: Beleren, STKaiti, sans-serif; font-size: 12pt; font-weight: normal;
-           padding: 3px; border: solid; border-width: 1px 2px; border-radius: 5px;
+      <div style='font-family: Beleren, STKaiti, sans-serif; font-size: 1em; font-weight: bold;
+           padding: 3px; border: solid; border-width: 2px 3px; border-radius: 5px;
            box-shadow: -2px 1px 3px 0 black; text-align: left; display: flex; align-items: center;'
            :style="{borderColor: colors[color][3], background: colors[color][1]}">
         <span style="flex: 1 0 auto;">{{ type }}</span>
-        <img :src="$$images['rarity'][rarity]" alt="" style="height: 15px;">
+        <span style="font-size: 1.2em;" class="ss ss-grad"
+              :class="[`ss-${version}`, `ss-${rarity}`]"></span>
       </div>
       <div style="font-size: 10pt; padding: 10px 10px; width: 260px; min-height: 100px;
            display: flex; align-items: center; justify-content: flex-start;
-           margin: 0 auto -5px auto; border: solid; border-width: 1px 2px; word-break: break-all;
+           margin: 0 auto -5px auto; border: solid; border-width: 2px 3px; word-break: break-all;
            border-radius: 1px; box-shadow: -2px 1px 3px 0 black; text-align: left;"
            :style="{borderColor: colors[color][3], background: colors[color][0]}">
         <span v-html="effect_render">{{ effect_render }}</span>
       </div>
       <div style='float: right; right: -5px; bottom: 15px; margin-bottom: -28px;
-             font-family: Beleren, sans-serif; border: 2px solid; border-radius: 5px;
+             font-family: Beleren, sans-serif; border: 1px solid; border-radius: 5px;
              box-shadow: -2px 1px 3px 0 black; position: relative;'
-           :style="{background: colors[color][1], borderColor: colors[color][0]}" v-if="is_creature">
+           :style="{background: colors[color][1], borderColor: colors[color][0]}"
+           v-if="is_creature">
           <span style="border-top: 2px solid #444; border-right: 2px solid #444;
                 border-radius: 5px; display: inline-block; padding: 0 10px;">{{ body[0]
             }}/{{ body[1] }}</span>
@@ -182,7 +184,7 @@
       }
     },
     props: ['id', 'name', 'cost_text', 'card_url', 'type', 'effect', 'body',
-      'is_creature', 'color', 'rarity'],
+      'is_creature', 'color', 'rarity', 'version'],
     computed: {
       cost() {
         return this.cost_text.split(',').map(t => t.trim())

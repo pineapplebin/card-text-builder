@@ -1,7 +1,7 @@
 import resources from '../resources/abilities.json'
 import images from '../resources/images.json'
 
-const ABILITY_REG = /\[\[(.+)\]\]/i;
+const ABILITY_REG = /\[\[([\u4e00-\u9fa5|\w\d{}\!]+)\]\]/i;
 const COST_REG = /{([\d\w]+)}/ig;
 const ITALIC_REG = /#(.+)#/i;
 
@@ -9,6 +9,11 @@ function transAbility(line) {
   const result = line.match(ABILITY_REG);
   if (result) {
     let [name, param] = result[1].split('|');
+    let only_desc = false;
+    if (name[0] === '!') {
+      only_desc = true;
+      name = name.slice(1);
+    }
     if (resources[name]) {
       // 判断是否为有效果异能
       if (resources[name]['keyword']) {
@@ -23,7 +28,7 @@ function transAbility(line) {
         }
         line = line.replace(
           result[0],
-          `${name}<span style="font-style: italic">（${desc}）</span>`)
+          `${only_desc ? '' : name}<span style="font-style: italic">（${desc}）</span>`)
       }
     }
   }

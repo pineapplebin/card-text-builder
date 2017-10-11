@@ -4,7 +4,7 @@
       <component :is="cards['NormalCard']" :id="id" :name="name"
                  :cost_text="cost_text" :card_url="card_url" :type="type"
                  :effect="effect" :body="[atk, def]" :is_creature="is_creature"
-                 :color="background" :rarity="rarity"></component>
+                 :color="background" :rarity="rarity" :version="version"></component>
     </div>
     <hr>
     <div class="form">
@@ -30,15 +30,19 @@
         </select>
         <label for="rarity">稀有度</label>
         <select id="rarity" v-model="rarity">
-          <option value="c">Common</option>
-          <option value="u">Uncommon</option>
-          <option value="r">Rare</option>
-          <option value="m">Mythic</option>
+          <option value="common">Common</option>
+          <option value="uncommon">Uncommon</option>
+          <option value="rare">Rare</option>
+          <option value="mythic">Mythic</option>
+          <option value="foil">Foil</option>
         </select>
+        <label for="version" style="margin-left: 100px;">卡包</label>
+        <input id="version" type="text" v-model="version" placeholder="Keyrune code"
+               style="width: 50px;">
       </div>
       <div class="form-control">
         <label for="id">ID</label>
-        <input id="id" type="text" v-model="id" autocomplete="off">
+        <input id="id" type="text" v-model="id" autocomplete="off" placeholder="美版编号">
       </div>
       <div class="form-control">
         <label for="name">名字</label>
@@ -121,7 +125,8 @@
         def: 0,
         is_creature: true,
         background: 'W',
-        rarity: 'c',
+        rarity: 'common',
+        version: 'xln',
       }
     },
     methods: {}
