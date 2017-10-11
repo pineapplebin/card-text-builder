@@ -1,6 +1,14 @@
 <template>
   <div class="CardShow">
     <div class="cardshow">
+      <!--<component :is="cards[card]" :id="id" :name="name"-->
+      <!--:cost_text="cost_text" :card_url="card_url" :type="type"-->
+      <!--:effect="effect" :body="[atk, def]" :is_creature="is_creature"-->
+      <!--:color="background" :rarity="rarity"></component>-->
+      <component :is="cards[card]" :id="id" :name="name"
+                 :cost_text="cost_text" :card_url="card_url" :type="type"
+                 :effect="effect" :body="[atk, def]" :is_creature="is_creature"
+                 :color="background" :rarity="rarity"></component>
       <component :is="cards['NormalCard']" :id="id" :name="name"
                  :cost_text="cost_text" :card_url="card_url" :type="type"
                  :effect="effect" :body="[atk, def]" :is_creature="is_creature"
@@ -102,13 +110,16 @@
 
 <script>
   import NormalCard from './Cards/NormalCard.vue'
+  import RealNormalCard from './Cards/RealNormalCard.vue'
 
   export default {
-    data() {
+    data () {
       return {
         cards: {
-          NormalCard
+          NormalCard,
+          RealNormalCard
         },
+        card: 'RealNormalCard',
         id: '',
         name: '',
         cost: [],

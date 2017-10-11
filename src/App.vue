@@ -23,7 +23,7 @@
 </script>
 
 <style lang="less">
-  html, body {
+  * {
     margin: 0;
     padding: 0;
   }
@@ -33,7 +33,6 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     width: 100%;
-    text-align: center;
 
     .contents {
       width: 80vw;
