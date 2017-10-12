@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<style lang="less">
+<style lang="less" scoped>
   .image-output {
     text-align: center;
     img {

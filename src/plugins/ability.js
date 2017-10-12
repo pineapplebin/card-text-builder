@@ -42,7 +42,7 @@ function transImage(line) {
       const img_name = short.toLowerCase().slice(1, short.length - 1);
       if (images['mana'][img_name]) {
         line = line.replace(short,
-          `<img src="${images['mana'][img_name]}" style="width: 14px;height: 14px; vertical-align: sub; margin-right: 2px;">`)
+          `<img src="${images['mana'][img_name]}" style="width: 15px;height: 15px; vertical-align: sub; margin-right: 2px; margin-bottom: 2px;">`)
       }
     });
   }
@@ -65,7 +65,7 @@ const ability = {
       .map(transAbility)
       .map(transImage)
       .map(transItalic)
-      .map(line => `<p style="margin: 5px 0;line-height: 15px">${line}</p>`)
+      .map(line => `<p style="margin: 3px 0;line-height: 17px">${line}</p>`)
       .join('');
   }
 };

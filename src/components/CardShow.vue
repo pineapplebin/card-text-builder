@@ -1,21 +1,18 @@
 <template>
   <div class="CardShow">
     <div class="cardshow">
-      <!--<component :is="cards[card]" :id="id" :name="name"-->
-      <!--:cost_text="cost_text" :card_url="card_url" :type="type"-->
-      <!--:effect="effect" :body="[atk, def]" :is_creature="is_creature"-->
-      <!--:color="background" :rarity="rarity"></component>-->
       <component :is="cards[card]" :id="id" :name="name"
                  :cost_text="cost_text" :card_url="card_url" :type="type"
                  :effect="effect" :body="[atk, def]" :is_creature="is_creature"
-                 :color="background" :rarity="rarity"></component>
-      <component :is="cards['NormalCard']" :id="id" :name="name"
-                 :cost_text="cost_text" :card_url="card_url" :type="type"
-                 :effect="effect" :body="[atk, def]" :is_creature="is_creature"
                  :color="background" :rarity="rarity" :version="version"></component>
+      <!--<component :is="cards['RealNormalCard']" :id="id" :name="name"-->
+      <!--:cost_text="cost_text" :card_url="card_url" :type="type"-->
+      <!--:effect="effect" :body="[atk, def]" :is_creature="is_creature"-->
+      <!--:color="background" :rarity="rarity" :version="version"></component>-->
     </div>
     <hr>
-    <div class="form">
+    <button @click="show_form = !show_form">隐藏／显示表单</button>
+    <div class="form" v-show="show_form">
       <div class="form-control">
         <label for="background">卡框颜色</label>
         <select id="background" v-model="background" style="width: 100px; margin-right: 100px;">
@@ -87,7 +84,7 @@
   </div>
 </template>
 
-<style lang="less">
+<style lang="less" scoped>
   .cardshow {
     padding: 10px;
     display: flex;
@@ -98,6 +95,7 @@
     width: 80%;
     margin: 0 auto;
     text-align: left;
+    overflow-y: scroll;
 
     .form-control {
       label {
@@ -115,15 +113,17 @@
 <script>
   import NormalCard from './Cards/NormalCard.vue'
   import RealNormalCard from './Cards/RealNormalCard.vue'
+  import ArenaNormalCard from './Cards/ArenaNormalCard.vue'
 
   export default {
-    data () {
+    data() {
       return {
+        show_form: true,
+        // card
         cards: {
-          NormalCard,
-          RealNormalCard
+          ArenaNormalCard,
         },
-        card: 'RealNormalCard',
+        card: 'ArenaNormalCard',
         id: '',
         name: '',
         cost: [],

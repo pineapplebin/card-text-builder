@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="contents">
-      <card-show></card-show>
+      <card-show ref="card_show"></card-show>
     </div>
     <div class="tools">
       <tools></tools>

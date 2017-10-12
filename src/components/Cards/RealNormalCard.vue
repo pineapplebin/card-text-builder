@@ -1,23 +1,30 @@
 <template>
   <div id="card" class="RealNormalCard">
-    <div class="inner-background" :style="{backgroundImage: `url(${default_white})`}">
-      <div class="block-border" :style="{borderRadius: '12px'}">
-        <div class="holder name-holder">
+    <div class="inner-background" :style="{backgroundImage: `url(${card_colors[color][3]})`}">
+      <div class="block-border"
+           :style="{borderRadius: '14px', borderColor: card_colors[color][2]}">
+        <div class="holder name-holder" :style="{backgroundColor: card_colors[color][1]}">
           <span class="text">{{ name }}</span>
           <img v-for="c in cost" :src="$$images['mana'][c]" alt="" v-if="c">
         </div>
       </div>
-      <div class="block-border" style="width: 308px">
+      <div class="block-border" style="width: 320px"
+           :style="{borderColor: card_colors[color][2]}">
         <div class="holder image-holder" :style="{backgroundImage: card_image}"></div>
       </div>
-      <div class="block-border" :style="{borderRadius: '12px'}">
-        <div class="holder type-holder">
+      <div class="block-border"
+           :style="{borderRadius: '14px', borderColor: card_colors[color][2]}">
+        <div class="holder type-holder" :style="{backgroundColor: card_colors[color][1]}">
           <span class="text">{{ type }}</span>
-          <span></span>
+          <span style="font-size: 1.2em;" class="ss ss-grad"
+                :class="[`ss-${version}`, `ss-${rarity}`]"></span>
         </div>
       </div>
-      <div class="block-border" style="width: 308px; margin-bottom: -10px;">
-        <div class="holder effect-holder" v-html="effect_render">{{ effect_render }}</div>
+      <div class="block-border" style="width: 320px; margin-bottom: -10px;"
+           :style="{borderColor: card_colors[color][2]}">
+        <div class="holder effect-holder" :style="{backgroundColor: card_colors[color][0]}"
+             v-html="effect_render">{{ effect_render }}
+        </div>
       </div>
     </div>
     <div class="card-info">
@@ -39,6 +46,7 @@
   .inner-background {
     border: 1px solid transparent;
     background-size: auto;
+    background-position: left;
     border-radius: 5px 5px 15% 15%;
     padding: 5px 2px 5px 5px;
   }
@@ -58,20 +66,22 @@
   }
 
   .name-holder {
-    height: 25px;
+    height: 30px;
     border-radius: 13px;
     display: flex;
     align-items: center;
     text-align: left;
     padding: 0 10px;
     font-family: Beleren, "FZCuSong-B09S", sans-serif;
-    font-size: 14pt;
+    font-size: 15pt;
 
-    .text { flex: 1 0 auto; }
+    .text {
+      flex: 1 0 auto;
+    }
 
     img {
       display: inline-block;
-      width: 18px;
+      width: 19px;
       margin-right: 2px;
       border-left: 1px solid black;
       border-bottom: 2px solid black;
@@ -80,31 +90,34 @@
   }
 
   .image-holder {
-    height: 225px;
+    height: 230px;
     margin: 0 auto;
-    background: center -55px no-repeat;
-    background-size: 360px;
+    background: center -62px no-repeat;
+    background-size: 380px;
   }
 
   .type-holder {
     font-family: Beleren, STKaiti, sans-serif;
-    height: 20px;
+    height: 25px;
     border-radius: 13px;
     display: flex;
     align-items: center;
     padding: 0 10px;
 
-    .text { flex: 1 0 auto; }
+    .text {
+      flex: 1 0 auto;
+    }
   }
 
   .effect-holder {
-    min-height: 170px;
+    min-height: 155px;
     border-width: 1px 1px 0 0;
     font-size: 11pt;
     padding: 10px 10px;
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
     word-break: break-all;
     text-align: left;
   }
@@ -127,7 +140,7 @@
       font-size: 13pt;
       float: right;
       position: relative;
-      right: 10px;
+      right: 5px;
       bottom: 15px;
       border: 2px solid white;
       border-radius: 8px;
@@ -148,24 +161,30 @@
 </style>
 
 <script>
-  import default_white from '../../assets/backgound/default_white.jpg'
+  import default_white from '../../assets/background/default_white.jpg'
+  import default_blue from '../../assets/background/default_blue.jpg'
+  import default_black from '../../assets/background/default_black.jpg'
 
   export default {
-    data () {
+    data() {
       return {
-        default_white
+        card_colors: {
+          "W": ['#FCFCF6', '#F5F5F0', '#FFFFFF', default_white],
+          "U": ['#E7F2F7', '#c8e6f6', '#007EBF', default_blue],
+          "B": ['#eeedeb', '#c5bdbd', '#1e1b14', default_black],
+        }
       }
     },
     props: ['id', 'name', 'cost_text', 'card_url', 'type', 'effect', 'body',
-      'is_creature', 'color', 'rarity'],
+      'is_creature', 'color', 'rarity', 'version'],
     computed: {
-      cost () {
+      cost() {
         return this.cost_text.split(',').map(t => t.trim())
       },
-      card_image () {
+      card_image() {
         return `url(${this.card_url}`;
       },
-      effect_render () {
+      effect_render() {
         return this.$$ability.translate(this.effect);
       }
     }
