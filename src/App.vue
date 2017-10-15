@@ -1,26 +1,15 @@
 <template>
-  <div id="app">
-    <div class="contents">
-      <card-show ref="card_show"></card-show>
-    </div>
-    <div class="tools">
-      <tools></tools>
+  <div id="app" class="layout">
+    <div class="flex">
+      <div style="flex: .8 0 auto;">
+        <component :is="CARDS[card]" ref="card_show"></component>
+      </div>
+      <div>
+        <tools :cards="CARDS" :card="card" @change="onChangeCard"></tools>
+      </div>
     </div>
   </div>
 </template>
-
-<script>
-  import CardShow from './components/CardShow.vue'
-  import Tools from './components/Tool.vue'
-
-  export default {
-    name: 'app',
-    components: {
-      CardShow,
-      Tools
-    }
-  }
-</script>
 
 <style lang="less">
   * {
@@ -32,20 +21,39 @@
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    width: 100%;
+  }
 
-    .contents {
-      width: 80vw;
-    }
+  .layout {
+    border: 1px solid #d7dde4;
+    position: relative;
+  }
 
-    .tools {
-      position: fixed;
-      top: 0;
-      left: 80vw;
-      width: 20vw;
-      height: 100vh;
-      border-left: 1px solid #555;
-      overflow-y: scroll;
-    }
+  .flex {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
 </style>
+
+<script>
+  import NormalCardShow from './components/CardShows/NormalCardShow.vue'
+  import Tools from './components/Tool.vue'
+
+  export default {
+    name: 'app',
+    components: {Tools},
+    data() {
+      return {
+        CARDS: {
+          NormalCardShow,
+        },
+        card: 'NormalCardShow',
+      }
+    },
+    methods: {
+      onChangeCard() {
+
+      }
+    }
+  }
+</script>

@@ -1,26 +1,27 @@
 <template>
   <div class="ArenaNormalCard" id="card">
-    <div class="background-image" :style="{backgroundImage: `url(${COLORS[color][3]})`}">
+    <div class="background-image" :style="{backgroundImage: `url(${color.background})`}">
       <div class="border-radius-block">
-        <div class="border-color-block" :style="{background: COLORS[color][2]}">
+        <div class="border-color-block" :style="{background: color.border}">
           <div class="content-block name-block" style="border-radius: 8px"
-               :style="{backgroundColor: COLORS[color][1]}">
+               :style="{backgroundColor: color.name}">
             <span>{{ name }}</span>
-            <img v-for="c in cost" :src="$$images['mana'][c]" alt="" v-if="c">
+            <img v-for="c in cost" :src="$$images['mana'][c]" alt=""
+                 v-if="c" :class="{bigger: c.match(/^[2wubrg][wubrg]$/)}">
           </div>
         </div>
       </div>
       <div class="border-radius-block" style="width: 335px; border-radius: 2px;">
         <div class="border-color-block" style="padding-top: 0; padding-bottom: 0;"
-             :style="{background: COLORS[color][2]}">
+             :style="{background: color.border}">
           <div class="content-block image-block" style="border-width: 2px 2px 0 0;"
                :style="{backgroundImage: card_image}"></div>
         </div>
       </div>
       <div class="border-radius-block">
-        <div class="border-color-block" :style="{background: COLORS[color][2]}">
+        <div class="border-color-block" :style="{background: color.border}">
           <div class="content-block type-block" style="border-radius: 8px"
-               :style="{backgroundColor: COLORS[color][1]}">
+               :style="{backgroundColor: color.type}">
             <span>{{ type }}</span>
             <span style="font-size: 1.2em;" class="ss ss-grad"
                   :class="[`ss-${version}`, `ss-${rarity}`]"></span>
@@ -29,19 +30,22 @@
       </div>
       <div class="border-radius-block" style="width: 335px; border-radius: 0 0 5px 5px;">
         <div class="border-color-block" style="padding-top: 0;"
-             :style="{background: COLORS[color][2]}">
+             :style="{background: color.border}">
           <div class="content-block effect-block" style="border-width: 1px 2px 2px 1px"
-               :style="{background: COLORS[color][0]}">
-            <div class="content" v-html="effect_render">{{ effect_render }}</div>
+               :style="{background: color.effect}">
+            <div class="content" v-html="effect_render"
+                 :style="{backgroundImage: `url(${EFFECT_BACKGROUNDS[effect_background]})`}">
+              {{ effect_render }}
+            </div>
           </div>
         </div>
       </div>
     </div>
     <div class="extra-info">
       <span class="id">{{ id }}</span>
-      <div class="body" :style="{borderColor: COLORS[color][1], background: COLORS[color][1]}"
-           v-if="is_creature">
-        <span :style="{backgroundColor: COLORS[color][1]}">
+      <div class="body" v-if="is_creature"
+           :style="{borderColor: color.body, background: color.body}">
+        <span :style="{backgroundColor: color.body, color: color.body_font}">
           {{ body[0] }}/{{ body[1] }}
         </span>
       </div>
@@ -60,7 +64,7 @@
 
   .background-image {
     background-position: center;
-    background-size: auto;
+    background-size: 100%;
     border-radius: 0 0 15% 15%;
   }
 
@@ -102,12 +106,17 @@
       border-left: 1px solid black;
       border-bottom: 2px solid black;
       border-radius: 50%;
+
+      &.bigger {
+        width: 23px;
+        margin-bottom: 1px;
+      }
     }
   }
 
   .image-block {
     height: 230px;
-    background: center -62px no-repeat;
+    background: center -60px no-repeat;
     background-size: 375px;
   }
 
@@ -138,6 +147,9 @@
       align-items: flex-start;
       word-break: break-all;
       text-align: left;
+      background-size: 100px;
+      background-position: center;
+      background-repeat: no-repeat;
     }
   }
 
@@ -184,31 +196,19 @@
 </style>
 
 <script>
-  import default_white from '../../assets/background/default_white.jpg'
-  import default_blue from '../../assets/background/default_blue.jpg'
-  import default_black from '../../assets/background/default_black.jpg'
-  import default_red from '../../assets/background/default_red.jpg'
-  import default_green from '../../assets/background/default_green.jpg'
-  import default_multi from '../../assets/background/default_multi.jpg'
+  import story_spotlight from '../../assets/background/story_spotlight.png'
 
   export default {
     data() {
       return {
-        COLORS: {
-          W: ['#F5F5ED', '#E7E1CD', '#F9F9F9', default_white],
-          U: ['#E2EDF5', '#BBDAEA', '#036FAF', default_blue],
-          B: ['#D4D4D2', '#B1AAA4', '#3E3D3B', default_black],
-          R: ['#E4D4C5', '#ECBA97', '#EE5A32', default_red],
-          G: ['#CCD7CF', '#BBBDA5', '#0D6C4E', default_green],
-          WU: ['linear-gradient(to right, #F5F5ED 45%, #E2EDF5 55%)', '#BCA468',
-            'linear-gradient(to right, #F9F9F9 45%, #036FAF 55%)', default_multi],
-          RG: ['linear-gradient(to right, #E4D4C5 45%, #CCD7CF 55%)', '#BCA468',
-            'linear-gradient(to right, #EE5A32 45%, #0D6C4E 55%)', default_multi],
-        },
+        EFFECT_BACKGROUNDS: {
+          none: '',
+          spotlight: story_spotlight,
+        }
       }
     },
     props: ['id', 'name', 'cost_text', 'card_url', 'type', 'effect', 'body',
-      'is_creature', 'color', 'rarity', 'version'],
+      'is_creature', 'color', 'rarity', 'version', 'effect_background'],
     computed: {
       cost() {
         return this.cost_text.split(',').map(t => t.trim())

@@ -1,59 +1,77 @@
 import resources from '../resources/abilities.json'
-import images from '../resources/images.json'
+// import images from '../resources/images.json'
+import images from './images.js'
 
-const ABILITY_REG = /\[\[([\u4e00-\u9fa5|\w\d{}\!]+)\]\]/i;
+const ABILITY_REG = /\[\[([!\u4e00-\u9fa5|\w\d{}／]+)\]\]/i;
 const COST_REG = /{([\d\w]+)}/ig;
 const ITALIC_REG = /#(.+)#/i;
 
+const SPAN_ITALIC = '%0<span style="font-style: italic;">%1</span>';
+
 function transAbility(line) {
+  /**
+   * 处理异能缩写
+   * [[飞行]]   -> 飞行（...）
+   * [[!飞行]]  -> （...）
+   * [[铭勇|1]] -> 铭勇 1（...1）
+   * [[激怒]]   -> 激怒 ～ 每当...
+   * [[!激怒]]  -> 激怒 ～
+   */
   const result = line.match(ABILITY_REG);
-  if (result) {
-    let [name, param] = result[1].split('|');
-    let only_desc = false;
-    if (name[0] === '!') {
-      only_desc = true;
-      name = name.slice(1);
-    }
-    if (resources[name]) {
-      // 判断是否为有效果异能
-      if (resources[name]['keyword']) {
-        line = line.replace(result[0],
-          `<span style="font-style: italic;">${name} ～ </span>`);
-      } else {
-        // 获取有效果异能的描述
-        let desc = resources[name]['desc'];
-        if (param) {
-          desc = desc.replace('%n', param);
-          name = `${name} ${param}`
-        }
-        line = line.replace(
-          result[0],
-          `${only_desc ? '' : name}<span style="font-style: italic">（${desc}）</span>`)
-      }
-    }
+  if (!result)
+    return line;
+
+  let [name, ...params] = result[1].split('|').filter(s => s.length);
+  let shorty = false;
+  if (name[0] === '!') {
+    shorty = true;
+    name = name.slice(1);
   }
+  if (!resources[name])
+    return line;
+
+  let desc = resources[name]['desc'];
+  if (params.length)
+    desc = desc.format(params);
+
+  if (resources[name]['keyword']) {
+    line = line.replace(result[0], SPAN_ITALIC.format('', `${name} ～ ${shorty ? '' : desc}`));
+  } else {
+    if (params.length)
+      name += ' ' + params.join(' ');
+    line = line.replace(result[0], SPAN_ITALIC.format(shorty ? '' : name, `（${desc}）`));
+    console.log(line);
+  }
+
   return line
 }
 
 function transImage(line) {
   const result = line.match(COST_REG);
-  if (result) {
-    result.forEach(short => {
-      const img_name = short.toLowerCase().slice(1, short.length - 1);
-      if (images['mana'][img_name]) {
-        line = line.replace(short,
-          `<img src="${images['mana'][img_name]}" style="width: 15px;height: 15px; vertical-align: sub; margin-right: 2px; margin-bottom: 2px;">`)
+  if (!result)
+    return line;
+  console.log(result);
+
+  const IMG = '<img src="%0" style="width: %1px; height: %1px; margin: %2; vertical-align: sub;"/>';
+  result.forEach(short => {
+    const img_name = short.toLowerCase().slice(1, short.length - 1);
+    if (images['mana'][img_name]) {
+      let size = 15;
+      let margin = '0 2px 2px 2px';
+      if (img_name.match(/^[2wubrg][wubrg]$/)) {
+        size = 18;
+        margin = '2px 2px 0 2px'
       }
-    });
-  }
+      line = line.replace(short, IMG.format(images['mana'][img_name], size, margin));
+    }
+  });
   return line;
 }
 
 function transItalic(line) {
   const result = line.match(ITALIC_REG);
   if (result) {
-    line = line.replace(result[0],
-      `<span style="font-style: italic">${result[1]}</span>`)
+    line = line.replace(result[0], SPAN_ITALIC.format('', result[1]));
   }
   return line
 }
@@ -65,7 +83,7 @@ const ability = {
       .map(transAbility)
       .map(transImage)
       .map(transItalic)
-      .map(line => `<p style="margin: 3px 0;line-height: 17px">${line}</p>`)
+      .map(line => `<p style="margin: 3px 0;line-height: 17px;">${line}</p>`)
       .join('');
   }
 };
