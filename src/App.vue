@@ -36,8 +36,9 @@
 </style>
 
 <script>
-  import NormalCardShow from './components/CardShows/NormalCardShow.vue'
   import Tools from './components/Tool.vue'
+  import NormalCardShow from './components/CardShows/NormalCardShow.vue'
+  import DoubleFaceCardShow from './components/CardShows/DoubleFaceCardShow.vue'
 
   export default {
     name: 'app',
@@ -46,13 +47,14 @@
       return {
         CARDS: {
           NormalCardShow,
+          DoubleFaceCardShow,
         },
         card: 'NormalCardShow',
       }
     },
     methods: {
-      onChangeCard() {
-
+      onChangeCard(card) {
+        this.card = card;
       }
     }
   }

@@ -123,5 +123,9 @@ export default {
   AV: Color({
     display: '神器载具', name: C.A2, effect: C.A1, border: C.A3,
     background: AVb, body_font: '#FFFFFF', body: '#93613C'
+  }),
+  DBW: Color({
+    display: '背面白', name: '#B9B1A2', effect: '#DCD6CC', border: C.W3,
+    background: Wb, body_font: '#FFFFFF', dot: [C.W3]
   })
 }

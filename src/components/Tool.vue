@@ -1,7 +1,7 @@
 <template>
   <div class="Tools">
     <label for="cards">卡模板</label>
-    <select id="cards" :value="card">
+    <select id="cards" :value="card" @change="changeCard" v-model="selected">
       <option v-for="(_, c) in cards" :value="c">{{ c }}</option>
     </select>
   </div>
@@ -19,9 +19,15 @@
 <script>
   export default {
     data() {
-      return {}
+      return {
+        selected: null
+      }
     },
     props: ['cards', 'card'],
-    methods: {}
+    methods: {
+      changeCard() {
+        this.$emit('change', this.selected)
+      }
+    }
   }
 </script>
