@@ -53,6 +53,17 @@
           {{ body[0] }}/{{ body[1] }}
         </span>
       </div>
+      <div class="back-body-block" v-if="back_body && back_body.length">
+        <div class="back-body">
+        <span class="border" :style="{borderColor: color.border}">
+          <span class="inner" :style="{backgroundColor: color.effect}"></span>
+          <span class="blocker" :style="{backgroundColor: color.effect}"></span>
+        </span>
+        </div>
+      </div>
+      <span class="body-text" v-if="back_body && back_body.length" :style="{backgroundColor: color.effect}">
+        {{ back_body[0] }}/{{ back_body[1] }}
+      </span>
     </div>
   </div>
 </template>
@@ -190,16 +201,6 @@
       background-repeat: no-repeat;
     }
 
-    .back-body {
-
-      .border {
-        float: right;
-        position: relative;
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-      }
-    }
   }
 
   .extra-info {
@@ -237,6 +238,59 @@
         text-align: center;
       }
     }
+
+    .back-body-block {
+      position: relative;
+      float: right;
+      top: -54px;
+      right: -9px;
+      margin-bottom: -100px;
+
+      .back-body {
+        width: 24px;
+        height: 60px;
+        overflow: hidden;
+
+        span { display: inline-block; }
+
+        .border {
+          position: relative;
+          left: -24px;
+          width: 30px;
+          height: 30px;
+          background-clip: content-box;
+          border: solid;
+          border-width: 8px 8px 0 0;
+          border-top-right-radius: 3px;
+          transform: rotate(45deg);
+
+          .inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            background: inherit;
+            border: solid black;
+            border-width: 2px 2px 0 0;
+          }
+        }
+      }
+    }
+
+    .body-text {
+      font-family: Beleren, sans-serif;
+      font-size: 10pt;
+      padding-right: 4px;
+      color: #444;
+      position: relative;
+      float: right;
+      border-radius: 5px;
+      height: 23px;
+      top: -45px;
+      right: 14px;
+      display: flex;
+      align-items: center;
+    }
   }
 
   .test {
@@ -248,7 +302,7 @@
   import story_spotlight from '../../assets/background/story_spotlight.png'
 
   export default {
-    data() {
+    data () {
       return {
         EFFECT_BACKGROUNDS: {
           none: '',
@@ -258,15 +312,15 @@
     },
     props: ['id', 'name', 'cost_text', 'card_url', 'type', 'effect', 'body',
       'is_creature', 'color', 'rarity', 'version', 'effect_background', 'double_image',
-      'is_double_back'],
+      'is_double_back', 'back_body'],
     computed: {
-      cost() {
+      cost () {
         return this.cost_text.split(',').map(t => t.trim())
       },
-      card_image() {
+      card_image () {
         return `url(${this.card_url}`;
       },
-      effect_render() {
+      effect_render () {
         return this.$$ability.translate(this.effect);
       }
     }

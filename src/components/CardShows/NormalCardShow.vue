@@ -4,7 +4,7 @@
       <arena-normal-card :id="id" :name="name" :cost_text="cost_text" :card_url="card_url"
                          :type="type" :effect="effect" :body="[atk, def]" :is_creature="is_creature"
                          :color="background" :rarity="rarity" :version="version"
-                         :effect_background="effect_background"></arena-normal-card>
+                         :effect_background="effect_background" :show_dot="show_dot"></arena-normal-card>
     </div>
     <hr>
     <button @click="show_form = !show_form">隐藏／显示表单</button>
@@ -77,7 +77,7 @@
       ColorSelector,
       RaritySelector,
     },
-    data() {
+    data () {
       return {
         show_form: true,
         // card
@@ -96,13 +96,14 @@
         rarity: 'common',
         version: 'xln',
         effect_background: 'none',
+        show_dot: false,
       }
     },
     methods: {
-      changeColor(color) {
+      changeColor (color) {
         this.background = color;
       },
-      changeRarity(rarity) {
+      changeRarity (rarity) {
         this.rarity = rarity
       }
     }

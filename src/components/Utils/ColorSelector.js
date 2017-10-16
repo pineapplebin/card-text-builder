@@ -7,10 +7,11 @@ const DEFAULT = {
   body_font: '#000000',
   background: null,
   border: null,
+  dot: [],
 };
 
-function Color(c = {}) {
-  const new_c = Object.assign({...DEFAULT}, c);
+function Color (c = {}) {
+  const new_c = Object.assign({ ...DEFAULT }, c);
   [['type', 'name'], ['body', 'name']].forEach(([target, default_]) => {
     if (new_c[target] === null)
       new_c[target] = new_c[default_];
@@ -18,7 +19,7 @@ function Color(c = {}) {
   return new_c
 }
 
-function linear(c1, c2, dir = 'to right') {
+function linear (c1, c2, dir = 'to right') {
   return `linear-gradient(${dir}, ${c1} 45%, ${c2} 55%)`
 }
 
@@ -51,78 +52,78 @@ import AVb from '../../assets/background/artifact_vehicle.jpg'
 
 export default {
   W: Color({
-    display: '白', name: C.W2, effect: C.W1, border: C.W3, background: Wb
+    display: '白', name: C.W2, effect: C.W1, border: C.W3, background: Wb, dot: [C.W3]
   }),
   U: Color({
-    display: '蓝', name: C.U2, effect: C.U1, border: C.U3, background: Ub
+    display: '蓝', name: C.U2, effect: C.U1, border: C.U3, background: Ub, dot: [C.U3]
   }),
   B: Color({
-    display: '黑', name: C.B2, effect: C.B1, border: C.B3, background: Bb
+    display: '黑', name: C.B2, effect: C.B1, border: C.B3, background: Bb, dot: [C.B3]
   }),
   R: Color({
-    display: '红', name: C.R2, effect: C.R1, border: C.R3, background: Rb
+    display: '红', name: C.R2, effect: C.R1, border: C.R3, background: Rb, dot: [C.R3]
   }),
   G: Color({
-    display: '绿', name: C.G2, effect: C.G1, border: C.G3, background: Gb
+    display: '绿', name: C.G2, effect: C.G1, border: C.G3, background: Gb, dot: [C.G3]
   }),
   WU: Color({
     display: '白蓝', name: C.M2, effect: linear(C.W1, C.U1),
-    border: linear(C.W3, C.U3), background: Mb
+    border: linear(C.W3, C.U3), background: Mb, dot: [C.W1, C.U1]
   }),
   UB: Color({
     display: '蓝黑', name: C.M2, effect: linear(C.U1, C.B1),
-    border: linear(C.U3, C.B3), background: Mb
+    border: linear(C.U3, C.B3), background: Mb, dot: [C.U1, C.B1]
   }),
   BR: Color({
     display: '黑红', name: C.M2, effect: linear(C.B1, C.R1),
-    border: linear(C.B3, C.R3), background: Mb
+    border: linear(C.B3, C.R3), background: Mb, dot: [C.B1, C.R1]
   }),
   RG: Color({
     display: '红绿', name: C.M2, effect: linear(C.R1, C.G1),
-    border: linear(C.R3, C.G3), background: Mb
+    border: linear(C.R3, C.G3), background: Mb, dot: [C.R1, C.G1]
   }),
   GW: Color({
     display: '绿白', name: C.M2, effect: linear(C.G1, C.W1),
-    border: linear(C.G3, C.W3), background: Mb
+    border: linear(C.G3, C.W3), background: Mb, dot: [C.G1, C.W1]
   }),
   WB: Color({
     display: '白黑', name: C.M2, effect: linear(C.W1, C.B1),
-    border: linear(C.W3, C.B3), background: Mb
+    border: linear(C.W3, C.B3), background: Mb, dot: [C.W1, C.B1]
   }),
   UR: Color({
     display: '蓝红', name: C.M2, effect: linear(C.U1, C.R1),
-    border: linear(C.U3, C.R3), background: Mb
+    border: linear(C.U3, C.R3), background: Mb, dot: [C.U1, C.R1]
   }),
   BG: Color({
     display: '黑绿', name: C.M2, effect: linear(C.B1, C.G1),
-    border: linear(C.B3, C.G3), background: Mb
+    border: linear(C.B3, C.G3), background: Mb, dot: [C.B1, C.G1]
   }),
   RW: Color({
     display: '红白', name: C.M2, effect: linear(C.R1, C.W1),
-    border: linear(C.R3, C.W3), background: Mb
+    border: linear(C.R3, C.W3), background: Mb, dot: [C.R1, C.W1]
   }),
   GU: Color({
     display: '绿蓝', name: C.M2, effect: linear(C.G1, C.U1),
-    border: linear(C.G3, C.U3), background: Mb
+    border: linear(C.G3, C.U3), background: Mb, dot: [C.G1, C.U1]
   }),
   MUL: Color({
-    display: '多色', name: C.M2, effect: C.M1, border: C.M3, background: Mb
+    display: '多色', name: C.M2, effect: C.M1, border: C.M3, background: Mb, dot: [C.M3]
   }),
   L: Color({
-    display: '地', name: C.L2, effect: C.L1, border: C.L3, background: Lb
+    display: '地', name: C.L2, effect: C.L1, border: C.L3, background: Lb, dot: [C.L3]
   }),
   A: Color({
-    display: '神器', name: C.A2, effect: C.A1, border: C.A3, background: Ab
+    display: '神器', name: C.A2, effect: C.A1, border: C.A3, background: Ab, dot: [C.A3]
   }),
   AB: Color({
-    display: '神器生物黑', name: C.B2, effect: C.B1, border: C.B3, background: Ab
+    display: '神器生物黑', name: C.B2, effect: C.B1, border: C.B3, background: Ab, dot: [C.B3]
   }),
   AR: Color({
-    display: '神器生物红', name: C.R2, effect: C.R1, border: C.R3, background: Ab
+    display: '神器生物红', name: C.R2, effect: C.R1, border: C.R3, background: Ab, dot: [C.R3]
   }),
   AV: Color({
     display: '神器载具', name: C.A2, effect: C.A1, border: C.A3,
-    background: AVb, body_font: '#FFFFFF', body: '#93613C'
+    background: AVb, body_font: '#FFFFFF', body: '#93613C', dot: [C.A3]
   }),
   DBW: Color({
     display: '背面白', name: '#B9B1A2', effect: '#DCD6CC', border: C.W3,

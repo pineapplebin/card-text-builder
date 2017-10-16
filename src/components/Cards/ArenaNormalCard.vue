@@ -22,7 +22,10 @@
         <div class="border-color-block" :style="{background: color.border}">
           <div class="content-block type-block" style="border-radius: 8px"
                :style="{backgroundColor: color.type}">
-            <span>{{ type }}</span>
+            <span class="dot" v-if="show_dot">
+              <span v-for="d in color.dot" :style="{background: d}"></span>
+            </span>
+            <span class="type">{{ type }}</span>
             <span style="font-size: 1.2em;" class="ss ss-grad"
                   :class="[`ss-${version}`, `ss-${rarity}`]"></span>
           </div>
@@ -130,7 +133,27 @@
     padding: 2px 3px;
     text-align: left;
 
-    span:first-child {
+    .dot {
+      margin: 0 3px;
+      height: 10px;
+      width: 10px;
+      border: 1px solid black;
+      border-radius: 50%;
+      box-shadow: 0 -1px 2px 0 #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      transform: rotate(45deg);
+
+      span {
+        height: 20px;
+        width: 20px;
+        display: inline-block;
+      }
+    }
+
+    .type {
       flex: 1 0 auto;
     }
   }
@@ -199,7 +222,7 @@
   import story_spotlight from '../../assets/background/story_spotlight.png'
 
   export default {
-    data() {
+    data () {
       return {
         EFFECT_BACKGROUNDS: {
           none: '',
@@ -208,15 +231,15 @@
       }
     },
     props: ['id', 'name', 'cost_text', 'card_url', 'type', 'effect', 'body',
-      'is_creature', 'color', 'rarity', 'version', 'effect_background'],
+      'is_creature', 'color', 'rarity', 'version', 'effect_background', 'show_dot'],
     computed: {
-      cost() {
+      cost () {
         return this.cost_text.split(',').map(t => t.trim())
       },
-      card_image() {
+      card_image () {
         return `url(${this.card_url}`;
       },
-      effect_render() {
+      effect_render () {
         return this.$$ability.translate(this.effect);
       }
     }

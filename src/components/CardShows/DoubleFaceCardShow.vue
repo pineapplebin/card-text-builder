@@ -7,7 +7,7 @@
                           :type="up.type" :effect="up.effect" :body="[up.atk, up.def]"
                           :is_creature="up.is_creature" :color="up.background" :rarity="up.rarity"
                           :version="up.version" :effect_background="up.effect_background"
-                          :double_image="up.double_image" :back_body="back_body"
+                          :double_image="up.double_image" :back_body="up.back_body" :show_dot="up.show_dot"
                           key="up"></double-face-card>
       </div>
       <div>
@@ -15,7 +15,7 @@
                           :card_url="down.card_url" :type="down.type" :effect="down.effect"
                           :body="[down.atk, down.def]" :is_creature="down.is_creature"
                           :color="down.background" :rarity="down.rarity" :version="down.version"
-                          :effect_background="down.effect_background"
+                          :effect_background="down.effect_background" :show_dot="down.show_dot"
                           :double_image="down.double_image" :is_double_back="true"
                           key="down"></double-face-card>
       </div>
@@ -165,6 +165,7 @@
       id: '', name: '', cost: [], cost_text: '', card_url: '', url: '', type: '',
       effect: '', atk: 0, def: 0, is_creature: true, background: {}, rarity: 'common',
       version: 'xln', effect_background: 'none', double_image: null, back_body: [0, 0],
+      show_dot: false,
     }
   };
 
