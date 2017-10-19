@@ -43,6 +43,8 @@ const images = {
     "2w": s2w, "2u": s2u, "2b": s2b, "2r": s2r, "2g": s2g,
     wu, ub, br, rg, gw, wb, ur, bg, gu, rw,
   },
+  series: {
+  },
   install(Vue) {
     Vue.prototype.$$images = {
       mana: this.mana

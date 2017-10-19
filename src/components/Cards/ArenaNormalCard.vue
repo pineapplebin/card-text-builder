@@ -127,6 +127,7 @@
     font-family: Beleren, STKaiti, sans-serif;
     font-size: 12pt;
     font-weight: bold;
+    height: 19px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -161,9 +162,9 @@
   .effect-block {
 
     .content {
-      min-height: 134px;
+      min-height: 144px;
       font-size: 11pt;
-      padding: 10px 10px;
+      padding: 5px 10px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -222,7 +223,7 @@
   import story_spotlight from '../../assets/background/story_spotlight.png'
 
   export default {
-    data () {
+    data() {
       return {
         EFFECT_BACKGROUNDS: {
           none: '',
@@ -233,15 +234,15 @@
     props: ['id', 'name', 'cost_text', 'card_url', 'type', 'effect', 'body',
       'is_creature', 'color', 'rarity', 'version', 'effect_background', 'show_dot'],
     computed: {
-      cost () {
+      cost() {
         return this.cost_text.split(',').map(t => t.trim())
       },
-      card_image () {
+      card_image() {
         return `url(${this.card_url}`;
       },
-      effect_render () {
+      effect_render() {
         return this.$$ability.translate(this.effect);
-      }
+      },
     }
   }
 </script>

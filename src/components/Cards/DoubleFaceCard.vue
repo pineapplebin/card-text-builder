@@ -187,9 +187,9 @@
   .effect-block {
 
     .content {
-      min-height: 134px;
+      min-height: 144px;
       font-size: 11pt;
-      padding: 10px 10px;
+      padding: 5px 10px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -322,7 +322,7 @@
       },
       effect_render () {
         return this.$$ability.translate(this.effect);
-      }
+      },
     }
   }
 </script>

@@ -128,5 +128,9 @@ export default {
   DBW: Color({
     display: '背面白', name: '#B9B1A2', effect: '#DCD6CC', border: C.W3,
     background: Wb, body_font: '#FFFFFF', dot: [C.W3]
+  }),
+  DBR: Color({
+    display: '背面红', name: '#C54D30', effect: '#DDBEB1', border: C.R3,
+    background: Rb, body_font: '#FFFFFF', dot: [C.R3]
   })
 }

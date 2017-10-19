@@ -33,6 +33,17 @@
     justify-content: flex-start;
     align-items: flex-start;
   }
+
+  .ss-uncommon.ss-grad {
+    background: -webkit-linear-gradient(left, #434f54 0%, #cee5f0 50%, #434f54 100%);
+    -webkit-text-stroke: 0.03em #111;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .ss-common.ss-grad {
+    -webkit-text-stroke: 0.01em #000;
+  }
 </style>
 
 <script>
