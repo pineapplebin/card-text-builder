@@ -1,54 +1,54 @@
 {
-    "deathtouch": {
-	"desc": "Any amount of damage this deals to a creature is enough to destroy it."
-    },
-    "defender":{
-	"desc": "This creature can't attack."
-    },
-    "doublestrike":{
-	"desc": "This creature deals both first-strike and regular combat damage."
-    },
-    "enchant": {
-	"desc": "This card can only be attached to an %0."
-    },
-    "equip":{
-	"desc": "%0: Attach to target creature you control. Equip only as a sorcery."
-    },
-    "firststrike":{
-	"desc": "This creature deals combat damage before creatures without first strike."
-    },
-    "flash":{
-	"desc": "You may cast this spell any time you could cast an instant."
-    },
-    "flying": {
-	"desc": "This creature can't be blocked except by creatures with flying and/or reach."
-    },
-    "haste": {
-	"desc": "This creature can attack and {T} as soon as it comes under your control."
-    },
-    "hexproof": {
-	"desc": "This permanent can't be the target of spells or abilities your opponents control."
-    },
-    "indestructible": {
-	"desc": "Effects that say \"destroy\" don’t destroy this."
-    },
-    "lifelink": {
-	"desc": "Damage dealt by this creature also causes you to gain that much life."
-    },
-    "menace": {
-	"desc": "This creature can't be blocked except by two or more creatures."
-    },
-    "prowess": {
-	"desc": "Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn."
-    },
-    "reach": {
-	"desc": "This creature can block creatures with flying."
-    },
-    "trample": {
-	"desc": "This creature can deal excess combat damage to defending player or planeswalker while attacking."
-    },
-    "vigilance": {
-	"desc": "Attacking doesn't cause this creature to tap."
-    }
+  "deathtouch": {
+    "desc": "Any amount of damage this deals to a creature is enough to destroy it."
+  },
+  "defender": {
+    "desc": "This creature can't attack."
+  },
+  "doublestrike": {
+    "desc": "This creature deals both first-strike and regular combat damage."
+  },
+  "enchant": {
+    "desc": "This card can only be attached to an %0."
+  },
+  "equip": {
+    "desc": "%0: Attach to target creature you control. Equip only as a sorcery."
+  },
+  "firststrike": {
+    "desc": "This creature deals combat damage before creatures without first strike."
+  },
+  "flash": {
+    "desc": "You may cast this spell any time you could cast an instant."
+  },
+  "flying": {
+    "desc": "This creature can't be blocked except by creatures with flying and/or reach."
+  },
+  "haste": {
+    "desc": "This creature can attack and {T} as soon as it comes under your control."
+  },
+  "hexproof": {
+    "desc": "This permanent can't be the target of spells or abilities your opponents control."
+  },
+  "indestructible": {
+    "desc": "Effects that say \"destroy\" don’t destroy this."
+  },
+  "lifelink": {
+    "desc": "Damage dealt by this creature also causes you to gain that much life."
+  },
+  "menace": {
+    "desc": "This creature can't be blocked except by two or more creatures."
+  },
+  "prowess": {
+    "desc": "Whenever you cast a noncreature spell, this creature gets +1/+1 until end of turn."
+  },
+  "reach": {
+    "desc": "This creature can block creatures with flying."
+  },
+  "trample": {
+    "desc": "This creature can deal excess combat damage to defending player or planeswalker while attacking."
+  },
+  "vigilance": {
+    "desc": "Attacking doesn't cause this creature to tap."
+  }
 }
 

@@ -10,6 +10,12 @@ String.prototype.format = function (...args) {
   return str;
 };
 
+String.prototype.title = function() {
+  if (this.length === 0)
+    return this;
+  return this[0].toUpperCase() + this.slice(1);
+};
+
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'

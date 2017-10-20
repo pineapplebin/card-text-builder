@@ -1,6 +1,9 @@
 import resources from '../resources/abilities.json'
+import resources_en from '../resources/abilities_en.json'
 // import images from '../resources/images.json'
 import images from './images.js'
+
+const abilities = Object.assign(resources, resources_en);
 
 const ABILITY_REG = /\[\[([!\u4e00-\u9fa5|\w\d{}／]+)\]\]/i;
 const COST_REG = /{([\d\w]+)}/ig;
@@ -27,19 +30,19 @@ function transAbility(line) {
     shorty = true;
     name = name.slice(1);
   }
-  if (!resources[name])
+  if (!abilities[name])
     return line;
 
-  let desc = resources[name]['desc'];
+  let desc = abilities[name]['desc'];
   if (params.length)
     desc = desc.format(params);
 
-  if (resources[name]['keyword']) {
-    line = line.replace(result[0], SPAN_ITALIC.format('', `${name} ～ ${shorty ? '' : desc}`));
+  if (abilities[name]['keyword']) {
+    line = line.replace(result[0], SPAN_ITALIC.format('', `${name.title()} ～ ${shorty ? '' : desc}`));
   } else {
     if (params.length)
       name += ' ' + params.join(' ');
-    line = line.replace(result[0], SPAN_ITALIC.format(shorty ? '' : name, `（${desc}）`));
+    line = line.replace(result[0], SPAN_ITALIC.format(shorty ? '' : name.title(), `（${desc}）`));
     console.log(line);
   }
 
