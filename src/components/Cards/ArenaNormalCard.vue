@@ -162,7 +162,8 @@
   .effect-block {
 
     .content {
-      min-height: 144px;
+      font-family: MPlantin, sans-serif;
+      height: 144px;
       font-size: 11pt;
       padding: 5px 10px;
       display: flex;

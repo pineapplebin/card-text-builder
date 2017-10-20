@@ -57,10 +57,10 @@ function transImage(line) {
     const img_name = short.toLowerCase().slice(1, short.length - 1);
     if (images['mana'][img_name]) {
       let size = 15;
-      let margin = '0 2px 2px 2px';
+      let margin = '0 1px 2px 1px';
       if (img_name.match(/^[2wubrg][wubrg]$/)) {
         size = 18;
-        margin = '2px 2px 0 2px'
+        margin = '2px 1px 0 1px'
       }
       line = line.replace(short, IMG.format(images['mana'][img_name], size, margin));
     }
@@ -71,7 +71,7 @@ function transImage(line) {
 function transItalic(line) {
   const result = line.match(ITALIC_REG);
   if (result) {
-    line = line.replace(result[0], SPAN_ITALIC.format('', result[1]));
+    line = line.replace(result[0], '<span style="font-style: italic; font-size: 12pt;font-family: STKaiti, sans-serif">%0</span>'.format(result[1]));
   }
   return line
 }

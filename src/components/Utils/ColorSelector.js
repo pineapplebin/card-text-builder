@@ -25,7 +25,7 @@ function linear (c1, c2, dir = 'to right') {
 
 const C = {
   W1: '#F5F5ED', W2: '#E7E1CD', W3: '#F9F9F9',
-  U1: '#E2EDF5', U2: '#BBDAEA', U3: '#036FAF',
+  U1: '#E2EDF5', U2: '#A5CFE4', U3: '#036FAF',
   B1: '#D4D4D2', B2: '#B1AAA4', B3: '#3E3D3B',
   R1: '#E4D4C5', R2: '#ECBA97', R3: '#EE5A32',
   G1: '#CCD7CF', G2: '#BBBDA5', G3: '#0D6C4E',

@@ -187,7 +187,7 @@
   .effect-block {
 
     .content {
-      min-height: 144px;
+      height: 144px;
       font-size: 11pt;
       padding: 5px 10px;
       display: flex;
