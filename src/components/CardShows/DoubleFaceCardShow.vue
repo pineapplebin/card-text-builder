@@ -7,7 +7,8 @@
                           :type="up.type" :effect="up.effect" :body="[up.atk, up.def]"
                           :is_creature="up.is_creature" :color="up.background" :rarity="up.rarity"
                           :version="up.version" :effect_background="up.effect_background"
-                          :double_image="up.double_image" :back_body="up.back_body" :show_dot="up.show_dot"
+                          :double_image="up.double_image" :back_body="up.back_body"
+                          :show_dot="up.show_dot"
                           key="up"></double-face-card>
       </div>
       <div>
@@ -26,14 +27,12 @@
     <div class="form" v-show="show_form && showing_up">
       <div class="form-control">
         <label>卡框颜色</label>
-        <color-selector style="margin-right: 50px" @change="changeColor"
-                        key="upcolor"></color-selector>
-        <label for="up_effect_background">效果背景图</label>
-        <select id="up_effect_background" v-model="up.effect_background"
-                style="margin-right: 50px;">
-          <option value="none">无</option>
-          <option value="spotlight">背景故事</option>
-        </select>
+        <color-selector style="margin-right: 50px" :filter="filterFaceupColor"
+                        @change="changeColor" key="upcolor"></color-selector>
+        <label>效果背景图</label>
+        <effect-image-selector @change="changeEffect"></effect-image-selector>
+      </div>
+      <div class="form-control">
         <label>稀有度</label>
         <rarity-selector @change="changeRarity" key="uprarity"></rarity-selector>
         <label for="up_version" style="margin-left: 50px;">卡包</label>
@@ -89,13 +88,12 @@
     <div class="form" v-show="show_form && !showing_up">
       <div class="form-control">
         <label>卡框颜色</label>
-        <color-selector style="margin-right: 50px" is_double_back
+        <color-selector style="margin-right: 50px" :filter="filterDoubleBackColor"
                         @change="changeColor"></color-selector>
-        <label for="effect_background">效果背景图</label>
-        <select id="effect_background" v-model="down.effect_background" style="margin-right: 50px;">
-          <option value="none">无</option>
-          <option value="spotlight">背景故事</option>
-        </select>
+        <label>效果背景图</label>
+        <effect-image-selector @change="changeEffect"></effect-image-selector>
+      </div>
+      <div class="form-control">
         <label>稀有度</label>
         <rarity-selector @change="changeRarity"></rarity-selector>
         <label for="version" style="margin-left: 50px;">卡包</label>
@@ -156,6 +154,7 @@
   import DoubleFaceCard from '../Cards/DoubleFaceCard.vue'
   import ColorSelector from '../Utils/ColorSelector.vue'
   import RaritySelector from '../Utils/RaritySelector.vue'
+  import EffectImageSelector from '../Utils/EffectImageSelector.vue'
 
   import sun_circle from '../../assets/double/sun_circle.png'
   import night_circle from '../../assets/double/night_circle.png'
@@ -174,6 +173,7 @@
       DoubleFaceCard,
       ColorSelector,
       RaritySelector,
+      EffectImageSelector,
     },
     data() {
       return {
@@ -199,6 +199,18 @@
           this.up.rarity = rarity;
         else
           this.down.rarity = rarity;
+      },
+      changeEffect(effect) {
+        if (this.showing_up)
+          this.up.effect_background = effect;
+        else
+          this.down.effect_background = effect;
+      },
+      filterDoubleBackColor(color) {
+        return color.code.match(/^DB\w+$/);
+      },
+      filterFaceupColor(color) {
+        return color.code.match(/^[WUBRGM]\w*/)
       }
     }
   }

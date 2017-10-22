@@ -37,7 +37,7 @@
           <div class="content-block effect-block" style="border-width: 1px 2px 2px 1px"
                :style="{background: color.effect}">
             <div class="content" v-html="effect_render"
-                 :style="{backgroundImage: `url(${EFFECT_BACKGROUNDS[effect_background]})`}">
+                 :style="{backgroundImage: `url(${effect_background})`}">
               {{ effect_render }}
             </div>
           </div>
@@ -124,14 +124,14 @@
   }
 
   .type-block {
-    font-family: Beleren, STKaiti, sans-serif;
+    font-family: Beleren, "Weibei SC", STKaiti, sans-serif;
     font-size: 12pt;
     font-weight: bold;
     height: 19px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 2px 3px;
+    padding: 2px 8px 2px 5px;
     text-align: left;
 
     .dot {
@@ -221,16 +221,9 @@
 </style>
 
 <script>
-  import story_spotlight from '../../assets/background/story_spotlight.png'
-
   export default {
     data() {
-      return {
-        EFFECT_BACKGROUNDS: {
-          none: '',
-          spotlight: story_spotlight,
-        }
-      }
+      return {}
     },
     props: ['id', 'name', 'cost_text', 'card_url', 'type', 'effect', 'body',
       'is_creature', 'color', 'rarity', 'version', 'effect_background', 'show_dot'],

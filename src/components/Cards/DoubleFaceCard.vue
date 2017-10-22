@@ -26,7 +26,8 @@
             <span class="dot" v-if="is_double_back">
               <span v-for="d in color.dot" :style="{background: d}"></span>
             </span>
-            <span class="type" :style="{color: is_double_back ? 'white' : 'black'}">{{ type }}</span>
+            <span class="type" :style="{color: is_double_back ? 'white' : 'black'}">{{ type
+              }}</span>
             <span style="font-size: 1.2em;" class="ss ss-grad"
                   :class="[`ss-${version}`, `ss-${rarity}`]"></span>
           </div>
@@ -38,7 +39,7 @@
           <div class="content-block effect-block" style="border-width: 1px 2px 2px 1px"
                :style="{background: color.effect}">
             <div class="content" v-html="effect_render"
-                 :style="{backgroundImage: `url(${EFFECT_BACKGROUNDS[effect_background]})`}">
+                 :style="{backgroundImage: `url(${effect_background})`}">
               {{ effect_render }}
             </div>
           </div>
@@ -61,7 +62,8 @@
         </span>
         </div>
       </div>
-      <span class="body-text" v-if="back_body && back_body.length" :style="{backgroundColor: color.effect}">
+      <span class="body-text" v-if="back_body && back_body.length"
+            :style="{backgroundColor: color.effect}">
         {{ back_body[0] }}/{{ back_body[1] }}
       </span>
     </div>
@@ -150,13 +152,13 @@
   }
 
   .type-block {
-    font-family: Beleren, STKaiti, sans-serif;
+    font-family: Beleren, "Weibei SC", STKaiti, sans-serif;
     font-size: 12pt;
     font-weight: bold;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 2px 3px;
+    padding: 2px 8px 2px 3px;
     text-align: left;
 
     .dot {
@@ -187,6 +189,7 @@
   .effect-block {
 
     .content {
+      font-family: MPlantin, "Source Han Sans CN", sans-serif;
       height: 144px;
       font-size: 11pt;
       padding: 5px 10px;
@@ -251,7 +254,9 @@
         height: 60px;
         overflow: hidden;
 
-        span { display: inline-block; }
+        span {
+          display: inline-block;
+        }
 
         .border {
           position: relative;
@@ -299,28 +304,21 @@
 </style>
 
 <script>
-  import story_spotlight from '../../assets/background/story_spotlight.png'
-
   export default {
-    data () {
-      return {
-        EFFECT_BACKGROUNDS: {
-          none: '',
-          spotlight: story_spotlight,
-        }
-      }
+    data() {
+      return {}
     },
     props: ['id', 'name', 'cost_text', 'card_url', 'type', 'effect', 'body',
       'is_creature', 'color', 'rarity', 'version', 'effect_background', 'double_image',
       'is_double_back', 'back_body'],
     computed: {
-      cost () {
+      cost() {
         return this.cost_text.split(',').map(t => t.trim())
       },
-      card_image () {
+      card_image() {
         return `url(${this.card_url}`;
       },
-      effect_render () {
+      effect_render() {
         return this.$$ability.translate(this.effect);
       },
     }

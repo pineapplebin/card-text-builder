@@ -25,7 +25,9 @@ Vue.config.productionTip = false;
 
 import images from './plugins/images'
 Vue.use(images);
-import ability from './plugins/ability'
+// import ability from './plugins/ability'
+// Vue.use(ability);
+import ability from './plugins/effect'
 Vue.use(ability);
 
 import '../static/fonts/Beleren-Bold.ttf'

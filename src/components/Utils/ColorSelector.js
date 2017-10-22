@@ -10,8 +10,8 @@ const DEFAULT = {
   dot: [],
 };
 
-function Color (c = {}) {
-  const new_c = Object.assign({ ...DEFAULT }, c);
+function Color(c = {}) {
+  const new_c = Object.assign({...DEFAULT}, c);
   [['type', 'name'], ['body', 'name']].forEach(([target, default_]) => {
     if (new_c[target] === null)
       new_c[target] = new_c[default_];
@@ -19,7 +19,7 @@ function Color (c = {}) {
   return new_c
 }
 
-function linear (c1, c2, dir = 'to right') {
+function linear(c1, c2, dir = 'to right') {
   return `linear-gradient(${dir}, ${c1} 45%, ${c2} 55%)`
 }
 
@@ -32,6 +32,7 @@ const C = {
   A1: '#EAF0F2', A2: '#CDD6DA', A3: '#DFE3E5',
   L1: '#D6D2CF', L2: '#D7CEC9', L3: '#A2958D',
   M1: '#F4EEDC', M2: '#BCA468', M3: '#FDE887',
+  MIX: '#D1C8BE'
 };
 
 import Wb from '../../assets/background/default_white.jpg'
@@ -49,88 +50,117 @@ import ECRb from '../../assets/background/enchant_creature_red.jpg'
 import ECGb from '../../assets/background/enchant_creature_green.jpg'
 import ECMb from '../../assets/background/enchant_creature_multi.jpg'
 import AVb from '../../assets/background/artifact_vehicle.jpg'
+import MIXBGb from '../../assets/background/mix_black_green.jpg'
 
 export default {
   W: Color({
-    display: '白', name: C.W2, effect: C.W1, border: C.W3, background: Wb, dot: [C.W3]
+    code: 'W', display: '白',
+    name: C.W2, effect: C.W1, border: C.W3, background: Wb, dot: [C.W3]
   }),
   U: Color({
-    display: '蓝', name: C.U2, effect: C.U1, border: C.U3, background: Ub, dot: [C.U3]
+    code: 'U', display: '蓝',
+    name: C.U2, effect: C.U1, border: C.U3, background: Ub, dot: [C.U3]
   }),
   B: Color({
-    display: '黑', name: C.B2, effect: C.B1, border: C.B3, background: Bb, dot: [C.B3]
+    code: 'B', display: '黑',
+    name: C.B2, effect: C.B1, border: C.B3, background: Bb, dot: [C.B3]
   }),
   R: Color({
-    display: '红', name: C.R2, effect: C.R1, border: C.R3, background: Rb, dot: [C.R3]
+    code: 'R', display: '红',
+    name: C.R2, effect: C.R1, border: C.R3, background: Rb, dot: [C.R3]
   }),
   G: Color({
-    display: '绿', name: C.G2, effect: C.G1, border: C.G3, background: Gb, dot: [C.G3]
+    code: 'G', display: '绿',
+    name: C.G2, effect: C.G1, border: C.G3, background: Gb, dot: [C.G3]
   }),
   WU: Color({
-    display: '白蓝', name: C.M2, effect: linear(C.W1, C.U1),
+    code: 'WU', display: '白蓝',
+    name: C.M2, effect: linear(C.W1, C.U1),
     border: linear(C.W3, C.U3), background: Mb, dot: [C.W1, C.U1]
   }),
   UB: Color({
-    display: '蓝黑', name: C.M2, effect: linear(C.U1, C.B1),
+    code: 'UB', display: '蓝黑',
+    name: C.M2, effect: linear(C.U1, C.B1),
     border: linear(C.U3, C.B3), background: Mb, dot: [C.U1, C.B1]
   }),
   BR: Color({
-    display: '黑红', name: C.M2, effect: linear(C.B1, C.R1),
+    code: 'BR', display: '黑红',
+    name: C.M2, effect: linear(C.B1, C.R1),
     border: linear(C.B3, C.R3), background: Mb, dot: [C.B1, C.R1]
   }),
   RG: Color({
-    display: '红绿', name: C.M2, effect: linear(C.R1, C.G1),
+    code: 'RG', display: '红绿',
+    name: C.M2, effect: linear(C.R1, C.G1),
     border: linear(C.R3, C.G3), background: Mb, dot: [C.R1, C.G1]
   }),
   GW: Color({
-    display: '绿白', name: C.M2, effect: linear(C.G1, C.W1),
+    code: 'GW', display: '绿白',
+    name: C.M2, effect: linear(C.G1, C.W1),
     border: linear(C.G3, C.W3), background: Mb, dot: [C.G1, C.W1]
   }),
   WB: Color({
-    display: '白黑', name: C.M2, effect: linear(C.W1, C.B1),
+    code: 'WB', display: '白黑',
+    name: C.M2, effect: linear(C.W1, C.B1),
     border: linear(C.W3, C.B3), background: Mb, dot: [C.W1, C.B1]
   }),
   UR: Color({
-    display: '蓝红', name: C.M2, effect: linear(C.U1, C.R1),
+    code: 'UR', display: '蓝红',
+    name: C.M2, effect: linear(C.U1, C.R1),
     border: linear(C.U3, C.R3), background: Mb, dot: [C.U1, C.R1]
   }),
   BG: Color({
-    display: '黑绿', name: C.M2, effect: linear(C.B1, C.G1),
+    code: 'BG', display: '黑绿',
+    name: C.M2, effect: linear(C.B1, C.G1),
     border: linear(C.B3, C.G3), background: Mb, dot: [C.B1, C.G1]
   }),
   RW: Color({
-    display: '红白', name: C.M2, effect: linear(C.R1, C.W1),
+    code: 'RW', display: '红白',
+    name: C.M2, effect: linear(C.R1, C.W1),
     border: linear(C.R3, C.W3), background: Mb, dot: [C.R1, C.W1]
   }),
   GU: Color({
-    display: '绿蓝', name: C.M2, effect: linear(C.G1, C.U1),
+    code: 'GU', display: '绿蓝',
+    name: C.M2, effect: linear(C.G1, C.U1),
     border: linear(C.G3, C.U3), background: Mb, dot: [C.G1, C.U1]
   }),
   MUL: Color({
-    display: '多色', name: C.M2, effect: C.M1, border: C.M3, background: Mb, dot: [C.M3]
+    code: 'MUL', display: '多色',
+    name: C.M2, effect: C.M1, border: C.M3, background: Mb, dot: [C.M3]
   }),
   L: Color({
-    display: '地', name: C.L2, effect: C.L1, border: C.L3, background: Lb, dot: [C.L3]
+    code: 'L', display: '地',
+    name: C.L2, effect: C.L1, border: C.L3, background: Lb, dot: [C.L3]
   }),
   A: Color({
-    display: '神器', name: C.A2, effect: C.A1, border: C.A3, background: Ab, dot: [C.A3]
+    code: 'A', display: '神器',
+    name: C.A2, effect: C.A1, border: C.A3, background: Ab, dot: [C.A3]
   }),
   AB: Color({
-    display: '神器生物黑', name: C.B2, effect: C.B1, border: C.B3, background: Ab, dot: [C.B3]
+    code: 'AB', display: '神器生物黑',
+    name: C.B2, effect: C.B1, border: C.B3, background: Ab, dot: [C.B3]
   }),
   AR: Color({
-    display: '神器生物红', name: C.R2, effect: C.R1, border: C.R3, background: Ab, dot: [C.R3]
+    code: 'AR', display: '神器生物红',
+    name: C.R2, effect: C.R1, border: C.R3, background: Ab, dot: [C.R3]
   }),
   AV: Color({
-    display: '神器载具', name: C.A2, effect: C.A1, border: C.A3,
+    code: 'AV', display: '神器载具',
+    name: C.A2, effect: C.A1, border: C.A3,
     background: AVb, body_font: '#FFFFFF', body: '#93613C', dot: [C.A3]
   }),
   DBW: Color({
-    display: '背面白', name: '#B9B1A2', effect: '#DCD6CC', border: C.W3,
+    code: 'DBW', display: '背面白',
+    name: '#B9B1A2', effect: '#DCD6CC', border: C.W3,
     background: Wb, body_font: '#FFFFFF', dot: [C.W3]
   }),
   DBR: Color({
-    display: '背面红', name: '#C54D30', effect: '#DDBEB1', border: C.R3,
+    code: 'DBR', display: '背面红',
+    name: '#C54D30', effect: '#DDBEB1', border: C.R3,
     background: Rb, body_font: '#FFFFFF', dot: [C.R3]
+  }),
+  MIXBG: Color({
+    code: 'MIXBG', display: '混色黑绿',
+    name: C.MIX, effect: linear(C.B1, C.G1),
+    border: linear(C.B3, C.G3), background: MIXBGb, dot: [C.B1, C.G1]
   })
 }

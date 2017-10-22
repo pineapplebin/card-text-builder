@@ -50,6 +50,7 @@
   import Tools from './components/Tool.vue'
   import NormalCardShow from './components/CardShows/NormalCardShow.vue'
   import DoubleFaceCardShow from './components/CardShows/DoubleFaceCardShow.vue'
+  import LevelUpCardShow from './components/CardShows/LevelUpCardShow.vue'
 
   export default {
     name: 'app',
@@ -59,6 +60,7 @@
         CARDS: {
           NormalCardShow,
           DoubleFaceCardShow,
+          LevelUpCardShow,
         },
         card: 'NormalCardShow',
       }
