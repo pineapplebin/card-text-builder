@@ -1,16 +1,33 @@
 import {getAbility} from './abilities'
 import images from '../images'
 
-const P_TAG = '<p style="margin: 3px 0; line-height: 18px;">%0</p>';
+const P_TAG = '<p class="render-line" style="%1">%0</p>';
 const ITALIC_TAG = '<span style="font-style: italic;">%0</span>';
 const COMMENT_TAG =
   '<span style="font-family: MPlantin, STKaiti, sans-serif; font-style: italic;">%0</span>';
 
 const REG_ABILITY = /\[\[([!\u4e00-\u9fa5|\w\d{}／]+)]]/i;
-const REG_ITALIC = /@(.+)@/i;
-const REG_COMMENT = /#(.+)#/i;
-const REG_COST = /{([\d\w]+)}/ig;
+const REG_ITALIC = /@(.+)@/;
+const REG_COMMENT = /#(.+)#/;
+const REG_COST = /{([\d\w]+)}/g;
+const REG_STYLE = /^\((.+)\)/;
 
+let line_style = {};
+const STYLE_TABLE = {
+  '-': {'font-size': '10pt', 'line-height': '14px'}
+};
+const NORMAL_LINE = {
+  'line-height': '18px', 'margin': '3px 0'
+};
+
+function matchStyle(line, idx) {
+  const result = line.match(REG_STYLE);
+  if (result) {
+    line_style[idx] = STYLE_TABLE[result[1]];
+    line = line.replace(result[0], '');
+  }
+  return line;
+}
 
 function matchAbility(line) {
   const result = line.match(REG_ABILITY);
@@ -66,15 +83,33 @@ function matchCost(line) {
   return line;
 }
 
+function transStyle(style) {
+  if (!style)
+    return '';
+  let s = '';
+  Object.keys(style).forEach(_s => {
+    s += `${_s}:${style[_s]};`
+  });
+  return s;
+}
+
+function renderLine(line, idx) {
+  return P_TAG.format(line, transStyle(line_style[idx]));
+}
+
 function render(origin) {
-  return origin
+  line_style = {};
+  const trans = origin
     .split('\n')
+    .map(matchStyle)
     .map(matchAbility)
     .map(matchItalic)
     .map(matchComment)
     .map(matchCost)
-    .map(line => P_TAG.format(line))
-    .join('')
+    .map(renderLine)
+    .join('');
+  const style = `<style>.render-line {${transStyle(NORMAL_LINE)}}</style>`;
+  return trans + style;
 }
 
 export default render;

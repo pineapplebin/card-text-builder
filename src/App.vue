@@ -51,6 +51,7 @@
   import NormalCardShow from './components/CardShows/NormalCardShow.vue'
   import DoubleFaceCardShow from './components/CardShows/DoubleFaceCardShow.vue'
   import LevelUpCardShow from './components/CardShows/LevelUpCardShow.vue'
+  import SplitCardShow from './components/CardShows/SplitCardShow.vue'
 
   export default {
     name: 'app',
@@ -61,6 +62,7 @@
           NormalCardShow,
           DoubleFaceCardShow,
           LevelUpCardShow,
+          SplitCardShow,
         },
         card: 'NormalCardShow',
       }

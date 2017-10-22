@@ -107,31 +107,94 @@
     data() {
       return {
         LEVEL_COLOR: {
-          W: {level1: '#FDFDF9', level2: '#EDE6D6', level3: '#E4D5BF'}
+          W: {
+            level1: '#FDFDF9', level1_body: '#F9F5EC',
+            level2: '#EDE6D6', level2_body: '#EFE8D4',
+            level3: '#E4D5BF', level3_body: '#DAC9A5'
+          },
+          U: {
+            level1: '#E0EAEF', level1_body: '#AEC8D6',
+            level2: '#C9DAE1', level2_body: '#A0BFCE',
+            level3: '#B2C9D6', level3_body: '#86B3C4'
+          },
+          B: {
+            level1: '#E7E3DE', level1_body: '#C3BDB9',
+            level2: '#DAD7D0', level2_body: '#C3C0B9',
+            level3: '#C0B9B3', level3_body: '#A19E98'
+          },
+          R: {
+            level1: '#F3DCD1', level1_body: '#EFCCB6',
+            level2: '#F0CAB3', level2_body: '#E9B696',
+            level3: '#E7AF90', level3_body: '#E29E7F'
+          },
+          G: {
+            level1: '#D9E7D5', level1_body: '#BEC8BB',
+            level2: '#C0D3BF', level2_body: '#ABC3AD',
+            level3: '#A5BDA3', level3_body: '#94AE93'
+          },
         },
-        show_form: true,
+        show_form:
+            true,
         // card
-        id: '',
-        name: '',
-        cost: [],
-        cost_text: '',
-        card_url: '',
-        url: '',
-        type: '',
-        levels: {
-          level1: {effect: '', atk: 0, def: 0, level_from: 0, level_to: 0},
-          level2: {effect: '', atk: 0, def: 0, level_from: 0, level_to: 0},
-          level3: {effect: '', atk: 0, def: 0, level_from: 0, level_to: 0},
-        },
+        id:
+            '',
+        name:
+            '',
+        cost:
+            [],
+        cost_text:
+            '',
+        card_url:
+            '',
+        url:
+            '',
+        type:
+            '',
+        levels:
+            {
+              level1: {
+                effect: '', atk:
+                    0, def:
+                    0, level_from:
+                    0, level_to:
+                    0
+              }
+              ,
+              level2: {
+                effect: '', atk:
+                    0, def:
+                    0, level_from:
+                    0, level_to:
+                    0
+              }
+              ,
+              level3: {
+                effect: '', atk:
+                    0, def:
+                    0, level_from:
+                    0, level_to:
+                    0
+              }
+              ,
+            }
+        ,
         effect: '',
-        atk: 0,
-        def: 0,
-        is_creature: true,
-        background: {},
+        atk:
+            0,
+        def:
+            0,
+        is_creature:
+            true,
+        background:
+            {}
+        ,
         rarity: 'common',
-        version: 'roe',
-        effect_background: null,
-        show_dot: false,
+        version:
+            'roe',
+        effect_background:
+            null,
+        show_dot:
+            false,
       }
     },
     methods: {

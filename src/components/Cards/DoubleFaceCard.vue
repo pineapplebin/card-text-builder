@@ -28,7 +28,7 @@
             </span>
             <span class="type" :style="{color: is_double_back ? 'white' : 'black'}">{{ type
               }}</span>
-            <span style="font-size: 1.2em;" class="ss ss-grad"
+            <span style="font-size: 1.1em;" class="ss ss-grad"
                   :class="[`ss-${version}`, `ss-${rarity}`]"></span>
           </div>
         </div>
@@ -153,7 +153,8 @@
 
   .type-block {
     font-family: Beleren, "Weibei SC", STKaiti, sans-serif;
-    font-size: 12pt;
+    font-size: 13pt;
+    height: 19px;
     font-weight: bold;
     display: flex;
     justify-content: flex-start;

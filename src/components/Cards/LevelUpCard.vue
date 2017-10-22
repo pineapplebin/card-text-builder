@@ -26,7 +26,7 @@
               <span v-for="d in color.dot" :style="{background: d}"></span>
             </span>
             <span class="type">{{ type }}</span>
-            <span style="font-size: 1.2em;" class="ss ss-grad"
+            <span style="font-size: 1.1em;" class="ss ss-grad"
                   :class="[`ss-${version}`, `ss-${rarity}`]"></span>
           </div>
         </div>
@@ -48,13 +48,13 @@
               </div>
               <div class="level-block" :style="{background: color.level2}">
                 <div class="effect">
-                  <div class="level-tag">
-                    <div class="right-arrow">
+                  <div class="level-tag" :style="{background: color.level2_body}">
+                    <div class="right-arrow" :style="{background: color.level2_body}">
                       <span :style="{borderRight: `1px solid ${color.effect}`}"></span>
                     </div>
                     <div class="level-text"
                          :style="{borderLeft: `1px solid ${color.effect}`}">
-                      <span style="font-size: 4pt; margin-bottom: -4px; color: #444;">等级</span>
+                      <span style="font-size: 4pt; margin-bottom: -5px; color: #444;">等级</span>
                       <span style="font-size: 14pt">
                         {{ levels.level2.level_from }}-{{ levels.level2.level_to }}
                       </span>
@@ -65,13 +65,13 @@
               </div>
               <div class="level-block" :style="{background: color.level3}">
                 <div class="effect">
-                  <div class="level-tag">
-                    <div class="right-arrow">
+                  <div class="level-tag" :style="{background: color.level3_body}">
+                    <div class="right-arrow" :style="{background: color.level3_body}">
                       <span :style="{borderRight: `1px solid ${color.effect}`}"></span>
                     </div>
                     <div class="level-text"
                          :style="{borderLeft: `1px solid ${color.effect}`}">
-                      <span style="font-size: 4pt; margin-bottom: -4px; color: #444;">等级</span>
+                      <span style="font-size: 4pt; margin-bottom: -5px; color: #444;">等级</span>
                       <span style="font-size: 14pt">
                         {{ levels.level3.level_from }}+
                       </span>
@@ -88,20 +88,20 @@
     <div class="extra-info">
       <span class="id">{{ id }}</span>
       <div class="body" :style="{
-                borderColor: color.level1, background: color.level1, top: '-145px'}">
-        <span :style="{backgroundColor: color.level1, color: color.body_font}">
+                borderColor: color.level1_body, background: color.level1_body, top: '-152px'}">
+        <span :style="{backgroundColor: color.level1_body, color: color.body_font}">
           {{ levels.level1.atk }}/{{ levels.level1.def }}
         </span>
       </div>
       <div class="body" :style="{
-                borderColor: color.level2, background: color.level2, top: '-97px'}">
-        <span :style="{backgroundColor: color.level2, color: color.body_font}">
+                borderColor: color.level2_body, background: color.level2_body, top: '-100px'}">
+        <span :style="{backgroundColor: color.level2_body, color: color.body_font}">
           {{ levels.level2.atk }}/{{ levels.level2.def }}
         </span>
       </div>
       <div class="body" :style="{
-                borderColor: color.level3, background: color.level3, top: '-48px'}">
-        <span :style="{backgroundColor: color.level3, color: color.body_font}">
+                borderColor: color.level3_body, background: color.level3_body, top: '-48px'}">
+        <span :style="{backgroundColor: color.level3_body, color: color.body_font}">
           {{ levels.level3.atk }}/{{ levels.level3.def }}
         </span>
       </div>
@@ -178,7 +178,7 @@
 
   .type-block {
     font-family: Beleren, "Weibei SC", STKaiti, sans-serif;
-    font-size: 12pt;
+    font-size: 13pt;
     font-weight: bold;
     height: 19px;
     display: flex;
@@ -214,30 +214,15 @@
 
   .effect-block {
 
-    /*.content {*/
-    /*font-family: MPlantin, sans-serif;*/
-    /*height: 144px;*/
-    /*font-size: 11pt;*/
-    /*padding: 5px 10px;*/
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*justify-content: center;*/
-    /*align-items: flex-start;*/
-    /*word-break: break-all;*/
-    /*text-align: left;*/
-    /*background-size: 100px;*/
-    /*background-position: center;*/
-    /*background-repeat: no-repeat;*/
-    /*}*/
     .content {
-      height: 144px;
+      height: 154px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
 
       .level-block {
-        height: 47.52px;
+        height: 50.6px;
         width: 100%;
 
         .effect {
@@ -248,7 +233,7 @@
           justify-content: flex-start;
           text-align: left;
           height: 100%;
-          width: 85%;
+          width: 88%;
 
           .text {
             padding: 0 5px;
@@ -264,6 +249,7 @@
             padding: 3px 0 3px 3px;
 
             .right-arrow {
+              z-index: 1;
               position: relative;
               display: inline-block;
               width: 25px;
@@ -288,6 +274,9 @@
             }
 
             .level-text {
+              z-index: 10;
+              position: relative;
+              float: left;
               font-family: Beleren, sans-serif;
               height: 30px;
               width: 35px;

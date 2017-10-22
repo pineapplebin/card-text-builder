@@ -26,7 +26,7 @@
               <span v-for="d in color.dot" :style="{background: d}"></span>
             </span>
             <span class="type">{{ type }}</span>
-            <span style="font-size: 1.2em;" class="ss ss-grad"
+            <span style="font-size: 1.1em;" class="ss ss-grad"
                   :class="[`ss-${version}`, `ss-${rarity}`]"></span>
           </div>
         </div>
@@ -125,7 +125,7 @@
 
   .type-block {
     font-family: Beleren, "Weibei SC", STKaiti, sans-serif;
-    font-size: 12pt;
+    font-size: 13pt;
     font-weight: bold;
     height: 19px;
     display: flex;
