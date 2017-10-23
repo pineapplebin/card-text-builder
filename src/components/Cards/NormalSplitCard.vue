@@ -1,96 +1,106 @@
 <template>
-  <div class="NormalSplitCard" id="card">
-    <div class="cards-block">
-      <div class="background-image" :style="{backgroundImage: `url(${bg})`}">
-        <div class="border-radius-block">
-          <div class="border-color-block" :style="{background: color.border}">
-            <div class="content-block name-block" style="border-radius: 8px"
-                 :style="{backgroundColor: color.name}">
-              <span>hello</span>
-              <img v-for="c in cost" :src="$$images['mana'][c]" alt=""
-                   v-if="c" :class="{bigger: c.match(/^[2wubrg][wubrg]$/)}">
+  <div class="holder" @click="is_vertical = !is_vertical">
+    <div class="NormalSplitCard" id="card" :style="{transform: is_vertical ? 'rotate(-90deg)': ''}">
+      <div class="cards-block">
+        <div class="background-image" :style="{backgroundImage: `url(${bg})`}">
+          <div class="border-radius-block">
+            <div class="border-color-block" :style="{background: color.border}">
+              <div class="content-block name-block" style="border-radius: 8px"
+                   :style="{backgroundColor: color.name}">
+                <span>hello</span>
+                <img v-for="c in cost" :src="$$images['mana'][c]" alt=""
+                     v-if="c" :class="{bigger: c.match(/^[2wubrg][wubrg]$/)}">
+              </div>
+            </div>
+          </div>
+          <div class="border-radius-block" style="width: 227px; border-radius: 2px;">
+            <div class="border-color-block" style="padding-top: 0; padding-bottom: 0;"
+                 :style="{background: color.border}">
+              <div class="content-block image-block" style="border-width: 2px 2px 0 0;">
+                <img :src="card_image" alt="image" class="image">
+              </div>
+            </div>
+          </div>
+          <div class="border-radius-block">
+            <div class="border-color-block" :style="{background: color.border}">
+              <div class="content-block type-block" style="border-radius: 8px"
+                   :style="{backgroundColor: color.type}">
+                <span class="type">{{ type }}</span>
+                <span style="font-size: 1.1em;" class="ss ss-grad"
+                      :class="[`ss-${version}`, `ss-${rarity}`]"></span>
+              </div>
+            </div>
+          </div>
+          <div class="border-radius-block" style="width: 227px; border-radius: 0 0 5px 5px;">
+            <div class="border-color-block" style="padding-top: 0;"
+                 :style="{background: color.border}">
+              <div class="content-block effect-block" style="border-width: 1px 2px 2px 1px"
+                   :style="{background: color.effect}">
+                <div class="content" v-html="effect_render"
+                     :style="{backgroundImage: `url(${effect_background})`}">
+                  {{ effect_render }}
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="border-radius-block" style="width: 227px; border-radius: 2px;">
-          <div class="border-color-block" style="padding-top: 0; padding-bottom: 0;"
-               :style="{background: color.border}">
-            <div class="content-block image-block" style="border-width: 2px 2px 0 0;">
-              <img :src="card_image" alt="image" class="image">
+        <div class="background-image" :style="{backgroundImage: `url(${bg})`}">
+          <div class="border-radius-block">
+            <div class="border-color-block" :style="{background: color.border}">
+              <div class="content-block name-block" style="border-radius: 8px"
+                   :style="{backgroundColor: color.name}">
+                <span>hello</span>
+                <img v-for="c in cost" :src="$$images['mana'][c]" alt=""
+                     v-if="c" :class="{bigger: c.match(/^[2wubrg][wubrg]$/)}">
+              </div>
             </div>
           </div>
-        </div>
-        <div class="border-radius-block">
-          <div class="border-color-block" :style="{background: color.border}">
-            <div class="content-block type-block" style="border-radius: 8px"
-                 :style="{backgroundColor: color.type}">
-              <span class="type">{{ type }}</span>
-              <span style="font-size: 1.1em;" class="ss ss-grad"
-                    :class="[`ss-${version}`, `ss-${rarity}`]"></span>
+          <div class="border-radius-block" style="width: 227px; border-radius: 2px;">
+            <div class="border-color-block" style="padding-top: 0; padding-bottom: 0;"
+                 :style="{background: color.border}">
+              <div class="content-block image-block" style="border-width: 2px 2px 0 0;">
+                <img :src="card_image" alt="image" class="image" style="left: -186px;">
+              </div>
             </div>
           </div>
-        </div>
-        <div class="border-radius-block" style="width: 227px; border-radius: 0 0 5px 5px;">
-          <div class="border-color-block" style="padding-top: 0;"
-               :style="{background: color.border}">
-            <div class="content-block effect-block" style="border-width: 1px 2px 2px 1px"
-                 :style="{background: color.effect}">
-              <div class="content" v-html="effect_render"
-                   :style="{backgroundImage: `url(${effect_background})`}">
-                {{ effect_render }}
+          <div class="border-radius-block">
+            <div class="border-color-block" :style="{background: color.border}">
+              <div class="content-block type-block" style="border-radius: 8px"
+                   :style="{backgroundColor: color.type}">
+                <span class="type">{{ type }}</span>
+                <span style="font-size: 1.1em;" class="ss ss-grad"
+                      :class="[`ss-${version}`, `ss-${rarity}`]"></span>
+              </div>
+            </div>
+          </div>
+          <div class="border-radius-block" style="width: 227px; border-radius: 0 0 5px 5px;">
+            <div class="border-color-block" style="padding-top: 0;"
+                 :style="{background: color.border}">
+              <div class="content-block effect-block" style="border-width: 1px 2px 2px 1px"
+                   :style="{background: color.effect}">
+                <div class="content" v-html="effect_render"
+                     :style="{backgroundImage: `url(${effect_background})`}">
+                  {{ effect_render }}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="background-image" :style="{backgroundImage: `url(${bg})`}">
-        <div class="border-radius-block">
-          <div class="border-color-block" :style="{background: color.border}">
-            <div class="content-block name-block" style="border-radius: 8px"
-                 :style="{backgroundColor: color.name}">
-              <span>hello</span>
-              <img v-for="c in cost" :src="$$images['mana'][c]" alt=""
-                   v-if="c" :class="{bigger: c.match(/^[2wubrg][wubrg]$/)}">
-            </div>
-          </div>
-        </div>
-        <div class="border-radius-block" style="width: 227px; border-radius: 2px;">
-          <div class="border-color-block" style="padding-top: 0; padding-bottom: 0;"
-               :style="{background: color.border}">
-            <div class="content-block image-block" style="border-width: 2px 2px 0 0;">
-              <img :src="card_image" alt="image" class="image" style="left: -186px;">
-            </div>
-          </div>
-        </div>
-        <div class="border-radius-block">
-          <div class="border-color-block" :style="{background: color.border}">
-            <div class="content-block type-block" style="border-radius: 8px"
-                 :style="{backgroundColor: color.type}">
-              <span class="type">{{ type }}</span>
-              <span style="font-size: 1.1em;" class="ss ss-grad"
-                    :class="[`ss-${version}`, `ss-${rarity}`]"></span>
-            </div>
-          </div>
-        </div>
-        <div class="border-radius-block" style="width: 227px; border-radius: 0 0 5px 5px;">
-          <div class="border-color-block" style="padding-top: 0;"
-               :style="{background: color.border}">
-            <div class="content-block effect-block" style="border-width: 1px 2px 2px 1px"
-                 :style="{background: color.effect}">
-              <div class="content" v-html="effect_render"
-                   :style="{backgroundImage: `url(${effect_background})`}">
-                {{ effect_render }}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="extra-info"></div>
     </div>
-    <div class="extra-info"></div>
   </div>
 </template>
 
 <style lang="less" scoped>
+  .holder {
+    height: 525px;
+    width: 525px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .NormalSplitCard {
     height: 350px;
     width: 499px;
@@ -222,8 +232,10 @@
   import color from '../Utils/ColorSelector.js'
 
   export default {
-    data() {
+    data () {
       return {
+        is_vertical: false,
+        // card
         bg,
         color: color.R,
         cost_text: '1,r',
@@ -231,11 +243,13 @@
         effect: '[[飞行]]'
       }
     },
+    props: ['id', 'name', 'card_url', 'type', 'body', 'is_creature',
+      'rarity', 'version', 'effect_background', 'show_dot'],
     computed: {
-      cost() {
+      cost () {
         return this.cost_text.split(',').map(t => t.trim())
       },
-      effect_render() {
+      effect_render () {
         return this.$$ability.translate(this.effect);
       },
     }
