@@ -87,7 +87,9 @@
           </div>
         </div>
       </div>
-      <div class="extra-info"></div>
+      <div class="extra-info">
+        <span class="id">{{ id }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -119,6 +121,14 @@
   .extra-info {
     height: 15px;
     text-align: left;
+
+    .id {
+      font-family: Beleren, sans-serif;
+      font-size: 10pt;
+      position: relative;
+      top: 9px;
+      color: white;
+    }
   }
 
   .background-image {
