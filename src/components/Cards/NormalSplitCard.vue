@@ -17,7 +17,7 @@
             <div class="border-color-block" style="padding-top: 0; padding-bottom: 0;"
                  :style="{background: card1.color.border}">
               <div class="content-block image-block" style="border-width: 2px 2px 0 0;">
-                <img :src="card_image" alt="image" class="image">
+                <img :src="card_url" alt="image" class="image">
               </div>
             </div>
           </div>
@@ -59,7 +59,7 @@
             <div class="border-color-block" style="padding-top: 0; padding-bottom: 0;"
                  :style="{background: card2.color.border}">
               <div class="content-block image-block" style="border-width: 2px 2px 0 0;">
-                <img :src="card_image" alt="image" class="image" style="left: -186px;">
+                <img :src="card_url" alt="image" class="image" style="left: -186px;">
               </div>
             </div>
           </div>
@@ -126,7 +126,7 @@
       font-family: Beleren, sans-serif;
       font-size: 10pt;
       position: relative;
-      top: 9px;
+      top: 7px;
       color: white;
     }
   }
@@ -196,7 +196,7 @@
       float: left;
       width: 340px;
       left: 56px;
-      top: -117px;
+      top: -116px;
       transform: rotate(90deg);
     }
   }
@@ -214,6 +214,7 @@
 
     .type {
       flex: 1 0 auto;
+      padding-top: 2px;
     }
   }
 
