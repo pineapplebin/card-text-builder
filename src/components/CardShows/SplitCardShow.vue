@@ -1,7 +1,8 @@
 <template>
   <div class="cardshow">
     <div class="cardshow-block">
-      <normal-split-card :id="id"></normal-split-card>
+      <normal-split-card :id="id" :card1="card1" :card2="card2" :version="version" :rarity="rarity"
+                         :card_url="card_url"></normal-split-card>
     </div>
     <hr>
     <button @click="show_form = !show_form">隐藏／显示表单</button>
@@ -10,21 +11,67 @@
         <label for="id">ID</label>
         <input id="id" type="text" v-model="id" autocomplete="off" placeholder="美版编号">
       </div>
+      <div class="form-control">
+        <label>稀有度</label>
+        <rarity-selector @change="changeRarity"></rarity-selector>
+        <label for="version" style="margin-left: 50px;">卡包</label>
+        <input id="version" type="text" v-model="version" placeholder="Keyrune code" style="width: 50px;">
+      </div>
+      <div class="form-control">
+        <label for="url">图片链接</label>
+        <input id="url" type="text" placeholder="gatherer.wizards.com的图片"
+               v-model="card_url" autocomplete="off">
+      </div>
       <br>
       <h3>Card 1</h3>
       <div class="form-control">
         <label>卡框颜色</label>
         <color-selector style="margin-right: 50px" :filter="filterColor"
-                        @change="changeColor"></color-selector>
+                        @change="changeColor('card1', $event)"></color-selector>
         <label>效果背景图</label>
-        <effect-image-selector @change="changeEffect"></effect-image-selector>
+        <effect-image-selector @change="changeEffect('card1', $event)"></effect-image-selector>
       </div>
       <div class="form-control">
-        <label>稀有度</label>
-        <rarity-selector @change="changeRarity"></rarity-selector>
-        <label for="version" style="margin-left: 50px;">卡包</label>
-        <input id="version" type="text" v-model="version" placeholder="Keyrune code"
-               style="width: 50px;">
+        <label for="name">名字</label>
+        <input id="name" type="text" v-model="card1.name" autocomplete="off">
+      </div>
+      <div class="form-control">
+        <label for="cost">费用</label>
+        <input id="cost" type="text" placeholder="eg: 1,r" v-model="card1.cost_text" autocomplete="off">
+      </div>
+      <div class="form-control">
+        <label for="type">类别</label>
+        <input id="type" type="text" placeholder="完整类别" v-model="card1.type" autocomplete="off">
+      </div>
+      <div class="form-control">
+        <label for="effect">效果</label>
+        <textarea id="effect" cols="80" rows="5" style="vertical-align: middle"
+                  v-model="card1.effect" placeholder="{1}为费用图片，[[xxx]]为异能"></textarea>
+      </div>
+      <h3>Card 2</h3>
+      <div class="form-control">
+        <label>卡框颜色</label>
+        <color-selector style="margin-right: 50px" :filter="filterColor"
+                        @change="changeColor('card2', $event)"></color-selector>
+        <label>效果背景图</label>
+        <effect-image-selector @change="changeEffect('card2', $event)"></effect-image-selector>
+      </div>
+      <div class="form-control">
+        <label for="name2">名字</label>
+        <input id="name2" type="text" v-model="card2.name" autocomplete="off">
+      </div>
+      <div class="form-control">
+        <label for="cost2">费用</label>
+        <input id="cost2" type="text" placeholder="eg: 1,r" v-model="card2.cost_text" autocomplete="off">
+      </div>
+      <div class="form-control">
+        <label for="type2">类别</label>
+        <input id="type2" type="text" placeholder="完整类别" v-model="card2.type" autocomplete="off">
+      </div>
+      <div class="form-control">
+        <label for="effect2">效果</label>
+        <textarea id="effect2" cols="80" rows="5" style="vertical-align: middle"
+                  v-model="card2.effect" placeholder="{1}为费用图片，[[xxx]]为异能"></textarea>
       </div>
     </div>
   </div>
@@ -47,9 +94,7 @@
       card_url: '',
       type: '',
       effect: '',
-      background: {},
-      rarity: 'common',
-      version: 'xln',
+      color: {},
       effect_background: null,
       show_dot: false,
     }
@@ -67,11 +112,26 @@
         show_form: true,
         // card
         id: '',
+        version: 'xln',
+        rarity: 'common',
+        card_url: '',
         card1: constructor(),
         card2: constructor(),
       }
     },
     methods: {
+      changeColor (card, color) {
+        this[card].color = color;
+      },
+      changeRarity (rarity) {
+        this.rarity = rarity;
+      },
+      changeEffect (card, effect_bg) {
+        this[card].effect_background = effect_bg;
+      },
+      filterColor(color) {
+        return color.code.match(/^(MIX)?[WUBRG]{1,2}$/);
+      }
     }
   }
 </script>
