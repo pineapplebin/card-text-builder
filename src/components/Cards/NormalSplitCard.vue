@@ -76,7 +76,7 @@
           <div class="border-radius-block" style="width: 227px; border-radius: 0 0 5px 5px;">
             <div class="border-color-block" style="padding-top: 0;"
                  :style="{background: card2.color.border}">
-              <div class="content-block effect-block" style="border-width: 1px 2px 2px 1px"
+              <div class="content-block effect-block" style="border-width: 1px 2px 2px 1px;"
                    :style="{background: card2.color.effect}">
                 <div class="content" v-html="effect_render2"
                      :style="{backgroundImage: `url(${card2.effect_background})`}">
@@ -89,6 +89,23 @@
       </div>
       <div class="extra-info">
         <span class="id">{{ id }}</span>
+        <!--<div class="fuse-block">-->
+        <!--<div class="fuse-arrow">-->
+        <!--<span class="left"></span>-->
+        <!--<span class="right"></span>-->
+        <!--</div>-->
+        <!--</div>-->
+        <div class="fuse-effect">
+          <div class="border-radius-block" style="width: 499px; border-radius: 5px;">
+            <div class="border-color-block" style=""
+                 :style="{background: card2.color.border}">
+              <div class="content-block effect-block" style="height: 15px; border-radius: 5px"
+                   :style="{backgroundColor: card2.color.type}">
+                <span class="content" style="height: auto; padding: 1px 10px 0 10px;">Fuse</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -116,19 +133,6 @@
   .cards-block {
     display: flex;
     justify-content: space-between;
-  }
-
-  .extra-info {
-    height: 15px;
-    text-align: left;
-
-    .id {
-      font-family: Beleren, sans-serif;
-      font-size: 10pt;
-      position: relative;
-      top: 7px;
-      color: white;
-    }
   }
 
   .background-image {
@@ -236,6 +240,43 @@
       background-repeat: no-repeat;
     }
   }
+
+  .extra-info {
+    height: 15px;
+    text-align: left;
+
+    .id {
+      font-family: Beleren, sans-serif;
+      font-size: 10pt;
+      height: 16px;
+      position: relative;
+      top: 7px;
+      color: white;
+    }
+
+    .fuse-block {
+
+      .fuse-arrow {
+        position: relative;
+        float: left;
+        top: -315px;
+        left: 248px;
+        border: 2px solid red;
+        text-align: center;
+
+        span {
+          display: inline-block;
+        }
+      }
+    }
+
+    .fuse-effect {
+      position: relative;
+      float: left;
+      z-index: 10;
+      top: -42px;
+    }
+  }
 </style>
 
 <script>
@@ -254,7 +295,7 @@
       effect_render1 () {
         return this.$$ability.translate(this.card1.effect);
       },
-      effect_render2() {
+      effect_render2 () {
         return this.$$ability.translate(this.card2.effect)
       }
     }
