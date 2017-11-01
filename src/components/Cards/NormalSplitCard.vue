@@ -5,7 +5,7 @@
         <div class="background-image" :style="{backgroundImage: `url(${card1.color.background})`}">
           <div class="border-radius-block">
             <div class="border-color-block" :style="{background: card1.color.border}">
-              <div class="content-block name-block" style="border-radius: 8px"
+              <div class="content-block name-block" style="border-radius: 3% / 50%"
                    :style="{backgroundColor: card1.color.name}">
                 <span>{{ card1.name }}</span>
                 <img v-for="c in card1.cost_text.split(',')" :src="$$images['mana'][c]" alt=""
@@ -23,7 +23,7 @@
           </div>
           <div class="border-radius-block">
             <div class="border-color-block" :style="{background: card1.color.border}">
-              <div class="content-block type-block" style="border-radius: 8px"
+              <div class="content-block type-block" style="border-radius: 2% / 50%"
                    :style="{backgroundColor: card1.color.type}">
                 <span class="type">{{ card1.type }}</span>
                 <span style="font-size: 1.1em;" class="ss ss-grad"
@@ -47,7 +47,7 @@
         <div class="background-image" :style="{backgroundImage: `url(${card2.color.background})`}">
           <div class="border-radius-block">
             <div class="border-color-block" :style="{background: card2.color.border}">
-              <div class="content-block name-block" style="border-radius: 8px"
+              <div class="content-block name-block" style="border-radius: 3% / 50%"
                    :style="{backgroundColor: card2.color.name}">
                 <span>{{ card2.name }}</span>
                 <img v-for="c in card2.cost_text.split(',')" :src="$$images['mana'][c]" alt=""
@@ -65,7 +65,7 @@
           </div>
           <div class="border-radius-block">
             <div class="border-color-block" :style="{background: card2.color.border}">
-              <div class="content-block type-block" style="border-radius: 8px"
+              <div class="content-block type-block" style="border-radius: 2% / 50%"
                    :style="{backgroundColor: card2.color.type}">
                 <span class="type">{{ card2.type }}</span>
                 <span style="font-size: 1.1em;" class="ss ss-grad"
@@ -96,10 +96,10 @@
         <!--</div>-->
         <!--</div>-->
         <div class="fuse-effect">
-          <div class="border-radius-block" style="width: 499px; border-radius: 5px;">
+          <div class="border-radius-block" style="width: 499px; border-radius: 2% / 50%;">
             <div class="border-color-block" style=""
                  :style="{background: card2.color.border}">
-              <div class="content-block effect-block" style="height: 15px; border-radius: 5px"
+              <div class="content-block effect-block" style="height: 15px; border-radius: 1% / 50%"
                    :style="{backgroundColor: card2.color.type}">
                 <span class="content" style="height: auto; padding: 1px 10px 0 10px;">Fuse</span>
               </div>
@@ -144,7 +144,8 @@
   }
 
   .border-radius-block {
-    border-radius: 10px;
+    /*border-radius: 10px;*/
+    border-radius: ~"3% / 50%";
     overflow: hidden;
     /*border-left: 3px solid black;*/
     box-shadow: -3px 3px 2px 0 black;

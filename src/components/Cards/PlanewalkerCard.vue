@@ -1,9 +1,9 @@
 <template>
-  <div class="ArenaNormalCard" id="card">
+  <div class="PlanewalkerCard" id="card">
     <div class="background-image" :style="{backgroundImage: `url(${color.background})`}">
-      <div class="border-radius-block">
+      <div class="border-radius-block" style="border-radius: 20px 20px 5px 5px">
         <div class="border-color-block" :style="{background: color.border}">
-          <div class="content-block name-block" style="border-radius: 3% / 50%"
+          <div class="content-block name-block" style="border-radius: 15px 15px 5px 5px"
                :style="{backgroundColor: color.name}">
             <span>{{ name }}</span>
             <img v-for="c in cost" :src="$$images['mana'][c]" alt=""
@@ -11,16 +11,16 @@
           </div>
         </div>
       </div>
-      <div class="border-radius-block" style="width: 335px; border-radius: 2px;">
+      <div class="border-radius-block" style="width: 340px; border-radius: 5% / 50%;">
         <div class="border-color-block" style="padding-top: 0; padding-bottom: 0;"
              :style="{background: color.border}">
-          <div class="content-block image-block" style="border-width: 2px 2px 0 0;"
+          <div class="content-block image-block" style="border-radius: 5% / 50%; border-width: 2px;"
                :style="{backgroundImage: card_image}"></div>
         </div>
       </div>
       <div class="border-radius-block">
         <div class="border-color-block" :style="{background: color.border}">
-          <div class="content-block type-block" style="border-radius: 2% / 50%"
+          <div class="content-block type-block" style="border-radius: 8px"
                :style="{backgroundColor: color.type}">
             <span class="dot" v-if="show_dot">
               <span v-for="d in color.dot" :style="{background: d}"></span>
@@ -57,7 +57,7 @@
 </template>
 
 <style lang="less" scoped>
-  .ArenaNormalCard {
+  .PlanewalkerCard {
     width: 350px;
     border: 13px solid #202020;
     border-radius: 5px;
@@ -72,8 +72,7 @@
   }
 
   .border-radius-block {
-    /*border-radius: 10px;*/
-    border-radius: ~"3% / 50%";
+    border-radius: 10px;
     overflow: hidden;
     /*border-left: 3px solid black;*/
     box-shadow: -3px 3px 2px 0 black;
@@ -223,19 +222,19 @@
 
 <script>
   export default {
-    data() {
+    data () {
       return {}
     },
     props: ['id', 'name', 'cost_text', 'card_url', 'type', 'effect', 'body',
       'is_creature', 'color', 'rarity', 'version', 'effect_background', 'show_dot'],
     computed: {
-      cost() {
+      cost () {
         return this.cost_text.split(',').map(t => t.trim())
       },
-      card_image() {
+      card_image () {
         return `url(${this.card_url}`;
       },
-      effect_render() {
+      effect_render () {
         return this.$$ability.translate(this.effect);
       },
     }
