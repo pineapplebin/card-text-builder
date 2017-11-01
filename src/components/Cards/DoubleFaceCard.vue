@@ -3,7 +3,7 @@
     <div class="background-image" :style="{backgroundImage: `url(${color.background})`}">
       <div class="border-radius-block">
         <div class="border-color-block" :style="{background: color.border}">
-          <div class="content-block name-block" style="border-radius: 8px"
+          <div class="content-block name-block" style="border-radius: 3% / 50%"
                :style="{backgroundColor: color.name}">
             <span class="double-image" :style="{backgroundImage: `url(${double_image})`}"></span>
             <span class="name" :style="{color: is_double_back ? '#FFF' : '#000'}">{{ name }}</span>
@@ -21,7 +21,7 @@
       </div>
       <div class="border-radius-block">
         <div class="border-color-block" :style="{background: color.border}">
-          <div class="content-block type-block" style="border-radius: 8px"
+          <div class="content-block type-block" style="border-radius: 2% / 50%"
                :style="{backgroundColor: color.type}">
             <span class="dot" v-if="is_double_back">
               <span v-for="d in color.dot" :style="{background: d}"></span>
@@ -86,7 +86,8 @@
   }
 
   .border-radius-block {
-    border-radius: 10px;
+    /*border-radius: 10px;*/
+    border-radius: ~"3% / 50%";
     overflow: hidden;
     /*border-left: 3px solid black;*/
     box-shadow: -3px 3px 2px 0 black;
