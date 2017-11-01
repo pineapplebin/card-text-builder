@@ -110,7 +110,7 @@
             <span class="right" :style="{borderRightColor: card2.color.dot[0]}"></span>
             <span class="sm-right" :style="{borderRightColor: card2.color.name}"></span>
           </div>
-          <div class="fuse-arrow" style="top: -199px; left: 189px;">
+          <div class="fuse-arrow" style="top: -200px; left: 189px;">
             <span class="sm-left" style="border-width: 12px 0 12px 10px"
                   :style="{borderLeftColor: card1.color.name}"></span>
             <span class="left" style="border-width: 20px 0 20px 10px;"

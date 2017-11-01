@@ -123,9 +123,9 @@
     /*<!--height: 230px;-->*/
     /*<!--background: center -60px no-repeat;-->*/
     /*<!--background-size: 375px;-->*/
-    height: 234px;
+    height: 242px;
     background: center -46px no-repeat;
-    background-size: 356px;
+    background-size: 365px;
   }
 
   .type-block {
@@ -168,7 +168,7 @@
 
     .content {
       font-family: MPlantin, sans-serif;
-      height: 142px;
+      height: 134px;
       font-size: 11pt;
       padding: 5px 10px;
       display: flex;
