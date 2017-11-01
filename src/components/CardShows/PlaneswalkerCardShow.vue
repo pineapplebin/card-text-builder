@@ -1,11 +1,10 @@
 <template>
   <div class="cardshow">
     <div class="cardshow-block">
-      <planewalker-card :id="id" :name="name" :cost_text="cost_text" :card_url="card_url"
-                         :type="type" :effect="effect" :body="[atk, def]" :is_creature="is_creature"
-                         :color="background" :rarity="rarity" :version="version"
-                         :effect_background="effect_background"
-                         :show_dot="show_dot"></planewalker-card>
+      <planeswalker-card :id="id" :name="name" :cost_text="cost_text" :card_url="card_url"
+                        :type="type" :effect="effect" :color="background" :rarity="rarity" :version="version"
+                        :effect_background="effect_background" :loyalty="loyalty"
+                        :show_dot="show_dot"></planeswalker-card>
     </div>
     <hr>
     <button @click="show_form = !show_form">隐藏／显示表单</button>
@@ -47,18 +46,14 @@
                v-model="type" autocomplete="off">
       </div>
       <div class="form-control">
-        <label for="effect">效果</label>
-        <textarea id="effect" cols="80" rows="5" style="vertical-align: middle"
-                  v-model="effect" placeholder="{1}为费用图片，[[xxx]]为异能"></textarea>
+        <label for="loyalty">忠诚</label>
+        <input type="text" id="loyalty" v-model="loyalty">
       </div>
-      <div class="form-control">
-        <label for="is_creature">是否生物？</label>
-        <input id="is_creature" type="checkbox" v-model="is_creature" style="width: 50px">
-        <label for="atk">攻击力</label>
-        <input id="atk" type="text" v-model="atk" style="width: 50px;">
-        <label for="def">防御力</label>
-        <input id="def" type="text" v-model="def" style="width: 50px;">
-      </div>
+      <!--<div class="form-control">-->
+      <!--<label for="effect">效果</label>-->
+      <!--<textarea id="effect" cols="80" rows="5" style="vertical-align: middle"-->
+      <!--v-model="effect" placeholder="{1}为费用图片，[[xxx]]为异能"></textarea>-->
+      <!--</div>-->
     </div>
   </div>
 </template>
@@ -68,19 +63,19 @@
 </style>
 
 <script>
-  import PlanewalkerCard from '../Cards/PlanewalkerCard.vue'
+  import PlaneswalkerCard from '../Cards/PlaneswalkerCard.vue'
   import ColorSelector from '../Utils/ColorSelector.vue'
   import RaritySelector from '../Utils/RaritySelector.vue'
   import EffectImageSelector from '../Utils/EffectImageSelector.vue'
 
   export default {
     components: {
-      PlanewalkerCard,
+      PlaneswalkerCard,
       ColorSelector,
       RaritySelector,
       EffectImageSelector,
     },
-    data() {
+    data () {
       return {
         show_form: true,
         // card
@@ -92,27 +87,25 @@
         url: '',
         type: '',
         effect: '',
-        atk: 0,
-        def: 0,
-        is_creature: true,
         background: {},
         rarity: 'common',
         version: 'xln',
         effect_background: null,
         show_dot: false,
+        loyalty: 0,
       }
     },
     methods: {
-      changeColor(color) {
+      changeColor (color) {
         this.background = color;
       },
-      changeRarity(rarity) {
+      changeRarity (rarity) {
         this.rarity = rarity
       },
-      changeEffect(effect) {
+      changeEffect (effect) {
         this.effect_background = effect;
       },
-      filterColor(color) {
+      filterColor (color) {
         return !color.code.match(/^DB\w+$/)
       }
     }

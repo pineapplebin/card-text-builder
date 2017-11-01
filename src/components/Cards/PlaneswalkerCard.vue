@@ -48,10 +48,11 @@
     </div>
     <div class="extra-info">
       <span class="id">{{ id }}</span>
-      <div class="body" :style="{backgroundImage: `url(${loyalty})`}">
-        <span>6</span>
+      <div class="body" :style="{backgroundImage: `url(${loyalty_img})`}">
+        <span>{{ loyalty }}</span>
       </div>
       <div class="mask"></div>
+      <div class="loyalty"></div>
     </div>
   </div>
 </template>
@@ -252,16 +253,16 @@
 </style>
 
 <script>
-  import loyalty from '../../assets/planewalker/loyalty.png'
+  import loyalty_img from '../../assets/planewalker/loyalty.png'
 
   export default {
     data () {
       return {
-        loyalty,
+        loyalty_img,
       }
     },
-    props: ['id', 'name', 'cost_text', 'card_url', 'type', 'effect', 'body',
-      'is_creature', 'color', 'rarity', 'version', 'effect_background', 'show_dot'],
+    props: ['id', 'name', 'cost_text', 'card_url', 'type', 'effect', 'color',
+      'rarity', 'version', 'effect_background', 'show_dot', 'loyalty'],
     computed: {
       cost () {
         return this.cost_text.split(',').map(t => t.trim())

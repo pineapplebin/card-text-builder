@@ -52,7 +52,7 @@
   import DoubleFaceCardShow from './components/CardShows/DoubleFaceCardShow.vue'
   import LevelUpCardShow from './components/CardShows/LevelUpCardShow.vue'
   import SplitCardShow from './components/CardShows/SplitCardShow.vue'
-  import PlanewalkerCardShow from './components/CardShows/PlanewalkerCardShow.vue'
+  import PlaneswalkerCardShow from './components/CardShows/PlaneswalkerCardShow.vue'
 
   export default {
     name: 'app',
@@ -64,7 +64,7 @@
           DoubleFaceCardShow,
           LevelUpCardShow,
           SplitCardShow,
-          PlanewalkerCardShow,
+          PlaneswalkerCardShow,
         },
         card: 'NormalCardShow',
       }
