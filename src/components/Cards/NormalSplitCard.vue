@@ -37,7 +37,8 @@
               <div class="content-block effect-block" style="border-width: 1px 2px 2px 1px"
                    :style="{background: card1.color.effect}">
                 <div class="content" v-html="effect_render1"
-                     :style="{backgroundImage: `url(${card1.effect_background})`}">
+                     :style="{backgroundImage: `url(${card1.effect_background})`,
+                     height: is_fuse ? '66px': ''}">
                   {{ effect_render1 }}
                 </div>
               </div>
@@ -79,7 +80,8 @@
               <div class="content-block effect-block" style="border-width: 1px 2px 2px 1px;"
                    :style="{background: card2.color.effect}">
                 <div class="content" v-html="effect_render2"
-                     :style="{backgroundImage: `url(${card2.effect_background})`}">
+                     :style="{backgroundImage: `url(${card2.effect_background})`,
+                      height: is_fuse ? '66px' : ''}">
                   {{ effect_render2 }}
                 </div>
               </div>
@@ -89,21 +91,34 @@
       </div>
       <div class="extra-info">
         <span class="id">{{ id }}</span>
-        <!--<div class="fuse-block">-->
-        <!--<div class="fuse-arrow">-->
-        <!--<span class="left"></span>-->
-        <!--<span class="right"></span>-->
-        <!--</div>-->
-        <!--</div>-->
-        <div class="fuse-effect">
-          <div class="border-radius-block" style="width: 499px; border-radius: 5px;">
-            <div class="border-color-block" style=""
-                 :style="{background: card2.color.border}">
-              <div class="content-block effect-block" style="height: 15px; border-radius: 5px"
-                   :style="{backgroundColor: card2.color.type}">
-                <span class="content" style="height: auto; padding: 1px 10px 0 10px;">Fuse</span>
+        <div class="fuse-block" v-show="is_fuse">
+          <div class="fuse-effect">
+            <div class="border-radius-block" style="width: 499px; border-radius: 5px;">
+              <div class="border-color-block" style=""
+                   :style="{background: fuse_border_color}">
+                <div class="content-block fuse-text-block"
+                     :style="{background: fuse_background_color}">
+                  <span class="content" v-html="fuse_render">{{ fuse_render }}</span>
+                </div>
               </div>
             </div>
+          </div>
+          <div class="fuse-arrow">
+            <span class="sm-left" :style="{borderLeftColor: card1.color.name}"></span>
+            <span class="left"
+                  :style="{borderLeftColor: card1.color.dot[1] || card1.color.dot[0]}"></span>
+            <span class="right" :style="{borderRightColor: card2.color.dot[0]}"></span>
+            <span class="sm-right" :style="{borderRightColor: card2.color.name}"></span>
+          </div>
+          <div class="fuse-arrow" style="top: -199px; left: 189px;">
+            <span class="sm-left" style="border-width: 12px 0 12px 10px"
+                  :style="{borderLeftColor: card1.color.name}"></span>
+            <span class="left" style="border-width: 20px 0 20px 10px;"
+                  :style="{borderLeftColor: card1.color.dot[1] || card1.color.dot[0]}"></span>
+            <span class="right" style="border-width: 20px 10px 20px 0;"
+                  :style="{borderRightColor: card2.color.dot[0]}"></span>
+            <span class="sm-right" style="border-width: 12px 10px 12px 0"
+                  :style="{borderRightColor: card2.color.name}"></span>
           </div>
         </div>
       </div>
@@ -246,6 +261,7 @@
     text-align: left;
 
     .id {
+      z-index: 100;
       font-family: Beleren, sans-serif;
       font-size: 10pt;
       height: 16px;
@@ -254,35 +270,93 @@
       color: white;
     }
 
-    .fuse-block {
-
-      .fuse-arrow {
-        position: relative;
-        float: left;
-        top: -315px;
-        left: 248px;
-        border: 2px solid red;
-        text-align: center;
-
-        span {
-          display: inline-block;
-        }
-      }
-    }
-
     .fuse-effect {
       position: relative;
       float: left;
       z-index: 10;
-      top: -42px;
+      top: -46px;
+    }
+
+    .fuse-text-block {
+      height: 18px;
+      border-radius: 5px;
+
+      .content {
+        position: relative;
+        top:-2px;
+        display: inline-block;
+        font-family: MPlantin, sans-serif;
+        font-size: 10pt;
+        padding: 0 5px;
+        word-break: break-all;
+        text-align: left;
+        background-size: 50px;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+    }
+
+    .fuse-arrow {
+      position: relative;
+      float: left;
+      top: -392px;
+      left: 230px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      span {
+        display: inline-block;
+        width: 0;
+        height: 0;
+
+        &.sm-left {
+          border-top: 15px solid transparent;
+          border-bottom: 15px solid transparent;
+          border-left: 10px solid;
+          border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px;
+        }
+
+        &.sm-right {
+          margin-left: 1px;
+          border-top: 15px solid transparent;
+          border-bottom: 15px solid transparent;
+          border-right: 10px solid;
+          border-top-right-radius: 10px;
+          border-bottom-right-radius: 10px;
+        }
+
+        &.left {
+          border-top: 22px solid transparent;
+          border-bottom: 22px solid transparent;
+          border-left: 10px solid;
+          border-top-left-radius: 10px;
+          border-bottom-left-radius: 10px;
+        }
+
+        &.right {
+          border-top: 22px solid transparent;
+          border-bottom: 22px solid transparent;
+          border-right: 10px solid;
+          border-top-right-radius: 10px;
+          border-bottom-right-radius: 10px;
+        }
+      }
     }
   }
 </style>
 
 <script>
+  import {getAbility} from '../../plugins/effect/abilities.js'
+  import ColorSelector from '../Utils/ColorSelector.js'
+
+  function linear(c1, c2, dir = 'to right') {
+    return `linear-gradient(${dir}, ${c1} 45%, ${c2} 55%)`
+  }
 
   export default {
-    data () {
+    data() {
       return {
         is_vertical: false,
         // card
@@ -290,13 +364,46 @@
         effect: '[[飞行]]'
       }
     },
-    props: ['id', 'card1', 'card2', 'version', 'rarity', 'card_url'],
+    props: ['id', 'card1', 'card2', 'version', 'rarity', 'card_url', 'is_fuse', 'fuse_text'],
     computed: {
-      effect_render1 () {
+      fuse_render() {
+        if (!this.fuse_text)
+          return '';
+        const ab = getAbility(this.fuse_text);
+        return `${ab[ab.lang].name.title()}<span style="font-style: italic">（${ab[ab.lang].desc}）</span>`;
+      },
+      effect_render1() {
         return this.$$ability.translate(this.card1.effect);
       },
-      effect_render2 () {
+      effect_render2() {
         return this.$$ability.translate(this.card2.effect)
+      },
+      fuse_border_color() {
+        if (!this.is_fuse)
+          return 'white';
+        const color1 = this.card1.color;
+        const color2 = this.card2.color;
+        if (Object.keys(color1).length < 2 || Object.keys(color2).length < 2)
+          return 'white';
+
+        // return linear(color1.border, color2.border);
+        let result = `linear-gradient(to right, ${color1.dot[0]} 5%, ${
+        color1.dot[1] || color1.dot[0]} 46%, ${color2.dot[0]} 53%, ${color2.dot[0]}, ${
+        color2.dot[1] || color2.dot[0]} 95%)`;
+        return result;
+      },
+      fuse_background_color() {
+        if (!this.is_fuse)
+          return 'white';
+        const color1 = this.card1.color;
+        const color2 = this.card2.color;
+        if (Object.keys(color1).length < 2 || Object.keys(color2).length < 2)
+          return 'white';
+
+        if (color1.dot.length === 2 || color2.dot.length === 2)
+          return ColorSelector.MUL.name;
+        else
+          return linear(color1.name, color2.name);
       }
     }
   }

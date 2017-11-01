@@ -16,6 +16,8 @@
 <script>
   import story_spotlight from '../../assets/effect/story_spotlight.png'
   import ravnica_BG_1 from '../../assets/effect/ravnica_BG_1.png'
+  import ravnica_UR_1 from '../../assets/effect/ravnica_UR_1.png'
+  import ravnica_UR_2 from '../../assets/effect/ravnica_UR_2.png'
 
   export default {
     data() {
@@ -24,6 +26,8 @@
         images: {
           story_spotlight,
           ravnica_BG_1,
+          ravnica_UR_1,
+          ravnica_UR_2,
         }
       }
     },

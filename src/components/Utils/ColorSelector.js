@@ -76,52 +76,52 @@ export default {
   WU: Color({
     code: 'WU', display: '白蓝',
     name: C.M2, effect: linear(C.W1, C.U1),
-    border: linear(C.W3, C.U3), background: Mb, dot: [C.W1, C.U1]
+    border: linear(C.W3, C.U3), background: Mb, dot: [C.W3, C.U3]
   }),
   UB: Color({
     code: 'UB', display: '蓝黑',
     name: C.M2, effect: linear(C.U1, C.B1),
-    border: linear(C.U3, C.B3), background: Mb, dot: [C.U1, C.B1]
+    border: linear(C.U3, C.B3), background: Mb, dot: [C.U3, C.B3]
   }),
   BR: Color({
     code: 'BR', display: '黑红',
     name: C.M2, effect: linear(C.B1, C.R1),
-    border: linear(C.B3, C.R3), background: Mb, dot: [C.B1, C.R1]
+    border: linear(C.B3, C.R3), background: Mb, dot: [C.B3, C.R3]
   }),
   RG: Color({
     code: 'RG', display: '红绿',
     name: C.M2, effect: linear(C.R1, C.G1),
-    border: linear(C.R3, C.G3), background: Mb, dot: [C.R1, C.G1]
+    border: linear(C.R3, C.G3), background: Mb, dot: [C.R3, C.G3]
   }),
   GW: Color({
     code: 'GW', display: '绿白',
     name: C.M2, effect: linear(C.G1, C.W1),
-    border: linear(C.G3, C.W3), background: Mb, dot: [C.G1, C.W1]
+    border: linear(C.G3, C.W3), background: Mb, dot: [C.G3, C.W3]
   }),
   WB: Color({
     code: 'WB', display: '白黑',
     name: C.M2, effect: linear(C.W1, C.B1),
-    border: linear(C.W3, C.B3), background: Mb, dot: [C.W1, C.B1]
+    border: linear(C.W3, C.B3), background: Mb, dot: [C.W3, C.B3]
   }),
   UR: Color({
     code: 'UR', display: '蓝红',
     name: C.M2, effect: linear(C.U1, C.R1),
-    border: linear(C.U3, C.R3), background: Mb, dot: [C.U1, C.R1]
+    border: linear(C.U3, C.R3), background: Mb, dot: [C.U3, C.R3]
   }),
   BG: Color({
     code: 'BG', display: '黑绿',
     name: C.M2, effect: linear(C.B1, C.G1),
-    border: linear(C.B3, C.G3), background: Mb, dot: [C.B1, C.G1]
+    border: linear(C.B3, C.G3), background: Mb, dot: [C.B3, C.G3]
   }),
   RW: Color({
     code: 'RW', display: '红白',
     name: C.M2, effect: linear(C.R1, C.W1),
-    border: linear(C.R3, C.W3), background: Mb, dot: [C.R1, C.W1]
+    border: linear(C.R3, C.W3), background: Mb, dot: [C.R3, C.W3]
   }),
   GU: Color({
     code: 'GU', display: '绿蓝',
     name: C.M2, effect: linear(C.G1, C.U1),
-    border: linear(C.G3, C.U3), background: Mb, dot: [C.G1, C.U1]
+    border: linear(C.G3, C.U3), background: Mb, dot: [C.G3, C.U3]
   }),
   MUL: Color({
     code: 'MUL', display: '多色',
@@ -161,6 +161,6 @@ export default {
   MIXBG: Color({
     code: 'MIXBG', display: '混色黑绿',
     name: C.MIX, effect: linear(C.B1, C.G1),
-    border: linear(C.B3, C.G3), background: MIXBGb, dot: [C.B1, C.G1]
+    border: linear(C.B3, C.G3), background: MIXBGb, dot: [C.B3, C.G3]
   })
 }
