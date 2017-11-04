@@ -2,9 +2,10 @@
   <div class="cardshow">
     <div class="cardshow-block">
       <planeswalker-card :id="id" :name="name" :cost_text="cost_text" :card_url="card_url"
-                        :type="type" :effect="effect" :color="background" :rarity="rarity" :version="version"
-                        :effect_background="effect_background" :loyalty="loyalty"
-                        :show_dot="show_dot"></planeswalker-card>
+                         :type="type" :effect="effect" :color="background" :rarity="rarity"
+                         :version="version" :effect_background="effect_background"
+                         :show_dot="show_dot" :loyalty="loyalty"
+                         :loyalty_effects="loyalty_effects"></planeswalker-card>
     </div>
     <hr>
     <button @click="show_form = !show_form">隐藏／显示表单</button>
@@ -49,6 +50,21 @@
         <label for="loyalty">忠诚</label>
         <input type="text" id="loyalty" v-model="loyalty">
       </div>
+      <div class="form-control">
+        <label for="effects">效果数</label>
+        <input id="effects" type="text" v-model="effects" style="width: 50px;"
+               @change="changeLoyaltyEffects">
+      </div>
+      <div class="form-control" v-for="(l, idx) in loyalty_effects">
+        <h3>Effect {{ idx + 1 }}</h3>
+        <label :for="'loyalty_count_' + idx">忠诚</label>
+        <input :id="'loyalty_count_' + idx" type="text" style="width: 50px;"
+               v-model="l['count']">
+        <br>
+        <label :for="'loyalty_effect_' + idx">效果</label>
+        <textarea :id="'loyalty_effect_' + idx" cols="80" rows="5"
+                  v-model="l['effect']"></textarea>
+      </div>
       <!--<div class="form-control">-->
       <!--<label for="effect">效果</label>-->
       <!--<textarea id="effect" cols="80" rows="5" style="vertical-align: middle"-->
@@ -75,9 +91,10 @@
       RaritySelector,
       EffectImageSelector,
     },
-    data () {
+    data() {
       return {
         show_form: true,
+        effects: 0,
         // card
         id: '',
         name: '',
@@ -93,19 +110,27 @@
         effect_background: null,
         show_dot: false,
         loyalty: 0,
+        loyalty_effects: [],
       }
     },
     methods: {
-      changeColor (color) {
+      changeLoyaltyEffects() {
+        const loyalty_effects = [];
+        for (let i = 0; i < this.effects; i++) {
+          loyalty_effects.push({count: 0, effect: ''});
+        }
+        this.loyalty_effects = loyalty_effects;
+      },
+      changeColor(color) {
         this.background = color;
       },
-      changeRarity (rarity) {
+      changeRarity(rarity) {
         this.rarity = rarity
       },
-      changeEffect (effect) {
+      changeEffect(effect) {
         this.effect_background = effect;
       },
-      filterColor (color) {
+      filterColor(color) {
         return !color.code.match(/^DB\w+$/)
       }
     }

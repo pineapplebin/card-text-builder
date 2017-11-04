@@ -18,6 +18,11 @@
   import ravnica_BG_1 from '../../assets/effect/ravnica_BG_1.png'
   import ravnica_UR_1 from '../../assets/effect/ravnica_UR_1.png'
   import ravnica_UR_2 from '../../assets/effect/ravnica_UR_2.png'
+  import watermark_w from '../../assets/effect/watermark_w.png'
+  import watermark_u from '../../assets/effect/watermark_u.png'
+  import watermark_b from '../../assets/effect/watermark_b.png'
+  import watermark_r from '../../assets/effect/watermark_r.png'
+  import watermark_g from '../../assets/effect/watermark_g.png'
 
   export default {
     data() {
@@ -28,6 +33,11 @@
           ravnica_BG_1,
           ravnica_UR_1,
           ravnica_UR_2,
+          watermark_w,
+          watermark_u,
+          watermark_b,
+          watermark_r,
+          watermark_g,
         }
       }
     },

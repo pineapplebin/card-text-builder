@@ -54,7 +54,7 @@
           {{ body[0] }}/{{ body[1] }}
         </span>
       </div>
-      <div class="back-body-block" v-if="back_body && back_body.length">
+      <div class="back-body-block" v-if="back_body">
         <div class="back-body">
         <span class="border" :style="{borderColor: color.border}">
           <span class="inner" :style="{backgroundColor: color.effect}"></span>
@@ -62,9 +62,9 @@
         </span>
         </div>
       </div>
-      <span class="body-text" v-if="back_body && back_body.length"
+      <span class="body-text" v-if="back_body"
             :style="{backgroundColor: color.effect}">
-        {{ back_body[0] }}/{{ back_body[1] }}
+        {{ back_body.length ? `${back_body[0]}/${back_body[1]}` : '&nbsp;&nbsp;' }}
       </span>
     </div>
   </div>
@@ -199,7 +199,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      word-break: break-all;
+      word-break: normal;
       text-align: left;
       background-size: 100px;
       background-position: center;
@@ -248,7 +248,7 @@
       position: relative;
       float: right;
       top: -54px;
-      right: -9px;
+      right: -8px;
       margin-bottom: -100px;
 
       .back-body {
@@ -294,7 +294,7 @@
       border-radius: 5px;
       height: 23px;
       top: -45px;
-      right: 14px;
+      right: 15px;
       display: flex;
       align-items: center;
     }

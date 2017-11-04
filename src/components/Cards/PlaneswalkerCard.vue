@@ -15,7 +15,7 @@
         <div class="border-color-block" style="padding-top: 0; padding-bottom: 0;"
              :style="{background: color.border}">
           <div class="content-block image-block" style="border-radius: 5% / 50%; border-width: 2px;"
-               :style="{backgroundImage: card_image}"></div>
+               :style="{backgroundImage: card_image, height: `${image_height}px`}"></div>
         </div>
       </div>
       <div class="border-radius-block" style="border-radius: 15px 15px 5px 5px">
@@ -33,14 +33,14 @@
       </div>
       <div class="border-radius-block" style="width: 335px; border-radius: 0 0 50% 50% / 10%;">
         <div class="border-color-block"
-             style="padding-top: 0; padding-bottom: 10px; padding-left: 25px;"
+             style="padding-top: 0; padding-bottom: 10px; padding-left: 20px;"
              :style="{background: color.border}">
           <div class="content-block effect-block"
                style="border-radius: 10px 10px 50% 50% / 10%; border-width: 1px 2px 2px 1px"
-               :style="{background: color.effect}">
-            <div class="content" v-html="effect_render"
-                 :style="{backgroundImage: `url(${effect_background})`}">
-              {{ effect_render }}
+               :style="{background: color.effect, height: `${TOTAL_HEIGHT - image_height}px`}">
+            <div class="content" v-html="$$ability.translate(l['effect'])"
+                 v-for="l in loyalty_effects">
+              {{ $$ability.translate(l['effect']) }}
             </div>
           </div>
         </div>
@@ -52,7 +52,14 @@
         <span>{{ loyalty }}</span>
       </div>
       <div class="mask"></div>
-      <div class="loyalty"></div>
+      <div class="loyalty" :style="{height: `${TOTAL_HEIGHT - image_height}px`}">
+        <div class="holder" v-for="l in loyalty_effects">
+          <span class="symbol" :style="{backgroundImage: getLoyaltyImage(l['count'])}">
+            {{ l['count'] }}
+          </span>
+          <span class="colon" v-show="String(l['count']).length">:</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -165,21 +172,33 @@
   }
 
   .effect-block {
+    height: 134px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden;
+    padding-bottom: 5px;
 
     .content {
+      width: 92%;
+      height: 30%;
       font-family: MPlantin, sans-serif;
-      height: 134px;
       font-size: 11pt;
-      padding: 5px 10px;
+      padding: 5px 0 5px 25px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      word-break: break-all;
+      word-break: normal;
       text-align: left;
       background-size: 100px;
       background-position: center;
       background-repeat: no-repeat;
+
+      &:nth-child(even) {
+        background-color: rgba(100, 100, 100, .1);
+      }
     }
   }
 
@@ -215,22 +234,6 @@
         font-family: Beleren, sans-serif;
         color: white;
       }
-      /*font-family: Beleren, sans-serif;*/
-      /*font-size: 12pt;*/
-      /*border: 2px solid white;*/
-      /*border-radius: 8px;*/
-      /*box-shadow: -2px 1px 3px 0 black;*/
-      /*background: white;*/
-
-      /*span {*/
-      /*border-top: 2px solid #444;*/
-      /*border-right: 2px solid #444;*/
-      /*border-radius: 8px;*/
-      /*display: inline-block;*/
-      /*min-width: 30px;*/
-      /*padding: 1px 10px;*/
-      /*text-align: center;*/
-      /*}*/
     }
 
     .mask {
@@ -239,11 +242,46 @@
       width: 200px;
       height: 20px;
       left: -76px;
-      top: 6px;
+      top: 10px;
       background: #202020;
       border-top: 2px solid black;
       z-index: 10;
       border-radius: ~"20% 20% 0 0";
+    }
+
+    .loyalty {
+      position: relative;
+      float: right;
+      width: 48px;
+      height: 242px;
+      margin-bottom: -1000px;
+      top: -144px;
+      left: -102px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+
+      .holder {
+        display: flex;
+        align-items: center;
+
+        .symbol {
+          font-family: Beleren, sans-serif;
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          width: 45px;
+          height: 43px;
+          background: center no-repeat;
+          background-size: 100%;
+          color: white;
+        }
+
+        .colon {
+          font-family: MPlantin, sans-serif;
+        }
+      }
     }
   }
 
@@ -254,24 +292,48 @@
 
 <script>
   import loyalty_img from '../../assets/planewalker/loyalty.png'
+  import loyaltyup_img from '../../assets/planewalker/loyaltyup.png'
+  import loyaltynaught_img from '../../assets/planewalker/loyaltynaught.png'
+  import loyaltydown_img from '../../assets/planewalker/loyaltydown.png'
 
   export default {
-    data () {
+    data() {
       return {
         loyalty_img,
+        loyaltyup_img,
+        loyaltynaught_img,
+        loyaltydown_img,
+        TOTAL_HEIGHT: 385,
+        image_height: 242,
+        is_moving: false,
+        clientY: 0,
       }
     },
-    props: ['id', 'name', 'cost_text', 'card_url', 'type', 'effect', 'color',
-      'rarity', 'version', 'effect_background', 'show_dot', 'loyalty'],
+    props: ['id', 'name', 'cost_text', 'card_url', 'type', 'color',
+      'rarity', 'version', 'effect_background', 'show_dot', 'loyalty', 'loyalty_effects'],
     computed: {
-      cost () {
+      cost() {
         return this.cost_text.split(',').map(t => t.trim())
       },
-      card_image () {
+      card_image() {
         return `url(${this.card_url}`;
       },
-      effect_render () {
+      effect_render() {
         return this.$$ability.translate(this.effect);
+      },
+    },
+    methods: {
+      getLoyaltyImage(value) {
+        value = String(value);
+        const BASE = 'url(%0)';
+        if (value === '0')
+          return BASE.format(this.loyaltynaught_img);
+        else if (value[0] === '+')
+          return BASE.format(this.loyaltyup_img);
+        else if (value[0] === '-')
+          return BASE.format(this.loyaltydown_img);
+        else
+          return ''
       },
     }
   }

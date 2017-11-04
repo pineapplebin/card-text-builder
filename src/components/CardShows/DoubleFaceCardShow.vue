@@ -136,7 +136,8 @@
       </div>
       <div class="form-control">
         <label for="is_creature">是否生物？</label>
-        <input id="is_creature" type="checkbox" v-model="down.is_creature" style="width: 50px">
+        <input id="is_creature" type="checkbox" v-model="down.is_creature"
+               @change="changeBackIsCreature" style="width: 50px">
         <label for="atk">攻击力</label>
         <input id="atk" type="text" v-model="down.atk" style="width: 50px;">
         <label for="def">防御力</label>
@@ -158,6 +159,7 @@
 
   import sun_circle from '../../assets/double/sun_circle.png'
   import night_circle from '../../assets/double/night_circle.png'
+  import ixalan from '../../assets/double/ixalan.png'
 
   const constrctor = () => {
     return {
@@ -180,6 +182,7 @@
         DOUBLE_ICONS: {
           "sun": sun_circle,
           "night": night_circle,
+          "ixalan": ixalan,
         },
         up: constrctor(),
         down: constrctor(),
@@ -211,6 +214,9 @@
       },
       filterFaceupColor(color) {
         return color.code.match(/^[WUBRGM]\w*/)
+      },
+      changeBackIsCreature() {
+        this.up.back_body = this.down.is_creature ? [0, 0] : []
       }
     }
   }

@@ -171,7 +171,7 @@
       flex-direction: column;
       justify-content: center;
       align-items: flex-start;
-      word-break: break-all;
+      word-break: normal;
       text-align: left;
       background-size: 100px;
       background-position: center;

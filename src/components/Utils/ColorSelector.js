@@ -50,6 +50,7 @@ import ECRb from '../../assets/background/enchant_creature_red.jpg'
 import ECGb from '../../assets/background/enchant_creature_green.jpg'
 import ECMb from '../../assets/background/enchant_creature_multi.jpg'
 import AVb from '../../assets/background/artifact_vehicle.jpg'
+import MIXUBb from '../../assets/background/mix_blue_black.png'
 import MIXBGb from '../../assets/background/mix_black_green.jpg'
 
 export default {
@@ -131,16 +132,20 @@ export default {
     code: 'L', display: '地',
     name: C.L2, effect: C.L1, border: C.L3, background: Lb, dot: [C.L3]
   }),
+  LG: Color({
+    code: 'LG', display: '地绿',
+    name: C.G2, effect: C.G1, border: C.G3, background: Lb, dot: [C.G3]
+  }),
   A: Color({
     code: 'A', display: '神器',
     name: C.A2, effect: C.A1, border: C.A3, background: Ab, dot: [C.A3]
   }),
   AB: Color({
-    code: 'AB', display: '神器生物黑',
+    code: 'AB', display: '神器黑',
     name: C.B2, effect: C.B1, border: C.B3, background: Ab, dot: [C.B3]
   }),
   AR: Color({
-    code: 'AR', display: '神器生物红',
+    code: 'AR', display: '神器红',
     name: C.R2, effect: C.R1, border: C.R3, background: Ab, dot: [C.R3]
   }),
   AV: Color({
@@ -158,9 +163,14 @@ export default {
     name: '#C54D30', effect: '#DDBEB1', border: C.R3,
     background: Rb, body_font: '#FFFFFF', dot: [C.R3]
   }),
+  MIXUB: Color({
+    code: 'MIXUB', display: '混色蓝黑',
+    name: C.MIX, effect: linear(C.U1, C.B1),
+    border: linear(C.U3, C.B3), background: MIXUBb, dot: [C.U3, C.B3]
+  }),
   MIXBG: Color({
     code: 'MIXBG', display: '混色黑绿',
     name: C.MIX, effect: linear(C.B1, C.G1),
     border: linear(C.B3, C.G3), background: MIXBGb, dot: [C.B3, C.G3]
-  })
+  }),
 }

@@ -167,6 +167,18 @@ add({
   }
 });
 
+// fortify
+add({
+  zh: {
+    name: '构工',
+    desc: '%0：装备在目标由你操控的地上； 构工的时机视同法术。 此牌进场时并未装备，且该地离场后，此牌依旧在场。'
+  },
+  en: {
+    name: 'fortify',
+    desc: '%0: Attach this Fortification to target land you control. Activate this ability only any time you could cast a sorcery.'
+  }
+});
+
 // fuse
 add({
   zh: {name: '融咒', desc: '你可以从手牌中单独施放此牌任一边或一同施放两边。'},
