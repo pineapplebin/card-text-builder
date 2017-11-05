@@ -4,7 +4,7 @@
       <planeswalker-card :id="id" :name="name" :cost_text="cost_text" :card_url="card_url"
                          :type="type" :effect="effect" :color="background" :rarity="rarity"
                          :version="version" :effect_background="effect_background"
-                         :show_dot="show_dot" :loyalty="loyalty"
+                         :show_dot="show_dot" :double_image="double_image" :loyalty="loyalty"
                          :loyalty_effects="loyalty_effects"></planeswalker-card>
     </div>
     <hr>
@@ -23,6 +23,15 @@
         <label for="version" style="margin-left: 50px;">卡包</label>
         <input id="version" type="text" v-model="version" placeholder="Keyrune code"
                style="width: 50px;">
+      </div>
+      <div class="form-control">
+        <label for="show_dot">显示颜色点</label>
+        <input id="show_dot" type="checkbox" style="width: 30px;" v-model="show_dot">
+        <label for="double_image">是否为双面卡</label>
+        <select id="double_image" v-model="double_image" style="width: 150px;">
+          <option :value="null">无</option>
+          <option v-for="icon in double_images" :value="icon['image']">{{ icon['name'] }}</option>
+        </select>
       </div>
       <div class="form-control">
         <label for="id">ID</label>
@@ -83,6 +92,7 @@
   import ColorSelector from '../Utils/ColorSelector.vue'
   import RaritySelector from '../Utils/RaritySelector.vue'
   import EffectImageSelector from '../Utils/EffectImageSelector.vue'
+  import planeswalker_origin from '../../assets/double/planeswalker_origin.png'
 
   export default {
     components: {
@@ -95,6 +105,9 @@
       return {
         show_form: true,
         effects: 0,
+        double_images: [
+          {name: 'planeswalker', image: planeswalker_origin},
+        ],
         // card
         id: '',
         name: '',
@@ -109,6 +122,7 @@
         version: 'xln',
         effect_background: null,
         show_dot: false,
+        double_image: null,
         loyalty: 0,
         loyalty_effects: [],
       }
@@ -131,7 +145,7 @@
         this.effect_background = effect;
       },
       filterColor(color) {
-        return !color.code.match(/^DB\w+$/)
+        return color.code.match(/^PW\w+$/)
       }
     }
   }

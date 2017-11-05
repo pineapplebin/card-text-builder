@@ -184,8 +184,8 @@
     text-align: left;
 
     .id {
-      font-family: Beleren, sans-serif;
-      font-size: 10pt;
+      font-family: "Gill Sans", sans-serif;
+      font-size: 9pt;
       position: relative;
       top: 2px;
       color: white;

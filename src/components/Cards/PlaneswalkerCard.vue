@@ -5,7 +5,9 @@
         <div class="border-color-block" :style="{background: color.border}">
           <div class="content-block name-block" style="border-radius: 15px 15px 5px 5px"
                :style="{backgroundColor: color.name}">
-            <span>{{ name }}</span>
+            <span class="double-image" v-if="double_image"
+                  :style="{backgroundImage: `url(${double_image})`}"></span>
+            <span class="text">{{ name }}</span>
             <img v-for="c in cost" :src="$$images['mana'][c]" alt=""
                  v-if="c" :class="{bigger: c.match(/^[2wubrg][wubrg]$/)}">
           </div>
@@ -52,7 +54,9 @@
         <span>{{ loyalty }}</span>
       </div>
       <div class="mask"></div>
-      <div class="loyalty" :style="{height: `${TOTAL_HEIGHT - image_height}px`}">
+      <div class="loyalty"
+           :style="{height: `${TOTAL_HEIGHT - image_height}px`,
+           top: `-${TOTAL_HEIGHT - image_height + 1}px`}">
         <div class="holder" v-for="l in loyalty_effects">
           <span class="symbol" :style="{backgroundImage: getLoyaltyImage(l['count'])}">
             {{ l['count'] }}
@@ -107,7 +111,21 @@
     padding: 5px 3px 3px 5px;
     text-align: left;
 
-    span {
+    .double-image {
+      position: relative;
+      left: -12px;
+      width: 32px;
+      height: 32px;
+      background-position: center;
+      background-size: 100%;
+      margin-right: -10px;
+      border: solid black;
+      border-width: 0 2px 0 0;
+      border-radius: 50%;
+      background-color: black;
+    }
+
+    .text {
       flex: 1 0 auto;
     }
 
@@ -131,8 +149,8 @@
     /*<!--background: center -60px no-repeat;-->*/
     /*<!--background-size: 375px;-->*/
     height: 242px;
-    background: center -46px no-repeat;
-    background-size: 365px;
+    background: center -54px no-repeat;
+    background-size: 380px;
   }
 
   .type-block {
@@ -181,11 +199,11 @@
     padding-bottom: 5px;
 
     .content {
-      width: 92%;
+      width: 93.5%;
       height: 30%;
       font-family: MPlantin, sans-serif;
       font-size: 11pt;
-      padding: 5px 0 5px 25px;
+      padding: 5px 0 5px 22px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -207,8 +225,8 @@
     text-align: left;
 
     .id {
-      font-family: Beleren, sans-serif;
-      font-size: 10pt;
+      font-family: "Gill Sans", sans-serif;
+      font-size: 9pt;
       position: relative;
       top: 9px;
       color: white;
@@ -304,13 +322,13 @@
         loyaltynaught_img,
         loyaltydown_img,
         TOTAL_HEIGHT: 385,
-        image_height: 242,
+        image_height: 238,
         is_moving: false,
         clientY: 0,
       }
     },
-    props: ['id', 'name', 'cost_text', 'card_url', 'type', 'color',
-      'rarity', 'version', 'effect_background', 'show_dot', 'loyalty', 'loyalty_effects'],
+    props: ['id', 'name', 'cost_text', 'card_url', 'type', 'color', 'rarity', 'version',
+      'effect_background', 'show_dot', 'double_image', 'loyalty', 'loyalty_effects'],
     computed: {
       cost() {
         return this.cost_text.split(',').map(t => t.trim())

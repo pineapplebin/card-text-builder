@@ -263,8 +263,8 @@
 
     .id {
       z-index: 100;
-      font-family: Beleren, sans-serif;
-      font-size: 10pt;
+      font-family: "Gill Sans", sans-serif;
+      font-size: 9pt;
       height: 16px;
       position: relative;
       top: 7px;

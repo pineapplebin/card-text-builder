@@ -120,7 +120,7 @@
       height: 32px;
       background-position: center;
       background-size: 100%;
-      margin-right: -5px;
+      margin-right: -10px;
       border: solid black;
       border-width: 0 2px 0 0;
       border-radius: 50%;
@@ -213,8 +213,9 @@
     text-align: left;
 
     .id {
-      font-family: Beleren, sans-serif;
-      font-size: 10pt;
+      /*font-family: Beleren, sans-serif;*/
+      font-family: "Gill Sans", sans-serif;
+      font-size: 9pt;
       position: relative;
       top: 2px;
       color: white;

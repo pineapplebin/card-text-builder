@@ -52,6 +52,8 @@ import ECMb from '../../assets/background/enchant_creature_multi.jpg'
 import AVb from '../../assets/background/artifact_vehicle.jpg'
 import MIXUBb from '../../assets/background/mix_blue_black.png'
 import MIXBGb from '../../assets/background/mix_black_green.jpg'
+import PWG from '../../assets/background/planeswalker_green.png'
+import PWW from '../../assets/background/planeswalker_white.jpg'
 
 export default {
   W: Color({
@@ -172,5 +174,13 @@ export default {
     code: 'MIXBG', display: '混色黑绿',
     name: C.MIX, effect: linear(C.B1, C.G1),
     border: linear(C.B3, C.G3), background: MIXBGb, dot: [C.B3, C.G3]
+  }),
+  PWW: Color({
+    code: 'PWW', display: '鹏洛客白',
+    name: C.W2, effect: C.W1, border: C.W3, background: PWW, dot: [C.W3]
+  }),
+  PWG: Color({
+    code: 'PWG', display: '鹏洛客绿',
+    name: C.G2, effect: C.G1, border: C.G3, background: PWG, dot: [C.G3]
   }),
 }

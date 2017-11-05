@@ -159,6 +159,8 @@
 
   import sun_circle from '../../assets/double/sun_circle.png'
   import night_circle from '../../assets/double/night_circle.png'
+  import origin from '../../assets/double/ccorner.png'
+  import planeswalker from '../../assets/double/planeswalker.png'
   import ixalan from '../../assets/double/ixalan.png'
 
   const constrctor = () => {
@@ -182,6 +184,8 @@
         DOUBLE_ICONS: {
           "sun": sun_circle,
           "night": night_circle,
+          "origin": origin,
+          "planeswalker": planeswalker,
           "ixalan": ixalan,
         },
         up: constrctor(),
