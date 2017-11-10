@@ -7,16 +7,17 @@ const DEFAULT = {
   transform(lang, params, shorty) {
     const data = {...this[lang]};
     data.name = data.display ? data.display : data.name.title();
+    const _params = params.filter(s => s.length);
 
     if (this.is_keyword) {
-      if (this.format && params.length)
-        data.desc = this.format(data.desc, params);
+      if (this.format && _params.length)
+        data.desc = this.format(data.desc, _params);
       else
-        data.desc = data.desc.format(...params);
+        data.desc = data.desc.format(..._params);
 
       return shorty ?
         `@（${data.desc}）@` :
-        `${data.name} ${params.join(' ')}@（${data.desc}）@`;
+        `${data.name}${_params.length ? ' ' : ''}${_params.join(' ')}@（${data.desc}）@`;
     }
     else {
       const symbol = {zh: '～', en: '—'};

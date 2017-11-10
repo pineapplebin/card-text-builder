@@ -14,7 +14,7 @@ const REG_STYLE = /^\((.+)\)/;
 
 let line_style = {};
 const STYLE_TABLE = {
-  '-': {'font-size': '10pt', 'line-height': '14px'}
+  '-': {'font-size': '10pt', 'line-height': '14px'},
 };
 const NORMAL_LINE = {
   'line-height': '18px', 'margin': '3px 0'

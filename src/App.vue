@@ -53,6 +53,7 @@
   import LevelUpCardShow from './components/CardShows/LevelUpCardShow.vue'
   import SplitCardShow from './components/CardShows/SplitCardShow.vue'
   import PlaneswalkerCardShow from './components/CardShows/PlaneswalkerCardShow.vue'
+  import TokenCardShow from './components/CardShows/TokenCardShow.vue'
 
   export default {
     name: 'app',
@@ -65,6 +66,7 @@
           LevelUpCardShow,
           SplitCardShow,
           PlaneswalkerCardShow,
+          TokenCardShow,
         },
         card: 'NormalCardShow',
       }

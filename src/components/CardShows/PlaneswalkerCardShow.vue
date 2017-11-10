@@ -12,7 +12,7 @@
     <div class="form" v-show="show_form">
       <div class="form-control">
         <label>卡框颜色</label>
-        <color-selector style="margin-right: 50px" :filter="filterColor"
+        <color-selector style="margin-right: 50px" :filter="$$filter.only(/^PW\w+$/)"
                         @change="changeColor"></color-selector>
         <label>效果背景图</label>
         <effect-image-selector @change="changeEffect"></effect-image-selector>

@@ -27,7 +27,7 @@
     <div class="form" v-show="show_form && showing_up">
       <div class="form-control">
         <label>卡框颜色</label>
-        <color-selector style="margin-right: 50px" :filter="filterFaceupColor"
+        <color-selector style="margin-right: 50px" :filter="$$filter.only(/^[WUBRGM]\w*/)"
                         @change="changeColor" key="upcolor"></color-selector>
         <label>效果背景图</label>
         <effect-image-selector @change="changeEffect"></effect-image-selector>
@@ -88,7 +88,7 @@
     <div class="form" v-show="show_form && !showing_up">
       <div class="form-control">
         <label>卡框颜色</label>
-        <color-selector style="margin-right: 50px" :filter="filterDoubleBackColor"
+        <color-selector style="margin-right: 50px" :filter="$$filter.only(/^DB/)"
                         @change="changeColor"></color-selector>
         <label>效果背景图</label>
         <effect-image-selector @change="changeEffect"></effect-image-selector>
@@ -212,12 +212,6 @@
           this.up.effect_background = effect;
         else
           this.down.effect_background = effect;
-      },
-      filterDoubleBackColor(color) {
-        return color.code.match(/^DB\w+$/);
-      },
-      filterFaceupColor(color) {
-        return color.code.match(/^[WUBRGM]\w*/)
       },
       changeBackIsCreature() {
         this.up.back_body = this.down.is_creature ? [0, 0] : []

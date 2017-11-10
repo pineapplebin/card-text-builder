@@ -52,8 +52,11 @@ import ECMb from '../../assets/background/enchant_creature_multi.jpg'
 import AVb from '../../assets/background/artifact_vehicle.jpg'
 import MIXUBb from '../../assets/background/mix_blue_black.png'
 import MIXBGb from '../../assets/background/mix_black_green.jpg'
-import PWG from '../../assets/background/planeswalker_green.png'
 import PWW from '../../assets/background/planeswalker_white.jpg'
+import PWU from '../../assets/background/planeswalker_blue.jpg'
+import PWB from '../../assets/background/planeswalker_black.jpg'
+import PWR from '../../assets/background/planeswalker_red.jpg'
+import PWG from '../../assets/background/planeswalker_green.png'
 
 export default {
   W: Color({
@@ -178,6 +181,18 @@ export default {
   PWW: Color({
     code: 'PWW', display: '鹏洛客白',
     name: C.W2, effect: C.W1, border: C.W3, background: PWW, dot: [C.W3]
+  }),
+  PWU: Color({
+    code: 'PWU', display: '鹏洛客蓝',
+    name: C.U2, effect: C.U1, border: C.U3, background: PWU, dot: [C.U3]
+  }),
+  PWB: Color({
+    code: 'PWB', display: '鹏洛客黑',
+    name: C.B2, effect: C.B1, border: C.B3, background: PWB, dot: [C.B3]
+  }),
+  PWR: Color({
+    code: 'PWR', display: '鹏洛客红',
+    name: C.R2, effect: C.R1, border: C.R3, background: PWR, dot: [C.R3]
   }),
   PWG: Color({
     code: 'PWG', display: '鹏洛客绿',

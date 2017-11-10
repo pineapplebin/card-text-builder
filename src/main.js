@@ -29,6 +29,8 @@ Vue.use(images);
 // Vue.use(ability);
 import ability from './plugins/effect'
 Vue.use(ability);
+import filter from './plugins/color_filter'
+Vue.use(filter);
 
 import '../static/fonts/Beleren-Bold.ttf'
 import '../static/fonts/Beleren Small Caps.ttf'

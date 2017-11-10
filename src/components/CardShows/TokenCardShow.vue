@@ -1,11 +1,11 @@
 <template>
   <div class="cardshow">
     <div class="cardshow-block">
-      <arena-normal-card :id="id" :name="name" :cost_text="cost_text" :card_url="card_url"
-                         :type="type" :effect="effect" :body="[atk, def]" :is_creature="is_creature"
-                         :color="background" :rarity="rarity" :version="version"
-                         :effect_background="effect_background"
-                         :show_dot="show_dot"></arena-normal-card>
+      <token-card :id="id" :name="name" :card_url="card_url"
+                  :type="type" :effect="effect" :body="[atk, def]" :is_creature="is_creature"
+                  :color="background" :rarity="rarity" :version="version"
+                  :effect_background="effect_background"
+                  :show_dot="show_dot"></token-card>
     </div>
     <hr>
     <button @click="show_form = !show_form">隐藏／显示表单</button>
@@ -31,10 +31,6 @@
       <div class="form-control">
         <label for="name">名字</label>
         <input id="name" type="text" v-model="name" autocomplete="off">
-      </div>
-      <div class="form-control">
-        <label for="cost">费用</label>
-        <input id="cost" type="text" placeholder="eg: 1,r" v-model="cost_text" autocomplete="off">
       </div>
       <div class="form-control">
         <label for="url">图片链接</label>
@@ -68,14 +64,14 @@
 </style>
 
 <script>
-  import ArenaNormalCard from '../Cards/ArenaNormalCard.vue'
+  import TokenCard from '../Cards/TokenCard.vue'
   import ColorSelector from '../Utils/ColorSelector.vue'
   import RaritySelector from '../Utils/RaritySelector.vue'
   import EffectImageSelector from '../Utils/EffectImageSelector.vue'
 
   export default {
     components: {
-      ArenaNormalCard,
+      TokenCard,
       ColorSelector,
       RaritySelector,
       EffectImageSelector,
@@ -86,10 +82,7 @@
         // card
         id: '',
         name: '',
-        cost: [],
-        cost_text: '',
         card_url: '',
-        url: '',
         type: '',
         effect: '',
         atk: 0,
