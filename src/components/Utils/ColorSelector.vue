@@ -1,16 +1,19 @@
 <template>
   <div class="ColorSelector">
-    <select v-model="selected" @change="onChange">
-      <option v-for="(d, c) in datas" :value="c" v-if="filter ? filter(d) : true">{{ d.display }}
-      </option>
+    <select v-model="border_selected" @change="onChange">
+      <option v-for="(d, c) in border" :value="c">{{ d.display }}</option>
+    </select>
+    <select v-model="background_selected" @change="onChange">
+      <option :value="{}">默认</option>
+      <option v-for="(d, c) in background" :value="c">{{ d.display }}</option>
     </select>
   </div>
 </template>
 
 <style lang="less" scoped>
   .ColorSelector {
-    width: 100px;
-    display: inline-block;
+    width: 150px;
+    display: inline-flex;
 
     select {
       width: 100%;
@@ -20,13 +23,15 @@
 </style>
 
 <script>
-  import datas from './ColorSelector.js'
+  import ColorSelector from './ColorSelector.js'
 
   export default {
     data() {
       return {
-        datas,
-        selected: null,
+        border: ColorSelector.border,
+        background: ColorSelector.background,
+        border_selected: null,
+        background_selected: {},
       }
     },
     props: {
@@ -34,7 +39,9 @@
     },
     methods: {
       onChange() {
-        this.$emit('change', datas[this.selected]);
+        const border = {...(this.border[this.border_selected] || {})};
+        const background = {...(this.background[this.background_selected] || {})};
+        this.$emit('change', Object.assign(border, background));
       }
     }
   }

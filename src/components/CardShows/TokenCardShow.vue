@@ -4,7 +4,7 @@
       <token-card :id="id" :name="name" :card_url="card_url"
                   :type="type" :effect="effect" :body="[atk, def]" :is_creature="is_creature"
                   :color="background" :rarity="rarity" :version="version"
-                  :effect_background="effect_background"
+                  :effect_background="effect_background" :is_old="is_old"
                   :show_dot="show_dot"></token-card>
     </div>
     <hr>
@@ -16,6 +16,8 @@
                         @change="changeColor"></color-selector>
         <label>效果背景图</label>
         <effect-image-selector @change="changeEffect"></effect-image-selector>
+        <label for="is_old">是否旧款？</label>
+        <input type="checkbox" v-model="is_old" id="is_old" style="width: 30px;">
       </div>
       <div class="form-control">
         <label>稀有度</label>
@@ -93,6 +95,7 @@
         version: 'xln',
         effect_background: null,
         show_dot: false,
+        is_old: false,
       }
     },
     methods: {

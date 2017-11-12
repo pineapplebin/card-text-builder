@@ -11,7 +11,7 @@ const DEFAULT = {
 
     if (this.is_keyword) {
       if (this.format && _params.length)
-        data.desc = this.format(data.desc, _params);
+        data.desc = this.format(data.desc, _params, lang);
       else
         data.desc = data.desc.format(..._params);
 

@@ -9,20 +9,29 @@
           </div>
         </div>
       </div>
-      <div class="border-radius-block" style="width: 335px; border-radius: 50% 50% 0 0">
+      <div class="border-radius-block" style="border-radius: 50% 50% 20px 20px; z-index: 10;"
+           :style="{width: is_old ? `330px` : `335px`}">
         <div class="border-color-block" style="padding-bottom: 0;"
-             :style="{background: color.border}">
+             :style="{background: color.border }">
           <div class="content-block image-block"
                style="border-radius: 50% 50% 0 0;border-width: 2px 2px 0 2px; height: 200px;"
-               :style="{backgroundImage: card_image}"></div>
+               :style="{backgroundImage: card_image,
+               backgroundPositionY: `${is_old && effect_length ? '-66px' : '-68px'}`}"></div>
         </div>
       </div>
-      <div class="border-radius-block" style="width: 335px; border-radius: 0 0 2px 2px">
-        <div class="border-color-block" style="padding-top: 0;padding-bottom: 0;"
-             :style="{background: color.border}">
-          <div class="content-block image-block"
-               style="border-width: 0 2px 2px 2px; background-position-y: -269px"
-               :style="{height: `${image_height}px`, backgroundImage: card_image}"></div>
+      <div style="overflow: hidden;" :style="{marginTop: `${second_image_position}px`}">
+        <div class="border-radius-block" :style="{width: is_old ? `330px` : `335px`,
+            borderRadius: `0 0 ${is_old ? '50%' : '2px'} ${is_old ? '50%' : '2px'}`,
+            marginTop: effect_length ? '-20px' : 0}">
+          <div class="border-color-block" style="padding-top: 0;"
+               :style="{background: color.border, paddingBottom: is_old ? '8px' : '0'}">
+            <div class="content-block image-block"
+                 style="border-radius: 2px 2px 50% 50%;border-width: 0 2px 2px 2px; height: 200px;"
+                 :style="{backgroundImage: card_image,
+               backgroundPositionY: `${(effect_length ? -141: -206) + (is_old ? 0 : -8) +
+               (effect_length ? (1 + (is_old ? 2 : 0)) : -7)}px`,
+               borderRadius: is_old ? `0 0 50% 50%` : ''}"></div>
+          </div>
         </div>
       </div>
       <div class="border-radius-block">
@@ -39,11 +48,12 @@
         </div>
       </div>
       <div class="border-radius-block" style="width: 335px; border-radius: 0 0 5px 5px;">
-        <div class="border-color-block" style="padding-top: 0; min-height: 20px; background-size: 100%"
-             :style="{background: effect_block_background}">
+        <div class="border-color-block"
+             style="padding-top: 0; min-height: 20px; background-size: 100%"
+             :style="effect_block_style">
           <div class="content-block effect-block" v-if="effect.length > 0"
-               style="border-width: 1px 2px 2px 1px"
-               :style="{background: color.effect, height: `${TOTAL_HEIGHT - image_height}px`}">
+               style="border-width: 1px 2px 2px 1px;"
+               :style="{background: color.effect, height: effect_length ? '90px' : ''}">
             <div class="content" v-html="effect_render"
                  :style="{backgroundImage: `url(${effect_background})`,
                  alignItems: effect.split('\n').length === 1 ? 'center' : 'left'}">
@@ -130,7 +140,7 @@
 
   .image-block {
     height: 230px;
-    background: center -69px no-repeat;
+    background: center -68px no-repeat;
     background-size: 375px;
   }
 
@@ -235,14 +245,14 @@
 <script>
   export default {
     data() {
-      return {
-        TOTAL_HEIGHT: 170,
-//        image_height: 230,
-      }
+      return {}
     },
     props: ['id', 'name', 'card_url', 'type', 'effect', 'body',
-      'is_creature', 'color', 'rarity', 'version', 'effect_background', 'show_dot'],
+      'is_creature', 'color', 'rarity', 'version', 'effect_background', 'show_dot', 'is_old'],
     computed: {
+      effect_length() {
+        return !!(this.effect.trim().length)
+      },
       card_image() {
         return `url(${this.card_url})`;
       },
@@ -252,8 +262,15 @@
       effect_block_background() {
         return this.effect.trim().length ? this.color.border : `url(${this.color.background})`;
       },
-      image_height() {
-        return this.effect.trim().length ? 80: 153;
+      effect_block_style() {
+        return {
+          background: this.effect.trim().length ?
+              this.color.border : `url(${this.color.background})`,
+          backgroundPositionY: (this.color.code || '').match(/^EC/) ? 'bottom' : 'top',
+        };
+      },
+      second_image_position() {
+        return (this.effect_length ? -108 : -55) + (this.is_old ? 0 : 8);
       }
     },
   }

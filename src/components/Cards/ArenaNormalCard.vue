@@ -11,7 +11,8 @@
           </div>
         </div>
       </div>
-      <div class="border-radius-block" style="width: 335px; border-radius: 2px;">
+      <div class="border-radius-block" style="width: 335px; border-radius: 2px;"
+           :style="{width: is_old ? '330px' : '335px'}">
         <div class="border-color-block" style="padding-top: 0; padding-bottom: 0;"
              :style="{background: color.border}">
           <div class="content-block image-block" style="border-width: 2px 2px 0 0;"
@@ -120,7 +121,7 @@
 
   .image-block {
     height: 230px;
-    background: center -60px no-repeat;
+    background: center -61px no-repeat;
     background-size: 375px;
   }
 
@@ -227,7 +228,7 @@
       return {}
     },
     props: ['id', 'name', 'cost_text', 'card_url', 'type', 'effect', 'body',
-      'is_creature', 'color', 'rarity', 'version', 'effect_background', 'show_dot'],
+      'is_creature', 'color', 'rarity', 'version', 'effect_background', 'show_dot', 'is_old'],
     computed: {
       cost() {
         return this.cost_text.split(',').map(t => t.trim())

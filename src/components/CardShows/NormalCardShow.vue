@@ -4,7 +4,7 @@
       <arena-normal-card :id="id" :name="name" :cost_text="cost_text" :card_url="card_url"
                          :type="type" :effect="effect" :body="[atk, def]" :is_creature="is_creature"
                          :color="background" :rarity="rarity" :version="version"
-                         :effect_background="effect_background"
+                         :effect_background="effect_background" :is_old="is_old"
                          :show_dot="show_dot"></arena-normal-card>
     </div>
     <hr>
@@ -16,6 +16,8 @@
                         @change="changeColor"></color-selector>
         <label>效果背景图</label>
         <effect-image-selector @change="changeEffect"></effect-image-selector>
+        <label for="is_old">是否旧款？</label>
+        <input id="is_old" type="checkbox" v-model="is_old" style="width: 30px;">
       </div>
       <div class="form-control">
         <label>稀有度</label>
@@ -100,6 +102,7 @@
         version: 'xln',
         effect_background: null,
         show_dot: false,
+        is_old: false,
       }
     },
     methods: {

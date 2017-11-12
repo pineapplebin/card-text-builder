@@ -284,7 +284,7 @@
 
       .content {
         position: relative;
-        top:-2px;
+        top: -2px;
         display: inline-block;
         font-family: MPlantin, sans-serif;
         font-size: 10pt;
@@ -402,7 +402,7 @@
           return 'white';
 
         if (color1.dot.length === 2 || color2.dot.length === 2)
-          return ColorSelector.MUL.name;
+          return ColorSelector.border.MUL.name;
         else
           return linear(color1.name, color2.name);
       }

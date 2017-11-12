@@ -19,6 +19,14 @@ function Color(c = {}) {
   return new_c
 }
 
+function Background(b = {}) {
+  return {
+    background: b.background,
+    code: b.code || undefined,
+    display: b.display
+  };
+}
+
 function linear(c1, c2, dir = 'to right') {
   return `linear-gradient(${dir}, ${c1} 45%, ${c2} 55%)`
 }
@@ -43,12 +51,13 @@ import Gb from '../../assets/background/default_green.jpg'
 import Ab from '../../assets/background/default_artifact.jpg'
 import Mb from '../../assets/background/default_multi.jpg'
 import Lb from '../../assets/background/default_land.jpg'
-import ECWb from '../../assets/background/enchat_creature_blue.jpg'
-import ECUb from '../../assets/background/enchant_creature_black.jpg'
-import ECBb from '../../assets/background/enchant_creature_white.jpg'
+import ECWb from '../../assets/background/enchant_creature_white.jpg'
+import ECUb from '../../assets/background/enchant_creature_blue.jpg'
+import ECBb from '../../assets/background/enchant_creature_black.jpg'
 import ECRb from '../../assets/background/enchant_creature_red.jpg'
 import ECGb from '../../assets/background/enchant_creature_green.jpg'
 import ECMb from '../../assets/background/enchant_creature_multi.jpg'
+import ECAb from '../../assets/background/enchant_artifact.jpg'
 import AVb from '../../assets/background/artifact_vehicle.jpg'
 import MIXUBb from '../../assets/background/mix_blue_black.png'
 import MIXBGb from '../../assets/background/mix_black_green.jpg'
@@ -58,26 +67,26 @@ import PWB from '../../assets/background/planeswalker_black.jpg'
 import PWR from '../../assets/background/planeswalker_red.jpg'
 import PWG from '../../assets/background/planeswalker_green.png'
 
-export default {
+const border = {
   W: Color({
     code: 'W', display: '白',
-    name: C.W2, effect: C.W1, border: C.W3, background: Wb, dot: [C.W3]
+    name: C.W2, effect: C.W1, background: Wb, border: C.W3, dot: [C.W3]
   }),
   U: Color({
     code: 'U', display: '蓝',
-    name: C.U2, effect: C.U1, border: C.U3, background: Ub, dot: [C.U3]
+    name: C.U2, effect: C.U1, background: Ub, border: C.U3, dot: [C.U3]
   }),
   B: Color({
     code: 'B', display: '黑',
-    name: C.B2, effect: C.B1, border: C.B3, background: Bb, dot: [C.B3]
+    name: C.B2, effect: C.B1, background: Bb, border: C.B3, dot: [C.B3]
   }),
   R: Color({
     code: 'R', display: '红',
-    name: C.R2, effect: C.R1, border: C.R3, background: Rb, dot: [C.R3]
+    name: C.R2, effect: C.R1, background: Rb, border: C.R3, dot: [C.R3]
   }),
   G: Color({
     code: 'G', display: '绿',
-    name: C.G2, effect: C.G1, border: C.G3, background: Gb, dot: [C.G3]
+    name: C.G2, effect: C.G1, background: Gb, border: C.G3, dot: [C.G3]
   }),
   WU: Color({
     code: 'WU', display: '白蓝',
@@ -135,67 +144,43 @@ export default {
   }),
   L: Color({
     code: 'L', display: '地',
-    name: C.L2, effect: C.L1, border: C.L3, background: Lb, dot: [C.L3]
-  }),
-  LG: Color({
-    code: 'LG', display: '地绿',
-    name: C.G2, effect: C.G1, border: C.G3, background: Lb, dot: [C.G3]
+    name: C.L2, effect: C.L1, background: Lb, border: C.L3, dot: [C.L3]
   }),
   A: Color({
     code: 'A', display: '神器',
-    name: C.A2, effect: C.A1, border: C.A3, background: Ab, dot: [C.A3]
-  }),
-  AB: Color({
-    code: 'AB', display: '神器黑',
-    name: C.B2, effect: C.B1, border: C.B3, background: Ab, dot: [C.B3]
-  }),
-  AR: Color({
-    code: 'AR', display: '神器红',
-    name: C.R2, effect: C.R1, border: C.R3, background: Ab, dot: [C.R3]
-  }),
-  AV: Color({
-    code: 'AV', display: '神器载具',
-    name: C.A2, effect: C.A1, border: C.A3,
-    background: AVb, body_font: '#FFFFFF', body: '#93613C', dot: [C.A3]
+    name: C.A2, effect: C.A1, background: Ab, border: C.A3, dot: [C.A3]
   }),
   DBW: Color({
-    code: 'DBW', display: '背面白',
-    name: '#B9B1A2', effect: '#DCD6CC', border: C.W3,
-    background: Wb, body_font: '#FFFFFF', dot: [C.W3]
+    code: 'DBW', display: '背面白', name: '#B9B1A2', effect: '#DCD6CC',
+    background: Wb, border: C.W3, body_font: '#FFFFFF', dot: [C.W3]
+  }),
+  DBU: Color({
+    code: 'DBU', display: '背面蓝', name: '#0291B8', effect: '#B9D2E2',
+    background: Ub, border: C.U3, body_font: '#FFFFFF', dot: [C.U3]
   }),
   DBR: Color({
-    code: 'DBR', display: '背面红',
-    name: '#C54D30', effect: '#DDBEB1', border: C.R3,
-    background: Rb, body_font: '#FFFFFF', dot: [C.R3]
+    code: 'DBR', display: '背面红', name: '#C54D30', effect: '#DDBEB1',
+    background: Rb, border: C.R3, body_font: '#FFFFFF', dot: [C.R3]
   }),
-  MIXUB: Color({
-    code: 'MIXUB', display: '混色蓝黑',
-    name: C.MIX, effect: linear(C.U1, C.B1),
-    border: linear(C.U3, C.B3), background: MIXUBb, dot: [C.U3, C.B3]
-  }),
-  MIXBG: Color({
-    code: 'MIXBG', display: '混色黑绿',
-    name: C.MIX, effect: linear(C.B1, C.G1),
-    border: linear(C.B3, C.G3), background: MIXBGb, dot: [C.B3, C.G3]
-  }),
-  PWW: Color({
-    code: 'PWW', display: '鹏洛客白',
-    name: C.W2, effect: C.W1, border: C.W3, background: PWW, dot: [C.W3]
-  }),
-  PWU: Color({
-    code: 'PWU', display: '鹏洛客蓝',
-    name: C.U2, effect: C.U1, border: C.U3, background: PWU, dot: [C.U3]
-  }),
-  PWB: Color({
-    code: 'PWB', display: '鹏洛客黑',
-    name: C.B2, effect: C.B1, border: C.B3, background: PWB, dot: [C.B3]
-  }),
-  PWR: Color({
-    code: 'PWR', display: '鹏洛客红',
-    name: C.R2, effect: C.R1, border: C.R3, background: PWR, dot: [C.R3]
-  }),
-  PWG: Color({
-    code: 'PWG', display: '鹏洛客绿',
-    name: C.G2, effect: C.G1, border: C.G3, background: PWG, dot: [C.G3]
-  }),
+};
+
+const background = {
+  W: Background({background: Wb, display: '白'}),
+  U: Background({background: Ub, display: '蓝'}),
+  B: Background({background: Bb, display: '黑'}),
+  R: Background({background: Rb, display: '红'}),
+  G: Background({background: Gb, display: '绿'}),
+  MUL: Background({background: Mb, display: '多色'}),
+  L: Background({background: Lb, display: '地'}),
+  A: Background({background: Ab, display: '神器'}),
+  ECW: Background({background: ECWb, display: '结界生物白', code: 'ECW'}),
+  ECU: Background({background: ECUb, display: '结界生物蓝', code: 'ECU'}),
+  ECB: Background({background: ECBb, display: '结界生物黑', code: 'ECB'}),
+  ECR: Background({background: ECRb, display: '结界生物红', code: 'ECR'}),
+  ECA: Background({background: ECAb, display: '结界神器', code: 'ECA'}),
+};
+
+export default {
+  border,
+  background,
 }

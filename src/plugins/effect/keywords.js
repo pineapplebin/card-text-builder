@@ -154,6 +154,19 @@ add({
 
 ///////////////// not evergreen /////////////////
 
+// bestow
+add({
+  zh: {
+    name: '神授',
+    desc: '如果你支付此牌的神授费用来施放它，则它便是具「结附于生物」的灵气咒语。如果它未结附于生物上，就会再度成为生物。'
+  },
+  en: {
+    name: 'bestow',
+    desc: "If you cast this card for its bestow cost, it's an Aura spell with enchant creature. " +
+    "It becomes a creature again if it's not attached to a creature."
+  }
+});
+
 // crew
 add({
   zh: {
@@ -167,6 +180,21 @@ add({
   }
 });
 
+// devotion
+add({
+  zh: {
+    name: '献力',
+    desc: "由你操控之永久物的法术力费用当中每含有一个%0，你的该色献力就加一。"
+  },
+  en: {
+    name: 'devotion',
+    desc: 'Each %0 in the mana costs of permanents you control counts toward your devotion to that color.'
+  },
+  format(desc, params, lang) {
+    return desc.format(params.join(lang === 'zh' ? '和／或' : ' and / or '))
+  }
+});
+
 // fortify
 add({
   zh: {
@@ -175,7 +203,8 @@ add({
   },
   en: {
     name: 'fortify',
-    desc: '%0: Attach this Fortification to target land you control. Activate this ability only any time you could cast a sorcery.'
+    desc: '%0: Attach this Fortification to target land you control. ' +
+    'Activate this ability only any time you could cast a sorcery.'
   }
 });
 
@@ -197,6 +226,16 @@ add({
   }
 });
 
+// monstrosity
+add({
+  zh: {name: '蛮化', desc: "如果此永久物未蛮化，则在其上放置%0个+1/+1指示物且它蛮化。"},
+  en: {
+    name: 'monstrosity',
+    desc: "If this permanent isn't monstrous, " +
+    "put %0 +1/+1 counters on it and it becomes monstrous."
+  }
+});
+
 /**
  * ability words
  */
@@ -211,6 +250,12 @@ add({
 add({
   is_keyword: false, zh: {name: '激怒'}, en: {name: 'enrage'},
   typical: '每当此生物受到伤害时，…'
+});
+
+// heroic
+add({
+  is_keyword: false, zh: {name: '勇行'}, en: {name: 'heroic'},
+  typical: '每当你施放一个以此生物为目标的咒语时，…'
 });
 
 // raid
@@ -234,7 +279,7 @@ add({
     display: 'Split color',
     desc: "%0 can be paid with either %1 or %2."
   },
-  format(desc, params) {
+  format(desc, params, lang) {
     return desc.format(params[0], `{${params[0][1]}}`, `{${params[0][2]}}`)
   }
 });
