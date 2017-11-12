@@ -1,6 +1,6 @@
 <template>
   <div class="ArenaNormalCard" id="card">
-    <div class="background-image" :style="{backgroundImage: `url(${color.background})`}">
+    <div class="background-image" :style="background_style">
       <div class="border-radius-block">
         <div class="border-color-block" :style="{background: color.border}">
           <div class="content-block name-block" style="border-radius: 3% / 50%"
@@ -239,6 +239,18 @@
       effect_render() {
         return this.$$ability.translate(this.effect);
       },
+      background_style() {
+        const basic = {backgroundImage: `url(${this.color.background})`};
+        if ((this.color.code || '').match(/^DEVOID/)) {
+          return {
+            backgroundImage: `url(${this.card_url})`,
+            backgroundPositionX: 'center',
+            backgroundPositionY: '-20px',
+            backgroundSize: '111%'
+          }
+        } else
+          return basic;
+      }
     }
   }
 </script>

@@ -154,6 +154,18 @@ add({
 
 ///////////////// not evergreen /////////////////
 
+// annihilator
+add({
+  zh: {
+    name: '歼灭',
+    desc: "每当此生物攻击时，防御牌手牺牲%0个永久物。"
+  },
+  en: {
+    name: 'annihilator',
+    desc: "Whenever this creature attacks, defending player sacrifices %0 permanents."
+  }
+});
+
 // bestow
 add({
   zh: {
@@ -180,6 +192,12 @@ add({
   }
 });
 
+// devoid
+add({
+  zh: {name: '虚色', desc: '此牌没有颜色。'},
+  en: {name: 'devoid', desc: 'This card has no color.'}
+});
+
 // devotion
 add({
   zh: {
@@ -192,6 +210,19 @@ add({
   },
   format(desc, params, lang) {
     return desc.format(params.join(lang === 'zh' ? '和／或' : ' and / or '))
+  }
+});
+
+// emerge
+add({
+  zh: {
+    name: '化生',
+    desc: "你可以牺牲一个生物并支付化生费用来施放此咒语，此时总费用会扣除该生物之总法术力费用。"
+  },
+  en: {
+    name: 'emerge',
+    desc: "You may cast this spell by sacrificing a creature and paying the " +
+    "emerge cost reduced by that creature's converted mana cost."
   }
 });
 
@@ -236,6 +267,19 @@ add({
   }
 });
 
+// surge
+add({
+  zh: {
+    name: '潮涌',
+    desc: "如果你或队友本回合中施放过其他咒语，则你可以支付此牌的潮涌费用来施放它。"
+  },
+  en: {
+    name: 'surge',
+    desc: "You may cast a spell for its surge cost if you or a teammate " +
+    "have cast another spell in the same turn."
+  }
+});
+
 /**
  * ability words
  */
@@ -256,6 +300,12 @@ add({
 add({
   is_keyword: false, zh: {name: '勇行'}, en: {name: 'heroic'},
   typical: '每当你施放一个以此生物为目标的咒语时，…'
+});
+
+// landfall
+add({
+  is_keyword: false, zh: {name: '地落'}, en: {name: 'landfall'},
+  typical: '每当一个地在你的操控下进战场时，…'
 });
 
 // raid
@@ -281,6 +331,18 @@ add({
   },
   format(desc, params, lang) {
     return desc.format(params[0], `{${params[0][1]}}`, `{${params[0][2]}}`)
+  }
+});
+
+// colorless
+add({
+  zh: {
+    name: '无色',
+    desc: "{c}代表无色法术力。"
+  },
+  en: {
+    name: 'colorless',
+    desc: "{C} represents colorless mana."
   }
 });
 

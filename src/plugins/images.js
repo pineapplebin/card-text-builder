@@ -9,6 +9,8 @@ import m7 from '../assets/mana/7.png'
 import m8 from '../assets/mana/8.png'
 import m9 from '../assets/mana/9.png'
 import m10 from '../assets/mana/10.png'
+import m11 from '../assets/mana/11.png'
+import m12 from '../assets/mana/12.png'
 import x from '../assets/mana/X.png'
 import w from '../assets/mana/W.png'
 import u from '../assets/mana/U.png'
@@ -38,7 +40,7 @@ import rw from '../assets/mana/RW.png'
 const images = {
   mana: {
     "0": m0, "1": m1, "2": m2, "3": m3, "4": m4, "5": m5, "6": m6, "7": m7,
-    "8": m8, "9": m9, "10": m10, x,
+    "8": m8, "9": m9, "10": m10, "11": m11, "12": m12, x,
     w, u, b, r, g, c, e, t, q,
     "2w": s2w, "2u": s2u, "2b": s2b, "2r": s2r, "2g": s2g,
     wu, ub, br, rg, gw, wb, ur, bg, gu, rw,

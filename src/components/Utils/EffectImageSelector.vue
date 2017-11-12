@@ -1,8 +1,8 @@
 <template>
   <div class="EffectImageSelector">
     <select v-model="selected" @change="onChange">
-      <option v-for="(d, c) in images" :value="c">{{ c }}
-      </option>
+      <option :value="null">无</option>
+      <option v-for="(d, c) in images" :value="c">{{ c }}</option>
     </select>
   </div>
 </template>

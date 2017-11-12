@@ -1,6 +1,6 @@
 <template>
   <div class="TokenCard" id="card">
-    <div class="background-image" :style="{backgroundImage: `url(${color.background})`}">
+    <div class="background-image" :style="background_style">
       <div class="border-radius-block" style="margin-bottom: 4px;">
         <div class="border-color-block" style="background: #A7853C;">
           <div class="content-block name-block"
@@ -263,14 +263,30 @@
         return this.effect.trim().length ? this.color.border : `url(${this.color.background})`;
       },
       effect_block_style() {
-        return {
+        const basic = {
           background: this.effect.trim().length ?
               this.color.border : `url(${this.color.background})`,
           backgroundPositionY: (this.color.code || '').match(/^EC/) ? 'bottom' : 'top',
         };
+        if ((this.color.code || '').match(/^DEVOID/) && !this.effect_length) {
+          return {background: this.color.type}
+        } else
+          return basic;
       },
       second_image_position() {
         return (this.effect_length ? -108 : -55) + (this.is_old ? 0 : 8);
+      },
+      background_style() {
+        const basic = {backgroundImage: `url(${this.color.background})`};
+        if ((this.color.code || '').match(/^DEVOID/)) {
+          return {
+            backgroundImage: `url(${this.card_url})`,
+            backgroundPositionX: 'center',
+            backgroundPositionY: '-13px',
+            backgroundSize: '110%'
+          }
+        } else
+          return basic;
       }
     },
   }

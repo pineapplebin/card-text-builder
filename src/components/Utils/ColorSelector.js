@@ -20,11 +20,13 @@ function Color(c = {}) {
 }
 
 function Background(b = {}) {
-  return {
-    background: b.background,
-    code: b.code || undefined,
-    display: b.display
-  };
+  const result = Object.assign({}, b);
+  const effect = b.__lookupGetter__('effect');
+  console.log(effect);
+  if (effect) {
+    result.__defineGetter__('effect', effect);
+  }
+  return result;
 }
 
 function linear(c1, c2, dir = 'to right') {
@@ -40,7 +42,8 @@ const C = {
   A1: '#EAF0F2', A2: '#CDD6DA', A3: '#DFE3E5',
   L1: '#D6D2CF', L2: '#D7CEC9', L3: '#A2958D',
   M1: '#F4EEDC', M2: '#BCA468', M3: '#FDE887',
-  MIX: '#D1C8BE'
+  MIX: '#D1C8BE',
+  DEVOID1: '#E7E9E3', DEVOID2: '#C4C7C5', DEVOID3: '#D8D8D8',
 };
 
 import Wb from '../../assets/background/default_white.jpg'
@@ -150,6 +153,40 @@ const border = {
     code: 'A', display: '神器',
     name: C.A2, effect: C.A1, background: Ab, border: C.A3, dot: [C.A3]
   }),
+  DEVOID: Color({
+    code: 'DEVOID', display: '无色', name: C.DEVOID2,
+    effect: C.DEVOID1, background: null, border: C.DEVOID3, dot: []
+  }),
+  DEVOIDW: Color({
+    code: 'DEVOIDW', display: '无色白', name: C.W2, type: C.DEVOID2,
+    body: C.DEVOID2, effect: C.DEVOID1, background: null,
+    border: C.DEVOID3, dot: [C.W3]
+  }),
+  DEVOIDU: Color({
+    code: 'DEVOIDU', display: '无色蓝', name: C.U2, type: C.DEVOID2,
+    body: C.DEVOID2, effect: C.DEVOID1, background: null,
+    border: C.DEVOID3, dot: [C.U3]
+  }),
+  DEVOIDB: Color({
+    code: 'DEVOIDB', display: '无色黑', name: C.B2, type: C.DEVOID2,
+    body: C.DEVOID2, effect: C.DEVOID1, background: null,
+    border: C.DEVOID3, dot: [C.B3]
+  }),
+  DEVOIDR: Color({
+    code: 'DEVOIDR', display: '无色红', name: C.R2, type: C.DEVOID2,
+    body: C.DEVOID2, effect: C.DEVOID1, background: null,
+    border: C.DEVOID3, dot: [C.R3]
+  }),
+  DEVOIDG: Color({
+    code: 'DEVOIDG', display: '无色绿', name: C.G2, type: C.DEVOID2,
+    body: C.DEVOID2, effect: C.DEVOID1, background: null,
+    border: C.DEVOID3, dot: [C.G3]
+  }),
+  DEVOIDMUL: Color({
+    code: 'DEVOIDMUL', display: '无色多色', name: C.M2, type: C.DEVOID2,
+    body: C.DEVOID2, effect: C.DEVOID1, background: null,
+    border: C.DEVOID3, dot: []
+  }),
   DBW: Color({
     code: 'DBW', display: '背面白', name: '#B9B1A2', effect: '#DCD6CC',
     background: Wb, border: C.W3, body_font: '#FFFFFF', dot: [C.W3]
@@ -171,13 +208,20 @@ const background = {
   R: Background({background: Rb, display: '红'}),
   G: Background({background: Gb, display: '绿'}),
   MUL: Background({background: Mb, display: '多色'}),
-  L: Background({background: Lb, display: '地'}),
+  L: Background({
+    background: Lb, display: '单色地',
+    get effect() {
+      return ({W: '#FBF0C9'}[this.code])
+    }
+  }),
+  LMUL: Background({background: Lb, name: C.L2, type: C.L2, display: '多色地'}),
   A: Background({background: Ab, display: '神器'}),
   ECW: Background({background: ECWb, display: '结界生物白', code: 'ECW'}),
   ECU: Background({background: ECUb, display: '结界生物蓝', code: 'ECU'}),
   ECB: Background({background: ECBb, display: '结界生物黑', code: 'ECB'}),
   ECR: Background({background: ECRb, display: '结界生物红', code: 'ECR'}),
   ECA: Background({background: ECAb, display: '结界神器', code: 'ECA'}),
+  DEVOID: Background({display: '无色', code: 'DEVOID'})
 };
 
 export default {
