@@ -20,13 +20,7 @@ function Color(c = {}) {
 }
 
 function Background(b = {}) {
-  const result = Object.assign({}, b);
-  const effect = b.__lookupGetter__('effect');
-  console.log(effect);
-  if (effect) {
-    result.__defineGetter__('effect', effect);
-  }
-  return result;
+  return Object.assign({}, b);
 }
 
 function linear(c1, c2, dir = 'to right') {
@@ -41,6 +35,9 @@ const C = {
   G1: '#CCD7CF', G2: '#BBBDA5', G3: '#0D6C4E',
   A1: '#EAF0F2', A2: '#CDD6DA', A3: '#DFE3E5',
   L1: '#D6D2CF', L2: '#D7CEC9', L3: '#A2958D',
+  LEFFECT: {
+    W: '#FBF0C9'
+  },
   M1: '#F4EEDC', M2: '#BCA468', M3: '#FDE887',
   MIX: '#D1C8BE',
   DEVOID1: '#E7E9E3', DEVOID2: '#C4C7C5', DEVOID3: '#D8D8D8',
@@ -201,6 +198,7 @@ const border = {
   }),
 };
 
+
 const background = {
   W: Background({background: Wb, display: '白'}),
   U: Background({background: Ub, display: '蓝'}),
@@ -210,11 +208,15 @@ const background = {
   MUL: Background({background: Mb, display: '多色'}),
   L: Background({
     background: Lb, display: '单色地',
-    get effect() {
-      return ({W: '#FBF0C9'}[this.code])
+    transform() {
+      const _new = C.LEFFECT[this.code];
+      if (_new)
+        this.effect = _new;
     }
   }),
-  LMUL: Background({background: Lb, name: C.L2, type: C.L2, display: '多色地'}),
+  LMUL: Background({
+    background: Lb, name: C.L2, type: C.L2, display: '多色地'
+  }),
   A: Background({background: Ab, display: '神器'}),
   ECW: Background({background: ECWb, display: '结界生物白', code: 'ECW'}),
   ECU: Background({background: ECUb, display: '结界生物蓝', code: 'ECU'}),

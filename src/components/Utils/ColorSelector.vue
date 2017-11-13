@@ -42,6 +42,8 @@
         const border = {...(this.border[this.border_selected] || {})};
         const background = {...(this.background[this.background_selected] || {})};
         const _new = Object.assign(border, background);
+        if (_new.transform)
+          _new.transform();
         this.$emit('change', _new);
       }
     }
