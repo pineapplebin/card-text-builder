@@ -36,7 +36,8 @@ const C = {
   A1: '#EAF0F2', A2: '#CDD6DA', A3: '#DFE3E5',
   L1: '#D6D2CF', L2: '#D7CEC9', L3: '#A2958D',
   LEFFECT: {
-    W: '#FBF0C9'
+    W: '#FBF0C9', U: '#BAD9EE', B: '#B0A8A9',
+    R: '#F1AF96', G: '#C3DDCE',
   },
   M1: '#F4EEDC', M2: '#BCA468', M3: '#FDE887',
   MIX: '#D1C8BE',
@@ -215,7 +216,11 @@ const background = {
     }
   }),
   LMUL: Background({
-    background: Lb, name: C.L2, type: C.L2, display: '多色地'
+    background: Lb, name: C.L2, type: C.L2, display: '多色地',
+    transform() {
+      if (this.code.match(/^[WUBRG]{2}$/))
+        this.effect = linear(C.LEFFECT[this.code[0]], C.LEFFECT[this.code[1]]);
+    }
   }),
   A: Background({background: Ab, display: '神器'}),
   ECW: Background({background: ECWb, display: '结界生物白', code: 'ECW'}),
