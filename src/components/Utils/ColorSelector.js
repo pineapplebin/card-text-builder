@@ -39,7 +39,7 @@ const C = {
     W: '#FBF0C9', U: '#BAD9EE', B: '#B0A8A9',
     R: '#F1AF96', G: '#C3DDCE',
   },
-  M1: '#F4EEDC', M2: '#BCA468', M3: '#FDE887',
+  M1: '#F4EEDC', M2: '#DABF82', M3: '#FDE887',
   MIX: '#D1C8BE',
   DEVOID1: '#E7E9E3', DEVOID2: '#C4C7C5', DEVOID3: '#D8D8D8',
 };
@@ -62,11 +62,11 @@ import ECAb from '../../assets/background/enchant_artifact.jpg'
 import AVb from '../../assets/background/artifact_vehicle.jpg'
 import MIXUBb from '../../assets/background/mix_blue_black.png'
 import MIXBGb from '../../assets/background/mix_black_green.jpg'
-import PWW from '../../assets/background/planeswalker_white.jpg'
-import PWU from '../../assets/background/planeswalker_blue.jpg'
-import PWB from '../../assets/background/planeswalker_black.jpg'
-import PWR from '../../assets/background/planeswalker_red.jpg'
-import PWG from '../../assets/background/planeswalker_green.png'
+import PWWb from '../../assets/background/planeswalker_white.jpg'
+import PWUb from '../../assets/background/planeswalker_blue.jpg'
+import PWBb from '../../assets/background/planeswalker_black.jpg'
+import PWRb from '../../assets/background/planeswalker_red.jpg'
+import PWGb from '../../assets/background/planeswalker_green.png'
 
 const border = {
   W: Color({
@@ -228,7 +228,9 @@ const background = {
   ECB: Background({background: ECBb, display: '结界生物黑', code: 'ECB'}),
   ECR: Background({background: ECRb, display: '结界生物红', code: 'ECR'}),
   ECA: Background({background: ECAb, display: '结界神器', code: 'ECA'}),
-  DEVOID: Background({display: '无色', code: 'DEVOID'})
+  DEVOID: Background({display: '无色', code: 'DEVOID'}),
+  PWB: Background({background: PWBb, display: '鹏洛客黑'}),
+  PWG: Background({background: PWGb, display: '鹏洛客绿'})
 };
 
 export default {

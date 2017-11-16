@@ -248,6 +248,25 @@ add({
   }
 });
 
+// ingest
+add({
+  zh: {name: '摄食', desc: '每当此生物对任一牌手造成战斗伤害时，该牌手放逐其牌库顶牌。'},
+  en: {
+    name: 'ingest',
+    desc: "Whenever this creature deals combat damage to a player, " +
+    "that player exiles the top card of his or her library."
+  }
+});
+
+// kicker
+add({
+  zh: {name: '增幅', desc: '你施放此咒语时可以额外支付%0。'},
+  en: {
+    name: 'kicker',
+    desc: "You may pay an additional %0 as you cast this spell."
+  }
+});
+
 // level up
 add({
   zh: {name: '升级', desc: "%0：在其上放置一个等级指示物。 升级的时机视同法术。"},
@@ -264,6 +283,19 @@ add({
     name: 'monstrosity',
     desc: "If this permanent isn't monstrous, " +
     "put %0 +1/+1 counters on it and it becomes monstrous."
+  }
+});
+
+// scry
+add({
+  zh: {
+    name: '占卜',
+    desc: "检视你牌库顶的%0张牌，将其中任意数量的牌以任意顺序置于你的牌库底，其余则以任意顺序置于你的牌库顶。"
+  },
+  en: {
+    name: 'scry',
+    desc: "Look at the top %0 cards of your library, put any number of them on " +
+    "the bottom of your library in any order, and put the rest on top of your library in any order."
   }
 });
 
