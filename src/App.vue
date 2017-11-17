@@ -54,6 +54,7 @@
   import SplitCardShow from './components/CardShows/SplitCardShow.vue'
   import PlaneswalkerCardShow from './components/CardShows/PlaneswalkerCardShow.vue'
   import TokenCardShow from './components/CardShows/TokenCardShow.vue'
+  import XlnLandCardShow from './components/CardShows/XlnLandCardShow.vue'
 
   export default {
     name: 'app',
@@ -67,6 +68,7 @@
           SplitCardShow,
           PlaneswalkerCardShow,
           TokenCardShow,
+          XlnLandCardShow,
         },
         card: 'NormalCardShow',
       }
