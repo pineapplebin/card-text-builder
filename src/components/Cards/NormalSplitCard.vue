@@ -26,8 +26,11 @@
               <div class="content-block type-block" style="border-radius: 2% / 50%"
                    :style="{backgroundColor: card1.color.type}">
                 <span class="type">{{ card1.type }}</span>
-                <span style="font-size: 1.1em;" class="ss ss-grad"
-                      :class="[`ss-${version}`, `ss-${rarity}`]"></span>
+                <span class="symbol">
+                  <img :src="$$images.getSymbol(version, rarity)"/>
+                </span>
+                <!--<span style="font-size: 1.1em;" class="ss ss-grad"-->
+                <!--:class="[`ss-${version}`, `ss-${rarity}`]"></span>-->
               </div>
             </div>
           </div>
@@ -69,8 +72,11 @@
               <div class="content-block type-block" style="border-radius: 2% / 50%"
                    :style="{backgroundColor: card2.color.type}">
                 <span class="type">{{ card2.type }}</span>
-                <span style="font-size: 1.1em;" class="ss ss-grad"
-                      :class="[`ss-${version}`, `ss-${rarity}`]"></span>
+                <span class="symbol">
+                  <img :src="$$images.getSymbol(version, rarity)"/>
+                </span>
+                <!--<span style="font-size: 1.1em;" class="ss ss-grad"-->
+                <!--:class="[`ss-${version}`, `ss-${rarity}`]"></span>-->
               </div>
             </div>
           </div>
@@ -192,14 +198,14 @@
 
     img {
       display: inline-block;
-      width: 19px;
+      width: 18px;
       margin-right: 2px;
       border-left: 1px solid black;
       border-bottom: 2px solid black;
       border-radius: 50%;
 
       &.bigger {
-        width: 23px;
+        width: 22px;
         margin-bottom: 1px;
       }
     }
@@ -235,6 +241,15 @@
     .type {
       flex: 1 0 auto;
       padding-top: 2px;
+    }
+
+    .symbol {
+      display: inline-flex;
+      align-items: center;
+
+      img {
+        height: 20px;
+      }
     }
   }
 

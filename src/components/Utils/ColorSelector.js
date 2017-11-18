@@ -28,11 +28,11 @@ function linear(c1, c2, dir = 'to right') {
 }
 
 const C = {
-  W1: '#F5F5ED', W2: '#E7E1CD', W3: '#F9F9F9',
-  U1: '#E2EDF5', U2: '#A5CFE4', U3: '#036FAF',
+  W1: '#F5F5ED', W2: '#efebdf', W3: '#F9F9F9',
+  U1: '#E2EDF5', U2: '#b8d6ec', U3: '#036FAF',
   B1: '#D4D4D2', B2: '#B1AAA4', B3: '#3E3D3B',
-  R1: '#E4D4C5', R2: '#ECBA97', R3: '#EE5A32',
-  G1: '#CCD7CF', G2: '#BBBDA5', G3: '#0D6C4E',
+  R1: '#E4D4C5', R2: '#f1c9b1', R3: '#EE5A32',
+  G1: '#CCD7CF', G2: '#b9d0bc', G3: '#0D6C4E',
   A1: '#EAF0F2', A2: '#CDD6DA', A3: '#DFE3E5',
   L1: '#D6D2CF', L2: '#D7CEC9', L3: '#A2958D',
   LEFFECT: {
@@ -223,14 +223,20 @@ const background = {
     }
   }),
   A: Background({background: Ab, display: '神器'}),
+  AV: Background({
+    background: AVb, display: '神器载具', body: '#966339', body_font: '#FFF'
+  }),
   ECW: Background({background: ECWb, display: '结界生物白', code: 'ECW'}),
   ECU: Background({background: ECUb, display: '结界生物蓝', code: 'ECU'}),
   ECB: Background({background: ECBb, display: '结界生物黑', code: 'ECB'}),
   ECR: Background({background: ECRb, display: '结界生物红', code: 'ECR'}),
   ECA: Background({background: ECAb, display: '结界神器', code: 'ECA'}),
   DEVOID: Background({display: '无色', code: 'DEVOID'}),
+  PWW: Background({background: PWWb, display: '鹏洛客白'}),
+  PWU: Background({background: PWUb, display: '鹏洛客蓝'}),
   PWB: Background({background: PWBb, display: '鹏洛客黑'}),
-  PWG: Background({background: PWGb, display: '鹏洛客绿'})
+  PWR: Background({background: PWRb, display: '鹏洛客红'}),
+  PWG: Background({background: PWGb, display: '鹏洛客绿'}),
 };
 
 export default {

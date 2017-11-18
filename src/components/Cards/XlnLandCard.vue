@@ -1,12 +1,12 @@
 <template>
   <div class="IxaLandCard" id="card">
-    <div class="top" :style="{backgroundImage: `url(${top})`}">
+    <div class="top" :style="{backgroundImage: `url(${color.top})`}">
       <div class="name">{{ name }}</div>
       <span style="font-size: 1.4em;" class="version ss ss-grad"
             :class="[`ss-${version}`, `ss-${rarity}`]"></span>
     </div>
     <div class="image" :style="{backgroundImage: `url(${card_url})`}"></div>
-    <div class="bottom" :style="{backgroundImage: `url(${bottom})`}">
+    <div class="bottom" :style="{backgroundImage: `url(${color.bottom})`}">
       <div class="type">{{ type }}</div>
       <div class="effect" v-html="effect_render">{{ effect_render }}</div>
     </div>
@@ -36,7 +36,7 @@
     .name {
       min-height: 22px;
       position: relative;
-      font-family: Beleren, "FZCuSong-B09S", sans-serif;
+      font-family: "Beleren Small Caps", "FZCuSong-B09S", sans-serif;
       font-size: 14pt;
       top: 13px;
     }

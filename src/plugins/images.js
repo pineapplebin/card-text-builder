@@ -45,9 +45,15 @@ const images = {
     "2w": s2w, "2u": s2u, "2b": s2b, "2r": s2r, "2g": s2g,
     wu, ub, br, rg, gw, wb, ur, bg, gu, rw,
   },
+  getSymbol(set, rarity='common') {
+    const _r = rarity[0];
+    return `http://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=${
+      set}&size=large&rarity=${_r}`
+  },
   install(Vue) {
     Vue.prototype.$$images = {
-      mana: this.mana
+      mana: this.mana,
+      getSymbol: this.getSymbol,
     }
   }
 };

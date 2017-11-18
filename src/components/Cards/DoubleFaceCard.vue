@@ -26,10 +26,14 @@
             <span class="dot" v-if="is_double_back">
               <span v-for="d in color.dot" :style="{background: d}"></span>
             </span>
-            <span class="type" :style="{color: is_double_back ? 'white' : 'black'}">{{ type
-              }}</span>
-            <span style="font-size: 1.1em;" class="ss ss-grad"
-                  :class="[`ss-${version}`, `ss-${rarity}`]"></span>
+            <span class="type" :style="{color: is_double_back ? 'white' : 'black'}">
+              {{ type }}
+            </span>
+            <span class="symbol">
+              <img :src="$$images.getSymbol(version, rarity)"/>
+            </span>
+            <!--<span style="font-size: 1.1em;" class="ss ss-grad"-->
+            <!--:class="[`ss-${version}`, `ss-${rarity}`]"></span>-->
           </div>
         </div>
       </div>
@@ -133,14 +137,14 @@
 
     .cost {
       display: inline-block;
-      width: 19px;
+      width: 18px;
       margin-right: 2px;
       border-left: 1px solid black;
       border-bottom: 2px solid black;
       border-radius: 50%;
 
       &.bigger {
-        width: 23px;
+        width: 22px;
         margin-bottom: 1px;
       }
     }
@@ -185,6 +189,15 @@
 
     .type {
       flex: 1 0 auto;
+    }
+
+    .symbol {
+      display: inline-flex;
+      align-items: center;
+
+      img {
+        height: 20px;
+      }
     }
   }
 
@@ -249,7 +262,7 @@
       position: relative;
       float: right;
       top: -54px;
-      right: -8px;
+      right: -9px;
       margin-bottom: -100px;
 
       .back-body {
@@ -263,7 +276,7 @@
 
         .border {
           position: relative;
-          left: -24px;
+          left: -25px;
           width: 30px;
           height: 30px;
           background-clip: content-box;

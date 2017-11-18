@@ -9,9 +9,10 @@
     <button @click="show_form = !show_form">隐藏／显示表单</button>
     <div class="form" v-show="show_form">
       <div class="form-control">
-        <label>卡框颜色</label>
-        <color-selector style="margin-right: 50px" :filter="$$filter.without(/^DB/, /^PW/)"
-                        @change="changeColor"></color-selector>
+        <label for="color">卡框颜色</label>
+        <select id="color" style="width: 100px;" v-model="background">
+          <option v-for="f in card_frames" :value="f">{{ f.display }}</option>
+        </select>
       </div>
       <div class="form-control">
         <label>稀有度</label>
@@ -57,6 +58,21 @@
   import RaritySelector from '../Utils/RaritySelector.vue'
   import EffectImageSelector from '../Utils/EffectImageSelector.vue'
 
+  import white_top from '../../assets/background/ixalan_land_white_top.png'
+  import white_bottom from '../../assets/background/ixalan_land_white_bottom.png'
+  import blue_top from '../../assets/background/ixalan_land_blue_top.png'
+  import blue_bottom from '../../assets/background/ixalan_land_blue_bottom.png'
+  import red_top from '../../assets/background/ixalan_land_red_top.png'
+  import red_bottom from '../../assets/background/ixalan_land_red_bottom.png'
+  import black_top from '../../assets/background/ixalan_land_black_top.png'
+  import black_bottom from '../../assets/background/ixalan_land_black_bottom.png'
+  import green_top from '../../assets/background/ixalan_land_green_top.png'
+  import green_bottom from '../../assets/background/ixalan_land_green_bottom.png'
+  import multi_top from '../../assets/background/ixalan_land_multi_top.png'
+  import multi_bottom from '../../assets/background/ixalan_land_multi_bottom.png'
+  import land_top from '../../assets/background/ixalan_land_land_top.png'
+  import land_bottom from '../../assets/background/ixalan_land_land_bottom.png'
+
   export default {
     components: {
       XlnLandCard,
@@ -67,6 +83,15 @@
     data() {
       return {
         show_form: true,
+        card_frames: [
+          {display: '白', top: white_top, bottom: white_bottom},
+          {display: '蓝', top: blue_top, bottom: blue_bottom},
+          {display: '红', top: red_top, bottom: red_bottom},
+          {display: '黑', top: black_top, bottom: black_bottom},
+          {display: '绿', top: green_top, bottom: green_bottom},
+          {display: '多色', top: multi_top, bottom: multi_bottom},
+          {display: '地', top: land_top, bottom: land_bottom},
+        ],
         // card
         id: '',
         name: '',

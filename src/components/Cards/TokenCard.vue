@@ -42,8 +42,11 @@
               <span v-for="d in color.dot" :style="{background: d}"></span>
             </span>
             <span class="type">{{ type }}</span>
-            <span style="font-size: 1.1em;" class="ss ss-grad"
-                  :class="[`ss-${version}`, `ss-${rarity}`]"></span>
+            <span class="symbol">
+              <img :src="$$images.getSymbol(version, rarity)"/>
+            </span>
+            <!--<span style="font-size: 1.1em;" class="ss ss-grad"-->
+            <!--:class="[`ss-${version}`, `ss-${rarity}`]"></span>-->
           </div>
         </div>
       </div>
@@ -109,7 +112,7 @@
   }
 
   .name-block {
-    font-family: Beleren, "FZCuSong-B09S", sans-serif;
+    font-family: "Beleren Small Caps", "FZCuSong-B09S", sans-serif;
     font-size: 14pt;
     height: 20px;
     display: flex;
@@ -125,14 +128,14 @@
 
     img {
       display: inline-block;
-      width: 19px;
+      width: 18px;
       margin-right: 2px;
       border-left: 1px solid black;
       border-bottom: 2px solid black;
       border-radius: 50%;
 
       &.bigger {
-        width: 23px;
+        width: 22px;
         margin-bottom: 1px;
       }
     }
@@ -177,6 +180,15 @@
 
     .type {
       flex: 1 0 auto;
+    }
+
+    .symbol {
+      display: inline-flex;
+      align-items: center;
+
+      img {
+        height: 20px;
+      }
     }
   }
 
