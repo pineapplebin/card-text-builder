@@ -7,7 +7,7 @@
                :style="{backgroundColor: color.name}">
             <span>{{ name }}</span>
             <img v-for="c in cost" :src="$$images['mana'][c]" alt=""
-                 v-if="c" :class="{bigger: c.match(/^[2wubrg][wubrg]$/)}">
+                 v-if="c" :class="{bigger: c.match(/^[2wubrg][wubrgp]$/)}">
           </div>
         </div>
       </div>
@@ -100,7 +100,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 5px 3px 3px 5px;
+    padding: 5px 5px 3px 8px;
     text-align: left;
 
     span {
@@ -186,7 +186,7 @@
       align-items: flex-start;
       word-break: normal;
       text-align: left;
-      background-size: 100px;
+      background-size: auto 130px;
       background-position: center;
       background-repeat: no-repeat;
     }

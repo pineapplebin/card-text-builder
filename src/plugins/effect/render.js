@@ -73,7 +73,7 @@ function matchCost(line) {
     if (images['mana'][img_name]) {
       let size = 15;
       let margin = '0 1px 2px 1px';
-      if (img_name.match(/^[2wubrg][wubrg]$/)) {
+      if (img_name.match(/^[2wubrg][wubrgp]$/)) {
         size = 18;
         margin = '2px 1px 0 1px'
       }

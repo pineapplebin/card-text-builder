@@ -9,7 +9,7 @@
                   :style="{backgroundImage: `url(${double_image})`}"></span>
             <span class="text">{{ name }}</span>
             <img v-for="c in cost" :src="$$images['mana'][c]" alt=""
-                 v-if="c" :class="{bigger: c.match(/^[2wubrg][wubrg]$/)}">
+                 v-if="c" :class="{bigger: c.match(/^[2wubrg][wubrgp]$/)}">
           </div>
         </div>
       </div>
@@ -111,7 +111,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 5px 3px 3px 5px;
+    padding: 5px 5px 3px 8px;
     text-align: left;
 
     .double-image {

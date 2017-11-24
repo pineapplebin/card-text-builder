@@ -2,8 +2,11 @@
   <div class="IxaLandCard" id="card">
     <div class="top" :style="{backgroundImage: `url(${color.top})`}">
       <div class="name">{{ name }}</div>
-      <span style="font-size: 1.4em;" class="version ss ss-grad"
-            :class="[`ss-${version}`, `ss-${rarity}`]"></span>
+      <span class="symbol version">
+        <img :src="$$images.getSymbol(version, rarity)"/>
+      </span>
+      <!--<span style="font-size: 1.4em;" class="version ss ss-grad"-->
+      <!--:class="[`ss-${version}`, `ss-${rarity}`]"></span>-->
     </div>
     <div class="image" :style="{backgroundImage: `url(${card_url})`}"></div>
     <div class="bottom" :style="{backgroundImage: `url(${color.bottom})`}">
@@ -41,9 +44,18 @@
       top: 13px;
     }
 
+    .symbol {
+      display: inline-flex;
+      align-items: center;
+
+      img {
+        height: 24px;
+      }
+    }
+
     .version {
       position: relative;
-      top: 14px;
+      top: 15px;
     }
   }
 

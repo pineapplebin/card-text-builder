@@ -192,6 +192,15 @@ add({
   }
 });
 
+// delve
+add({
+  zh: {name: '掘穴', desc: "你于施放此咒语时每从你坟墓场中放逐一张牌，就能为此咒语支付{1}"},
+  en: {
+    name: 'delve', desc: "Each card you exile from your graveyard while " +
+    "casting this spell pays for {1}."
+  }
+});
+
 // devoid
 add({
   zh: {name: '虚色', desc: '此牌没有颜色。'},
@@ -276,6 +285,19 @@ add({
   }
 });
 
+// livingweapon
+add({
+  zh: {
+    name: '活化武器',
+    desc: "当此武具进入战场时，派出一个0/0黑色病菌衍生生物，然后将它装备此武具。"
+  },
+  en: {
+    name: 'living weapon',
+    desc: "When this Equipment enters the battlefield, " +
+    "create a 0/0 black Germ creature token, then attach this Equipment to it."
+  }
+});
+
 // monstrosity
 add({
   zh: {name: '蛮化', desc: "如果此永久物未蛮化，则在其上放置%0个+1/+1指示物且它蛮化。"},
@@ -283,6 +305,32 @@ add({
     name: 'monstrosity',
     desc: "If this permanent isn't monstrous, " +
     "put %0 +1/+1 counters on it and it becomes monstrous."
+  }
+});
+
+// morph
+add({
+  zh: {
+    name: '变身',
+    desc: "你可牌面朝下地施放此牌并支付{3}，将其当成2/2生物。可随时支付其变身费用使其翻回正面。"
+  },
+  en: {
+    name: 'morph',
+    desc: "You may cast this card face down as a 2/2 creature for {3}." +
+    " Turn it face up any time for its morph cost."
+  }
+});
+
+// outlast
+add({
+  zh: {
+    name: '延生', desc: "%0，{t}：在此生物上放置一个+1/+1指示物。" +
+    "延生的时机视同法术。"
+  },
+  en: {
+    name: 'outlast',
+    desc: "%0, {T}: Put a +1/+1 counter on this creature. " +
+    "Activate this ability only any time you could cast a sorcery."
   }
 });
 
@@ -299,6 +347,15 @@ add({
   }
 });
 
+// skulk
+add({
+  zh: {name: '潜匿', desc: "此生物不能被力量比它大的生物阻挡。"},
+  en: {
+    name: 'skulk',
+    desc: "This creature can’t be blocked by creatures with greater power."
+  }
+});
+
 // surge
 add({
   zh: {
@@ -312,6 +369,18 @@ add({
   }
 });
 
+// **walk
+add({
+  zh: {
+    name: '行者',
+    desc: "只要防御牌手操控%0，此生物就不能被阻挡。"
+  },
+  en: {
+    name: 'walk',
+    desc: "This creature can’t be blocked as long as defending player controls an %0."
+  }
+});
+
 /**
  * ability words
  */
@@ -322,10 +391,22 @@ add({
   typical: '每当此生物与至少两个其他生物攻击时，…'
 });
 
+// delirium
+add({
+  is_keyword: false, zh: {name: '躁狂'}, en: {name: 'delirium'},
+  typical: "…，若你坟墓场中牌的类别有四种或更多，…"
+});
+
 // enrage
 add({
   is_keyword: false, zh: {name: '激怒'}, en: {name: 'enrage'},
   typical: '每当此生物受到伤害时，…'
+});
+
+// ferocious
+add({
+  is_keyword: false, zh: {name: '威猛'}, en: {name: 'ferocious'},
+  typical: '…如果你操控力量等于或大于4的生物，…'
 });
 
 // heroic
@@ -349,6 +430,21 @@ add({
 /**
  * others
  */
+
+// phyrexian mana
+add({
+  zh: {
+    name: '非瑞克西亚',
+    desc: '%0可用%1或2点生命来支付。'
+  },
+  en: {
+    name: 'phyrexiancolor',
+    desc: "%0 can be paid with either %1 or 2 life."
+  },
+  format(desc, params, lang) {
+    return desc.format(params[0], `{${params[0][1]}}`)
+  }
+});
 
 // split color
 add({

@@ -36,6 +36,11 @@ import ur from '../assets/mana/UR.png'
 import bg from '../assets/mana/BG.png'
 import gu from '../assets/mana/GU.png'
 import rw from '../assets/mana/RW.png'
+import wp from '../assets/mana/WP.png'
+import up from '../assets/mana/UP.png'
+import bp from '../assets/mana/BP.png'
+import rp from '../assets/mana/RP.png'
+import gp from '../assets/mana/GP.png'
 
 const images = {
   mana: {
@@ -44,6 +49,7 @@ const images = {
     w, u, b, r, g, c, e, t, q,
     "2w": s2w, "2u": s2u, "2b": s2b, "2r": s2r, "2g": s2g,
     wu, ub, br, rg, gw, wb, ur, bg, gu, rw,
+    wp, up, bp, rp, gp,
   },
   getSymbol(set, rarity='common') {
     const _r = rarity[0];

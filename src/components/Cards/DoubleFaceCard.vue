@@ -8,7 +8,7 @@
             <span class="double-image" :style="{backgroundImage: `url(${double_image})`}"></span>
             <span class="name" :style="{color: is_double_back ? '#FFF' : '#000'}">{{ name }}</span>
             <img v-for="c in cost" :src="$$images['mana'][c]" alt="" class="cost"
-                 v-if="c" :class="{bigger: c.match(/^[2wubrg][wubrg]$/)}">
+                 v-if="c" :class="{bigger: c.match(/^[2wubrg][wubrgp]$/)}">
           </div>
         </div>
       </div>
@@ -114,7 +114,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 5px 3px 3px 5px;
+    padding: 5px 5px 3px 8px;
     text-align: left;
 
     .double-image {
@@ -302,7 +302,7 @@
       font-family: Beleren, sans-serif;
       font-size: 10pt;
       padding-right: 4px;
-      color: #444;
+      color: #555;
       position: relative;
       float: right;
       border-radius: 5px;

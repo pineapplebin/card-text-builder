@@ -193,9 +193,17 @@ const border = {
     code: 'DBU', display: '背面蓝', name: '#0291B8', effect: '#B9D2E2',
     background: Ub, border: C.U3, body_font: '#FFFFFF', dot: [C.U3]
   }),
+  DBB: Color({
+    code: 'DBB', display: '背面黑', name: '#615d5a', effect: '#b9b5b1',
+    background: Bb, border: C.B3, body_font: '#FFFFFF', dot: [C.B3]
+  }),
   DBR: Color({
     code: 'DBR', display: '背面红', name: '#C54D30', effect: '#DDBEB1',
     background: Rb, border: C.R3, body_font: '#FFFFFF', dot: [C.R3]
+  }),
+  DBG: Color({
+    code: 'DBG', display: '背面绿', name: '#395e3e', effect: '#b3c5ba',
+    background: Gb, border: C.G3, body_font: '#FFFFFF', dot: [C.G3]
   }),
 };
 
