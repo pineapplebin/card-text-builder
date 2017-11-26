@@ -1,6 +1,7 @@
 <template>
   <div class="holder" @click="is_vertical = !is_vertical">
-    <div class="NormalSplitCard" id="card" :style="{transform: is_vertical ? 'rotate(-90deg)': ''}">
+    <div class="NormalSplitCard" id="card"
+         :style="{transform: is_vertical ? 'rotate(-90deg)': 'rotate(0)'}">
       <div class="cards-block">
         <div class="background-image" :style="{backgroundImage: `url(${card1.color.background})`}">
           <div class="border-radius-block">
@@ -148,7 +149,7 @@
     border-radius: 5px;
     background: #202020;
     text-align: center;
-    /*transform: rotate(-90deg);*/
+    transition: transform 300ms;
   }
 
   .cards-block {

@@ -154,6 +154,24 @@ add({
 
 ///////////////// not evergreen /////////////////
 
+// afflict
+add({
+  zh: {name: '折磨', desc: "每当此生物被阻挡时，防御牌手失去%0点生命。"},
+  en: {
+    name: 'afflict',
+    desc: "Whenever this creature becomes blocked, defending player loses %0 life."
+  }
+});
+
+// aftermath
+add({
+  zh: {name: '余响', desc: "此咒语只能从你的坟墓场中施放。然后将它放逐。"},
+  en: {
+    name: 'aftermath',
+    desc: "Cast this spell only from your graveyard. Then exile it."
+  }
+});
+
 // annihilator
 add({
   zh: {
@@ -176,6 +194,15 @@ add({
     name: 'bestow',
     desc: "If you cast this card for its bestow cost, it's an Aura spell with enchant creature. " +
     "It becomes a creature again if it's not attached to a creature."
+  }
+});
+
+// bushido
+add({
+  zh: {name: '武士道', desc: "每当此生物进行阻挡或被阻挡时，它得+%0/+%0直到回合结束。"},
+  en: {
+    name: 'bushido',
+    desc: "Whenever this creature blocks or becomes blocked, it gets +%0/+%0 until end of turn."
   }
 });
 
@@ -232,6 +259,25 @@ add({
     name: 'emerge',
     desc: "You may cast this spell by sacrificing a creature and paying the " +
     "emerge cost reduced by that creature's converted mana cost."
+  }
+});
+
+// eternalize
+add({
+  zh: {
+    name: '永生',
+    desc: "%0，从你的坟墓场放逐此牌：派出一个衍生物，且为此牌的复制品，但它是4/4黑色灵俑%1" +
+    "，且没有法术力费用。永生的时机视同法术。"
+  },
+  en: {
+    name: 'eternalize',
+    desc: "%0, Exile this card from your graveyard: Create a token that’s a " +
+    "copy of this card, except it's a 4/4 black Zombie%1 with no mana cost. " +
+    "Eternalize only as a sorcery."
+  },
+  format(desc, params, lang) {
+    const c = lang === 'zh' ? '／' : ' ';
+    return desc.format(params[0], c + params.slice(1).join(c));
   }
 });
 
@@ -356,6 +402,20 @@ add({
   }
 });
 
+// soulshift
+add({
+  zh: {
+    name: '转生',
+    desc: "当此永久物从战场上置入坟墓场时，你可以将目标总法术力费用等于或小于%0的精怪牌从你的坟墓场移回你手上。"
+  },
+  en: {
+    name: 'soulshift',
+    desc: "When this permanent is put into a graveyard from the battlefield, " +
+    "you may return target Spirit card with converted mana cost %0 or less from " +
+    "your graveyard to your hand."
+  }
+});
+
 // surge
 add({
   zh: {
@@ -395,6 +455,12 @@ add({
 add({
   is_keyword: false, zh: {name: '躁狂'}, en: {name: 'delirium'},
   typical: "…，若你坟墓场中牌的类别有四种或更多，…"
+});
+
+// eminence
+add({
+  is_keyword: false, zh: {name: '威仪'}, en: {name: 'eminence'},
+  typical: "…，只要该生物位于统帅区或战场上，…"
 });
 
 // enrage

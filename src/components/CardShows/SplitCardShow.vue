@@ -1,12 +1,19 @@
 <template>
   <div class="cardshow">
     <div class="cardshow-block">
-      <normal-split-card :id="id" :card1="card1" :card2="card2" :version="version" :rarity="rarity"
-                         :card_url="card_url" :is_fuse="is_fuse"
-                         :fuse_text="fuse_text"></normal-split-card>
+      <component :is="cards[card_style]"
+                 :id="id" :card1="card1" :card2="card2" :version="version" :rarity="rarity"
+                 :card_url="card_url" :is_fuse="is_fuse"
+                 :fuse_text="fuse_text"></component>
     </div>
     <hr>
     <button @click="show_form = !show_form">隐藏／显示表单</button>
+    <label for="card">样式</label>
+    <select id="card" v-model="card_style">
+      <option value="normal">normal</option>
+      <option value="aftermath">aftermath</option>
+      <option value="kamigawa">kamigawa</option>
+    </select>
     <div class="form" v-show="show_form">
       <div class="form-control">
         <label for="id">ID</label>
@@ -62,6 +69,14 @@
         <textarea id="effect" cols="80" rows="5" style="vertical-align: middle"
                   v-model="card1.effect" placeholder="{1}为费用图片，[[xxx]]为异能"></textarea>
       </div>
+      <div class="form-control">
+        <label for="is_creature">是否生物？</label>
+        <input id="is_creature" type="checkbox" v-model="card1.is_creature" style="width: 50px">
+        <label for="atk">攻击力</label>
+        <input id="atk" type="text" v-model="card1.body[0]" style="width: 50px;">
+        <label for="def">防御力</label>
+        <input id="def" type="text" v-model="card1.body[1]" style="width: 50px;">
+      </div>
       <h3>Card 2</h3>
       <div class="form-control">
         <label>卡框颜色</label>
@@ -88,6 +103,14 @@
         <textarea id="effect2" cols="80" rows="5" style="vertical-align: middle"
                   v-model="card2.effect" placeholder="{1}为费用图片，[[xxx]]为异能"></textarea>
       </div>
+      <div class="form-control">
+        <label for="is_creature2">是否生物？</label>
+        <input id="is_creature2" type="checkbox" v-model="card2.is_creature" style="width: 50px">
+        <label for="atk2">攻击力</label>
+        <input id="atk2" type="text" v-model="card2.body[0]" style="width: 50px;">
+        <label for="def2">防御力</label>
+        <input id="def2" type="text" v-model="card2.body[1]" style="width: 50px;">
+      </div>
     </div>
   </div>
 </template>
@@ -98,6 +121,9 @@
 
 <script>
   import NormalSplitCard from '../Cards/NormalSplitCard.vue'
+  import AftermathSplitCard from '../Cards/AftermathSplitCard.vue'
+  import KamigawaFlipCard from '../Cards/KamigawaFlipCard.vue'
+
   import ColorSelector from '../Utils/ColorSelector.vue'
   import EffectImageSelector from '../Utils/EffectImageSelector.vue'
   import RaritySelector from '../Utils/RaritySelector.vue'
@@ -112,19 +138,26 @@
       color: {dot: []},
       effect_background: null,
       show_dot: false,
+      is_creature: false,
+      body: [0, 0]
     }
   };
 
   export default {
     components: {
-      NormalSplitCard,
       ColorSelector,
       EffectImageSelector,
       RaritySelector,
     },
     data() {
       return {
+        cards: {
+          'aftermath': AftermathSplitCard,
+          'normal': NormalSplitCard,
+          'kamigawa': KamigawaFlipCard,
+        },
         show_form: true,
+        card_style: 'kamigawa',
         // card
         id: '1',
         version: 'xln',
