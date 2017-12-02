@@ -166,7 +166,7 @@
   const constrctor = () => {
     return {
       id: '', name: '', cost: [], cost_text: '', card_url: '', url: '', type: '',
-      effect: '', atk: 0, def: 0, is_creature: true, background: {}, rarity: 'common',
+      effect: '', atk: 0, def: 0, is_creature: true, background: {dot: []}, rarity: 'common',
       version: 'xln', effect_background: 'none', double_image: null, back_body: [0, 0],
       show_dot: false,
     }

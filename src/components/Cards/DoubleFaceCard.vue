@@ -23,7 +23,7 @@
         <div class="border-color-block" :style="{background: color.border}">
           <div class="content-block type-block" style="border-radius: 2% / 50%"
                :style="{backgroundColor: color.type}">
-            <span class="dot" v-if="is_double_back">
+            <span class="dot" v-if="is_double_back && color.dot.length">
               <span v-for="d in color.dot" :style="{background: d}"></span>
             </span>
             <span class="type" :style="{color: is_double_back ? 'white' : 'black'}">
@@ -164,11 +164,11 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: 2px 8px 2px 3px;
+    padding: 2px 8px 2px 5px;
     text-align: left;
 
     .dot {
-      margin: 0 3px;
+      margin: 0 3px 0 1px;
       height: 10px;
       width: 10px;
       border: 1px solid black;

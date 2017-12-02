@@ -67,6 +67,7 @@ import PWUb from '../../assets/background/planeswalker_blue.jpg'
 import PWBb from '../../assets/background/planeswalker_black.jpg'
 import PWRb from '../../assets/background/planeswalker_red.jpg'
 import PWGb from '../../assets/background/planeswalker_green.png'
+import PWMb from '../../assets/background/planeswalker_multi.jpg'
 
 const border = {
   W: Color({
@@ -205,6 +206,10 @@ const border = {
     code: 'DBG', display: '背面绿', name: '#395e3e', effect: '#b3c5ba',
     background: Gb, border: C.G3, body_font: '#FFFFFF', dot: [C.G3]
   }),
+  DBA: Color({
+    code: 'DBA', display: '背面神器', name: '#89a5ae', effect: '#bdced3',
+    background: Ab, border: C.A3, body_font: '#FFFFFF', dot: []
+  }),
 };
 
 
@@ -238,6 +243,8 @@ const background = {
   ECU: Background({background: ECUb, display: '结界生物蓝', code: 'ECU'}),
   ECB: Background({background: ECBb, display: '结界生物黑', code: 'ECB'}),
   ECR: Background({background: ECRb, display: '结界生物红', code: 'ECR'}),
+  ECG: Background({background: ECGb, display: '结界生物绿', code: 'ECG'}),
+  ECM: Background({background: ECMb, display: '结界生物多色', code: 'ECM'}),
   ECA: Background({background: ECAb, display: '结界神器', code: 'ECA'}),
   DEVOID: Background({display: '无色', code: 'DEVOID'}),
   PWW: Background({background: PWWb, display: '鹏洛客白'}),
@@ -245,6 +252,7 @@ const background = {
   PWB: Background({background: PWBb, display: '鹏洛客黑'}),
   PWR: Background({background: PWRb, display: '鹏洛客红'}),
   PWG: Background({background: PWGb, display: '鹏洛客绿'}),
+  PWM: Background({background: PWMb, display: '鹏洛客多色'}),
 };
 
 export default {
