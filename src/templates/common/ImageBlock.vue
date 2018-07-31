@@ -1,15 +1,15 @@
 <template>
   <div class="ImageBlock" :style="{ width: `${width}px` }">
-    <div class="image-holder">
+    <div class="image-holder" :style="{background: $$borders.getColorText(border, 'border')}">
       <div class="image" :style="{ width: `${width - 10}px`, height: `${height}px` }">
         <slot></slot>
       </div>
     </div>
     <div class="left-legendary" v-show="isLegendary">
-      <div class="rect"></div>
+      <div class="rect" :style="{borderRightColor: $$borders.getColorText(border, 'border')}"></div>
     </div>
     <div class="right-legendary" v-show="isLegendary">
-      <div class="rect"></div>
+      <div class="rect" :style="{borderLeftColor: $$borders.getColorText(border, 'border')}"></div>
     </div>
   </div>
 </template>
@@ -21,7 +21,6 @@
   }
 
   .image-holder {
-    background: #fffdf7;
     padding: 0 5px;
 
     .image {
@@ -40,7 +39,7 @@
       content: '';
       height: 30px;
       box-sizing: content-box;
-      border-right: 5px solid #fffdf7;
+      border-right: 5px solid transparent;
       border-bottom: 5px solid transparent;
     }
   }
@@ -56,7 +55,7 @@
       content: '';
       height: 30px;
       box-sizing: content-box;
-      border-left: 5px solid #fffdf7;
+      border-left: 5px solid transparent;
       border-bottom: 5px solid transparent;
     }
   }
@@ -69,6 +68,10 @@
       return {}
     },
     props: {
+      border: {
+        type: String,
+        default: 'w',
+      },
       width: {
         type: Number,
         default: 390,

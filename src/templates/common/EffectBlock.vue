@@ -1,7 +1,8 @@
 <template>
   <div class="EffectBlock" :style="{ width: `${width}px` }">
-    <div class="effect-border">
-      <div class="effect" :style="{ height: `${height - 5}px` }"></div>
+    <div class="effect-border" :style="{background: $$borders.getColorText(border, 'border')}">
+      <div class="effect"
+           :style="{height: `${height - 5}px`, background: $$borders.getColorText(border, 'effect')}"></div>
     </div>
   </div>
 </template>
@@ -15,13 +16,13 @@
 
   .effect-border {
     padding: 0 5px 5px 5px;
-    background: #fffdf7;
+    background: transparent;
 
     .effect {
       border: 1px solid #fefefe;
       border-top-color: #dadada;
       border-right-color: #dadada;
-      background: #e9e6dd;
+      background: transparent;
       box-shadow: inset 0 0 10px 0 rgba(44, 44, 44, .3);
     }
   }
@@ -33,6 +34,10 @@
       return {}
     },
     props: {
+      border: {
+        type: String,
+        default: 'w'
+      },
       width: {
         type: Number,
         default: 390,

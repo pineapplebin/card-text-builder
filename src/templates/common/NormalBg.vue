@@ -1,8 +1,8 @@
 <template>
   <div class="NormalBg">
     <div class="inner" :class="{ full: isFull }">
-      <div class="bigger"></div>
-      <div class="smaller"></div>
+      <div class="bigger" :style="{backgroundImage: `url(${bg})`}"></div>
+      <div class="smaller" :style="{backgroundImage: `url(${bg})`}"></div>
     </div>
   </div>
 </template>
@@ -59,6 +59,10 @@
       return {}
     },
     props: {
+      bg: {
+        type: String,
+        default: '',
+      },
       isFull: {
         type: Boolean,
         default: false,

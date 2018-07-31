@@ -5,10 +5,12 @@ import 'element-ui/lib/theme-chalk/index.css';
 import BaseCard from './templates/BaseCard.vue'
 
 import images from './utils/plugins/images'
+import borders from './utils/plugins/borders'
 import tools from './utils/plugins/tools'
 
 Vue.use(ElementUI)
 Vue.use(images)
+Vue.use(borders)
 Vue.use(tools)
 Vue.component('base-card', BaseCard)
 

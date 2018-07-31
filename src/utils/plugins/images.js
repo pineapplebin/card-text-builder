@@ -42,6 +42,31 @@ import bp from '../../assets/images/mana/BP.png'
 import rp from '../../assets/images/mana/RP.png'
 import gp from '../../assets/images/mana/GP.png'
 
+import Wb from '../../assets/images/background/default_white.jpg'
+import Ub from '../../assets/images/background/default_blue.jpg'
+import Bb from '../../assets/images/background/default_black.jpg'
+import Rb from '../../assets/images/background/default_red.jpg'
+import Gb from '../../assets/images/background/default_green.jpg'
+import Ab from '../../assets/images/background/default_artifact.jpg'
+import Mb from '../../assets/images/background/default_multi.jpg'
+import Lb from '../../assets/images/background/default_land.jpg'
+import ECWb from '../../assets/images/background/enchant_creature_white.jpg'
+import ECUb from '../../assets/images/background/enchant_creature_blue.jpg'
+import ECBb from '../../assets/images/background/enchant_creature_black.jpg'
+import ECRb from '../../assets/images/background/enchant_creature_red.jpg'
+import ECGb from '../../assets/images/background/enchant_creature_green.jpg'
+import ECMb from '../../assets/images/background/enchant_creature_multi.jpg'
+import ECAb from '../../assets/images/background/enchant_artifact.jpg'
+import AVb from '../../assets/images/background/artifact_vehicle.jpg'
+import MIXUBb from '../../assets/images/background/mix_blue_black.png'
+import MIXBGb from '../../assets/images/background/mix_black_green.jpg'
+import PWWb from '../../assets/images/background/planeswalker_white.jpg'
+import PWUb from '../../assets/images/background/planeswalker_blue.jpg'
+import PWBb from '../../assets/images/background/planeswalker_black.jpg'
+import PWRb from '../../assets/images/background/planeswalker_red.jpg'
+import PWGb from '../../assets/images/background/planeswalker_green.png'
+import PWMb from '../../assets/images/background/planeswalker_multi.jpg'
+
 const images = {
   mana: {
     "0": m0, "1": m1, "2": m2, "3": m3, "4": m4, "5": m5, "6": m6, "7": m7,
@@ -51,7 +76,7 @@ const images = {
     wu, ub, br, rg, gw, wb, ur, bg, gu, rw,
     wp, up, bp, rp, gp,
   },
-  getSymbol(set, rarity) {
+  getSymbol (set, rarity) {
     let _r
     if (!rarity)
       _r = 'c'
@@ -60,7 +85,7 @@ const images = {
     return `http://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=${
       set}&size=large&rarity=${_r}`
   },
-  install(Vue) {
+  install (Vue) {
     Vue.prototype.$$images = {
       mana: this.mana,
       getSymbol: this.getSymbol,
@@ -69,3 +94,10 @@ const images = {
 };
 
 export default images
+
+export function getBgOptions () {
+  return [
+    { label: '白', value: Wb },
+    { label: '蓝', value: Ub },
+  ]
+}

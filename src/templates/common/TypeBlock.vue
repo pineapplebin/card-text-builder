@@ -1,7 +1,7 @@
 <template>
   <div class="TypeBlock">
-    <div class="type-border">
-      <div class="content">
+    <div class="type-border" :style="{background: $$borders.getColorText(border, 'border')}">
+      <div class="content" :style="{background: $$borders.getColorText(border, 'type')}">
         <p class="type">{{ parseType(type) }}</p>
         <img class="symbol" :src="$$images.getSymbol(series || 'dom', rarity)"/>
       </div>
@@ -19,12 +19,12 @@
 
   .type-border {
     padding: 10px;
-    background: #fffdf7;
+    background: transparent;
     border-radius: ~'3% / 50%';
 
     .content {
       height: 30px;
-      background: #e9e6dd;
+      background: transparent;
       border-radius: ~'3% / 50%';
       border: 1px solid #191919;
       box-shadow: -1px 1px 1px 1px rgba(44, 44, 44, .8);
@@ -49,6 +49,10 @@
       return {}
     },
     props: {
+      border: {
+        type: String,
+        default: 'w'
+      },
       type: {
         type: String,
         default: ''

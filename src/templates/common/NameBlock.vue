@@ -1,11 +1,13 @@
 <template>
   <div class="NameBlock" :style="{ width: `${width}px` }">
-    <div class="normal-border" v-show="!isLegendary"></div>
+    <div class="normal-border" v-show="!isLegendary"
+         :style="{background: $$borders.getColorText(border, 'border')}"></div>
     <div class="legendary-border" v-show="isLegendary">
       <legendary-title :width="width + 20"
-                       :left-color="'#fffdf7'" :right-color="'#fffdf7'"></legendary-title>
+                       :left-color="color_list[0]" :right-color="color_list[1]"></legendary-title>
     </div>
-    <div class="name" :style="{ width: `${width - 20}px` }">
+    <div class="name"
+         :style="{ width: `${width - 20}px`, background: $$borders.getColorText(border, 'name') }">
       <p class="name-content">{{ name }}</p>
       <img class="mana-icon" v-for="icon in parseCost(costText)" :src="$$images.mana[icon]"
            :class="{ bigger: icon.match(/^[2wubrg][wubrgp]$/) }">
@@ -30,7 +32,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: #fffdf7;
+    background: transparent;
     border-radius: ~'3% / 50%';
   }
 
@@ -46,7 +48,7 @@
     left: 10px;
     top: 10px;
     height: 35px;
-    background: #e9e6dd;
+    background: transparent;
     border-radius: ~'3% / 50%';
     border: 1px solid #191919;
     box-shadow: -1px 1px 2px 2px rgba(44, 44, 44, .8);
@@ -84,10 +86,18 @@
       LegendaryTitle,
     },
     data () {
-      return {
+      return {}
+    },
+    computed: {
+      color_list () {
+        return this.$$borders.getLegendaryColor(this.border, 'border')
       }
     },
     props: {
+      border: {
+        type: String,
+        default: 'w'
+      },
       name: {
         type: String,
         default: ''

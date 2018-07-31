@@ -13,6 +13,16 @@
         <stop offset="35%" :stop-color="leftColor"/>
         <stop offset="65%" :stop-color="rightColor"/>
       </linearGradient>
+      <filter id="dropShadow">
+        <feGaussianBlur in="inset-shadow" stdDeviation="3"/>
+        <feOffset dx="0" dy="0" result="offsetblur"/>
+        <feFlood flood-color="rgba(44, 44, 44, 0.5)"/>
+        <feComposite in2="offsetblur" operator="in"/>
+        <feMerge>
+          <feMergeNode/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
     </defs>
     <path id="legend" data-name="legend" class="cls-1"
           d="M199,62.667l-173.686.778-8.548,3.111L12.1,72,5.886,64.222,2,54.111l0.777-7,0.777-4.667v-14l3.108-7,10.1-13.222,6.217,3.111,7.771,2.333L41.633,16l15.542,0.778,10.88-9.333,7.771,3.111L83.6,13.667l10.88,3.111H110.8l17.1-.778L156.647,5.889l5.44,2.333H168.3l8.548-3.111,6.994-2.333L190.84,2H199V62.667Zm0,0-173.686.778-8.548,3.111L12.1,72,5.886,64.222,2,54.111l0.777-7,0.777-4.667v-14l3.108-7,10.1-13.222,6.217,3.111,7.771,2.333L41.633,16l15.542,0.778,10.88-9.333,7.771,3.111L83.6,13.667l10.88,3.111H110.8l17.1-.778L156.647,5.889l5.44,2.333H168.3l8.548-3.111,6.994-2.333L190.84,2H199V62.667Zm-3,0,173.686,0.778,8.549,3.111L382.9,72l6.217-7.778L393,54.111l-0.777-7-0.777-4.667v-14l-3.109-7-10.1-13.222-6.217,3.111-7.771,2.333L353.367,16l-15.543.778L326.945,7.444l-7.771,3.111L311.4,13.667l-10.879,3.111H284.2L267.107,16,238.353,5.889l-5.44,2.333H226.7l-8.548-3.111-6.994-2.333L204.16,2H196V62.667Zm0,0,173.686,0.778,8.549,3.111L382.9,72l6.217-7.778L393,54.111l-0.777-7-0.777-4.667v-14l-3.109-7-10.1-13.222-6.217,3.111-7.771,2.333L353.367,16l-15.543.778L326.945,7.444l-7.771,3.111L311.4,13.667l-10.879,3.111H284.2L267.107,16,238.353,5.889l-5.44,2.333H226.7l-8.548-3.111-6.994-2.333L204.16,2H196V62.667Z"/>
@@ -25,6 +35,7 @@
     stroke: url(#MyGradient);
     stroke-width: 3px;
     fill-rule: nonzero;
+    /*filter: url(#dropShadow)*/
   }
 </style>
 
@@ -35,8 +46,8 @@
     },
     props: {
       width: { type: Number, default: 440 },
-      leftColor: { type: String, default: '#000' },
-      rightColor: { type: String, default: '#000' },
+      leftColor: { type: String, default: 'transparent' },
+      rightColor: { type: String, default: 'transparent' },
     },
     computed: {
       height () {

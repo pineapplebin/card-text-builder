@@ -1,7 +1,7 @@
 <template>
   <div class="FormRenderer">
     <el-form label-width="100px" v-if="form_conf">
-      <el-form-item v-for="(field, key) in form_conf" :label="field.label">
+      <el-form-item v-for="(field, key) in form_conf" :label="field.label" :key="key">
         <component :is="field_map[field._$type]" :key="key" v-model="current_data[key]"
                    :conf="form_conf[key]" @change="updateFieldValue(key, $event)"></component>
       </el-form-item>

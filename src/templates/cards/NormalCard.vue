@@ -1,17 +1,17 @@
 <template>
   <base-card>
     <div class="bg">
-      <normal-bg></normal-bg>
+      <normal-bg :bg="cardData.bg_style"></normal-bg>
     </div>
     <div class="main">
       <name-block :name="cardData.name" :is-legendary="cardData.is_legendary"
-                  :cost-text="cardData.cost"></name-block>
-      <image-block :is-legendary="cardData.is_legendary">
+                  :cost-text="cardData.cost" :border="cardData.border_style"></name-block>
+      <image-block :border="cardData.border_style" :is-legendary="cardData.is_legendary">
         <div class="image" :style="{backgroundImage: `url(${cardData.image_url})`}"></div>
       </image-block>
       <type-block :type="cardData.type" :series="cardData.series"
-                  :rarity="cardData.rarity"></type-block>
-      <effect-block></effect-block>
+                  :rarity="cardData.rarity" :border="cardData.border_style"></type-block>
+      <effect-block :border="cardData.border_style"></effect-block>
       <series-block style="margin-top: 10px" :number="$$tools.getNumberFromImage(cardData.image_url)"
                     :series="cardData.series" :rarity="cardData.rarity"></series-block>
     </div>
@@ -52,12 +52,12 @@
   import EffectBlock from '../common/EffectBlock'
   import SeriesBlock from '../common/SeriesBlock'
   import {TextField, CheckBoxField, SelectField} from '../../utils/form-engine/fields'
-  import {common_conf} from './common'
+  import {common_conf, getBorderOptions, getBgOptions} from './common'
 
   const form = {
     ...common_conf,
-    border_style: SelectField({ label: '边框样式', options: [{ label: '普通白', value: 'w' }] }),
-    bg_style: SelectField({ label: '背景样式' }),
+    border_style: SelectField({ label: '边框样式', options: getBorderOptions() }),
+    bg_style: SelectField({ label: '背景样式', options: getBgOptions() }),
     cost: TextField({ label: '法术力费用' }),
     is_legendary: CheckBoxField({ label: '传奇?' }),
     image_url: TextField({ label: '卡图地址' }),
