@@ -11,7 +11,7 @@
       </image-block>
       <type-block :type="cardData.type" :series="cardData.series"
                   :rarity="cardData.rarity" :border="cardData.border_style"></type-block>
-      <effect-block :border="cardData.border_style"></effect-block>
+      <effect-block :border="cardData.border_style" :effect="cardData.effect"></effect-block>
       <series-block style="margin-top: 10px" :number="$$tools.getNumberFromImage(cardData.image_url)"
                     :series="cardData.series" :rarity="cardData.rarity"></series-block>
     </div>
@@ -51,7 +51,7 @@
   import TypeBlock from '../common/TypeBlock'
   import EffectBlock from '../common/EffectBlock'
   import SeriesBlock from '../common/SeriesBlock'
-  import {TextField, CheckBoxField, SelectField} from '../../utils/form-engine/fields'
+  import {TextField, CheckBoxField, SelectField, TextareaField} from '../../utils/form-engine/fields'
   import {common_conf, getBorderOptions, getBgOptions} from './common'
 
   const form = {
@@ -61,6 +61,7 @@
     cost: TextField({ label: '法术力费用' }),
     is_legendary: CheckBoxField({ label: '传奇?' }),
     image_url: TextField({ label: '卡图地址' }),
+    effect: TextareaField({ label: '效果' })
   }
 
   export default {

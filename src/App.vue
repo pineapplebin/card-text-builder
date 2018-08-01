@@ -17,6 +17,7 @@
 
 <style lang="less">
   @import './assets/styles/common.less';
+  @import './utils/plugins/effect/style';
 
   * {
     padding: 0;

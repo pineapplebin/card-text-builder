@@ -7,11 +7,33 @@ import BaseCard from './templates/BaseCard.vue'
 import images from './utils/plugins/images'
 import borders from './utils/plugins/borders'
 import tools from './utils/plugins/tools'
+import series from './utils/plugins/series'
+import effect from './utils/plugins/effect'
+
+String.prototype.replaceAll = function (split, replace) {
+  return this.split(split).join(replace);
+};
+
+String.prototype.format = function (...args) {
+  let str = this.slice(0);
+  args.forEach((content, idx) => {
+    str = str.replaceAll(`%${idx}`, content)
+  });
+  return str;
+};
+
+String.prototype.title = function () {
+  if (this.length === 0)
+    return this;
+  return this[0].toUpperCase() + this.slice(1);
+};
 
 Vue.use(ElementUI)
 Vue.use(images)
 Vue.use(borders)
 Vue.use(tools)
+Vue.use(series)
+Vue.use(effect)
 Vue.component('base-card', BaseCard)
 
 Vue.config.productionTip = false

@@ -9,6 +9,12 @@ export const TextField = function (conf) {
   }, conf)
 }
 
+export const TextareaField = function (conf) {
+  return Object.assign({}, common, {
+    _$type: 'TextareaField',
+  }, conf)
+}
+
 export const CheckBoxField = function (conf) {
   return Object.assign({}, common, {
     _$type: 'CheckBoxField',

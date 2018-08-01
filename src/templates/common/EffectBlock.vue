@@ -2,7 +2,9 @@
   <div class="EffectBlock" :style="{ width: `${width}px` }">
     <div class="effect-border" :style="{background: $$borders.getColorText(border, 'border')}">
       <div class="effect"
-           :style="{height: `${height - 5}px`, background: $$borders.getColorText(border, 'effect')}"></div>
+           :style="{height: `${height - 5}px`, background: $$borders.getColorText(border, 'effect')}">
+        <div class="render-effect" v-html="render_effect">{{ render_effect }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -19,6 +21,9 @@
     background: transparent;
 
     .effect {
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
       border: 1px solid #fefefe;
       border-top-color: #dadada;
       border-right-color: #dadada;
@@ -33,7 +38,16 @@
     data () {
       return {}
     },
+    computed: {
+      render_effect () {
+        return this.$$effect(this.effect || '')
+      }
+    },
     props: {
+      effect: {
+        type: String,
+        default: ''
+      },
       border: {
         type: String,
         default: 'w'

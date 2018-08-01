@@ -15,6 +15,9 @@
         <component :is="active_card" :card-data="current_data"></component>
       </div>
       <div class="card-setting padding">
+        <div style="text-align: right">
+          <el-button type="primary" icon="el-icon-edit" circle @click="tempSave"></el-button>
+        </div>
         <h2>{{ selecting_card }}</h2>
         <!--<div><span>／</span></div>-->
         <form-renderer ref="form_renderer"></form-renderer>
@@ -72,9 +75,20 @@
         this.selecting_card = key
         const card = this.card_map[this.selecting_card]
         this.active_card = card.component
-        this.current_data = initData(card.form)
+        // load temp save
+        const saved = localStorage.getItem(`tempsave:${key}`)
+        if (saved) {
+          this.current_data = JSON.parse(saved)
+          this.$notify({ title: '读取成功', message: '读取之前临时保存的数据', type: 'success' })
+        }
+        else
+          this.current_data = initData(card.form)
         const renderer = this.$refs.form_renderer
         renderer.renderForm(card.form, this.current_data)
+      },
+      tempSave () {
+        localStorage.setItem(`tempsave:${this.selecting_card}`, JSON.stringify(this.current_data))
+        this.$notify({ title: '保存成功', message: '刷新或切换模版后可自动读取', type: 'success' })
       },
     },
   }

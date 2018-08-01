@@ -18,6 +18,7 @@
 <script>
   import {Input, Checkbox} from 'element-ui'
   import SelectField from './SelectField'
+  import TextareaField from './TextareaField'
 
   export default {
     data () {
@@ -26,6 +27,7 @@
           TextField: Input,
           CheckBoxField: Checkbox,
           SelectField,
+          TextareaField,
         },
         form_conf: null,
         current_data: null,

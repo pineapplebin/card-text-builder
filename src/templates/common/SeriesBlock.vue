@@ -1,6 +1,7 @@
 <template>
   <div class="SeriesBlock">
-    {{ series ? series.toUpperCase() : '___' }} • {{ padZero(number) }}/299 {{ parseRarity(rarity) }}
+    {{ series ? series.toUpperCase() : '___' }} • {{ padZero(number) }}/{{
+    padZero($$series.getSeriesAmount(series)) }} {{ parseRarity(rarity) }}
   </div>
 </template>
 
@@ -39,7 +40,7 @@
         }
         return sn
       },
-      parseRarity(r) {
+      parseRarity (r) {
         if (!r)
           return 'C'
         return r[0].toUpperCase()
