@@ -8,7 +8,8 @@ const REG_COST = /{([\d\w]+)}/g;
 const REG_STYLE = /^\((.+)\)/;
 
 const ITALIC_TAG = '<span class="italic">%0</span>'
-const COMMENT_TAG = '<div class="flavor-split-line"></div><div class="flavor">%0</div>'
+const SPLIT_LINE_TAG = '<div class="flavor-split-line"></div>'
+const COMMENT_TAG = '<div class="flavor">%0</div>'
 
 const STYLE_MAP = {
   '-': ['smaller'],
@@ -72,11 +73,14 @@ function matchItalic (node) {
   return node
 }
 
-function matchComment (node) {
+function matchComment (node, idx) {
   let line = node.content
   const result = line.match(REG_COMMENT);
-  if (result)
+  if (result) {
     line = line.replace(result[0], COMMENT_TAG.format(result[1]));
+    if (idx > 0)
+      line = SPLIT_LINE_TAG + line
+  }
   node.content = line
   return node
 }

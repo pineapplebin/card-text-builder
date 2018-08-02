@@ -13,15 +13,19 @@
         <stop offset="35%" :stop-color="leftColor"/>
         <stop offset="65%" :stop-color="rightColor"/>
       </linearGradient>
-      <filter id="dropShadow">
-        <feGaussianBlur in="inset-shadow" stdDeviation="3"/>
-        <feOffset dx="0" dy="0" result="offsetblur"/>
-        <feFlood flood-color="rgba(44, 44, 44, 0.5)"/>
-        <feComposite in2="offsetblur" operator="in"/>
-        <feMerge>
-          <feMergeNode/>
-          <feMergeNode in="SourceGraphic"/>
-        </feMerge>
+      <filter id="innershadow" x0="-50%" y0="-50%" width="200%" height="200%">
+        <feGaussianBlur in="SourceAlpha" stdDeviation="0" result="blur"></feGaussianBlur>
+        <feOffset dy="0" dx="0"></feOffset>
+        <feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowDiff"></feComposite>
+        <feFlood flood-color="#fff" flood-opacity="0.3"></feFlood>
+        <feComposite in2="shadowDiff" operator="in"></feComposite>
+        <feComposite in2="SourceGraphic" operator="over" result="firstfilter"></feComposite>
+        <feGaussianBlur in="firstfilter" stdDeviation="0" result="blur2"></feGaussianBlur>
+        <feOffset dy="1" dx="-1"></feOffset>
+        <feComposite in2="firstfilter" operator="arithmetic" k2="-1" k3="1" result="shadowDiff"></feComposite>
+        <feFlood flood-color="#fff" flood-opacity="0.3"></feFlood>
+        <feComposite in2="shadowDiff" operator="in"></feComposite>
+        <feComposite in2="firstfilter" operator="over"></feComposite>
       </filter>
     </defs>
     <path id="legend" data-name="legend" class="cls-1"
@@ -35,7 +39,8 @@
     stroke: url(#MyGradient);
     stroke-width: 3px;
     fill-rule: nonzero;
-    /*filter: url(#dropShadow)*/
+    box-shadow: inset 0 2px 0 white;
+    filter: url(#innershadow)
   }
 </style>
 

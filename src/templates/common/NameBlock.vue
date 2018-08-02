@@ -3,7 +3,7 @@
     <div class="normal-border" v-show="!isLegendary"
          :style="{background: $$borders.getColorText(border, 'border')}"></div>
     <div class="legendary-border" v-show="isLegendary">
-      <legendary-title :width="width + 20"
+      <legendary-title :width="width + 10"
                        :left-color="color_list[0]" :right-color="color_list[1]"></legendary-title>
     </div>
     <div class="name"
@@ -38,8 +38,8 @@
 
   .legendary-border {
     position: absolute;
-    top: -16px;
-    left: -10px;
+    top: -14px;
+    left: -5px;
     filter: drop-shadow(0 3px 1px #191919);
   }
 

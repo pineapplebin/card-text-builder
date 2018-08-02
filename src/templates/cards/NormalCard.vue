@@ -14,6 +14,8 @@
       <effect-block :border="cardData.border_style" :effect="cardData.effect"></effect-block>
       <series-block style="margin-top: 10px" :number="$$tools.getNumberFromImage(cardData.image_url)"
                     :series="cardData.series" :rarity="cardData.rarity"></series-block>
+      <body-block v-show="cardData.is_creature" :bottom="20" :right="20"
+                  :border="cardData.border_style" :body="cardData.body"></body-block>
     </div>
   </base-card>
 </template>
@@ -51,17 +53,16 @@
   import TypeBlock from '../common/TypeBlock'
   import EffectBlock from '../common/EffectBlock'
   import SeriesBlock from '../common/SeriesBlock'
+  import BodyBlock from '../common/BodyBlock'
   import {TextField, CheckBoxField, SelectField, TextareaField} from '../../utils/form-engine/fields'
   import {common_conf, getBorderOptions, getBgOptions} from './common'
 
   const form = {
     ...common_conf,
-    border_style: SelectField({ label: '边框样式', options: getBorderOptions() }),
-    bg_style: SelectField({ label: '背景样式', options: getBgOptions() }),
-    cost: TextField({ label: '法术力费用' }),
     is_legendary: CheckBoxField({ label: '传奇?' }),
-    image_url: TextField({ label: '卡图地址' }),
-    effect: TextareaField({ label: '效果' })
+    is_creature: CheckBoxField({ label: '生物?' }),
+    body: TextField({ label: '身材' }),
+    effect: TextareaField({ label: '效果' }),
   }
 
   export default {
@@ -73,6 +74,7 @@
       TypeBlock,
       EffectBlock,
       SeriesBlock,
+      BodyBlock,
     },
     data () {
       return {

@@ -1,18 +1,19 @@
 const COLORS = {
-  W: '#fffdf7', INF_W: '#ece8e3', EFF_W: '#e7e5de',
-  U: '#016dab', INF_U: '#a9c3d2', EFF_U: '#cdd7e0',
+  BODY_FONT: '#000',
+  W: '#fffdf7', INF_W: '#f9f5ea', EFF_W: '#f9f5ea', BODY_W: '#efe8d6',
+  U: '#016dab', INF_U: '#c3dfed', EFF_U: '#e0f1fb', BODY_U: '#b2d6e6',
 }
 
 const borders = {
   w: {
     _name: '普通白',
     border: [COLORS.W], name: [COLORS.INF_W], type: [COLORS.INF_W],
-    effect: [COLORS.EFF_W], body: [],
+    effect: [COLORS.EFF_W], body: [COLORS.BODY_W], body_font: [COLORS.BODY_FONT],
   },
   u: {
     _name: '普通蓝',
     border: [COLORS.U], name: [COLORS.INF_U], type: [COLORS.INF_U],
-    effect: [COLORS.EFF_U], body: [],
+    effect: [COLORS.EFF_U], body: [COLORS.BODY_U], body_font: [COLORS.BODY_FONT],
   }
 }
 
