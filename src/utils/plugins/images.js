@@ -12,6 +12,8 @@ import m10 from '../../assets/images/mana/10.png'
 import m11 from '../../assets/images/mana/11.png'
 import m12 from '../../assets/images/mana/12.png'
 import x from '../../assets/images/mana/X.png'
+import y from '../../assets/images/mana/Y.png'
+import z from '../../assets/images/mana/Z.png'
 import w from '../../assets/images/mana/W.png'
 import u from '../../assets/images/mana/U.png'
 import b from '../../assets/images/mana/B.png'
@@ -70,7 +72,7 @@ import PWMb from '../../assets/images/background/planeswalker_multi.jpg'
 const images = {
   mana: {
     "0": m0, "1": m1, "2": m2, "3": m3, "4": m4, "5": m5, "6": m6, "7": m7,
-    "8": m8, "9": m9, "10": m10, "11": m11, "12": m12, x,
+    "8": m8, "9": m9, "10": m10, "11": m11, "12": m12, x, y, z,
     w, u, b, r, g, c, e, t, q,
     "2w": s2w, "2u": s2u, "2b": s2b, "2r": s2r, "2g": s2g,
     wu, ub, br, rg, gw, wb, ur, bg, gu, rw,
@@ -99,5 +101,9 @@ export function getBgOptions () {
   return [
     { label: '白', value: Wb },
     { label: '蓝', value: Ub },
+    { label: '黑', value: Bb },
+    { label: '红', value: Rb },
+    { label: '绿', value: Gb },
+    { label: '多色', value: Mb },
   ]
 }

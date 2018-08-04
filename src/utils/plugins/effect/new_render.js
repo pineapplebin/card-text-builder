@@ -20,6 +20,7 @@ class ENode {
     this.tag = tag
     this.content = content
     this.classList = []
+    this.type = 'normal'
   }
 
   addClass (...cls) {
@@ -73,13 +74,14 @@ function matchItalic (node) {
   return node
 }
 
-function matchComment (node, idx) {
+function matchComment (node, idx, list) {
   let line = node.content
   const result = line.match(REG_COMMENT);
   if (result) {
     line = line.replace(result[0], COMMENT_TAG.format(result[1]));
-    if (idx > 0)
+    if (idx > 0) {
       line = SPLIT_LINE_TAG + line
+    }
   }
   node.content = line
   return node
@@ -116,6 +118,10 @@ export default function (origin) {
     .map(matchItalic)
     .map(matchComment)
     .map(matchCost)
+    .map((node) => {
+      node.content = node.content.replace('\\n', '<br>')
+      return node
+    })
     .map(node => node.toText())
     .join('')
 }
