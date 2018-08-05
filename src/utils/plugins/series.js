@@ -1,5 +1,7 @@
 const no = {
+  'm19': 280,
   'gs1': 40,
+  'dom': 269,
 }
 
 export default function (Vue) {

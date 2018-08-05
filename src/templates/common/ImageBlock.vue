@@ -6,10 +6,10 @@
       </div>
     </div>
     <div class="left-legendary" v-show="isLegendary">
-      <div class="rect" :style="{borderRightColor: $$borders.getColorText(border, 'border')}"></div>
+      <div class="rect" :style="{borderRightColor: $$borders.getLegendaryColor(border, 'border')[0]}"></div>
     </div>
     <div class="right-legendary" v-show="isLegendary">
-      <div class="rect" :style="{borderLeftColor: $$borders.getColorText(border, 'border')}"></div>
+      <div class="rect" :style="{borderLeftColor: $$borders.getLegendaryColor(border, 'border')[1]}"></div>
     </div>
   </div>
 </template>

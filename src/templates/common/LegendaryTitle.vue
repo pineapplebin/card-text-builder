@@ -10,8 +10,8 @@
     </metadata>
     <defs>
       <linearGradient id="MyGradient">
-        <stop offset="35%" :stop-color="leftColor"/>
-        <stop offset="65%" :stop-color="rightColor"/>
+        <stop offset="45%" :stop-color="leftColor"/>
+        <stop offset="55%" :stop-color="rightColor"/>
       </linearGradient>
       <filter id="innershadow" x0="-50%" y0="-50%" width="200%" height="200%">
         <feGaussianBlur in="SourceAlpha" stdDeviation="0" result="blur"></feGaussianBlur>

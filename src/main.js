@@ -9,6 +9,7 @@ import borders from './utils/plugins/borders'
 import tools from './utils/plugins/tools'
 import series from './utils/plugins/series'
 import effect from './utils/plugins/effect'
+import request from './utils/plugins/request'
 
 String.prototype.replaceAll = function (split, replace) {
   return this.split(split).join(replace);
@@ -34,6 +35,7 @@ Vue.use(borders)
 Vue.use(tools)
 Vue.use(series)
 Vue.use(effect)
+Vue.use(request)
 Vue.component('base-card', BaseCard)
 
 Vue.config.productionTip = false

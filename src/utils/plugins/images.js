@@ -78,6 +78,10 @@ const images = {
     wu, ub, br, rg, gw, wb, ur, bg, gu, rw,
     wp, up, bp, rp, gp,
   },
+  bg: {
+    w: Wb, u: Ub, r: Rb, b: Bb, g: Gb, m: Mb, a: Ab,
+    av: AVb,
+  },
   getSymbol (set, rarity) {
     let _r
     if (!rarity)
@@ -88,10 +92,7 @@ const images = {
       set}&size=large&rarity=${_r}`
   },
   install (Vue) {
-    Vue.prototype.$$images = {
-      mana: this.mana,
-      getSymbol: this.getSymbol,
-    }
+    Vue.prototype.$$images = this
   }
 };
 
@@ -99,11 +100,13 @@ export default images
 
 export function getBgOptions () {
   return [
-    { label: '白', value: Wb },
-    { label: '蓝', value: Ub },
-    { label: '黑', value: Bb },
-    { label: '红', value: Rb },
-    { label: '绿', value: Gb },
-    { label: '多色', value: Mb },
+    { label: '白', value: 'w' },
+    { label: '蓝', value: 'u' },
+    { label: '黑', value: 'b' },
+    { label: '红', value: 'r' },
+    { label: '绿', value: 'g' },
+    { label: '多色', value: 'm' },
+    { label: '神器', value: 'a' },
+    { label: '载具', value: 'av' },
   ]
 }

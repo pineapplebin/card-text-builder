@@ -1,7 +1,7 @@
 <template>
   <base-card>
     <div class="bg">
-      <normal-bg :bg="cardData.bg_style"></normal-bg>
+      <normal-bg :bg="$$images.bg[cardData.bg_style]"></normal-bg>
     </div>
     <div class="main">
       <name-block :name="cardData.name" :is-legendary="cardData.is_legendary"
@@ -55,9 +55,27 @@
   import SeriesBlock from '../common/SeriesBlock'
   import BodyBlock from '../common/BodyBlock'
   import {TextField, CheckBoxField, SelectField, TextareaField} from '../../utils/form-engine/fields'
-  import {common_conf, getBorderOptions, getBgOptions} from './common'
+  import {common_conf, fetchCardInfo, api_parser} from './common'
 
   const form = {
+    api: TextField({
+      label: '加载数据', onchange: (url, form) => {
+        fetchCardInfo(url).then(data => {
+          form.cost = api_parser.parseCost(data)
+          form.name = data.printed_name
+          form.type = api_parser.parseType(data)
+          form.image_url = data.image_uris.large
+          form.effect = api_parser.parseEffect(data)
+          form.is_creature = data.power !== undefined
+          form.body = api_parser.parseBody(data)
+          form.series = data.set
+          form.rarity = data.rarity
+          form.border_style = api_parser.parseBorder(data)
+          form.bg_style = api_parser.parseBg(data)
+          form.is_legendary = api_parser.parseLegendary(data)
+        })
+      }
+    }),
     ...common_conf,
     is_legendary: CheckBoxField({ label: '传奇?' }),
     is_creature: CheckBoxField({ label: '生物?' }),

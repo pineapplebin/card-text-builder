@@ -1,6 +1,7 @@
 import {TextField, CheckBoxField, SelectField} from '../../utils/form-engine/fields'
 import {getBorderOptions} from '../../utils/plugins/borders'
 import {getBgOptions} from '../../utils/plugins/images'
+import {request} from '../../utils/plugins/request'
 
 export {getBorderOptions} from '../../utils/plugins/borders'
 export {getBgOptions} from '../../utils/plugins/images'
@@ -21,4 +22,56 @@ export const common_conf = {
       { label: '秘稀', value: 'mythic' },
     ]
   }),
+}
+
+/**
+ * @param url
+ * @returns {Promise<CardType>}
+ */
+export async function fetchCardInfo (url) {
+  const splited = url.slice(8).split('/')
+  const r = await request.getCardBySeries(splited[2], splited[3])
+  if (!r.error) {
+    if (r.image_uris && r.image_uris.large)
+      r.image_uris.large = r.image_uris.large.replace(/zhs/g, 'en')
+    return r
+  }
+  else // 兼容无中文卡情况
+    return null
+}
+
+export const api_parser = {
+  parseCost (obj) {
+    return obj.mana_cost.replace(/}/g, ',').replace(/{/g, '').slice(0, -1).toLowerCase()
+  },
+  parseBody (obj) {
+    return `${obj.power}/${obj.toughness}`
+  },
+  parseType (obj) {
+    return obj.printed_type_line.replace(/\s/g, '')
+  },
+  parseEffect (obj) {
+    let t = `${obj.printed_text || ''}`
+    if (obj.flavor_text) {
+      t += `${t.length ? '\n' : ''}#${obj.flavor_text.replace('\n', '\\n')}#`
+    }
+    return t
+  },
+  parseBorder (obj) {
+    if (obj.colors.length === 0)
+      return 'a'
+    if (obj.colors.length > 2)
+      return 'm'
+    return obj.colors.join('').toLowerCase()
+  },
+  parseBg (obj) {
+    if (obj.colors.length === 0)
+      return 'a'
+    if (obj.colors.length > 1)
+      return 'm'
+    return obj.colors[0].toLowerCase()
+  },
+  parseLegendary (obj) {
+    return !!obj.type_line.match(/legendary/i)
+  }
 }

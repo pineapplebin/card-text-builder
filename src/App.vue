@@ -11,6 +11,9 @@
     name: 'app',
     components: {
       MainPage,
+    },
+    mounted () {
+      this.$$request.getCardBySeries('m19', 1)
     }
   }
 </script>
