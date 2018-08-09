@@ -1,8 +1,8 @@
 <template>
   <div id="MainPage">
-    <el-menu class="el-menu-demo" mode="horizontal" background-color="#545c64"
+    <el-menu class="menu" mode="horizontal" background-color="#545c64"
              text-color="#fff" active-text-color="#ffd04b" ref="menu" default-active="normal"
-             @select="selectMenu">
+             @select="selectMenu" :class="{focusing: is_focus}">
       <el-submenu index="1">
         <template slot="title">卡片模版</template>
         <el-menu-item v-for="(card, key) in card_map" :key="key" :index="key">
@@ -11,10 +11,10 @@
       </el-submenu>
     </el-menu>
     <div class="content">
-      <div class="card-preview padding">
+      <div class="card-preview padding" @click="focusCard" :class="{focusing: is_focus}">
         <component :is="active_card" :card-data="current_data"></component>
       </div>
-      <div class="card-setting padding">
+      <div class="card-setting padding" v-show="!is_focus">
         <div style="text-align: right">
           <el-button type="primary" icon="el-icon-edit" circle @click="tempSave"></el-button>
         </div>
@@ -27,6 +27,14 @@
 </template>
 
 <style scoped lang="less">
+  .menu {
+    overflow: hidden;
+
+    &.focusing {
+      max-height: 0;
+    }
+  }
+
   .content {
     display: flex;
     width: 100%;
@@ -40,6 +48,10 @@
       top: 20px;
       padding: 50px;
       width: 40%;
+
+      &.focusing {
+        width: 100%;
+      }
     }
 
     .card-setting {
@@ -65,6 +77,7 @@
         selecting_card: null,
         active_card: null,
         current_data: null,
+        is_focus: false,
       }
     },
     mounted () {
@@ -90,6 +103,9 @@
         localStorage.setItem(`tempsave:${this.selecting_card}`, JSON.stringify(this.current_data))
         this.$notify({ title: '保存成功', message: '刷新或切换模版后可自动读取', type: 'success' })
       },
+      focusCard () {
+        this.is_focus = !this.is_focus
+      }
     },
   }
 </script>

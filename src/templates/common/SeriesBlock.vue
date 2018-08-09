@@ -1,7 +1,15 @@
 <template>
   <div class="SeriesBlock">
-    {{ series ? series.toUpperCase() : '___' }} • {{ padZero(number) }}/{{
-    padZero($$series.getSeriesAmount(series)) }} {{ parseRarity(rarity) }}
+    <div>
+      <span>{{ series ? series.toUpperCase() : 'XXX' }}</span>
+      <span> • </span>
+      <span>{{ padZero(number) }}</span>
+      <span>/</span>
+      <span>{{ padZero($$series.getSeriesAmount(series)) }}</span>
+      <span>&nbsp;{{ parseRarity(rarity) }}</span>
+    </div>
+    <!--{{ series ? series.toUpperCase() : '___' }} • {{ padZero(number) }}/{{-->
+    <!--padZero($$series.getSeriesAmount(series)) }} {{ parseRarity(rarity) }}-->
   </div>
 </template>
 
@@ -10,6 +18,8 @@
     text-align: left;
     font-family: "Gill Sans", sans-serif;
     color: white;
+    font-weight: lighter;
+    font-size: 12px;
   }
 </style>
 

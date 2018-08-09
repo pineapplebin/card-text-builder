@@ -16,7 +16,7 @@
 </style>
 
 <script>
-  import {Input, Checkbox} from 'element-ui'
+  import {Input, Checkbox, Slider} from 'element-ui'
   import SelectField from './SelectField'
   import TextareaField from './TextareaField'
 
@@ -26,6 +26,7 @@
         field_map: {
           TextField: Input,
           CheckBoxField: Checkbox,
+          SlideField: Slider,
           SelectField,
           TextareaField,
         },

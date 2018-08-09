@@ -52,8 +52,9 @@ export const api_parser = {
   },
   parseEffect (obj) {
     let t = `${obj.printed_text || ''}`
+    t = t.replace(/(（)/g, '@$1').replace(/(）)/g, '$1@')
     if (obj.flavor_text) {
-      t += `${t.length ? '\n' : ''}#${obj.flavor_text.replace('\n', '\\n')}#`
+      t += `${t.length ? '\n' : ''}#${obj.flavor_text}#`
     }
     return t
   },

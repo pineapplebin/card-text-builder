@@ -61,6 +61,7 @@
     api: TextField({
       label: '加载数据', onchange: (url, form) => {
         fetchCardInfo(url).then(data => {
+          if (!data) return
           form.cost = api_parser.parseCost(data)
           form.name = data.printed_name
           form.type = api_parser.parseType(data)

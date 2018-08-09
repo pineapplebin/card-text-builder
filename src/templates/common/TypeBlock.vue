@@ -27,7 +27,7 @@
       background: transparent;
       border-radius: ~'3% / 50%';
       border: 1px solid #191919;
-      box-shadow: -1px 1px 1px 1px rgba(44, 44, 44, .8);
+      box-shadow: inset -1px 1px 3px 1px rgba(250, 250, 250, .7), -1px 1px 1px 1px rgba(44, 44, 44, .8);
       display: flex;
       align-items: center;
       padding: 0 5px;

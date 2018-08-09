@@ -2,6 +2,7 @@ const no = {
   'm19': 280,
   'gs1': 40,
   'dom': 269,
+  'xln': 279,
 }
 
 export default function (Vue) {
