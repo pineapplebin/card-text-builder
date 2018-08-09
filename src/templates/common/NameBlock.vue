@@ -54,7 +54,7 @@
     box-shadow: inset -1px 1px 3px 1px rgba(250, 250, 250, .7), -1px 1px 2px 2px rgba(44, 44, 44, .8);
     display: flex;
     align-items: center;
-    padding: 0 10px;
+    padding: 0 5px 0 10px;
 
     .name-content {
       flex: 1 0 auto;
@@ -64,14 +64,14 @@
 
     img.mana-icon {
       display: inline-block;
-      width: 22px;
+      width: 20px;
       margin-right: 2px;
       border-left: 1px solid black;
       border-bottom: 2px solid black;
       border-radius: 50%;
 
       &.bigger {
-        width: 26px;
+        width: 24px;
         margin-bottom: 1px;
       }
     }

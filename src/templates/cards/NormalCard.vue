@@ -7,7 +7,9 @@
       <name-block :name="cardData.name" :is-legendary="cardData.is_legendary"
                   :cost-text="cardData.cost" :border="cardData.border_style"></name-block>
       <image-block :border="cardData.border_style" :is-legendary="cardData.is_legendary">
-        <div class="image" :style="{backgroundImage: `url(${cardData.image_url})`}"></div>
+        <div class="image" slot-scope="{ brightness, contrast }"
+             :style="{backgroundImage: `url(${cardData.image_url})`,
+             filter: `brightness(${brightness}%) contrast(${contrast}%)`}"></div>
       </image-block>
       <type-block :type="cardData.type" :series="cardData.series"
                   :rarity="cardData.rarity" :border="cardData.border_style"></type-block>

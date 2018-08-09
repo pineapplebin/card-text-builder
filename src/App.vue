@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <main-page></main-page>
+    <photoshop></photoshop>
   </div>
 </template>
 

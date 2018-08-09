@@ -10,6 +10,7 @@ import tools from './utils/plugins/tools'
 import series from './utils/plugins/series'
 import effect from './utils/plugins/effect'
 import request from './utils/plugins/request'
+import Photoshop, { install as psInstall } from './utils/plugins/Photoshop'
 
 String.prototype.replaceAll = function (split, replace) {
   return this.split(split).join(replace);
@@ -36,7 +37,9 @@ Vue.use(tools)
 Vue.use(series)
 Vue.use(effect)
 Vue.use(request)
+Vue.use(psInstall)
 Vue.component('base-card', BaseCard)
+Vue.component('photoshop', Photoshop)
 
 Vue.config.productionTip = false
 

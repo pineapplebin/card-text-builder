@@ -1,8 +1,8 @@
 <template>
-  <div class="ImageBlock" :style="{ width: `${width}px` }">
+  <div class="ImageBlock" :style="{ width: `${width}px` }" @click.stop="showPanel">
     <div class="image-holder" :style="{background: $$borders.getColorText(border, 'border')}">
       <div class="image" :style="{ width: `${width - 10}px`, height: `${height}px` }">
-        <slot></slot>
+        <slot :brightness="brightness" :contrast="contrast"></slot>
       </div>
     </div>
     <div class="left-legendary" v-show="isLegendary">
@@ -59,13 +59,15 @@
       border-bottom: 5px solid transparent;
     }
   }
-
 </style>
 
 <script>
   export default {
     data () {
-      return {}
+      return {
+        brightness: 100,
+        contrast: 100,
+      }
     },
     props: {
       border: {
@@ -83,6 +85,11 @@
       isLegendary: {
         type: Boolean,
         default: false,
+      }
+    },
+    methods: {
+      showPanel () {
+        this.$$ps.showPanel(this)
       }
     }
   }
