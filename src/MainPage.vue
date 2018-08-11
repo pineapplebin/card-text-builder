@@ -46,7 +46,7 @@
     display: flex;
     height: 50px;
     overflow: hidden;
-    background: black;
+    background: #222;
 
     &.focusing {
       max-height: 0;

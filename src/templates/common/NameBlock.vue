@@ -59,7 +59,6 @@
     .name-content {
       flex: 1 0 auto;
       font-size: 20px;
-      letter-spacing: 1px;
     }
 
     img.mana-icon {
