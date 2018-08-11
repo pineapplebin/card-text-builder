@@ -26,6 +26,7 @@
     right: 10px;
     top: 50px;
     width: 500px;
+    z-index: 100;
   }
 </style>
 

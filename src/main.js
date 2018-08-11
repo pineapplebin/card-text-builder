@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css';
+// import 'element-ui/lib/theme-chalk/index.css';
+import './assets/styles/element-custom/index.css'
 import BaseCard from './templates/BaseCard.vue'
 
 import images from './utils/plugins/images'
