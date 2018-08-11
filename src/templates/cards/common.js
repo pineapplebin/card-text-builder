@@ -40,6 +40,11 @@ export async function fetchCardInfo (url) {
     return null
 }
 
+function sortColor (list) {
+  const order = { w: 1, u: 2, b: 3, r: 4, g: 5 }
+  return list.sort((a, b) => (order[a.toLowerCase()] || 100) - (order[b.toLowerCase()] || 100))
+}
+
 export const api_parser = {
   parseCost (obj) {
     return obj.mana_cost.replace(/}/g, ',').replace(/{/g, '').slice(0, -1).toLowerCase()
@@ -63,7 +68,7 @@ export const api_parser = {
       return 'a'
     if (obj.colors.length > 2)
       return 'm'
-    return obj.colors.join('').toLowerCase()
+    return sortColor(obj.colors).join('').toLowerCase()
   },
   parseBg (obj) {
     if (obj.colors.length === 0)

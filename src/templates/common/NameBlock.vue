@@ -38,7 +38,7 @@
 
   .legendary-border {
     position: absolute;
-    top: -14px;
+    top: -13px;
     left: -5px;
     filter: drop-shadow(0 3px 1px #191919);
   }
@@ -59,7 +59,7 @@
     .name-content {
       flex: 1 0 auto;
       font-size: 20px;
-      /*letter-spacing: 1px;*/
+      letter-spacing: 1px;
     }
 
     img.mana-icon {
@@ -91,7 +91,7 @@
     computed: {
       color_list () {
         return this.$$borders.getLegendaryColor(this.border, 'border')
-      }
+      },
     },
     props: {
       border: {

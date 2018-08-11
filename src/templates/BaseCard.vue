@@ -9,8 +9,7 @@
     position: relative;
     width: 450px;
     height: 627px;
-    border: 10px;
-    border-radius: 20px;
+    border-radius: 15px;
     background: #191919;
     overflow: hidden;
   }

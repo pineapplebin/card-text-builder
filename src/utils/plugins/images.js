@@ -44,14 +44,14 @@ import bp from '../../assets/images/mana/BP.png'
 import rp from '../../assets/images/mana/RP.png'
 import gp from '../../assets/images/mana/GP.png'
 
-import Wb from '../../assets/images/background/default_white.jpg'
-import Ub from '../../assets/images/background/default_blue.jpg'
-import Bb from '../../assets/images/background/default_black.jpg'
-import Rb from '../../assets/images/background/default_red.jpg'
+import Wb from '../../assets/images/background/default_white.png'
+import Ub from '../../assets/images/background/default_blue.png'
+import Bb from '../../assets/images/background/default_black.png'
+import Rb from '../../assets/images/background/default_red.png'
 import Gb from '../../assets/images/background/default_green.png'
-import Ab from '../../assets/images/background/default_artifact.jpg'
-import Mb from '../../assets/images/background/default_multi.jpg'
-import Lb from '../../assets/images/background/default_land.jpg'
+import Ab from '../../assets/images/background/default_artifact.png'
+import Mb from '../../assets/images/background/default_multi.png'
+import Lb from '../../assets/images/background/default_land.png'
 import ECWb from '../../assets/images/background/enchant_creature_white.jpg'
 import ECUb from '../../assets/images/background/enchant_creature_blue.jpg'
 import ECBb from '../../assets/images/background/enchant_creature_black.jpg'
@@ -59,10 +59,10 @@ import ECRb from '../../assets/images/background/enchant_creature_red.jpg'
 import ECGb from '../../assets/images/background/enchant_creature_green.jpg'
 import ECMb from '../../assets/images/background/enchant_creature_multi.jpg'
 import ECAb from '../../assets/images/background/enchant_artifact.jpg'
-import AVb from '../../assets/images/background/artifact_vehicle.jpg'
+import AVb from '../../assets/images/background/artifact_vehicle.png'
 import MIXUBb from '../../assets/images/background/mix_blue_black.png'
 import MIXBGb from '../../assets/images/background/mix_black_green.jpg'
-import PWWb from '../../assets/images/background/planeswalker_white.jpg'
+import PWWb from '../../assets/images/background/planeswalker_white.png'
 import PWUb from '../../assets/images/background/planeswalker_blue.jpg'
 import PWBb from '../../assets/images/background/planeswalker_black.jpg'
 import PWRb from '../../assets/images/background/planeswalker_red.jpg'
@@ -80,7 +80,7 @@ const images = {
   },
   bg: {
     w: Wb, u: Ub, r: Rb, b: Bb, g: Gb, m: Mb, a: Ab,
-    av: AVb,
+    av: AVb, l: Lb,
   },
   getSymbol (set, rarity) {
     let _r
@@ -108,5 +108,6 @@ export function getBgOptions () {
     { label: '多色', value: 'm' },
     { label: '神器', value: 'a' },
     { label: '载具', value: 'av' },
+    { label: '地', value: 'l' },
   ]
 }

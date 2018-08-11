@@ -2,7 +2,7 @@
   <div class="ImageBlock" :style="{ width: `${width}px` }" @click.stop="showPanel">
     <div class="image-holder" :style="{background: $$borders.getColorText(border, 'border')}">
       <div class="image" :style="{ width: `${width - 10}px`, height: `${height}px` }">
-        <slot :brightness="brightness" :contrast="contrast"></slot>
+        <slot :brightness="brightness" :contrast="contrast" :saturate="saturate"></slot>
       </div>
     </div>
     <div class="left-legendary" v-show="isLegendary">
@@ -67,6 +67,7 @@
       return {
         brightness: 100,
         contrast: 100,
+        saturate: 100,
       }
     },
     props: {

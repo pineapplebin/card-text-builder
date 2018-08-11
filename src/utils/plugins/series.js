@@ -3,6 +3,7 @@ const no = {
   'gs1': 40,
   'dom': 269,
   'xln': 279,
+  'hou': 199,
 }
 
 export default function (Vue) {

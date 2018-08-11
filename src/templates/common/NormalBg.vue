@@ -21,13 +21,13 @@
 
       .bigger, .smaller {
         background: no-repeat center;
-        background-size: cover;
+        background-size: 100%;
       }
 
       .bigger {
         height: 547px;
         border-radius: 10px 10px 10% 10%;
-        background-image: url("../../assets/images/background/default_white.jpg");
+        background-image: none;
       }
 
       .smaller {
@@ -36,7 +36,7 @@
         height: 20px;
         background-size: 105%;
         background-position: bottom;
-        background-image: url("../../assets/images/background/default_white.jpg");
+        background-image: none;
       }
     }
 
