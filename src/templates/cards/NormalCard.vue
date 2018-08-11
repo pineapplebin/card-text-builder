@@ -98,9 +98,7 @@
       BodyBlock,
     },
     data () {
-      return {
-        img_url: 'https://img.scryfall.com/cards/large/en/m19/7.jpg',
-      }
+      return {}
     },
     props: {
       cardData: {

@@ -2,7 +2,7 @@
   <div class="NormalBg">
     <div class="inner" :class="{ full: isFull }">
       <div class="bigger" :style="{backgroundImage: `url(${bg})`}"></div>
-      <div class="smaller" :style="{backgroundImage: `url(${bg})`}"></div>
+      <div class="smaller" v-show="!hideSmaller" :style="{backgroundImage: `url(${bg})`}"></div>
     </div>
   </div>
 </template>
@@ -64,6 +64,10 @@
         default: '',
       },
       isFull: {
+        type: Boolean,
+        default: false,
+      },
+      hideSmaller: {
         type: Boolean,
         default: false,
       }

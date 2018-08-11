@@ -1,4 +1,5 @@
 import NormalCard from './cards/NormalCard'
+import PlaneswalkerCard from './cards/PlaneswalkerCard'
 
 export default {
   normal: {
@@ -6,9 +7,9 @@ export default {
     name: '普通牌',
     form: NormalCard.form,
   },
-  planewalker: {
-    component: null,
+  planeswalker: {
+    component: PlaneswalkerCard,
     name: '鹏洛客牌',
-    form: null,
+    form: PlaneswalkerCard.form,
   }
 }

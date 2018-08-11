@@ -4,7 +4,8 @@
          :style="{background: $$borders.getColorText(border, 'border')}"></div>
     <div class="legendary-border" v-show="isLegendary">
       <legendary-title :width="width + 10"
-                       :left-color="color_list[0]" :right-color="color_list[1]"></legendary-title>
+                       :left-color="color_list[0]" :right-color="color_list[1]">
+      </legendary-title>
     </div>
     <div class="name"
          :style="{ width: `${width - 20}px`, background: $$borders.getColorText(border, 'name') }">

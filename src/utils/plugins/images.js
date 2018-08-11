@@ -81,6 +81,7 @@ const images = {
   bg: {
     w: Wb, u: Ub, r: Rb, b: Bb, g: Gb, m: Mb, a: Ab,
     av: AVb, l: Lb,
+    pww: PWWb,
   },
   getSymbol (set, rarity) {
     let _r
@@ -98,16 +99,22 @@ const images = {
 
 export default images
 
-export function getBgOptions () {
-  return [
-    { label: '白', value: 'w' },
-    { label: '蓝', value: 'u' },
-    { label: '黑', value: 'b' },
-    { label: '红', value: 'r' },
-    { label: '绿', value: 'g' },
-    { label: '多色', value: 'm' },
-    { label: '神器', value: 'a' },
-    { label: '载具', value: 'av' },
-    { label: '地', value: 'l' },
-  ]
+const BG = [
+  { label: '白', value: 'w' },
+  { label: '蓝', value: 'u' },
+  { label: '黑', value: 'b' },
+  { label: '红', value: 'r' },
+  { label: '绿', value: 'g' },
+  { label: '多色', value: 'm' },
+  { label: '神器', value: 'a' },
+  { label: '载具', value: 'av' },
+  { label: '地', value: 'l' },
+  { label: '鹏洛客白', value: 'pww' },
+]
+
+export function getBgOptions (filter) {
+  if (filter)
+    return BG.filter(filter)
+  else
+    return [...BG]
 }

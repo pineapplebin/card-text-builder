@@ -3,7 +3,9 @@
     <div class="effect-border" :style="{background: $$borders.getColorText(border, 'border')}">
       <div class="effect"
            :style="{height: `${height - 5}px`, background: $$borders.getColorText(border, 'effect')}">
-        <div class="render-effect" v-html="render_effect">{{ render_effect }}</div>
+        <slot>
+          <div class="render-effect" v-html="render_effect">{{ render_effect }}</div>
+        </slot>
       </div>
     </div>
   </div>
