@@ -9,7 +9,7 @@ const no = {
 export default function (Vue) {
   Vue.prototype.$$series = {
     getSeriesAmount (s) {
-      const _s = s.toLowerCase()
+      const _s = s ? s.toLowerCase() : null
       if (!no[_s])
         return 0
       return no[_s]

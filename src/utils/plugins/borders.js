@@ -70,6 +70,8 @@ const borders = {
 export default function (Vue) {
   Vue.prototype.$$borders = {
     getColorText (code, part) {
+      if (!code)
+        return 'transparent'
       let border = null
       if (code.match(/^[wrgub]{2}$/)) {
         border = borders.doubleColor(code)
@@ -89,6 +91,8 @@ export default function (Vue) {
     },
     // for legendary title
     getLegendaryColor (code, part) {
+      if (!code)
+        return 'transparent'
       let border = null
       if (code.match(/^[wrgub]{2}$/)) {
         border = borders.doubleColor(code)
