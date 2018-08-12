@@ -1,23 +1,23 @@
 <template>
   <base-card>
     <div class="bg">
-      <normal-bg :bg="$$images.bg[cardData.bg_style]"></normal-bg>
+      <normal-bg hide-smaller :bg="$$images.bg[cardData.bg_style]"></normal-bg>
     </div>
     <div class="main">
       <name-block class="name-block" :name="cardData.name" :is-legendary="cardData.is_legendary"
                   :cost-text="cardData.cost" :border="'token'"></name-block>
-      <div class="image-block">
+      <div class="image-block" @click.stop="showPanel">
         <div class="top" :style="{background: $$borders.getColorText(cardData.border_style, 'border')}">
           <div class="image">
             <div class="content" :style="{backgroundImage: `url(${cardData.image_url})`,
-                 filter: `brightness(${100}%) contrast(${100}%) saturate(${100}%)`}"></div>
+                 filter: `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturate}%)`}"></div>
           </div>
         </div>
         <div class="middle" :class="{large: !cardData.effect}"
              :style="{background: $$borders.getColorText(cardData.border_style, 'border')}">
           <div class="image">
             <div class="content" :style="{backgroundImage: `url(${cardData.image_url})`,
-                 filter: `brightness(${100}%) contrast(${100}%) saturate(${100}%)`}"></div>
+                 filter: `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturate}%)`}"></div>
           </div>
         </div>
       </div>
@@ -173,7 +173,11 @@
       BodyBlock,
     },
     data () {
-      return {}
+      return {
+        brightness: 100,
+        contrast: 100,
+        saturate: 100,
+      }
     },
     props: {
       cardData: {
@@ -182,5 +186,10 @@
         },
       }
     },
+    methods: {
+      showPanel () {
+        this.$$ps.showPanel(this)
+      }
+    }
   }
 </script>
