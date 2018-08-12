@@ -5,7 +5,7 @@
       <span> • </span>
       <span>{{ padZero(number) }}</span>
       <span>/</span>
-      <span>{{ padZero($$series.getSeriesAmount(series)) }}</span>
+      <span>{{ amount ? padZero(amount) : padZero($$series.getSeriesAmount(series)) }}</span>
       <span>&nbsp;{{ rarity }}</span>
     </div>
     <!--{{ series ? series.toUpperCase() : '___' }} • {{ padZero(number) }}/{{-->
@@ -37,10 +37,14 @@
         type: Number,
         default: 1,
       },
+      amount: {
+        type: String,
+        default: '',
+      },
       rarity: {
         type: String,
         default: 'C'
-      }
+      },
     },
     methods: {
       padZero (n) {

@@ -11,7 +11,7 @@ const COLORS = {
   BODY_AV: '#9a673a',
 }
 const KEYS = [
-  '_name', 'border', 'name', 'type', 'effect', 'body', 'body_font']
+  '_name', 'border', 'name', 'type', 'effect', 'body', 'body_font', 'name_font']
 
 function standardBorder (obj) {
   const conf = { ...obj }
@@ -19,6 +19,8 @@ function standardBorder (obj) {
     conf.type = [...conf.name]
   if (!conf.body_font)
     conf.body_font = [COLORS.BODY_FONT]
+  if (!conf.name_font)
+    conf.name_font = [COLORS.BODY_FONT]
   return conf
 }
 
@@ -85,6 +87,9 @@ Object.assign(borders, (function () {
   return rst
 }()))
 
+/**
+ * land color borders
+ */
 const LAND_BORDERS = {
   lw: reuseBorder(borders.w, { _name: '地白', effect: [COLORS.EFF_LW] }),
   lu: reuseBorder(borders.u, { _name: '地蓝', effect: [COLORS.EFF_LU] }),
@@ -96,6 +101,14 @@ Object.assign(borders, LAND_BORDERS, (function () {
   return {}
 }()))
 
+/**
+ * special borders
+ */
+Object.assign(borders, {
+  token: standardBorder({
+    _name: null, name: ['#0c100e'], border: ['#cfa130'], name_font: ['#e1c54c'],
+  })
+})
 
 export default function (Vue) {
   Vue.prototype.$$borders = {
