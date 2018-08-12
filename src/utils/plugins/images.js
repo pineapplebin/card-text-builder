@@ -70,6 +70,12 @@ import PWGb from '../../assets/images/background/planeswalker_green.png'
 import PWMb from '../../assets/images/background/planeswalker_multi.png'
 import PWAb from '../../assets/images/background/planeswalker_artifact.png'
 
+import wmW from '../../assets/images/effect/watermark_w.png'
+import wmU from '../../assets/images/effect/watermark_u.png'
+import wmB from '../../assets/images/effect/watermark_b.png'
+import wmR from '../../assets/images/effect/watermark_r.png'
+import wmG from '../../assets/images/effect/watermark_g.png'
+
 const images = {
   mana: {
     "0": m0, "1": m1, "2": m2, "3": m3, "4": m4, "5": m5, "6": m6, "7": m7,
@@ -123,4 +129,14 @@ export function getBgOptions (filter) {
     return BG.filter(filter)
   else
     return [...BG]
+}
+
+export function getWatermarkOptions () {
+  return [
+    { label: '白', value: wmW },
+    { label: '蓝', value: wmU },
+    { label: '黑', value: wmB },
+    { label: '红', value: wmR },
+    { label: '绿', value: wmG },
+  ]
 }

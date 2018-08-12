@@ -6,6 +6,9 @@
         <slot>
           <div class="render-effect" v-html="render_effect">{{ render_effect }}</div>
         </slot>
+        <div class="icon" v-if="watermark">
+          <img :src="watermark" alt="">
+        </div>
       </div>
     </div>
   </div>
@@ -23,6 +26,7 @@
     background: transparent;
 
     .effect {
+      position: relative;
       display: flex;
       align-items: center;
       padding: 0 10px;
@@ -31,6 +35,19 @@
       border-right-color: #dadada;
       background: transparent;
       box-shadow: inset 0 0 10px 0 rgba(44, 44, 44, .3);
+
+      .icon {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          height: 80%;
+        }
+      }
     }
   }
 </style>
@@ -61,6 +78,10 @@
       height: {
         type: Number,
         default: 188
+      },
+      watermark: {
+        type: String,
+        default: null,
       }
     }
   }

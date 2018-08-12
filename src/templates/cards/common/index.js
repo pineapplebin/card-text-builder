@@ -1,6 +1,6 @@
 import {TextField, CheckBoxField, SelectField} from '../../../utils/form-engine/fields'
 import {getBorderOptions} from '../../../utils/plugins/borders'
-import {getBgOptions} from '../../../utils/plugins/images'
+import {getBgOptions, getWatermarkOptions} from '../../../utils/plugins/images'
 import {request} from '../../../utils/plugins/request'
 
 export {getBorderOptions} from '../../../utils/plugins/borders'
@@ -22,6 +22,10 @@ export const common_conf = {
       { label: '秘稀', value: 'mythic' },
     ]
   }),
+}
+
+export const uncommon_conf = {
+  effect_watermark: SelectField({ label: '效果栏水印', options: getWatermarkOptions() })
 }
 
 /**

@@ -7,6 +7,7 @@ const COLORS = {
   B: '#37372d', INF_B: '#c0baba', EFF_B: '#e8e5e3', BODY_B: '#cac5c3',
   M: '#f3dd81', INF_M: '#cfba7c', EFF_M: '#f3ead3', BODY_M: '#c8b37a',
   A: '#e9e8eb', INF_A: '#dce4e9', EFF_A: '#dbe5e9', BODY_A: '#cad6dd',
+  EFF_LW: '#f4e6c3', EFF_LU: '#b9d6eb', EFF_LB: '#b1abab', EFF_LR: '#eba78f', EFF_LG: '#c4deca',
   BODY_AV: '#9a673a',
 }
 const KEYS = [
@@ -21,6 +22,14 @@ function standardBorder (obj) {
   return conf
 }
 
+function reuseBorder (source, target) {
+  const n = JSON.parse(JSON.stringify(source))
+  return Object.assign(n, target)
+}
+
+/**
+ * normal borders
+ */
 const borders = {
   w: standardBorder({
     _name: '白', border: [COLORS.W], name: [COLORS.INF_W],
@@ -54,34 +63,48 @@ const borders = {
     _name: '载具', border: [COLORS.A], name: [COLORS.INF_A],
     effect: [COLORS.EFF_A], body: [COLORS.BODY_AV], body_font: [COLORS.BODY_FONT_WHITE],
   }),
-  doubleColor (color) {
-    const l = borders[color[0]], r = borders[color[1]]
-    return standardBorder({
-      _name: `${l._name}${r._name}`,
-      border: [l.border[0], r.border[0]], name: [COLORS.INF_M],
-      effect: [l.effect[0], r.effect[0]], body: [COLORS.BODY_M],
-    })
-  },
 }
+
+/**
+ * double color borders
+ */
+Object.assign(borders, (function () {
+  const color = ['w', 'u', 'b', 'r', 'g']
+  const rst = {}
+  for (let i = 0; i < color.length; i++) {
+    for (let j = i + 1; j < color.length; j++) {
+      const l = borders[color[i]], r = borders[color[j]]
+      const k = color[i] + color[j]
+      rst[k] = standardBorder({
+        _name: `${l._name}${r._name}`,
+        border: [l.border[0], r.border[0]], name: [COLORS.INF_M],
+        effect: [l.effect[0], r.effect[0]], body: [COLORS.BODY_M],
+      })
+    }
+  }
+  return rst
+}()))
+
+const LAND_BORDERS = {
+  lw: reuseBorder(borders.w, { _name: '地白', effect: [COLORS.EFF_LW] }),
+  lu: reuseBorder(borders.u, { _name: '地蓝', effect: [COLORS.EFF_LU] }),
+  lb: reuseBorder(borders.b, { _name: '地黑', effect: [COLORS.EFF_LB] }),
+  lr: reuseBorder(borders.r, { _name: '地红', effect: [COLORS.EFF_LR] }),
+  lg: reuseBorder(borders.g, { _name: '地绿', effect: [COLORS.EFF_LG] }),
+}
+Object.assign(borders, LAND_BORDERS, (function () {
+  return {}
+}()))
 
 
 export default function (Vue) {
   Vue.prototype.$$borders = {
     getColorText (code, part) {
-      if (!code)
+      if (!borders[code])
         return 'transparent'
-      let border = null
-      if (code.match(/^[wrgub]{2}$/)) {
-        border = borders.doubleColor(code)
-      } else {
-        if (!borders[code])
-          return 'transparent'
-        border = borders[code]
-      }
-
-      if (!border[part])
+      if (!borders[code][part])
         return 'transparent'
-      const t = border[part]
+      const t = borders[code][part]
 
       return t.length > 1 ?
         `linear-gradient(to right, ${t[0]} 45%, ${t[1]} 55%)` :
@@ -89,20 +112,11 @@ export default function (Vue) {
     },
     // for legendary title
     getLegendaryColor (code, part) {
-      if (!code)
+      if (!borders[code])
         return 'transparent'
-      let border = null
-      if (code.match(/^[wrgub]{2}$/)) {
-        border = borders.doubleColor(code)
-      } else {
-        if (!borders[code])
-          return 'transparent'
-        border = borders[code]
-      }
-
-      if (!border[part])
+      if (!borders[code][part])
         return 'transparent'
-      const t = border[part]
+      const t = borders[code][part]
 
       return t.length > 1 ? t : [t[0], t[0]]
     }
@@ -110,17 +124,7 @@ export default function (Vue) {
 }
 
 export function getBorderOptions () {
-  let rst = Object.keys(borders)
+  return Object.keys(borders)
     .filter(k => borders[k]._name)
     .map(k => ({ label: borders[k]._name, value: k }))
-
-  const color = ['w', 'u', 'b', 'r', 'g']
-  for (let i = 0; i < color.length; i++) {
-    for (let j = i + 1; j < color.length; j++) {
-      const k = color[i] + color[j]
-      const b = borders.doubleColor(k)
-      rst.push({ label: b._name, value: k })
-    }
-  }
-  return rst
 }

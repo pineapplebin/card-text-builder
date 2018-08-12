@@ -31,8 +31,9 @@
           </div>
         </div>
       </effect-block>
-      <series-block style="margin-top: 10px" :number="$$tools.getNumberFromImage(cardData.image_url)"
-                    :series="cardData.series" :rarity="cardData.rarity"></series-block>
+      <series-block style="margin-top: 10px" :series="cardData.series"
+                    :number="$$tools.getNumberFromImage(cardData.image_url)"
+                    :rarity="$$tools.getSeriesRarity(cardData.rarity)"></series-block>
       <div class="loyalty">
         <img src="../../assets/images/loyalty/loyalty.png" alt="">
         <span>{{ cardData.loyalty }}</span>

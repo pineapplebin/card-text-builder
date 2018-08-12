@@ -13,9 +13,11 @@
       </image-block>
       <type-block :type="cardData.type" :series="cardData.series"
                   :rarity="cardData.rarity" :border="cardData.border_style"></type-block>
-      <effect-block :border="cardData.border_style" :effect="cardData.effect"></effect-block>
-      <series-block style="margin-top: 10px" :number="$$tools.getNumberFromImage(cardData.image_url)"
-                    :series="cardData.series" :rarity="cardData.rarity"></series-block>
+      <effect-block :border="cardData.border_style" :effect="cardData.effect"
+                    :watermark="cardData.effect_watermark"></effect-block>
+      <series-block style="margin-top: 10px" :series="cardData.series"
+                    :number="$$tools.getNumberFromImage(cardData.image_url)"
+                    :rarity="$$tools.getSeriesRarity(cardData.rarity, cardData.type)"></series-block>
       <body-block v-show="cardData.is_creature" :bottom="20" :right="20"
                   :border="cardData.border_style" :body="cardData.body"></body-block>
     </div>
@@ -57,7 +59,7 @@
   import SeriesBlock from '../common/SeriesBlock'
   import BodyBlock from '../common/BodyBlock'
   import {TextField, CheckBoxField, SelectField, TextareaField} from '../../utils/form-engine/fields'
-  import {common_conf, fetchCardInfo, api_parser} from './common'
+  import {common_conf, uncommon_conf, fetchCardInfo, api_parser} from './common'
 
   const form = {
     api: TextField({
@@ -80,6 +82,7 @@
       }
     }),
     ...common_conf,
+    effect_watermark: uncommon_conf.effect_watermark,
     is_legendary: CheckBoxField({ label: '传奇?' }),
     is_creature: CheckBoxField({ label: '生物?' }),
     body: TextField({ label: '身材' }),

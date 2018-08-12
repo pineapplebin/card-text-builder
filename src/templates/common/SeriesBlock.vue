@@ -6,7 +6,7 @@
       <span>{{ padZero(number) }}</span>
       <span>/</span>
       <span>{{ padZero($$series.getSeriesAmount(series)) }}</span>
-      <span>&nbsp;{{ parseRarity(rarity) }}</span>
+      <span>&nbsp;{{ rarity }}</span>
     </div>
     <!--{{ series ? series.toUpperCase() : '___' }} • {{ padZero(number) }}/{{-->
     <!--padZero($$series.getSeriesAmount(series)) }} {{ parseRarity(rarity) }}-->
@@ -50,11 +50,6 @@
         }
         return sn
       },
-      parseRarity (r) {
-        if (!r)
-          return 'C'
-        return r[0].toUpperCase()
-      }
     }
   }
 </script>

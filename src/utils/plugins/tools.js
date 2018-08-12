@@ -7,6 +7,16 @@ export default function (Vue) {
       if (rst)
         return +rst[1]
       return 0
+    },
+    getSeriesRarity (rarity, type) {
+      if (type) {
+        if (type.match(/基本地/g))
+          return 'L'
+
+        if (type.match(/衍生/g))
+          return 'T'
+      }
+      return ((rarity || '')[0] || 'C').toUpperCase()
     }
   }
 }
