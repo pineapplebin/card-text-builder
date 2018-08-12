@@ -4,6 +4,7 @@ const no = {
   'dom': 269,
   'xln': 279,
   'hou': 199,
+  'c14': 337,
 }
 
 export default function (Vue) {

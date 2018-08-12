@@ -27,6 +27,7 @@
       <div class="card-setting" v-show="!is_focus">
         <div class="controller padding">
           <h2>{{ card_map[selecting_card].name }}</h2>
+          <el-button icon="el-icon-delete" circle @click="tempDelete"></el-button>
           <el-button icon="el-icon-edit" circle @click="tempSave"></el-button>
         </div>
         <!--<div><span>／</span></div>-->
@@ -148,7 +149,9 @@
         const saved = localStorage.getItem(`tempsave:${key}`)
         if (saved) {
           this.current_data = JSON.parse(saved)
-          this.$notify({ title: '读取成功', message: '读取之前临时保存的数据', type: 'success' })
+          this.$notify({
+            title: '读取成功', message: '读取之前临时保存的数据', type: 'success', duration: 2000
+          })
         }
         else
           this.current_data = initData(card.form)
@@ -157,7 +160,15 @@
       },
       tempSave () {
         localStorage.setItem(`tempsave:${this.selecting_card}`, JSON.stringify(this.current_data))
-        this.$notify({ title: '保存成功', message: '刷新或切换模版后可自动读取', type: 'success' })
+        this.$notify({
+          title: '保存成功', message: '刷新或切换模版后可自动读取', type: 'success', duration: 2000
+        })
+      },
+      tempDelete () {
+        localStorage.removeItem(`tempsave:${this.selecting_card}`)
+        this.$notify({
+          title: '清除成功', message: '保存的临时数据已清除', type: 'success', duration: 2000
+        })
       },
       focusCard () {
         this.is_focus = !this.is_focus

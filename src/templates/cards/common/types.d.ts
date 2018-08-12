@@ -8,6 +8,8 @@ type CardType = {
   rarity: string,
   mana_cost: string,
   flavor_text: string,
+  name: string,
+  oracle_text: string,
   type_line: string,
   printed_name: string,
   printed_text: string,

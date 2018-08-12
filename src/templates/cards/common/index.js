@@ -1,10 +1,10 @@
-import {TextField, CheckBoxField, SelectField} from '../../utils/form-engine/fields'
-import {getBorderOptions} from '../../utils/plugins/borders'
-import {getBgOptions} from '../../utils/plugins/images'
-import {request} from '../../utils/plugins/request'
+import {TextField, CheckBoxField, SelectField} from '../../../utils/form-engine/fields'
+import {getBorderOptions} from '../../../utils/plugins/borders'
+import {getBgOptions} from '../../../utils/plugins/images'
+import {request} from '../../../utils/plugins/request'
 
-export {getBorderOptions} from '../../utils/plugins/borders'
-export {getBgOptions} from '../../utils/plugins/images'
+export {getBorderOptions} from '../../../utils/plugins/borders'
+export {getBgOptions} from '../../../utils/plugins/images'
 
 export const common_conf = {
   border_style: SelectField({ label: '边框样式', options: getBorderOptions() }),
@@ -29,6 +29,8 @@ export const common_conf = {
  * @returns {Promise<CardType>}
  */
 export async function fetchCardInfo (url) {
+  if (!url)
+    return null
   const splited = url.slice(8).split('/')
   const r = await request.getCardBySeries(splited[2], splited[3])
   if (!r.error) {
@@ -36,8 +38,16 @@ export async function fetchCardInfo (url) {
       r.image_uris.large = r.image_uris.large.replace(/zhs/g, 'en')
     return r
   }
-  else // 兼容无中文卡情况
-    return null
+  else {// 兼容无中文卡情况
+    const r = await request.getCardBySeries(splited[2], splited[3], 'en')
+    if (!r.error) {
+      r.printed_text = r.oracle_text
+      r.printed_type_line = r.type_line
+      r.printed_name = r.name
+      return r
+    } else
+      return null
+  }
 }
 
 function sortColor (list) {
@@ -81,3 +91,4 @@ export const api_parser = {
     return !!obj.type_line.match(/legendary/i)
   }
 }
+

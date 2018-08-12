@@ -93,17 +93,16 @@ function matchCost (node) {
   if (!result)
     return node;
 
-  const IMG = '<img src="%0" style="width: %1px; height: %1px; margin: %2; vertical-align: sub;"/>';
+  const IMG = '<img src="%0" class="%1"/>';
   result.forEach(short => {
     const img_name = short.toLowerCase().slice(1, short.length - 1);
     if (images['mana'][img_name]) {
-      let size = 16;
-      let margin = '0 2px 2px 2px';
+      let clazz = 'mana-normal'
       if (img_name.match(/^[2wubrg][wubrgp]$/)) {
-        size = 20;
-        margin = '2px 2px 0 2px'
+        clazz = 'mana-large'
       }
-      line = line.replace(short, IMG.format(images['mana'][img_name], size, margin));
+
+      line = line.replace(short, IMG.format(images['mana'][img_name], clazz));
     }
   });
   node.content = line

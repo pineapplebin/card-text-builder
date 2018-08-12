@@ -63,11 +63,12 @@ import AVb from '../../assets/images/background/artifact_vehicle.png'
 import MIXUBb from '../../assets/images/background/mix_blue_black.png'
 import MIXBGb from '../../assets/images/background/mix_black_green.jpg'
 import PWWb from '../../assets/images/background/planeswalker_white.png'
-import PWUb from '../../assets/images/background/planeswalker_blue.jpg'
-import PWBb from '../../assets/images/background/planeswalker_black.jpg'
-import PWRb from '../../assets/images/background/planeswalker_red.jpg'
+import PWUb from '../../assets/images/background/planeswalker_blue.png'
+import PWBb from '../../assets/images/background/planeswalker_black.png'
+import PWRb from '../../assets/images/background/planeswalker_red.png'
 import PWGb from '../../assets/images/background/planeswalker_green.png'
-import PWMb from '../../assets/images/background/planeswalker_multi.jpg'
+import PWMb from '../../assets/images/background/planeswalker_multi.png'
+import PWAb from '../../assets/images/background/planeswalker_artifact.png'
 
 const images = {
   mana: {
@@ -79,9 +80,8 @@ const images = {
     wp, up, bp, rp, gp,
   },
   bg: {
-    w: Wb, u: Ub, r: Rb, b: Bb, g: Gb, m: Mb, a: Ab,
-    av: AVb, l: Lb,
-    pww: PWWb,
+    w: Wb, u: Ub, r: Rb, b: Bb, g: Gb, m: Mb, a: Ab, av: AVb, l: Lb,
+    pww: PWWb, pwu: PWUb, pwb: PWBb, pwr: PWRb, pwg: PWGb, pwm: PWMb, pwa: PWAb,
   },
   getSymbol (set, rarity) {
     let _r
@@ -110,6 +110,12 @@ const BG = [
   { label: '载具', value: 'av' },
   { label: '地', value: 'l' },
   { label: '鹏洛客白', value: 'pww' },
+  { label: '鹏洛客蓝', value: 'pwu' },
+  { label: '鹏洛客黑', value: 'pwb' },
+  { label: '鹏洛客红', value: 'pwr' },
+  { label: '鹏洛客绿', value: 'pwg' },
+  { label: '鹏洛客多色', value: 'pwm' },
+  { label: '鹏洛客神器', value: 'pwa' },
 ]
 
 export function getBgOptions (filter) {

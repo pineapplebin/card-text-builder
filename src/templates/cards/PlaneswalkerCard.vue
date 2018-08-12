@@ -6,24 +6,25 @@
     <div class="main">
       <name-block class="name-block" :name="cardData.name"
                   :cost-text="cardData.cost" :border="cardData.border_style"></name-block>
-      <image-block class="image-block" :border="cardData.border_style" :height="280">
+      <image-block class="image-block" :border="cardData.border_style"
+                   :height="rendered_effects.length < 4 ? 280 : 240">
         <div class="image" slot-scope="{ brightness, contrast, saturate }"
              :style="{backgroundImage: `url(${cardData.image_url})`,
              filter: `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturate}%)`}"></div>
       </image-block>
       <type-block class="type-block" :type="cardData.type" :series="cardData.series"
                   :rarity="cardData.rarity" :border="cardData.border_style"></type-block>
-      <effect-block class="effect-block" :height="177" :border="cardData.border_style"
-                    :effect="cardData.effect">
+      <effect-block class="effect-block" :border="cardData.border_style"
+                    :effect="cardData.effect" :height="rendered_effects.length < 4 ? 177 : 217">
         <div class="planeswalker-effect">
           <div class="single-effect" v-for="(eff, idx) in rendered_effects" :key="idx">
             <div class="content render-effect" v-html="eff.effect"></div>
             <div class="counter">
               <div class="loyalty-counter" v-if="eff.counter">
                 <img v-if="eff.counter[0] === '+'" src="../../assets/images/loyalty/plus.png" alt="">
-                <img v-else-if="eff.counter[0] === '-'" src="../../assets/images/loyalty/minus.png" alt="">
+                <img v-else-if="eff.counter[0] === '−'" src="../../assets/images/loyalty/minus.png" alt="">
                 <img v-else src="../../assets/images/loyalty/neutral.png" alt="">
-                <span>{{ eff.counter }}</span>
+                <span :class="{minus: eff.counter[0] === '−'}">{{ eff.counter }}</span>
               </div>
               <span>：</span>
             </div>
@@ -123,10 +124,11 @@
       width: 100%;
       display: flex;
       flex-direction: column;
+      padding-top: 5px;
       padding-bottom: 10px;
 
       .single-effect {
-        flex: 1 1 auto;
+        flex: 1;
         position: relative;
         display: flex;
         align-items: center;
@@ -164,6 +166,10 @@
               display: flex;
               justify-content: center;
               align-items: center;
+
+              &.minus {
+                top: -8px;
+              }
             }
           }
         }
@@ -278,10 +284,18 @@
         if (!this.cardData.pw_effect)
           return []
         return this.cardData.pw_effect.split('\n').map((line) => {
-          const splited = line.split('：', 2)
+          const splited = line.split('：')
+          let counter = null
+          let effect = null
+          if (splited.length >= 2) {
+            counter = splited[0]
+            effect = splited.slice(1).join('：')
+          } else {
+            effect = splited[0]
+          }
           return {
-            counter: splited.length === 2 ? splited[0] : null,
-            effect: splited.length === 2 ? this.$$effect(splited[1]) : this.$$effect(splited[0])
+            counter,
+            effect: this.$$effect(effect),
           }
         })
       },
