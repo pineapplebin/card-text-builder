@@ -54,9 +54,23 @@ export async function fetchCardInfo (url) {
   }
 }
 
+const DOUBLE_COLORS = [
+  'wu', 'ub', 'br', 'rg', 'gw',
+  'wb', 'ur', 'bg', 'rw', 'gu',
+].reduce((acc, color) => {
+  const l = color[0], r = color[1]
+  if (!acc[l])
+    acc[l] = {}
+  if (!acc[r])
+    acc[r] = {}
+  acc[l][r] = 1
+  acc[r][l] = 0
+  return acc
+}, {})
+
 function sortColor (list) {
-  const order = { w: 1, u: 2, b: 3, r: 4, g: 5 }
-  return list.sort((a, b) => (order[a.toLowerCase()] || 100) - (order[b.toLowerCase()] || 100))
+  console.log(list, DOUBLE_COLORS)
+  return DOUBLE_COLORS[list[0].toLowerCase()][list[1].toLowerCase()] ? list : list.reverse()
 }
 
 export const api_parser = {

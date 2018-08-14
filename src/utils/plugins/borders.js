@@ -13,6 +13,11 @@ const COLORS = {
 const KEYS = [
   '_name', 'border', 'name', 'type', 'effect', 'body', 'body_font', 'name_font']
 
+const DOUBLE_COLORS = [
+  'wu', 'ub', 'br', 'rg', 'gw',
+  'wb', 'ur', 'bg', 'rw', 'gu',
+]
+
 function standardBorder (obj) {
   const conf = { ...obj }
   if (!conf.type)
@@ -71,19 +76,16 @@ const borders = {
  * double color borders
  */
 Object.assign(borders, (function () {
-  const color = ['w', 'u', 'b', 'r', 'g']
   const rst = {}
-  for (let i = 0; i < color.length; i++) {
-    for (let j = i + 1; j < color.length; j++) {
-      const l = borders[color[i]], r = borders[color[j]]
-      const k = color[i] + color[j]
-      rst[k] = standardBorder({
-        _name: `${l._name}${r._name}`,
-        border: [l.border[0], r.border[0]], name: [COLORS.INF_M],
-        effect: [l.effect[0], r.effect[0]], body: [COLORS.BODY_M],
-      })
-    }
-  }
+  DOUBLE_COLORS.forEach(color => {
+    const l = borders[color[0]], r = borders[color[1]]
+    const k = color[0] + color[1]
+    rst[k] = standardBorder({
+      _name: `${l._name}${r._name}`,
+      border: [l.border[0], r.border[0]], name: [COLORS.INF_M],
+      effect: [l.effect[0], r.effect[0]], body: [COLORS.BODY_M],
+    })
+  })
   return rst
 }()))
 

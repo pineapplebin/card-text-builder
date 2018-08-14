@@ -75,6 +75,7 @@ import wmU from '../../assets/images/effect/watermark_u.png'
 import wmB from '../../assets/images/effect/watermark_b.png'
 import wmR from '../../assets/images/effect/watermark_r.png'
 import wmG from '../../assets/images/effect/watermark_g.png'
+import symDOM from '../../assets/images/effect/symbol_dom.png'
 
 const images = {
   mana: {
@@ -138,5 +139,6 @@ export function getWatermarkOptions () {
     { label: '黑', value: wmB },
     { label: '红', value: wmR },
     { label: '绿', value: wmG },
+    { label: 'DOM', value: symDOM },
   ]
 }

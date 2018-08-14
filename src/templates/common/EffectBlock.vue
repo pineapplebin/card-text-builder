@@ -1,13 +1,15 @@
 <template>
   <div class="EffectBlock" :style="{ width: `${width}px` }">
     <div class="effect-border" :style="{background: $$borders.getColorText(border, 'border')}">
-      <div class="effect"
+      <div class="effect" @click.stop="showPanel"
            :style="{height: `${height - 5}px`, background: $$borders.getColorText(border, 'effect')}">
-        <slot>
-          <div class="render-effect" v-html="render_effect">{{ render_effect }}</div>
-        </slot>
-        <div class="icon" v-if="watermark">
+        <div class="icon" v-if="watermark" :style="{opacity: opacity / 100}">
           <img :src="watermark" alt="">
+        </div>
+        <div class="content">
+          <slot>
+            <div class="render-effect" v-html="render_effect">{{ render_effect }}</div>
+          </slot>
         </div>
       </div>
     </div>
@@ -27,8 +29,6 @@
 
     .effect {
       position: relative;
-      display: flex;
-      align-items: center;
       padding: 0 10px;
       border: 1px solid #fefefe;
       border-top-color: #dadada;
@@ -43,10 +43,20 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        z-index: 1;
 
         img {
           height: 80%;
         }
+      }
+
+      .content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        z-index: 5;
       }
     }
   }
@@ -55,7 +65,9 @@
 <script>
   export default {
     data () {
-      return {}
+      return {
+        opacity: 100,
+      }
     },
     computed: {
       render_effect () {
@@ -82,6 +94,11 @@
       watermark: {
         type: String,
         default: null,
+      }
+    },
+    methods: {
+      showPanel () {
+        this.$$ps.showPanel(this, ['opacity'])
       }
     }
   }
