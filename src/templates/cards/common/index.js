@@ -69,7 +69,8 @@ const DOUBLE_COLORS = [
 }, {})
 
 function sortColor (list) {
-  console.log(list, DOUBLE_COLORS)
+  if (list.length < 2)
+    return list.map(i => i.toLowerCase())
   return DOUBLE_COLORS[list[0].toLowerCase()][list[1].toLowerCase()] ? list : list.reverse()
 }
 
