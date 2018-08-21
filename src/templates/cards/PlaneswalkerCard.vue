@@ -22,7 +22,8 @@
             <div class="counter">
               <div class="loyalty-counter" v-if="eff.counter">
                 <img v-if="eff.counter[0] === '+'" src="../../assets/images/loyalty/plus.png" alt="">
-                <img v-else-if="eff.counter[0] === '−'" src="../../assets/images/loyalty/minus.png" alt="">
+                <img v-else-if="eff.counter[0] === '−' || eff.counter[0] === '-'"
+                     src="../../assets/images/loyalty/minus.png" alt="">
                 <img v-else src="../../assets/images/loyalty/neutral.png" alt="">
                 <span :class="{minus: eff.counter[0] === '−'}">{{ eff.counter }}</span>
               </div>
