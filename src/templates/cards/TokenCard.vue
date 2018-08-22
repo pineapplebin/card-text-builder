@@ -13,7 +13,7 @@
                  filter: `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturate}%)`}"></div>
           </div>
         </div>
-        <div class="middle" :class="{large: !cardData.effect}"
+        <div class="middle" :class="image_height"
              :style="{background: $$borders.getColorText(cardData.border_style, 'border')}">
           <div class="image">
             <div class="content" :style="{backgroundImage: `url(${cardData.image_url})`,
@@ -24,7 +24,7 @@
       <type-block :type="cardData.type" :series="cardData.series"
                   :rarity="cardData.rarity" :border="cardData.border_style"></type-block>
       <div>
-        <effect-block v-show="cardData.effect" :height="119" :border="cardData.border_style"
+        <effect-block v-show="cardData.effect" :height="effect_height" :border="cardData.border_style"
                       :effect="cardData.effect" :watermark="cardData.effect_watermark"></effect-block>
         <div class="effect-holder" v-show="!cardData.effect"
              :style="{backgroundImage: `url(${$$images.bg[cardData.bg_style]})`}"></div>
@@ -102,6 +102,10 @@
         height: 239px;
       }
 
+      &.short {
+        height: 79px;
+      }
+
       .image {
         height: 100%;
         border: 2px solid #191919;
@@ -155,6 +159,7 @@
       }
     }),
     ...common_conf,
+    is_short: CheckBoxField({ label: '短图?' }),
     amount: TextField({ label: '系列总数' }),
     is_legendary: CheckBoxField({ label: '传奇?' }),
     body: TextField({ label: '身材' }),
@@ -184,6 +189,17 @@
         type: Object,
         default: () => {
         },
+      }
+    },
+    computed: {
+      image_height () {
+        if (!this.cardData.effect)
+          return ['large']
+        if (this.cardData.is_short)
+          return ['short']
+      },
+      effect_height () {
+        return this.cardData.is_short ? 188 : 119
       }
     },
     methods: {

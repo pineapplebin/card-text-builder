@@ -13,6 +13,7 @@ const COMMENT_TAG = '<div class="flavor">%0</div>'
 
 const STYLE_MAP = {
   '-': ['smaller'],
+  '_': ['smaller-plus'],
   '=': ['text-center'],
 }
 

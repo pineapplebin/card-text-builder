@@ -76,6 +76,7 @@ import wmB from '../../assets/images/effect/watermark_b.png'
 import wmR from '../../assets/images/effect/watermark_r.png'
 import wmG from '../../assets/images/effect/watermark_g.png'
 import symDOM from '../../assets/images/effect/symbol_dom.png'
+import wmStory from '../../assets/images/effect/story_spotlight.png'
 
 const images = {
   mana: {
@@ -90,7 +91,7 @@ const images = {
     w: Wb, u: Ub, r: Rb, b: Bb, g: Gb, m: Mb, a: Ab, av: AVb, l: Lb,
     pww: PWWb, pwu: PWUb, pwb: PWBb, pwr: PWRb, pwg: PWGb, pwm: PWMb, pwa: PWAb,
   },
-  getSymbol (set, rarity) {
+  getSymbol(set, rarity) {
     let _r
     if (!rarity)
       _r = 'c'
@@ -99,7 +100,7 @@ const images = {
     return `http://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=${
       set}&size=large&rarity=${_r}`
   },
-  install (Vue) {
+  install(Vue) {
     Vue.prototype.$$images = this
   }
 };
@@ -125,20 +126,22 @@ const BG = [
   { label: '鹏洛客神器', value: 'pwa' },
 ]
 
-export function getBgOptions (filter) {
+export function getBgOptions(filter) {
   if (filter)
     return BG.filter(filter)
   else
     return [...BG]
 }
 
-export function getWatermarkOptions () {
+export function getWatermarkOptions() {
   return [
+    { label: '无', value: null },
     { label: '白', value: wmW },
     { label: '蓝', value: wmU },
     { label: '黑', value: wmB },
     { label: '红', value: wmR },
     { label: '绿', value: wmG },
+    { label: '故事焦点', value: wmStory },
     { label: 'DOM', value: symDOM },
   ]
 }

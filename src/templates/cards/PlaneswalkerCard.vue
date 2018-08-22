@@ -135,6 +135,10 @@
         display: flex;
         align-items: center;
 
+        /deep/ .render-effect div {
+          margin-bottom: 0;
+        }
+
         &:nth-child(even) {
           background: rgba(100, 100, 100, .2);
         }
