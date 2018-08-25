@@ -11,8 +11,8 @@
          :style="{ width: `${width - 20}px`, background: $$borders.getColorText(border, 'name') }">
       <p class="name-content"
          :style="{color: $$borders.getColorText(border, 'name_font')}">{{ name }}</p>
-      <img class="mana-icon" v-for="icon in parseCost(costText)" :src="$$images.mana[icon]"
-           :class="{ bigger: icon.match(/^[2wubrg][wubrgp]$/) }">
+      <img class="mana-icon" v-for="(icon, idx) in parseCost(costText)" :src="$$images.mana[icon]"
+           :key="idx" :class="{ bigger: icon.match(/^[2wubrg][wubrgp]$/) }">
     </div>
   </div>
 </template>

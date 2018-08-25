@@ -7,12 +7,13 @@
       <name-block :name="cardData.name" :is-legendary="cardData.is_legendary"
                   :cost-text="cardData.cost" :border="cardData.border_style"></name-block>
       <image-block :border="cardData.border_style" :is-legendary="cardData.is_legendary">
-        <div class="image" slot-scope="{ brightness, contrast, saturate }"
+        <div class="image" :class="{ 'old-series': cardData.is_old_series }"
+             slot-scope="{ brightness, contrast, saturate }"
              :style="{backgroundImage: `url(${cardData.image_url})`,
              filter: `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturate}%)`}"></div>
       </image-block>
-      <type-block :type="cardData.type" :series="cardData.series"
-                  :rarity="cardData.rarity" :border="cardData.border_style"></type-block>
+      <type-block :type="cardData.type" :series="cardData.series" :rarity="cardData.rarity"
+                  :border="cardData.border_style" :indicator="cardData.indicator"></type-block>
       <effect-block :border="cardData.border_style" :effect="cardData.effect"
                     :watermark="cardData.effect_watermark"></effect-block>
       <series-block style="margin-top: 10px" :series="cardData.series"
@@ -41,6 +42,11 @@
     background-size: 446px;
     background-position-x: center;
     background-position-y: -70px;
+
+    &.old-series {
+      background-size: 453px;
+      background-position-y: -76px;
+    }
   }
 
   .bg {
@@ -68,6 +74,7 @@
           if (!data) return
           form.cost = api_parser.parseCost(data)
           form.name = data.printed_name
+          form.indicator = api_parser.parseIndicator(data)
           form.type = api_parser.parseType(data)
           form.image_url = data.image_uris.large
           form.effect = api_parser.parseEffect(data)
@@ -83,6 +90,7 @@
     }),
     ...common_conf,
     effect_watermark: uncommon_conf.effect_watermark,
+    is_old_series: CheckBoxField({ label: '旧系列?' }),
     is_legendary: CheckBoxField({ label: '传奇?' }),
     is_creature: CheckBoxField({ label: '生物?' }),
     body: TextField({ label: '身材' }),

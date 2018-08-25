@@ -13,7 +13,8 @@
              filter: `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturate}%)`}"></div>
       </image-block>
       <type-block class="type-block" :type="cardData.type" :series="cardData.series"
-                  :rarity="cardData.rarity" :border="cardData.border_style"></type-block>
+                  :rarity="cardData.rarity" :border="cardData.border_style"
+                  :indicator="cardData.indicator"></type-block>
       <effect-block class="effect-block" :border="cardData.border_style"
                     :effect="cardData.effect" :height="rendered_effects.length < 4 ? 177 : 217">
         <div class="planeswalker-effect">
@@ -248,6 +249,7 @@
           if (!data) return
           form.cost = api_parser.parseCost(data)
           form.name = data.printed_name
+          form.indicator = api_parser.parseIndicator(data)
           form.type = api_parser.parseType(data)
           form.image_url = data.image_uris.large
           form.series = data.set

@@ -18,5 +18,6 @@ type CardType = {
   toughness: string,
   colors: string[],
   color_identity: string[],
+  color_indicator: string[],
   loyalty: string,
 }

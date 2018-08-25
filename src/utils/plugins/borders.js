@@ -5,7 +5,7 @@ const COLORS = {
   G: '#075c21', INF_G: '#bdd5c8', EFF_G: '#e2f4e4', BODY_G: '#c7decc',
   R: '#e02d2d', INF_R: '#f1d1c2', EFF_R: '#f1e1da', BODY_R: '#f0cdbd',
   B: '#37372d', INF_B: '#c0baba', EFF_B: '#e8e5e3', BODY_B: '#cac5c3',
-  M: '#f3dd81', INF_M: '#cfba7c', EFF_M: '#f3ead3', BODY_M: '#c8b37a',
+  M: '#e8c86a', INF_M: '#cfba7c', EFF_M: '#f3ead3', BODY_M: '#c8b37a',
   A: '#e9e8eb', INF_A: '#dce4e9', EFF_A: '#dbe5e9', BODY_A: '#cad6dd',
   EFF_LW: '#f4e6c3', EFF_LU: '#b9d6eb', EFF_LB: '#b1abab', EFF_LR: '#eba78f', EFF_LG: '#c4deca',
   BODY_AV: '#9a673a',

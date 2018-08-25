@@ -12,6 +12,7 @@ export const common_conf = {
   name: TextField({ label: '名字' }),
   cost: TextField({ label: '法术力费用' }),
   image_url: TextField({ label: '卡图地址' }),
+  indicator: TextField({ label: '颜色标记' }),
   type: TextField({ label: '类别' }),
   series: TextField({ label: '系列编号' }),
   rarity: SelectField({
@@ -108,6 +109,15 @@ export const api_parser = {
   },
   parseLegendary (obj) {
     return !!obj.type_line.match(/legendary/i)
+  },
+  parseIndicator (obj) {
+    if (!obj.color_indicator || !obj.color_indicator.length)
+      return ''
+    if (obj.color_indicator.length <= 2) {
+      return sortColor(obj.color_indicator).join('').toLowerCase()
+    } else {
+      return obj.color_indicator.join('').toLowerCase()
+    }
   }
 }
 

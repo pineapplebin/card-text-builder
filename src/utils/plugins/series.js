@@ -7,6 +7,7 @@ const no = {
   'akh': 269,
   'kld': 264,
   'c14': 337,
+  'roe': 248,
 }
 
 export default function (Vue) {
