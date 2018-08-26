@@ -128,7 +128,6 @@
       display: flex;
       flex-direction: column;
       padding-top: 5px;
-      padding-bottom: 10px;
 
       .single-effect {
         flex: 1;
@@ -142,6 +141,17 @@
 
         &:nth-child(even) {
           background: rgba(100, 100, 100, .2);
+        }
+
+        &:last-child {
+          padding-bottom: 10px;
+          border-radius: ~'50% / 30%';
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+
+          .counter {
+            margin-top: -10px;
+          }
         }
 
         .counter {

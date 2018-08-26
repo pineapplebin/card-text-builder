@@ -11,6 +11,7 @@
             <div class="render-effect" v-html="render_effect">{{ render_effect }}</div>
           </slot>
         </div>
+        <div class="double-face-block"></div>
       </div>
     </div>
   </div>
@@ -57,6 +58,15 @@
         display: flex;
         align-items: center;
         z-index: 5;
+      }
+      
+      .double-face-block {
+        position: absolute;
+        right: -6px;
+        bottom: 15px;
+        width: 10px;
+        height: 100px;
+        background: red;
       }
     }
   }

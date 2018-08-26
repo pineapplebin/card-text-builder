@@ -9,11 +9,19 @@
     </div>
     <div class="name"
          :style="{ width: `${width - 20}px`, background: $$borders.getColorText(border, 'name') }">
-      <p class="name-content"
+      <p class="name-content" :class="{'double-face-name': doubleFaceSymbol}"
          :style="{color: $$borders.getColorText(border, 'name_font')}">{{ name }}</p>
       <img class="mana-icon" v-for="(icon, idx) in parseCost(costText)" :src="$$images.mana[icon]"
            :key="idx" :class="{ bigger: icon.match(/^[2wubrg][wubrgp]$/) }">
     </div>
+    <template v-if="doubleFaceSymbol">
+      <div class="double-face-mask up-mask" :style="{backgroundColor: color_list[0]}"></div>
+      <div class="double-face-mask down-mask" :style="{backgroundColor: color_list[0]}"></div>
+      <div class="double-face-symbol"
+           :style="{backgroundColor: color_list[0]}">
+        <div class="symbol" :style="{backgroundImage: `url(${doubleFaceSymbol})`}"></div>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -45,6 +53,44 @@
     filter: drop-shadow(0 3px 1px #191919);
   }
 
+  .double-face-mask {
+    position: absolute;
+    top: 5px;
+    left: 12px;
+    width: 15px;
+    height: 10px;
+    background: red;
+
+    &.down-mask {
+      left: 6px;
+      width: 20px;
+      top: 40px;
+    }
+  }
+
+  .double-face-symbol {
+    position: absolute;
+    top: 8px;
+    left: 3px;
+    width: 39px;
+    height: 39px;
+    border-radius: 20% 50% 50% 20%;
+    /*box-shadow: 3px 0 2px 0 rgba(44, 44, 44, .8);*/
+    border-right: 3px solid #191919;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .symbol {
+      margin-right: 3px;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: no-repeat center;
+      background-size: 100%;
+    }
+  }
+
   .name {
     position: absolute;
     left: 10px;
@@ -61,6 +107,10 @@
     .name-content {
       flex: 1 0 auto;
       font-size: 20px;
+
+      &.double-face-name {
+        padding-left: 25px;
+      }
     }
 
     img.mana-icon {
@@ -81,6 +131,7 @@
 
 <script>
   import LegendaryTitle from './LegendaryTitle'
+  import dbf from '../../assets/images/double-face/symbol-night.png'
 
   export default {
     components: {
@@ -114,6 +165,10 @@
       costText: {
         type: String,
         default: ''
+      },
+      doubleFaceSymbol: {
+        type: String,
+        default: '',
       }
     },
     methods: {

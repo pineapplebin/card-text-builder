@@ -14,7 +14,8 @@ const COMMENT_TAG = '<div class="flavor">%0</div>'
 const STYLE_MAP = {
   '-': ['smaller'],
   '_': ['smaller-plus'],
-  '=': ['text-center'],
+  '=': ['align-center'],
+  '>': ['align-right'],
 }
 
 class ENode {
@@ -40,9 +41,8 @@ function toNode (t) {
 }
 
 function matchStyle (node) {
-  const first = node.content[0]
-  if (STYLE_MAP[first]) {
-    node.addClass(...STYLE_MAP[first])
+  while (STYLE_MAP[node.content[0]]) {
+    node.addClass(...STYLE_MAP[node.content[0]])
     node.content = node.content.slice(1)
   }
   return node
