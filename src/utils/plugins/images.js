@@ -52,16 +52,7 @@ import Gb from '../../assets/images/background/default_green.png'
 import Ab from '../../assets/images/background/default_artifact.png'
 import Mb from '../../assets/images/background/default_multi.png'
 import Lb from '../../assets/images/background/default_land.png'
-import ECWb from '../../assets/images/background/enchant_creature_white.jpg'
-import ECUb from '../../assets/images/background/enchant_creature_blue.jpg'
-import ECBb from '../../assets/images/background/enchant_creature_black.jpg'
-import ECRb from '../../assets/images/background/enchant_creature_red.jpg'
-import ECGb from '../../assets/images/background/enchant_creature_green.jpg'
-import ECMb from '../../assets/images/background/enchant_creature_multi.jpg'
-import ECAb from '../../assets/images/background/enchant_artifact.jpg'
 import AVb from '../../assets/images/background/artifact_vehicle.png'
-import MIXUBb from '../../assets/images/background/mix_blue_black.png'
-import MIXBGb from '../../assets/images/background/mix_black_green.jpg'
 import PWWb from '../../assets/images/background/planeswalker_white.png'
 import PWUb from '../../assets/images/background/planeswalker_blue.png'
 import PWBb from '../../assets/images/background/planeswalker_black.png'
@@ -69,14 +60,19 @@ import PWRb from '../../assets/images/background/planeswalker_red.png'
 import PWGb from '../../assets/images/background/planeswalker_green.png'
 import PWMb from '../../assets/images/background/planeswalker_multi.png'
 import PWAb from '../../assets/images/background/planeswalker_artifact.png'
+import hyWUb from '../../assets/images/background/hybrid_white_blue.png'
+// import ECWb from '../../assets/images/background/enchant_creature_white.jpg'
+// import ECUb from '../../assets/images/background/enchant_creature_blue.jpg'
+// import ECBb from '../../assets/images/background/enchant_creature_black.jpg'
+// import ECRb from '../../assets/images/background/enchant_creature_red.jpg'
+// import ECGb from '../../assets/images/background/enchant_creature_green.jpg'
+// import ECMb from '../../assets/images/background/enchant_creature_multi.jpg'
+// import ECAb from '../../assets/images/background/enchant_artifact.jpg'
+// import MIXUBb from '../../assets/images/background/mix_blue_black.png'
+// import MIXBGb from '../../assets/images/background/mix_black_green.jpg'
 
-import wmW from '../../assets/images/effect/watermark_w.png'
-import wmU from '../../assets/images/effect/watermark_u.png'
-import wmB from '../../assets/images/effect/watermark_b.png'
-import wmR from '../../assets/images/effect/watermark_r.png'
-import wmG from '../../assets/images/effect/watermark_g.png'
-import symDOM from '../../assets/images/effect/symbol_dom.png'
-import wmStory from '../../assets/images/effect/story_spotlight.png'
+// watermarks
+import effect_watermarks from '../../assets/images/effect'
 
 import dbfNight from '../../assets/images/double-face/symbol-night.png'
 import dbfDay from '../../assets/images/double-face/symbol-day.png'
@@ -94,6 +90,7 @@ const images = {
   bg: {
     w: Wb, u: Ub, r: Rb, b: Bb, g: Gb, m: Mb, a: Ab, av: AVb, l: Lb,
     pww: PWWb, pwu: PWUb, pwb: PWBb, pwr: PWRb, pwg: PWGb, pwm: PWMb, pwa: PWAb,
+    hywu: hyWUb,
   },
   getSymbol (set, rarity) {
     let _r
@@ -128,6 +125,7 @@ const BG = [
   { label: '鹏洛客绿', value: 'pwg' },
   { label: '鹏洛客多色', value: 'pwm' },
   { label: '鹏洛客神器', value: 'pwa' },
+  { label: '混色白蓝', value: 'hywu' },
 ]
 
 export function getBgOptions (filter) {
@@ -140,13 +138,14 @@ export function getBgOptions (filter) {
 export function getWatermarkOptions () {
   return [
     { label: '无', value: null },
-    { label: '白', value: wmW },
-    { label: '蓝', value: wmU },
-    { label: '黑', value: wmB },
-    { label: '红', value: wmR },
-    { label: '绿', value: wmG },
-    { label: '故事焦点', value: wmStory },
-    { label: 'DOM', value: symDOM },
+    { label: '白', value: effect_watermarks.wmW },
+    { label: '蓝', value: effect_watermarks.wmU },
+    { label: '黑', value: effect_watermarks.wmB },
+    { label: '红', value: effect_watermarks.wmR },
+    { label: '绿', value: effect_watermarks.wmG },
+    { label: '故事焦点', value: effect_watermarks.wmStory },
+    { label: 'DOM', value: effect_watermarks.symDOM },
+    { label: '俄佐立1', value: effect_watermarks.ravnicaAzorius1 },
   ]
 }
 

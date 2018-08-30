@@ -8,6 +8,7 @@ const no = {
   'kld': 264,
   'c14': 337,
   'roe': 248,
+  'dis': 180,
 }
 
 export default function (Vue) {

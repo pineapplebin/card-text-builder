@@ -11,7 +11,7 @@
             <div class="render-effect" v-html="render_effect">{{ render_effect }}</div>
           </slot>
         </div>
-        <div class="double-face-block"></div>
+        <div class="double-face-block" v-if="false"></div>
       </div>
     </div>
   </div>

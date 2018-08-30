@@ -8,7 +8,7 @@ const COLORS = {
   M: '#e8c86a', INF_M: '#cfba7c', EFF_M: '#f3ead3', BODY_M: '#c8b37a',
   A: '#e9e8eb', INF_A: '#dce4e9', EFF_A: '#dbe5e9', BODY_A: '#cad6dd',
   EFF_LW: '#f4e6c3', EFF_LU: '#b9d6eb', EFF_LB: '#b1abab', EFF_LR: '#eba78f', EFF_LG: '#c4deca',
-  BODY_AV: '#9a673a',
+  BODY_AV: '#9a673a', HYBRID: '#d6ceca',
 }
 const KEYS = [
   '_name', 'border', 'name', 'type', 'effect', 'body', 'body_font', 'name_font']
@@ -101,6 +101,23 @@ const LAND_BORDERS = {
 }
 Object.assign(borders, LAND_BORDERS, (function () {
   return {}
+}()))
+
+/**
+ * hybrid color borders
+ */
+Object.assign(borders, (function () {
+  const rst = {}
+  DOUBLE_COLORS.forEach(color => {
+    const l = borders[color[0]], r = borders[color[1]]
+    const k = color[0] + color[1]
+    rst[`hy${k}`] = standardBorder({
+      _name: `混色${l._name}${r._name}`,
+      border: [l.border[0], r.border[0]], name: [COLORS.HYBRID],
+      effect: [l.effect[0], r.effect[0]], body: [COLORS.HYBRID],
+    })
+  })
+  return rst
 }()))
 
 /**
