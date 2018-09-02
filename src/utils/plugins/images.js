@@ -61,6 +61,7 @@ import PWGb from '../../assets/images/background/planeswalker_green.png'
 import PWMb from '../../assets/images/background/planeswalker_multi.png'
 import PWAb from '../../assets/images/background/planeswalker_artifact.png'
 import hyWUb from '../../assets/images/background/hybrid_white_blue.png'
+import hyURb from '../../assets/images/background/hybrid_blue_red.png'
 // import ECWb from '../../assets/images/background/enchant_creature_white.jpg'
 // import ECUb from '../../assets/images/background/enchant_creature_blue.jpg'
 // import ECBb from '../../assets/images/background/enchant_creature_black.jpg'
@@ -72,7 +73,7 @@ import hyWUb from '../../assets/images/background/hybrid_white_blue.png'
 // import MIXBGb from '../../assets/images/background/mix_black_green.jpg'
 
 // watermarks
-import effect_watermarks from '../../assets/images/effect'
+export {default as getWatermarkOptions} from '../../templates/common/Watermark'
 
 import dbfNight from '../../assets/images/double-face/symbol-night.png'
 import dbfDay from '../../assets/images/double-face/symbol-day.png'
@@ -90,7 +91,7 @@ const images = {
   bg: {
     w: Wb, u: Ub, r: Rb, b: Bb, g: Gb, m: Mb, a: Ab, av: AVb, l: Lb,
     pww: PWWb, pwu: PWUb, pwb: PWBb, pwr: PWRb, pwg: PWGb, pwm: PWMb, pwa: PWAb,
-    hywu: hyWUb,
+    hywu: hyWUb, hyur: hyURb,
   },
   getSymbol (set, rarity) {
     let _r
@@ -126,6 +127,7 @@ const BG = [
   { label: '鹏洛客多色', value: 'pwm' },
   { label: '鹏洛客神器', value: 'pwa' },
   { label: '混色白蓝', value: 'hywu' },
+  { label: '混色蓝红', value: 'hyur' },
 ]
 
 export function getBgOptions (filter) {
@@ -133,20 +135,6 @@ export function getBgOptions (filter) {
     return BG.filter(filter)
   else
     return [...BG]
-}
-
-export function getWatermarkOptions () {
-  return [
-    { label: '无', value: null },
-    { label: '白', value: effect_watermarks.wmW },
-    { label: '蓝', value: effect_watermarks.wmU },
-    { label: '黑', value: effect_watermarks.wmB },
-    { label: '红', value: effect_watermarks.wmR },
-    { label: '绿', value: effect_watermarks.wmG },
-    { label: '故事焦点', value: effect_watermarks.wmStory },
-    { label: 'DOM', value: effect_watermarks.symDOM },
-    { label: '俄佐立1', value: effect_watermarks.ravnicaAzorius1 },
-  ]
 }
 
 export function getDoubleFaceSymbolOptions () {

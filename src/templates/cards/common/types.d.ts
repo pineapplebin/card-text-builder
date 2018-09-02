@@ -1,4 +1,5 @@
 type CardType = {
+  multiverse_ids: number[],
   image_uris: {
     small: string,
     normal: string,

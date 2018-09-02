@@ -1,15 +1,5 @@
 <template>
   <div id="MainPage">
-    <!--<el-menu class="menu" mode="horizontal" background-color="#545c64"-->
-    <!--text-color="#fff" active-text-color="#ffd04b" ref="menu" default-active="normal"-->
-    <!--@select="selectMenu" :class="{focusing: is_focus}">-->
-    <!--<el-submenu index="1">-->
-    <!--<template slot="title">卡片模版</template>-->
-    <!--<el-menu-item v-for="(card, key) in card_map" :key="key" :index="key">-->
-    <!--{{ card.name }}-->
-    <!--</el-menu-item>-->
-    <!--</el-submenu>-->
-    <!--</el-menu>-->
     <div class="menu" :class="{focusing: is_focus}">
       <div class="menu-item">
         <img src="https://magic.wizards.com/sites/all/themes/wiz_mtg/img/interface/logo-magic-small.png"
@@ -21,7 +11,7 @@
       </div>
     </div>
     <div class="content">
-      <div class="card-preview padding" @click="focusCard" :class="{focusing: is_focus}">
+      <div class="card-preview" @click="focusCard" :class="{focusing: is_focus}">
         <component :is="active_card" :card-data="current_data"></component>
       </div>
       <div class="card-setting" v-show="!is_focus">
@@ -88,6 +78,7 @@
       padding: 50px;
       width: 40%;
       height: 100%;
+      min-width: 550px;
 
       &.focusing {
         width: 100%;

@@ -18,6 +18,9 @@
         <el-form-item label="透明度%" v-if="active_params.opacity">
           <el-slider show-input :step="10" :max="100" v-model="current_vm.opacity"></el-slider>
         </el-form-item>
+        <el-form-item>
+          <img :src="gatherer_image" alt="">
+        </el-form-item>
       </el-form>
     </el-card>
   </div>
@@ -69,10 +72,17 @@
         current_vm: {},
         active_params: {},
         temp: null,
+        multiverse_id: null,
       }
     },
     created () {
       this.$$ps.init(this)
+    },
+    computed: {
+      gatherer_image () {
+        return `http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=${
+          this.multiverse_id}&type=card`
+      }
     },
     methods: {
       reset () {
@@ -81,6 +91,7 @@
         this.temp = null
       },
       showPanel (vm, params = ['brightness', 'contrast', 'saturate']) {
+        this.multiverse_id = localStorage.getItem('data:multiverseid')
         this.active_params = params.reduce((acc, key) => {
           acc[key] = true
           return acc

@@ -34,25 +34,30 @@ export const uncommon_conf = {
  * @returns {Promise<CardType>}
  */
 export async function fetchCardInfo (url) {
+  const saveLastMultiverseId = (id) => localStorage.setItem('data:multiverseid', id)
   if (!url)
-    return null
+    return null;
+
+  let rst = null
   const splited = url.slice(8).split('/')
   const r = await request.getCardBySeries(splited[2], splited[3])
   if (!r.error) {
     if (r.image_uris && r.image_uris.large)
       r.image_uris.large = r.image_uris.large.replace(/zhs/g, 'en')
-    return r
+    rst = r
   }
-  else {// 兼容无中文卡情况
-    const r = await request.getCardBySeries(splited[2], splited[3], 'en')
-    if (!r.error) {
-      r.printed_text = r.oracle_text
-      r.printed_type_line = r.type_line
-      r.printed_name = r.name
-      return r
-    } else
-      return null
+  // 兼容无中文卡情况
+  const enr = await request.getCardBySeries(splited[2], splited[3], 'en')
+  if (!enr.error) {
+    enr.printed_text = enr.oracle_text
+    enr.printed_type_line = enr.type_line
+    enr.printed_name = enr.name
+    saveLastMultiverseId(enr.multiverse_ids[0])
+    if (!rst) {
+      rst = enr
+    }
   }
+  return rst
 }
 
 const DOUBLE_COLORS = [
@@ -94,6 +99,9 @@ export const api_parser = {
     return t
   },
   parseBorder (obj) {
+    if (obj.type_line.match('Land')) {
+      return 'l' + sortColor(obj.color_identity).join('').toLowerCase()
+    }
     if (obj.colors.length === 0)
       return 'a'
     if (obj.colors.length > 2)
@@ -101,8 +109,9 @@ export const api_parser = {
     return sortColor(obj.colors).join('').toLowerCase()
   },
   parseBg (obj) {
+    const is_land = obj.type_line.match('Land')
     if (obj.colors.length === 0)
-      return 'a'
+      return is_land ? 'l' : 'a'
     if (obj.colors.length > 1)
       return 'm'
     return obj.colors[0].toLowerCase()

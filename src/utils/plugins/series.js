@@ -8,7 +8,10 @@ const no = {
   'kld': 264,
   'c14': 337,
   'roe': 248,
+  'dgm': 156,
+  'rtr': 274,
   'dis': 180,
+  'gpt': 165,
 }
 
 export default function (Vue) {

@@ -4,7 +4,9 @@
       <div class="effect" @click.stop="showPanel"
            :style="{height: `${height - 5}px`, background: $$borders.getColorText(border, 'effect')}">
         <div class="icon" v-if="watermark" :style="{opacity: opacity / 100}">
-          <img :src="watermark" alt="">
+          <!--<img :src="watermark" alt="">-->
+          <watermark :watermark="watermark" :border="border"
+                     :height="height * .8"></watermark>
         </div>
         <div class="content">
           <slot>
@@ -41,6 +43,7 @@
         position: absolute;
         width: 100%;
         height: 100%;
+        margin-left: -10px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -59,7 +62,7 @@
         align-items: center;
         z-index: 5;
       }
-      
+
       .double-face-block {
         position: absolute;
         right: -6px;
@@ -73,7 +76,10 @@
 </style>
 
 <script>
+  import Watermark from './Watermark/Watermark'
+
   export default {
+    components: { Watermark },
     data () {
       return {
         opacity: 100,
