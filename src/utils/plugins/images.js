@@ -65,7 +65,7 @@ import hyURb from '../../assets/images/background/hybrid_blue_red.png'
 // import ECWb from '../../assets/images/background/enchant_creature_white.jpg'
 // import ECUb from '../../assets/images/background/enchant_creature_blue.jpg'
 // import ECBb from '../../assets/images/background/enchant_creature_black.jpg'
-// import ECRb from '../../assets/images/background/enchant_creature_red.jpg'
+import ECRb from '../../assets/images/background/enchant_creature_red.png'
 // import ECGb from '../../assets/images/background/enchant_creature_green.jpg'
 // import ECMb from '../../assets/images/background/enchant_creature_multi.jpg'
 // import ECAb from '../../assets/images/background/enchant_artifact.jpg'
@@ -92,6 +92,7 @@ const images = {
     w: Wb, u: Ub, r: Rb, b: Bb, g: Gb, m: Mb, a: Ab, av: AVb, l: Lb,
     pww: PWWb, pwu: PWUb, pwb: PWBb, pwr: PWRb, pwg: PWGb, pwm: PWMb, pwa: PWAb,
     hywu: hyWUb, hyur: hyURb,
+    ecr: ECRb,
   },
   getSymbol (set, rarity) {
     let _r
@@ -128,6 +129,7 @@ const BG = [
   { label: '鹏洛客神器', value: 'pwa' },
   { label: '混色白蓝', value: 'hywu' },
   { label: '混色蓝红', value: 'hyur' },
+  { label: '结界红', value: 'ecr' },
 ]
 
 export function getBgOptions (filter) {
