@@ -11,6 +11,7 @@ import m9 from '../../assets/images/mana/9.png'
 import m10 from '../../assets/images/mana/10.png'
 import m11 from '../../assets/images/mana/11.png'
 import m12 from '../../assets/images/mana/12.png'
+import m13 from '../../assets/images/mana/13.png'
 import x from '../../assets/images/mana/X.png'
 import y from '../../assets/images/mana/Y.png'
 import z from '../../assets/images/mana/Z.png'
@@ -82,14 +83,14 @@ import dbfPlaneswalker from '../../assets/images/double-face/symbol-planeswalker
 const images = {
   mana: {
     "0": m0, "1": m1, "2": m2, "3": m3, "4": m4, "5": m5, "6": m6, "7": m7,
-    "8": m8, "9": m9, "10": m10, "11": m11, "12": m12, x, y, z,
+    "8": m8, "9": m9, "10": m10, "11": m11, "12": m12, "13": m13, x, y, z,
     w, u, b, r, g, c, e, t, q,
     "2w": s2w, "2u": s2u, "2b": s2b, "2r": s2r, "2g": s2g,
     wu, ub, br, rg, gw, wb, ur, bg, gu, rw,
     wp, up, bp, rp, gp,
   },
   bg: {
-    w: Wb, u: Ub, r: Rb, b: Bb, g: Gb, m: Mb, a: Ab, av: AVb, l: Lb,
+    w: Wb, u: Ub, r: Rb, b: Bb, g: Gb, m: Mb, a: Ab, av: AVb, l: Lb, void: null,
     pww: PWWb, pwu: PWUb, pwb: PWBb, pwr: PWRb, pwg: PWGb, pwm: PWMb, pwa: PWAb,
     hywu: hyWUb, hyur: hyURb,
     ecr: ECRb,
@@ -120,6 +121,7 @@ const BG = [
   { label: '神器', value: 'a' },
   { label: '载具', value: 'av' },
   { label: '地', value: 'l' },
+  { label: '无色', value: 'void' },
   { label: '鹏洛客白', value: 'pww' },
   { label: '鹏洛客蓝', value: 'pwu' },
   { label: '鹏洛客黑', value: 'pwb' },

@@ -14,6 +14,7 @@ const COLORS = {
   LC: '#9f9085', INF_LC: '#d6d1cf', EFF_LC: '#d8d5d2',
   WM_LW: '#decea0', WM_LU: '#91b7dc', WM_LB: '#968380', WM_LR: '#e78f6e', WM_LG: '#a2c9af',
   WM_LC: '#bcb5b1',
+  VOID: '#dad9d8', INF_VOID: '#bdbbba', EFF_VOID: '#d2cdcd', BODY_VOID: '#d5ceca',
 }
 const KEYS = [
   '_name', 'border', 'name', 'type', 'effect', 'body', 'body_font', 'name_font']
@@ -75,6 +76,10 @@ const borders = {
     _name: '载具', border: [COLORS.A], name: [COLORS.INF_A],
     effect: [COLORS.EFF_A], body: [COLORS.BODY_AV], body_font: [COLORS.BODY_FONT_WHITE],
     watermark: [COLORS.WM_A],
+  }),
+  void: standardBorder({
+    _name: '无色', border: [COLORS.VOID], name: [COLORS.INF_VOID],
+    effect: [COLORS.EFF_VOID], body: [COLORS.BODY_VOID], watermark: ['#a6c7d9'],
   }),
 }
 

@@ -1,7 +1,7 @@
 <template>
   <base-card>
     <div class="bg">
-      <normal-bg :bg="$$images.bg[cardData.bg_style]"></normal-bg>
+      <normal-bg :image-url="cardData.image_url" :bg="$$images.bg[cardData.bg_style]"></normal-bg>
     </div>
     <div class="main">
       <name-block :name="cardData.name" :is-legendary="cardData.is_legendary"

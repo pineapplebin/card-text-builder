@@ -9,7 +9,8 @@
           </div>
         </div>
         <p class="type">{{ parseType(type) }}</p>
-        <img class="symbol" :src="$$images.getSymbol(series || 'dom', rarity)"/>
+        <img class="symbol" :style="$$series.getSymbolStyle(series || 'dom')"
+             :src="$$images.getSymbol(series || 'dom', rarity)"/>
       </div>
     </div>
   </div>
@@ -43,6 +44,7 @@
       }
 
       .symbol {
+        display: inline-block;
         height: 25px;
       }
     }

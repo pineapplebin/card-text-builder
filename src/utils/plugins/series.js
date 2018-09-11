@@ -6,6 +6,8 @@ const no = {
   'hou': 199, // 幻灭时刻 2017-07
   'akh': 269, // 阿芒凯 2017-04
   'kld': 264, // 卡拉德许 2016-09
+  'emn': 205, // 异月传奇 2016-07
+  'soi': 297, // 依尼翠阴影 2016-04
   'c14': 337, // 指挥官2014 2014-11
   'jou': 165, // 尼兹之旅 2014-05
   'bng': 165, // 天神创生 2014-02
@@ -21,6 +23,11 @@ const no = {
   'rav': 306, // 拉尼卡公会城 2005-10
 }
 
+const styles = {
+  'emn': { height: '32px' },
+  'rav': { marginRight: '5px' },
+}
+
 export default function (Vue) {
   Vue.prototype.$$series = {
     getSeriesAmount (s) {
@@ -28,6 +35,12 @@ export default function (Vue) {
       if (!no[_s])
         return 0
       return no[_s]
+    },
+    getSymbolStyle (series) {
+      if (series.toLowerCase() in styles) {
+        return styles[series.toLowerCase()]
+      }
+      return {}
     }
   }
 }

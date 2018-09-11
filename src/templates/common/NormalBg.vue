@@ -1,7 +1,8 @@
 <template>
   <div class="NormalBg">
     <div class="inner" :class="{ full: isFull }">
-      <div class="bigger" :style="{backgroundImage: `url(${bg})`}"></div>
+      <div class="bigger" :class="{ 'origin-card': !bg }"
+           :style="{backgroundImage: `url(${bg || imageUrl})`}"></div>
       <div class="smaller" v-show="!hideSmaller" :style="{backgroundImage: `url(${bg})`}"></div>
     </div>
   </div>
@@ -28,6 +29,11 @@
         height: 547px;
         border-radius: 10px 10px 10% 10%;
         background-image: none;
+
+        &.origin-card {
+          background-size: 109%;
+          background-position-y: -14px;
+        }
       }
 
       .smaller {
@@ -61,7 +67,7 @@
     props: {
       bg: {
         type: String,
-        default: '',
+        default: null,
       },
       isFull: {
         type: Boolean,
@@ -70,7 +76,11 @@
       hideSmaller: {
         type: Boolean,
         default: false,
+      },
+      imageUrl: {
+        type: String,
+        default: null,
       }
-    }
+    },
   }
 </script>
