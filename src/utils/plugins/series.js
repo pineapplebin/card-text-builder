@@ -1,4 +1,5 @@
 const no = {
+  'grn': 259, // 烽会拉尼卡 2018-10
   'm19': 280, // 核心2019 2018-07
   'gs1': 40,  // 幻境奇谈 2018-06
   'dom': 269, // 多明纳里亚 2018-04
@@ -24,6 +25,7 @@ const no = {
 }
 
 const styles = {
+  'grn': { height: '22px', marginRight: '3px' },
   'emn': { height: '32px' },
   'rav': { marginRight: '5px' },
 }

@@ -9,6 +9,8 @@ import wmStory from '../../../assets/images/watermark/story_spotlight.vue'
 import ravnicaIzzet2 from '../../../assets/images/watermark/ravnica_izzet_2.vue'
 import ravnicaDimir2 from '../../../assets/images/watermark/ravnica_dimir_2.vue'
 import ravnicaBoros2 from '../../../assets/images/watermark/ravnica_boros_2.vue'
+import ravnicaSelesnya2 from '../../../assets/images/watermark/ravnica_selesnya_2.vue'
+import ravnicaGolgari2 from '../../../assets/images/watermark/ravnica_golgari_2.vue'
 
 const bitmap = [
   { label: '法术力白', content: wmW },
@@ -24,10 +26,12 @@ const svg = [
   { label: '伊捷2', content: ravnicaIzzet2 },
   { label: '底密尔2', content: ravnicaDimir2 },
   { label: '波洛斯2', content: ravnicaBoros2 },
+  { label: '瑟雷尼亚2', content: ravnicaSelesnya2 },
+  { label: '葛加理2', content: ravnicaGolgari2 },
 ].map(item => ({ ...item, type: 'svg' }))
 
 export default function () {
-  return [...bitmap, ...svg].map((item, idx) => ({
+  return [{ value: null, label: '无' }, ...bitmap, ...svg].map((item, idx) => ({
     ...item,
     value: '' + idx,
   }))

@@ -9,8 +9,9 @@
           </div>
         </div>
         <p class="type">{{ parseType(type) }}</p>
-        <img class="symbol" :style="$$series.getSymbolStyle(series || 'dom')"
-             :src="$$images.getSymbol(series || 'dom', rarity)"/>
+        <img class="symbol" :class="{fallback: series in series_fallback}"
+             :style="$$series.getSymbolStyle(series || 'dom')"
+             :src="getSymbol()"/>
       </div>
     </div>
   </div>
@@ -118,9 +119,13 @@
 </style>
 
 <script>
+  import series_fallback from '../../assets/images/series'
+
   export default {
     data () {
-      return {}
+      return {
+        series_fallback,
+      }
     },
     props: {
       border: {
@@ -149,6 +154,13 @@
         if (!t)
           return ''
         return t.replace('/', '／')
+      },
+      getSymbol() {
+        if (this.series && this.series in this.series_fallback) {
+          return this.series_fallback[this.series][(this.rarity || 'c')[0]]
+        } else {
+          return this.$$images.getSymbol(this.series || 'dom', this.rarity)
+        }
       }
     }
   }

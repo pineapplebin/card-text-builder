@@ -120,7 +120,7 @@ export default function (origin) {
     .map(matchComment)
     .map(matchCost)
     .map((node) => {
-      node.content = node.content.replace('\\n', '<br>')
+      node.content = node.content.replace(/\\n/g, '<br>')
       return node
     })
     .map(node => node.toText())

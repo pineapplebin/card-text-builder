@@ -20,7 +20,7 @@
 
 <script>
   export default {
-    name: "ravnica_izzet_2",
+    name: "ravnica_dimir_2",
     data () {
       return {
         ratio: 250 / 257,
