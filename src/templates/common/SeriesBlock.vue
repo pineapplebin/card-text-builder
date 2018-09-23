@@ -31,7 +31,7 @@
     props: {
       series: {
         type: String,
-        default: '___'
+        default: 'XXX'
       },
       number: {
         type: Number,

@@ -22,10 +22,10 @@
             <div class="content render-effect" v-html="eff.effect"></div>
             <div class="counter">
               <div class="loyalty-counter" v-if="eff.counter">
-                <img v-if="eff.counter[0] === '+'" src="../../assets/images/loyalty/plus.png" alt="">
-                <img v-else-if="eff.counter[0] === '−' || eff.counter[0] === '-'"
-                     src="../../assets/images/loyalty/minus.png" alt="">
-                <img v-else src="../../assets/images/loyalty/neutral.png" alt="">
+                <img v-if="eff.counter[0] === '+'" src="../../assets/images/loyalty/plus.png">
+                <img v-else-if="eff.counter[0] === '−'"
+                     src="../../assets/images/loyalty/minus.png">
+                <img v-else src="../../assets/images/loyalty/neutral.png">
                 <span :class="{minus: eff.counter[0] === '−'}">{{ eff.counter }}</span>
               </div>
               <span>：</span>
@@ -312,7 +312,7 @@
             effect = splited[0]
           }
           return {
-            counter,
+            counter: (counter || '').replace('-', '−'),
             effect: this.$$effect(effect),
           }
         })

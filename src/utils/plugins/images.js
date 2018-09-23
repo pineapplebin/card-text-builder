@@ -63,6 +63,7 @@ import PWMb from '../../assets/images/background/planeswalker_multi.png'
 import PWAb from '../../assets/images/background/planeswalker_artifact.png'
 import hyWUb from '../../assets/images/background/hybrid_white_blue.png'
 import hyURb from '../../assets/images/background/hybrid_blue_red.png'
+import hyRWb from '../../assets/images/background/hybrid_red_white.png'
 // import ECWb from '../../assets/images/background/enchant_creature_white.jpg'
 // import ECUb from '../../assets/images/background/enchant_creature_blue.jpg'
 // import ECBb from '../../assets/images/background/enchant_creature_black.jpg'
@@ -92,7 +93,7 @@ const images = {
   bg: {
     w: Wb, u: Ub, r: Rb, b: Bb, g: Gb, m: Mb, a: Ab, av: AVb, l: Lb, void: null,
     pww: PWWb, pwu: PWUb, pwb: PWBb, pwr: PWRb, pwg: PWGb, pwm: PWMb, pwa: PWAb,
-    hywu: hyWUb, hyur: hyURb,
+    hywu: hyWUb, hyur: hyURb, hyrw: hyRWb,
     ecr: ECRb,
   },
   getSymbol (set, rarity) {
@@ -131,6 +132,7 @@ const BG = [
   { label: '鹏洛客神器', value: 'pwa' },
   { label: '混色白蓝', value: 'hywu' },
   { label: '混色蓝红', value: 'hyur' },
+  { label: '混色红白', value: 'hyrw' },
   { label: '结界红', value: 'ecr' },
 ]
 

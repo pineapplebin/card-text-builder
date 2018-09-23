@@ -1,5 +1,5 @@
 <template>
-  <div class="NormalBg">
+  <div class="NormalBg" :style="{padding}">
     <div class="inner" :class="{ full: isFull }">
       <div class="bigger" :class="{ 'origin-card': !bg }"
            :style="{backgroundImage: `url(${bg || imageUrl})`}"></div>
@@ -12,7 +12,6 @@
   .NormalBg {
     width: 100%;
     height: 100%;
-    padding: 20px;
     padding-bottom: 40px;
 
     .inner {
@@ -80,7 +79,11 @@
       imageUrl: {
         type: String,
         default: null,
-      }
+      },
+      padding: {
+        type: String,
+        default: '20px',
+      },
     },
   }
 </script>

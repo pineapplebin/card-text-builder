@@ -5,6 +5,7 @@ import {request} from '../../../utils/plugins/request'
 
 export {getBorderOptions} from '../../../utils/plugins/borders'
 export {getBgOptions} from '../../../utils/plugins/images'
+export {getWatermarkOptions} from '../../../utils/plugins/images'
 
 export const common_conf = {
   border_style: SelectField({ label: '边框样式', options: getBorderOptions() }),
