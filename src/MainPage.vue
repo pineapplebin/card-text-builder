@@ -1,6 +1,6 @@
 <template>
   <div id="MainPage">
-    <div class="menu" :class="{focusing: is_focus}">
+    <div class="menu" :class="{ focusing: is_focus }">
       <div class="menu-item">
         <img
           src="https://magic.wizards.com/sites/all/themes/wiz_mtg/img/interface/logo-magic-small.png"
@@ -11,20 +11,36 @@
         class="menu-item"
         v-for="(card, key) in card_map"
         :key="key"
-        :class="{selected: selecting_card === key}"
+        :class="{ selected: selecting_card === key }"
         @click="selectMenu(key)"
       >
         <div class="name">{{ card.name }}</div>
       </div>
+      <div
+        class="menu-item"
+        :class="{ selected: selecting_card === 'conjurer' }"
+        @click="selectMenu('conjurer')"
+      >
+        <div class="name">CardConjurer</div>
+      </div>
     </div>
-    <div class="content">
-      <div class="card-preview" @click="focusCard" :class="{focusing: is_focus}">
+    <div v-if="selecting_card === 'conjurer'"></div>
+    <div v-else class="content">
+      <div
+        class="card-preview"
+        :class="{ focusing: is_focus }"
+        @click="focusCard"
+      >
         <component :is="active_card" :card-data="current_data"></component>
       </div>
       <div class="card-setting" v-show="!is_focus">
         <div class="controller padding">
           <h2>{{ card_map[selecting_card].name }}</h2>
-          <el-button icon="el-icon-delete" circle @click="tempDelete"></el-button>
+          <el-button
+            icon="el-icon-delete"
+            circle
+            @click="tempDelete"
+          ></el-button>
           <el-button icon="el-icon-edit" circle @click="tempSave"></el-button>
         </div>
         <!--<div><span>／</span></div>-->
@@ -138,6 +154,11 @@ export default {
   methods: {
     selectMenu(key) {
       this.selecting_card = key
+
+      if (key === 'conjurer') {
+        return
+      }
+
       const card = this.card_map[this.selecting_card]
       this.active_card = card.component
       // load temp save

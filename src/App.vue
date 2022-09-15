@@ -6,30 +6,30 @@
 </template>
 
 <script>
-  import MainPage from './MainPage'
+import MainPage from './MainPage.vue'
 
-  export default {
-    name: 'app',
-    components: {
-      MainPage,
-    },
-    mounted () {
-      this.$$request.getCardBySeries('m19', 1)
-    }
-  }
+export default {
+  name: 'app',
+  components: {
+    MainPage,
+  },
+  mounted() {
+    this.$$request.getCardBySeries('m19', 1)
+  },
+}
 </script>
 
 <style lang="less">
-  @import './assets/styles/common.less';
-  @import './utils/plugins/effect/style';
+@import './assets/styles/common.less';
+@import './utils/plugins/effect/style';
 
-  * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-  }
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 
-  body {
-    font-size: 14px;
-  }
+body {
+  font-size: 14px;
+}
 </style>
