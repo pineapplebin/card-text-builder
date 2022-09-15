@@ -75,7 +75,7 @@ import ECRb from '../../assets/images/background/enchant_creature_red.png'
 // import MIXBGb from '../../assets/images/background/mix_black_green.jpg'
 
 // watermarks
-export {default as getWatermarkOptions} from '../../templates/common/Watermark'
+export { default as getWatermarkOptions } from '../../templates/common/Watermark'
 
 import dbfNight from '../../assets/images/double-face/symbol-night.png'
 import dbfDay from '../../assets/images/double-face/symbol-day.png'
@@ -83,32 +83,86 @@ import dbfPlaneswalker from '../../assets/images/double-face/symbol-planeswalker
 
 const images = {
   mana: {
-    "0": m0, "1": m1, "2": m2, "3": m3, "4": m4, "5": m5, "6": m6, "7": m7,
-    "8": m8, "9": m9, "10": m10, "11": m11, "12": m12, "13": m13, x, y, z,
-    w, u, b, r, g, c, e, t, q,
-    "2w": s2w, "2u": s2u, "2b": s2b, "2r": s2r, "2g": s2g,
-    wu, ub, br, rg, gw, wb, ur, bg, gu, rw,
-    wp, up, bp, rp, gp,
+    0: m0,
+    1: m1,
+    2: m2,
+    3: m3,
+    4: m4,
+    5: m5,
+    6: m6,
+    7: m7,
+    8: m8,
+    9: m9,
+    10: m10,
+    11: m11,
+    12: m12,
+    13: m13,
+    x,
+    y,
+    z,
+    w,
+    u,
+    b,
+    r,
+    g,
+    c,
+    e,
+    t,
+    q,
+    '2w': s2w,
+    '2u': s2u,
+    '2b': s2b,
+    '2r': s2r,
+    '2g': s2g,
+    wu,
+    ub,
+    br,
+    rg,
+    gw,
+    wb,
+    ur,
+    bg,
+    gu,
+    rw,
+    wp,
+    up,
+    bp,
+    rp,
+    gp,
   },
   bg: {
-    w: Wb, u: Ub, r: Rb, b: Bb, g: Gb, m: Mb, a: Ab, av: AVb, l: Lb, void: null,
-    pww: PWWb, pwu: PWUb, pwb: PWBb, pwr: PWRb, pwg: PWGb, pwm: PWMb, pwa: PWAb,
-    hywu: hyWUb, hyur: hyURb, hyrw: hyRWb,
+    w: Wb,
+    u: Ub,
+    r: Rb,
+    b: Bb,
+    g: Gb,
+    m: Mb,
+    a: Ab,
+    av: AVb,
+    l: Lb,
+    void: null,
+    pww: PWWb,
+    pwu: PWUb,
+    pwb: PWBb,
+    pwr: PWRb,
+    pwg: PWGb,
+    pwm: PWMb,
+    pwa: PWAb,
+    hywu: hyWUb,
+    hyur: hyURb,
+    hyrw: hyRWb,
     ecr: ECRb,
   },
-  getSymbol (set, rarity) {
+  getSymbol(set, rarity) {
     let _r
-    if (!rarity)
-      _r = 'c'
-    else
-      _r = rarity[0];
-    return `http://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=${
-      set}&size=large&rarity=${_r}`
+    if (!rarity) _r = 'c'
+    else _r = rarity[0]
+    return `http://gatherer.wizards.com/Handlers/Image.ashx?type=symbol&set=${set}&size=large&rarity=${_r}`
   },
-  install (Vue) {
-    Vue.prototype.$$images = this
-  }
-};
+  install(app) {
+    app.config.globalProperties.$$images = this
+  },
+}
 
 export default images
 
@@ -136,14 +190,12 @@ const BG = [
   { label: '结界红', value: 'ecr' },
 ]
 
-export function getBgOptions (filter) {
-  if (filter)
-    return BG.filter(filter)
-  else
-    return [...BG]
+export function getBgOptions(filter) {
+  if (filter) return BG.filter(filter)
+  else return [...BG]
 }
 
-export function getDoubleFaceSymbolOptions () {
+export function getDoubleFaceSymbolOptions() {
   return [
     { label: '无', value: null },
     { label: 'night', value: dbfNight },
