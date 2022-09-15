@@ -24,7 +24,9 @@
         <div class="name">CardConjurer</div>
       </div>
     </div>
-    <div v-if="selecting_card === 'conjurer'"></div>
+    <div v-if="selecting_card === 'conjurer'" class="conjurer-holder">
+      <conjurer-view />
+    </div>
     <div v-else class="content">
       <div
         class="card-preview"
@@ -127,17 +129,24 @@
     }
   }
 }
+
+.conjurer-holder {
+  width: 100%;
+  height: calc(100vh - 50px);
+}
 </style>
 
 <script>
 import card_map from './templates/card-map'
 import FormRenderer from './utils/form-engine/FormRenderer'
+import ConjurerView from './conjurer/index.vue'
 import { initData } from './utils/form-engine'
 
 export default {
   name: 'main-page',
   components: {
     FormRenderer,
+    ConjurerView,
   },
   data() {
     return {

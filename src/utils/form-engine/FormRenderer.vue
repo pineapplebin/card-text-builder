@@ -21,7 +21,7 @@
 <style lang="less" scoped></style>
 
 <script>
-import { Input, Checkbox, Slider } from 'element-plus'
+import { ElInput, ElCheckbox, ElSlider } from 'element-plus'
 import SelectField from './SelectField.vue'
 import TextareaField from './TextareaField.vue'
 
@@ -29,9 +29,9 @@ export default {
   data() {
     return {
       field_map: {
-        TextField: Input,
-        CheckBoxField: Checkbox,
-        SlideField: Slider,
+        TextField: ElInput,
+        CheckBoxField: ElCheckbox,
+        SlideField: ElSlider,
         SelectField,
         TextareaField,
       },

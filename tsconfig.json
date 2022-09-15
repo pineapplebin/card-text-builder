@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "target": "ES2021",
+    "isolatedModules": true,
+    "useDefineForClassFields": true,
+    "types": ["vite/client"]
+  }
+}
