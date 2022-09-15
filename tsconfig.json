@@ -1,8 +1,14 @@
 {
   "compilerOptions": {
+    "strict": true,
+    "jsx": "preserve",
     "target": "ES2021",
     "isolatedModules": true,
     "useDefineForClassFields": true,
-    "types": ["vite/client"]
+    "types": ["vite/client"],
+    "noImplicitThis": true,
+    "paths": {
+      "@": ["./src"]
+    }
   }
 }
