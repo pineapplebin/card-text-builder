@@ -44,6 +44,9 @@ const handleUpdatePosition = (ev: FocusEvent, key: keyof Position) => {
         />
       </div>
     </div>
+    <div class="content">
+      <textarea rows="5" name="content" :value="block.content"></textarea>
+    </div>
     <CButton @click="emit('remove')">移除</CButton>
   </CCard>
 </template>
@@ -61,5 +64,13 @@ const handleUpdatePosition = (ev: FocusEvent, key: keyof Position) => {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.content {
+  margin-bottom: 10px;
+}
+
+.content > textarea {
+  width: 100%;
 }
 </style>

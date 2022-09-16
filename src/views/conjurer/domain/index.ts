@@ -1,6 +1,7 @@
 import { Application, Container, Graphics } from 'pixi.js'
 import { DEFAULT_SETTINGS } from './settings'
 import type { DomainConstructorSettings, Position, RawTextBlock } from './types'
+import { resize, RESOLUTION } from './utils'
 
 export class ConjurerDomain {
   public baseImage: string = ''
@@ -37,6 +38,8 @@ export class ConjurerDomain {
       width: this.settings.width,
       height: this.settings.height,
       backgroundAlpha: 0,
+      antialias: true,
+      resolution: RESOLUTION,
     })
   }
 
@@ -60,16 +63,16 @@ export class ConjurerDomain {
 
     const container = new Container()
 
-    container.x = raw.x
-    container.y = raw.y
-    container.width = raw.width
-    container.height = raw.height
+    container.x = resize(raw.x)
+    container.y = resize(raw.y)
+    container.width = resize(raw.width)
+    container.height = resize(raw.height)
 
     // stroke
     if (this.settings.debug) {
       const rect = new Graphics()
       rect.lineStyle(4, 0xff0000, 1)
-      rect.drawRect(0, 0, raw.width, raw.height)
+      rect.drawRect(0, 0, resize(raw.width), resize(raw.height))
       rect.x = 0
       rect.y = 0
       container.addChild(rect)
@@ -109,21 +112,27 @@ export class ConjurerDomain {
     const newInfo = { ...info, ...position }
     this.rawTextList[index] = newInfo
 
-    container.x = newInfo.x
-    container.y = newInfo.y
-    container.width = newInfo.width
-    container.height = newInfo.height
+    container.x = resize(newInfo.x)
+    container.y = resize(newInfo.y)
+    container.width = resize(newInfo.width)
+    container.height = resize(newInfo.height)
 
     // update stroke
     if (this.settings.debug && container.children[0] instanceof Graphics) {
       const rect = container.children[0]
       rect.clear()
       rect.lineStyle(4, 0xff0000, 1)
-      rect.drawRect(0, 0, newInfo.width, newInfo.height)
+      rect.drawRect(0, 0, resize(newInfo.width), resize(newInfo.height))
     }
 
     // TODO: 更新排版
   }
+
+  /**
+   * 更新文本内容
+   * 解析、排版
+   */
+  public updateTextContent() {}
 
   /**
    * 移除文本框
