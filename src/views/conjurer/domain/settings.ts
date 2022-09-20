@@ -1,7 +1,8 @@
 import type { DomainConstructorSettings } from './types'
+import { resize } from './utils'
 
 export const DEFAULT_SETTINGS: DomainConstructorSettings = {
   debug: false,
-  width: 1500,
-  height: 2100,
+  width: resize(1500),
+  height: resize(2100),
 }

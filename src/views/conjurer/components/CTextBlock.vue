@@ -7,6 +7,7 @@ import CButton from './CButton.vue'
 const { block } = defineProps<{ block: RawTextBlock }>()
 const emit = defineEmits<{
   (e: 'position', pos: Position): void
+  (e: 'content', value: string): void
   (e: 'remove'): void
 }>()
 
@@ -22,6 +23,14 @@ const handleUpdatePosition = (ev: FocusEvent, key: keyof Position) => {
     height: block.height,
     [key]: value,
   })
+}
+
+const handleUpdateContent = (ev: FocusEvent) => {
+  if (!ev.target) {
+    return
+  }
+  const value = (ev.target as HTMLTextAreaElement).value
+  emit('content', value || '')
 }
 </script>
 
@@ -45,7 +54,12 @@ const handleUpdatePosition = (ev: FocusEvent, key: keyof Position) => {
       </div>
     </div>
     <div class="content">
-      <textarea rows="5" name="content" :value="block.content"></textarea>
+      <textarea
+        rows="5"
+        name="content"
+        :value="block.content"
+        @blur="handleUpdateContent"
+      ></textarea>
     </div>
     <CButton @click="emit('remove')">移除</CButton>
   </CCard>

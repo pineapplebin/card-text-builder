@@ -6,7 +6,7 @@ import CButton from './components/CButton.vue'
 import CTextBlock from './components/CTextBlock.vue'
 
 const canvasRef = ref<HTMLCanvasElement>()
-const domain = reactive(new ConjurerDomain({ debug: true }))
+const domain = reactive(new ConjurerDomain({ debug: false }))
 
 // @ts-ignore
 window.domain = domain
@@ -33,14 +33,7 @@ onBeforeUnmount(() => {
 <template>
   <div class="container">
     <div class="part preview-part">
-      <div
-        class="scale-preview"
-        :style="{
-          backgroundImage: domain.baseImage
-            ? `url(${domain.baseImage})`
-            : undefined,
-        }"
-      >
+      <div class="scale-preview">
         <canvas ref="canvasRef" width="1500" height="2100"></canvas>
       </div>
     </div>
@@ -56,6 +49,7 @@ onBeforeUnmount(() => {
         :key="block.id"
         :block="block"
         @position="domain.updateTextBlockPosition(block.id, $event)"
+        @content="domain.updateTextContent(block.id, $event)"
         @remove="domain.removeTextBlock(block.id)"
       />
     </div>
