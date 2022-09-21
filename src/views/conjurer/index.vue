@@ -1,12 +1,21 @@
 <script setup lang="ts">
-import { reactive, ref, onMounted, onBeforeUnmount } from 'vue'
+import { reactive, ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import { ConjurerDomain } from './domain'
 import CCard from './components/CCard.vue'
 import CButton from './components/CButton.vue'
 import CTextBlock from './components/CTextBlock.vue'
+import type { RawTextBlock } from './domain/types'
+
+const TEXT_CACHED = 'TEXT_CACHED '
 
 const canvasRef = ref<HTMLCanvasElement>()
 const domain = reactive(new ConjurerDomain({ debug: false }))
+
+watch(domain.rawTextList, (val) => {
+  if (val) {
+    localStorage.setItem(TEXT_CACHED, JSON.stringify(val))
+  }
+})
 
 // @ts-ignore
 window.domain = domain
@@ -22,6 +31,13 @@ const handleFile = (event: Event) => {
 onMounted(() => {
   if (canvasRef.value) {
     domain.initCanvas(canvasRef.value)
+  }
+  const cached = localStorage.getItem(TEXT_CACHED)
+  if (cached) {
+    const list: RawTextBlock[] = JSON.parse(cached)
+    list.forEach((raw) => {
+      domain.addRawTextBlock({ ...raw, id: 100 + raw.id + list.length })
+    })
   }
 })
 
@@ -50,6 +66,10 @@ onBeforeUnmount(() => {
         :block="block"
         @position="domain.updateTextBlockPosition(block.id, $event)"
         @content="domain.updateTextContent(block.id, $event)"
+        @color="domain.updateRawTextInfo(block.id, { color: $event })"
+        @display-type="
+          domain.updateRawTextInfo(block.id, { displayType: $event })
+        "
         @remove="domain.removeTextBlock(block.id)"
       />
     </div>

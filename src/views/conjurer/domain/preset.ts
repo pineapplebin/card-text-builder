@@ -1,6 +1,8 @@
-import type { Position } from './types'
+import type { Position, RawTextBlock } from './types'
 
-export function getPrefixPosition(index: number): Position {
+export function getPrefixPosition(
+  index: number
+): Position & Pick<RawTextBlock, 'displayType'> {
   if (index === 0) {
     // 名字
     return {
@@ -8,6 +10,7 @@ export function getPrefixPosition(index: number): Position {
       y: 110,
       width: 1244,
       height: 114,
+      displayType: 'title',
     }
   } else if (index === 1) {
     // 类型
@@ -16,6 +19,7 @@ export function getPrefixPosition(index: number): Position {
       y: 1189,
       width: 1244,
       height: 114,
+      displayType: 'type',
     }
   } else if (index === 2) {
     // 效果
@@ -24,6 +28,7 @@ export function getPrefixPosition(index: number): Position {
       y: 1324,
       width: 1242,
       height: 604,
+      displayType: 'rules',
     }
   }
 
@@ -33,5 +38,6 @@ export function getPrefixPosition(index: number): Position {
     y: 0,
     width: 1000,
     height: 100,
+    displayType: 'rules',
   }
 }

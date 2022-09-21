@@ -13,7 +13,7 @@ export interface Position {
 
 export interface RawTextBlock extends Position {
   id: number
-  fontFamily: string
   content: string
-  color: number
+  color: number | string
+  displayType: 'title' | 'type' | 'rules'
 }

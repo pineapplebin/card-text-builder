@@ -2,15 +2,13 @@ import {
   Application,
   Container,
   Graphics,
-  TextStyle,
-  Text,
-  TextMetrics,
   Texture,
   BaseTexture,
   Sprite,
 } from 'pixi.js'
 import { getPrefixPosition } from './preset'
 import { DEFAULT_SETTINGS } from './settings'
+import { buildTextContent } from './text'
 import type { DomainConstructorSettings, Position, RawTextBlock } from './types'
 import { resize, RESOLUTION } from './utils'
 
@@ -74,14 +72,13 @@ export class ConjurerDomain {
   /**
    * 添加新的文本框
    */
-  public addRawTextBlock() {
+  public addRawTextBlock(cached?: RawTextBlock) {
     const count = this.container?.children.length ?? 0
 
-    const raw: RawTextBlock = {
+    const raw: RawTextBlock = cached ?? {
       id: ++this.innerId,
-      fontFamily: '',
       content: '',
-      color: 0x000,
+      color: '#000',
       ...getPrefixPosition(count),
     }
     this.rawTextList.push(raw)
@@ -131,31 +128,54 @@ export class ConjurerDomain {
   }
 
   /**
+   * 通用更新 rawInfo 方法
+   */
+  public updateRawTextInfo(id: number, update: Partial<RawTextBlock>) {
+    const result = this.findTextBlockById(id)
+    const newInfo: RawTextBlock = { ...result.info, ...update }
+    this.rawTextList[result.index] = newInfo
+    return { ...result, info: newInfo }
+  }
+
+  /**
    * 更新文本框位置与大小
    * 更新后重新排版文字
    */
   public updateTextBlockPosition(id: number, position: Position) {
-    const { index, info, container } = this.findTextBlockById(id)
-    const newInfo = { ...info, ...position }
-    this.rawTextList[index] = newInfo
+    const { info, container } = this.updateRawTextInfo(id, position)
 
-    container.x = resize(newInfo.x)
-    container.y = resize(newInfo.y)
-    container.width = resize(newInfo.width)
-    container.height = resize(newInfo.height)
+    container.x = resize(info.x)
+    container.y = resize(info.y)
+    container.width = resize(info.width)
+    container.height = resize(info.height)
 
     // 尺寸有变化时更新内容
-    if (info.width !== newInfo.width || info.height !== newInfo.height) {
+    if (info.width !== info.width || info.height !== info.height) {
       // update stroke
       if (this.settings.debug && container.children[0] instanceof Graphics) {
         const rect = container.children[0]
         rect.clear()
         rect.lineStyle(4, 0xff0000, 1)
-        rect.drawRect(0, 0, resize(newInfo.width), resize(newInfo.height))
+        rect.drawRect(0, 0, resize(info.width), resize(info.height))
       }
 
-      // TODO: 更新排版
+      // 更新排版
+      this.reBuildTextContent(container, info)
     }
+  }
+
+  protected reBuildTextContent(container: Container, info: RawTextBlock) {
+    // 清空原有的 text
+    const stroke =
+      container.children[0] instanceof Graphics
+        ? container.children[0]
+        : undefined
+    container.removeChildren()
+    if (stroke) {
+      container.addChild(stroke)
+    }
+
+    buildTextContent(container, info)
   }
 
   /**
@@ -163,35 +183,8 @@ export class ConjurerDomain {
    * 解析、排版
    */
   public updateTextContent(id: number, content: string) {
-    const { info, container } = this.findTextBlockById(id)
-
-    // 清空原有的 text
-    container.children.forEach((child) => {
-      if (child instanceof Graphics) {
-        return
-      }
-      child.destroy()
-      container.removeChild(child)
-    })
-
-    const maxWidth = resize(info.width)
-
-    const fontStyle = new TextStyle({
-      fontFamily: '华康魏碑 Std W7',
-      fontSize: 44,
-      strokeThickness: 0.5,
-      lineJoin: 'round',
-      fill: info.color || 0x000,
-    })
-    const text = new Text(content, fontStyle)
-    text.x = 0
-    text.y = 0
-    const measure = TextMetrics.measureText(content, fontStyle)
-    if (measure.width > maxWidth) {
-      text.scale.x = maxWidth / measure.width
-    }
-
-    container.addChild(text)
+    const { info, container } = this.updateRawTextInfo(id, { content })
+    this.reBuildTextContent(container, info)
   }
 
   /**
