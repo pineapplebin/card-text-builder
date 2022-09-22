@@ -2,6 +2,7 @@ import { TextMetrics, Text, TextStyle, type Container } from 'pixi.js'
 import type { RawTextBlock } from '../types'
 import { resize } from '../utils'
 import { tail } from '@/tools'
+import { parseLineContent } from './parser'
 
 export const buildTextContent = (container: Container, info: RawTextBlock) => {
   if (info.displayType === 'title' || info.displayType === 'type') {
@@ -64,6 +65,8 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
     }
 
     // TODO: 解析行内容
+    const result = parseLineContent(line, { debug: true })
+    console.log(result)
 
     const meta: LineMeta = {
       posX: 0,
@@ -103,7 +106,7 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
     const measure = TextMetrics.measureText(info.content, fontStyle)
     // FIXME: 一行多个字体时处理
     if (measure.width > maxWidth) {
-      text.scale.x = 0.98
+      text.scale.x = maxWidth / measure.width
     }
     container.addChild(text)
   }
