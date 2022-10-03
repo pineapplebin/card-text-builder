@@ -4,6 +4,7 @@ import { resize } from '../utils'
 import { fixed, tail } from '@/tools'
 import {
   parseLineContent,
+  type TFlavorLine,
   type TModifier,
   type TPureNumber,
   type TSymbol,
@@ -11,6 +12,7 @@ import {
 } from './parser'
 import { isNumberType } from './utils'
 import { getSymbolSprite } from './symbols'
+import { getFlavorSprite } from './flavor'
 
 export const buildTextContent = (container: Container, info: RawTextBlock) => {
   if (info.displayType === 'title' || info.displayType === 'type') {
@@ -57,10 +59,15 @@ interface TextMeta {
   italic: boolean
 }
 
+interface FlavorMeta {
+  raw: TFlavorLine
+  type: 'flavor'
+}
+
 interface LineMeta {
   posY: number
   baseFontSize: number
-  content: (SymbolMeta | TextMeta)[]
+  content: (SymbolMeta | TextMeta | FlavorMeta)[]
 }
 
 const buildRulesText = (container: Container, info: RawTextBlock) => {
@@ -97,21 +104,28 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
 
       if (index === 0) {
         xOffset = 0
-      } else if (part.text[0] === '（') {
+      }
+      if ('text' in part && part.text[0] === '（') {
         xOffset = 0
-      } else if (previous && previous.type === 'symbol') {
+      }
+      if (previous && previous.type === 'symbol') {
         xOffset = 5
       }
 
       if (part.type === 'text') {
-        meta.content.push({
+        const sub = {
           posX: xOffset,
           raw: part,
           text: part.text,
           fontFamily: '方正等细线_GBK_FIX',
           fontSize: 35,
           italic: !!part.italic,
-        } as TextMeta)
+        } as TextMeta
+        if (part.bookFont) {
+          sub.fontFamily = 'Magic华文楷体'
+          sub.fontSize = 30
+        }
+        meta.content.push(sub)
       } else if (isNumberType(part)) {
         meta.content.push({
           posX: xOffset,
@@ -128,6 +142,11 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
           icon: part.text,
           size: 'normal',
         } as SymbolMeta)
+      } else if (part.type === 'flavor') {
+        meta.content.push({ raw: part, type: 'flavor' })
+        meta.posY += 20
+        meta.baseFontSize = 2
+        startPoxY += 35
       }
 
       index++
@@ -162,13 +181,14 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
         rawType === 'number' ||
         rawType === 'modifier'
       ) {
+        // type=各种文本
         const _p = part as TextMeta
         const fontStyle = new TextStyle({
           fontFamily: _p.fontFamily,
           fontSize: _p.fontSize,
           fontStyle: _p.italic ? 'italic' : 'normal',
           fill: info.color || 0x000,
-          strokeThickness: 1,
+          strokeThickness: 'bookFont' in _p.raw && _p.raw.bookFont ? 0 : 1,
           lineJoin: 'round',
           fontWeight: 'lighter',
           letterSpacing: rawType === 'text' ? 2.2 : 1,
@@ -189,6 +209,13 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
         sprite.y = 8
         sub.addChild(sprite)
         posXOffset += sprite.width + _p.posX
+      } else if (rawType === 'flavor') {
+        // type=flavor
+        const sprite = getFlavorSprite(maxWidth)
+        sprite.x = 0
+        sprite.y = 0
+        sub.addChild(sprite)
+        posXOffset += maxWidth
       }
     }
 

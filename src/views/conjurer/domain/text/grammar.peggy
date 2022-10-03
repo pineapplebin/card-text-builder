@@ -17,10 +17,10 @@ Num = [0-9]
 
 EngChar = [_a-zA-Z]
 HansChar "hans-char" = [\u3000-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff00-\uff9f]
-Char = EngChar / HansChar / [\[\]]
+Char = EngChar / HansChar / [\[\]] / " "
 
 Symbol "symbol"
-  = "{" _ s:([0-9a-z]+) _ "}" {
+  = "{" _ s:([0-9a-zA-Z]+) _ "}" {
   	return {
       type: "symbol",
       text: s.join('')
@@ -39,21 +39,36 @@ Modifier "modifier"
 
 
 PureNum "pure-number"
-  = (Num / "/")+ {
+  = (Num / "/" / "\u2022")+ {
     return {
         type: 'number',
         text: text()
       }
   }
 
-Italic "italic"
-  = "<i>" _ body:(PureNum / Symbol / Modifier / Char)* _ "</i>" {
+FormatTag = "ib" / "i" / "b"
+
+Formatted "Fomatted"
+  = "<" start:FormatTag ">" _ body:(PureNum / Symbol / Modifier / Char)* _ "</" end:FormatTag ">" {
+    if (start != end) {
+      error('tag start not matching end')
+    }
+
     return {
-      type: 'italic',
+      type: 'formatted',
+      italic: start.indexOf('i') > -1,
+      bookFont: start.indexOf('b') > -1,
       body: body || []
     }
   }
 
-Line = _ body:(Modifier / PureNum / Symbol / Italic / Char)* _ {
+Flavor "flavor"
+  = "<f>" {
+    return {
+      type: 'flavor'
+    }
+  }
+
+Line = _ body:(Modifier / PureNum / Symbol / Flavor / Formatted / Char)* _ {
 	return body || []
 }

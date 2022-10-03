@@ -20,8 +20,10 @@ export interface TPureNumber {
   italic?: boolean
 }
 
-export interface TItalic {
-  type: 'italic'
+export interface TFormatted {
+  type: 'formatted'
+  italic: boolean
+  bookFont: boolean
   body: (TSymbol | TModifier | TPureNumber | string)[]
 }
 
@@ -29,12 +31,28 @@ export interface TText {
   type: 'text'
   text: string
   italic: boolean
-  fontFamily: boolean
+  bookFont: boolean
 }
 
-type ParseResult = (TItalic | TPureNumber | TSymbol | TModifier | string)[]
+export interface TFlavorLine {
+  type: 'flavor'
+}
 
-export type TransformResultItem = TPureNumber | TSymbol | TModifier | TText
+type ParseResult = (
+  | TFormatted
+  | TPureNumber
+  | TSymbol
+  | TModifier
+  | TFlavorLine
+  | string
+)[]
+
+export type TransformResultItem =
+  | TPureNumber
+  | TSymbol
+  | TModifier
+  | TFlavorLine
+  | TText
 
 export type TransformResult = TransformResultItem[]
 
@@ -54,7 +72,7 @@ export function parseLineContent(line: string, settings: ParseSettings = {}) {
     const current = result[index]
 
     // 斜体语法 嵌套展平
-    if (typeof current === 'object' && current.type === 'italic') {
+    if (typeof current === 'object' && current.type === 'formatted') {
       // 只有一层
       // 重复合并的逻辑
       let innerIndex = 0
@@ -71,7 +89,8 @@ export function parseLineContent(line: string, settings: ParseSettings = {}) {
           continue
         }
         const { text, endIndex } = mergeText(current.body, innerIndex, {
-          italic: true,
+          italic: current.italic,
+          bookFont: current.bookFont,
         })
         transform.push(text)
         innerIndex = endIndex
@@ -113,7 +132,7 @@ function mergeText<T>(
     type: 'text',
     text: list.slice(startIndex, endIndex).join(''),
     italic: false,
-    fontFamily: false,
+    bookFont: false,
     ...override,
   }
 
