@@ -1,8 +1,15 @@
-import { TextMetrics, Text, TextStyle, type Container } from 'pixi.js'
+import { TextMetrics, Text, TextStyle, Container } from 'pixi.js'
 import type { RawTextBlock } from '../types'
 import { resize } from '../utils'
-import { tail } from '@/tools'
-import { parseLineContent } from './parser'
+import { fixed, tail } from '@/tools'
+import {
+  parseLineContent,
+  type TModifier,
+  type TPureNumber,
+  type TSymbol,
+  type TText,
+} from './parser'
+import { isNumberType } from './utils'
 
 export const buildTextContent = (container: Container, info: RawTextBlock) => {
   if (info.displayType === 'title' || info.displayType === 'type') {
@@ -34,18 +41,25 @@ const buildTitleText = (container: Container, info: RawTextBlock) => {
 }
 
 interface SymbolMeta {
+  raw: TSymbol
   icon: string
-  posY: string
+  posX: string
   size: string
 }
 
-interface LineMeta {
+interface TextMeta {
+  raw: TText | TPureNumber | TModifier
   posX: number
-  posY: number
   text: string
-  symbols: SymbolMeta[]
   fontFamily: string
   fontSize: number
+  italic: boolean
+}
+
+interface LineMeta {
+  posY: number
+  baseFontSize: number
+  content: (SymbolMeta | TextMeta)[]
 }
 
 const buildRulesText = (container: Container, info: RawTextBlock) => {
@@ -64,26 +78,54 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
       continue
     }
 
-    // TODO: 解析行内容
-    const result = parseLineContent(line, { debug: true })
-    console.log(result)
+    // 解析行内容
+    const result = parseLineContent(line, { debug: false })
+    console.log('[DEBUG] parse result', result)
 
     const meta: LineMeta = {
-      posX: 0,
       posY: startPoxY,
-      text: line,
-      symbols: [],
-      fontFamily: '方正等细线_GBK_FIX',
-      fontSize: 35,
+      baseFontSize: 35,
+      content: [],
     }
+
+    let index = 0
+    for (const part of result) {
+      const previous = result[index - 1]
+      const numberOffset =
+        isNumberType(part) || (previous && isNumberType(previous)) ? 10 : 0
+      const defaultOffset = index === 0 ? 0 : numberOffset
+
+      if (part.type === 'text') {
+        meta.content.push({
+          posX: defaultOffset,
+          raw: part,
+          text: part.text,
+          fontFamily: '方正等细线_GBK_FIX',
+          fontSize: 35,
+          italic: !!part.italic,
+        })
+      } else if (isNumberType(part)) {
+        meta.content.push({
+          posX: defaultOffset,
+          raw: part,
+          text: part.text,
+          fontFamily: '方正等细线_GBK_FIX',
+          fontSize: 28,
+          italic: !!part.italic,
+        })
+      }
+
+      index++
+    }
+
     lineMeta.push(meta)
-    startPoxY += Math.round(meta.fontSize * 1.05)
+    startPoxY += Math.round(meta.baseFontSize * 1.05)
   }
 
   // 上下居中字符
-  const endPoxY = tail(lineMeta).posY + tail(lineMeta).fontSize
+  const endPoxY = tail(lineMeta).posY + tail(lineMeta).baseFontSize
   if (maxHeight - endPoxY > 10) {
-    const deltaPoxY = (maxHeight - endPoxY) / 2
+    const deltaPoxY = fixed((maxHeight - endPoxY) / 2)
     lineMeta.forEach((meta) => {
       meta.posY += deltaPoxY
     })
@@ -91,23 +133,70 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
 
   // 插入字符
   for (const meta of lineMeta) {
-    const fontStyle = new TextStyle({
-      fontFamily: meta.fontFamily,
-      fontSize: meta.fontSize,
-      fill: info.color || 0x000,
-      strokeThickness: 0.6,
-      lineJoin: 'round',
-      fontWeight: 'lighter',
-      letterSpacing: 2.2,
-    })
-    const text = new Text(meta.text, fontStyle)
-    text.x = meta.posX
-    text.y = meta.posY
-    const measure = TextMetrics.measureText(info.content, fontStyle)
-    // FIXME: 一行多个字体时处理
-    if (measure.width > maxWidth) {
-      text.scale.x = maxWidth / measure.width
+    const sub = new Container()
+    sub.width = maxWidth
+    sub.height = meta.baseFontSize
+    sub.x = 0
+    sub.y = meta.posY
+
+    let posXOffset = 0
+    for (const part of meta.content) {
+      const rawType = part.raw.type
+      if (
+        rawType === 'text' ||
+        rawType === 'number' ||
+        rawType === 'modifier'
+      ) {
+        const _p = part as TextMeta
+        const fontStyle = new TextStyle({
+          fontFamily: _p.fontFamily,
+          fontSize: _p.fontSize,
+          fontStyle: _p.italic ? 'italic' : 'normal',
+          fill: info.color || 0x000,
+          strokeThickness: 0.6,
+          lineJoin: 'round',
+          fontWeight: 'lighter',
+          letterSpacing: rawType === 'text' ? 2.2 : 1,
+        })
+        const text = new Text(_p.text, fontStyle)
+        text.x = posXOffset + _p.posX
+        text.y = rawType === 'text' ? 0 : 6
+        sub.addChild(text)
+
+        // 测量宽度
+        const measure = TextMetrics.measureText(_p.text, fontStyle)
+        posXOffset += measure.width + _p.posX
+      } else {
+        // TODO: type=symbol
+      }
     }
-    container.addChild(text)
+
+    // 缩放调整边缘
+    if (posXOffset > maxWidth || maxWidth - posXOffset < 10) {
+      sub.scale.x = maxWidth / posXOffset
+    }
+
+    container.addChild(sub)
   }
+
+  // for (const meta of lineMeta) {
+  //   const fontStyle = new TextStyle({
+  //     fontFamily: meta.fontFamily,
+  //     fontSize: meta.fontSize,
+  //     fill: info.color || 0x000,
+  //     strokeThickness: 0.6,
+  //     lineJoin: 'round',
+  //     fontWeight: 'lighter',
+  //     letterSpacing: 2.2,
+  //   })
+  //   const text = new Text(meta.text, fontStyle)
+  //   text.x = meta.posX
+  //   text.y = meta.posY
+  //   const measure = TextMetrics.measureText(info.content, fontStyle)
+  //   // FIXME: 一行多个字体时处理
+  //   if (measure.width > maxWidth) {
+  //     text.scale.x = maxWidth / measure.width
+  //   }
+  //   container.addChild(text)
+  // }
 }

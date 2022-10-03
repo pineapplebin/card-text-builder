@@ -34,7 +34,9 @@ export interface TText {
 
 type ParseResult = (TItalic | TPureNumber | TSymbol | TModifier | string)[]
 
-export type TransformResult = (TPureNumber | TSymbol | TModifier | TText)[]
+export type TransformResultItem = TPureNumber | TSymbol | TModifier | TText
+
+export type TransformResult = TransformResultItem[]
 
 export interface ParseSettings {
   debug?: boolean
