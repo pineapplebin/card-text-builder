@@ -39,7 +39,7 @@ Modifier "modifier"
 
 
 PureNum "pure-number"
-  = Num+ {
+  = (Num / "/")+ {
     return {
         type: 'number',
         text: text()

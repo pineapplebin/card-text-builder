@@ -5,7 +5,7 @@ import CButton from './CButton.vue'
 
 const { block } = defineProps<{ block: RawTextBlock }>()
 const emit = defineEmits<{
-  (e: 'position', pos: Position): void
+  (e: 'position', pos: Partial<Position>): void
   (e: 'content', value: string): void
   (e: 'color', value: string): void
   (e: 'display-type', value: RawTextBlock['displayType']): void
@@ -21,10 +21,6 @@ const getValue = <Ev extends Event>(ev: Ev) => {
 const handleUpdatePosition = (ev: FocusEvent, key: keyof Position) => {
   const value = +getValue(ev)
   emit('position', {
-    x: block.x,
-    y: block.y,
-    width: block.width,
-    height: block.height,
     [key]: value,
   })
 }
@@ -77,7 +73,7 @@ const handleUpdateColor = (ev: Event) => {
     </div>
     <div class="content">
       <textarea
-        rows="5"
+        rows="10"
         name="content"
         :value="block.content"
         @blur="handleUpdateContent"

@@ -10,6 +10,7 @@ import {
   type TText,
 } from './parser'
 import { isNumberType } from './utils'
+import { getSymbolSprite } from './symbols'
 
 export const buildTextContent = (container: Container, info: RawTextBlock) => {
   if (info.displayType === 'title' || info.displayType === 'type') {
@@ -43,7 +44,7 @@ const buildTitleText = (container: Container, info: RawTextBlock) => {
 interface SymbolMeta {
   raw: TSymbol
   icon: string
-  posX: string
+  posX: number
   size: string
 }
 
@@ -91,28 +92,42 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
     let index = 0
     for (const part of result) {
       const previous = result[index - 1]
-      const numberOffset =
+      let xOffset =
         isNumberType(part) || (previous && isNumberType(previous)) ? 10 : 0
-      const defaultOffset = index === 0 ? 0 : numberOffset
+
+      if (index === 0) {
+        xOffset = 0
+      } else if (part.text[0] === '（') {
+        xOffset = 0
+      } else if (previous && previous.type === 'symbol') {
+        xOffset = 5
+      }
 
       if (part.type === 'text') {
         meta.content.push({
-          posX: defaultOffset,
+          posX: xOffset,
           raw: part,
           text: part.text,
           fontFamily: '方正等细线_GBK_FIX',
           fontSize: 35,
           italic: !!part.italic,
-        })
+        } as TextMeta)
       } else if (isNumberType(part)) {
         meta.content.push({
-          posX: defaultOffset,
+          posX: xOffset,
           raw: part,
           text: part.text,
           fontFamily: '方正等细线_GBK_FIX',
           fontSize: 28,
           italic: !!part.italic,
-        })
+        } as TextMeta)
+      } else if (part.type === 'symbol') {
+        meta.content.push({
+          posX: xOffset,
+          raw: part,
+          icon: part.text,
+          size: 'normal',
+        } as SymbolMeta)
       }
 
       index++
@@ -134,8 +149,8 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
   // 插入字符
   for (const meta of lineMeta) {
     const sub = new Container()
-    sub.width = maxWidth
-    sub.height = meta.baseFontSize
+    // sub.width = maxWidth
+    // sub.height = meta.baseFontSize
     sub.x = 0
     sub.y = meta.posY
 
@@ -153,7 +168,7 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
           fontSize: _p.fontSize,
           fontStyle: _p.italic ? 'italic' : 'normal',
           fill: info.color || 0x000,
-          strokeThickness: 0.6,
+          strokeThickness: 1,
           lineJoin: 'round',
           fontWeight: 'lighter',
           letterSpacing: rawType === 'text' ? 2.2 : 1,
@@ -166,37 +181,23 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
         // 测量宽度
         const measure = TextMetrics.measureText(_p.text, fontStyle)
         posXOffset += measure.width + _p.posX
-      } else {
-        // TODO: type=symbol
+      } else if (rawType === 'symbol') {
+        // type=symbol
+        const _p = part as SymbolMeta
+        const sprite = getSymbolSprite(_p.icon, _p)
+        sprite.x = posXOffset + _p.posX
+        sprite.y = 8
+        sub.addChild(sprite)
+        posXOffset += sprite.width + _p.posX
       }
     }
 
     // 缩放调整边缘
     if (posXOffset > maxWidth || maxWidth - posXOffset < 10) {
-      sub.scale.x = maxWidth / posXOffset
+      // sub.scale.x = maxWidth / posXOffset
+      sub.width = maxWidth
     }
 
     container.addChild(sub)
   }
-
-  // for (const meta of lineMeta) {
-  //   const fontStyle = new TextStyle({
-  //     fontFamily: meta.fontFamily,
-  //     fontSize: meta.fontSize,
-  //     fill: info.color || 0x000,
-  //     strokeThickness: 0.6,
-  //     lineJoin: 'round',
-  //     fontWeight: 'lighter',
-  //     letterSpacing: 2.2,
-  //   })
-  //   const text = new Text(meta.text, fontStyle)
-  //   text.x = meta.posX
-  //   text.y = meta.posY
-  //   const measure = TextMetrics.measureText(info.content, fontStyle)
-  //   // FIXME: 一行多个字体时处理
-  //   if (measure.width > maxWidth) {
-  //     text.scale.x = maxWidth / measure.width
-  //   }
-  //   container.addChild(text)
-  // }
 }

@@ -61,8 +61,6 @@ export class ConjurerDomain {
     })
 
     const container = new Container()
-    container.width = this.settings.width
-    container.height = this.settings.height
     container.x = 0
     container.y = 0
     this.pixiApp.stage.addChild(container)
@@ -89,14 +87,12 @@ export class ConjurerDomain {
 
     container.x = resize(raw.x)
     container.y = resize(raw.y)
-    container.width = resize(raw.width)
-    container.height = resize(raw.height)
 
     // stroke
     if (this.settings.debug) {
       const rect = new Graphics()
-      rect.lineStyle(4, 0xff0000, 1)
-      rect.drawRect(0, 0, resize(raw.width), resize(raw.height))
+      rect.lineStyle(2, 0xff0000, 1)
+      rect.drawRect(-2, -2, resize(raw.width), resize(raw.height))
       rect.x = 0
       rect.y = 0
       container.addChild(rect)
@@ -133,6 +129,13 @@ export class ConjurerDomain {
   public updateRawTextInfo(id: number, update: Partial<RawTextBlock>) {
     const result = this.findTextBlockById(id)
     const newInfo: RawTextBlock = { ...result.info, ...update }
+    this.settings.debug &&
+      console.log(
+        `[DEBUG] update raw text info`,
+        { ...result.info },
+        update,
+        newInfo
+      )
     this.rawTextList[result.index] = newInfo
     return { ...result, info: newInfo }
   }
@@ -141,22 +144,27 @@ export class ConjurerDomain {
    * 更新文本框位置与大小
    * 更新后重新排版文字
    */
-  public updateTextBlockPosition(id: number, position: Position) {
+  public updateTextBlockPosition(id: number, position: Partial<Position>) {
     const { info, container } = this.updateRawTextInfo(id, position)
+
+    console.log(
+      [container.width, resize(info.width)],
+      [container.height, resize(info.height)],
+      [container.x, resize(info.x)],
+      [container.y, resize(info.y)]
+    )
 
     container.x = resize(info.x)
     container.y = resize(info.y)
-    container.width = resize(info.width)
-    container.height = resize(info.height)
 
     // 尺寸有变化时更新内容
-    if (info.width !== info.width || info.height !== info.height) {
+    if (position.width || position.height) {
       // update stroke
       if (this.settings.debug && container.children[0] instanceof Graphics) {
         const rect = container.children[0]
         rect.clear()
-        rect.lineStyle(4, 0xff0000, 1)
-        rect.drawRect(0, 0, resize(info.width), resize(info.height))
+        rect.lineStyle(2, 0xff0000, 1)
+        rect.drawRect(-2, -2, resize(info.width), resize(info.height))
       }
 
       // 更新排版

@@ -32,13 +32,15 @@ onMounted(() => {
   if (canvasRef.value) {
     domain.initCanvas(canvasRef.value)
   }
-  const cached = localStorage.getItem(TEXT_CACHED)
-  if (cached) {
-    const list: RawTextBlock[] = JSON.parse(cached)
-    list.forEach((raw) => {
-      domain.addRawTextBlock({ ...raw, id: 100 + raw.id + list.length })
-    })
-  }
+  setTimeout(() => {
+    const cached = localStorage.getItem(TEXT_CACHED)
+    if (cached) {
+      const list: RawTextBlock[] = JSON.parse(cached)
+      list.forEach((raw) => {
+        domain.addRawTextBlock({ ...raw, id: 100 + raw.id + list.length })
+      })
+    }
+  }, 0)
 })
 
 onBeforeUnmount(() => {
