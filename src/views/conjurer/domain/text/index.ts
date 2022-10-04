@@ -2,17 +2,10 @@ import { TextMetrics, Text, TextStyle, Container } from 'pixi.js'
 import type { RawTextBlock } from '../types'
 import { resize } from '../utils'
 import { fixed, tail } from '@/tools'
-import {
-  parseLineContent,
-  type TFlavorLine,
-  type TModifier,
-  type TPureNumber,
-  type TSymbol,
-  type TText,
-} from './parser'
+import { parseLineContent } from './parser'
 import { isNumberType } from './utils'
-import { getSymbolSprite } from './symbols'
-import { getFlavorSprite } from './flavor'
+import { getSymbolSprite, getFlavorSprite, getTextSprite } from './factory'
+import type { LineMeta, TextMeta, SymbolMeta } from './types'
 
 export const buildTextContent = (container: Container, info: RawTextBlock) => {
   if (info.displayType === 'title' || info.displayType === 'type') {
@@ -41,33 +34,6 @@ const buildTitleText = (container: Container, info: RawTextBlock) => {
   }
 
   container.addChild(text)
-}
-
-interface SymbolMeta {
-  raw: TSymbol
-  icon: string
-  posX: number
-  size: string
-}
-
-interface TextMeta {
-  raw: TText | TPureNumber | TModifier
-  posX: number
-  text: string
-  fontFamily: string
-  fontSize: number
-  italic: boolean
-}
-
-interface FlavorMeta {
-  raw: TFlavorLine
-  type: 'flavor'
-}
-
-interface LineMeta {
-  posY: number
-  baseFontSize: number
-  content: (SymbolMeta | TextMeta | FlavorMeta)[]
 }
 
 const buildRulesText = (container: Container, info: RawTextBlock) => {
@@ -108,7 +74,7 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
       if ('text' in part && part.text[0] === '（') {
         xOffset = 0
       }
-      if (previous && previous.type === 'symbol') {
+      if ((previous && previous.type === 'symbol') || part.type === 'symbol') {
         xOffset = 5
       }
 
@@ -183,24 +149,12 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
       ) {
         // type=各种文本
         const _p = part as TextMeta
-        const fontStyle = new TextStyle({
-          fontFamily: _p.fontFamily,
-          fontSize: _p.fontSize,
-          fontStyle: _p.italic ? 'italic' : 'normal',
-          fill: info.color || 0x000,
-          strokeThickness: 'bookFont' in _p.raw && _p.raw.bookFont ? 0 : 1,
-          lineJoin: 'round',
-          fontWeight: 'lighter',
-          letterSpacing: rawType === 'text' ? 2.2 : 1,
-        })
-        const text = new Text(_p.text, fontStyle)
+        const [text, measureWidth] = getTextSprite(_p, info)
         text.x = posXOffset + _p.posX
         text.y = rawType === 'text' ? 0 : 6
         sub.addChild(text)
-
         // 测量宽度
-        const measure = TextMetrics.measureText(_p.text, fontStyle)
-        posXOffset += measure.width + _p.posX
+        posXOffset += measureWidth + _p.posX
       } else if (rawType === 'symbol') {
         // type=symbol
         const _p = part as SymbolMeta
