@@ -9,6 +9,7 @@ import {
 import { getPrefixPosition } from './preset'
 import { DEFAULT_SETTINGS } from './settings'
 import { buildTextContent } from './text'
+import { FONT_SCALE } from './text/font-size'
 import type { DomainConstructorSettings, Position, RawTextBlock } from './types'
 import { resize, RESOLUTION } from './utils'
 
@@ -77,6 +78,7 @@ export class ConjurerDomain {
       id: ++this.innerId,
       content: '',
       color: '#000',
+      scale: FONT_SCALE.Normal,
       ...getPrefixPosition(count),
     }
     this.rawTextList.push(raw)

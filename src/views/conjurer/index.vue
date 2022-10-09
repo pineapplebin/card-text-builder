@@ -69,6 +69,7 @@ onBeforeUnmount(() => {
         @position="domain.updateTextBlockPosition(block.id, $event)"
         @content="domain.updateTextContent(block.id, $event)"
         @color="domain.updateRawTextInfo(block.id, { color: $event })"
+        @scale="domain.updateRawTextInfo(block.id, { scale: $event })"
         @display-type="
           domain.updateRawTextInfo(block.id, { displayType: $event })
         "

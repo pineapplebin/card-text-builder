@@ -37,9 +37,14 @@ Modifier "modifier"
     }
   }
 
+PowNum "pow-num"
+  = Num+ "/" Num+ {
+    return text()
+  }
 
 PureNum "pure-number"
-  = (Num / "/" / "\u2022")+ {
+  = (PowNum / Num / "\u2022")+ {
+    // \u2022 是 点号
     return {
         type: 'number',
         text: text()

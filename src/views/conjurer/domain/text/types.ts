@@ -1,3 +1,4 @@
+import type { FONT_SCALE } from './font-size'
 import type {
   TFlavorLine,
   TSymbol,
@@ -10,7 +11,7 @@ export interface SymbolMeta {
   raw: TSymbol
   icon: string
   posX: number
-  size: string
+  size: FONT_SCALE
 }
 
 export interface TextMeta {

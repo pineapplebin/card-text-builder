@@ -1,5 +1,6 @@
 import { Sprite, Texture, TextStyle, Text, TextMetrics } from 'pixi.js'
 import type { RawTextBlock } from '../types'
+import type { FONT_SCALE } from './font-size'
 import type { TextMeta } from './types'
 
 const modules = import.meta.glob('../assets/*.svg', { eager: true, as: 'raw' })
@@ -28,7 +29,7 @@ export function getFlavorSprite(width: number) {
   return sprite
 }
 
-export function getSymbolSprite(key: string, data: { size: string }) {
+export function getSymbolSprite(key: string, data: { size: FONT_SCALE }) {
   const texture = Texture.from(modules[`../assets/${key}.svg`])
   const sprite = new Sprite(texture)
   sprite.width = 28

@@ -6,22 +6,38 @@ import { parseLineContent } from './parser'
 import { isNumberType } from './utils'
 import { getSymbolSprite, getFlavorSprite, getTextSprite } from './factory'
 import type { LineMeta, TextMeta, SymbolMeta } from './types'
+import {
+  FONT_SCALE,
+  getBookFontSize,
+  getNumberFontSize,
+  getTextFontSize,
+} from './font-size'
 
 export const buildTextContent = (container: Container, info: RawTextBlock) => {
-  if (info.displayType === 'title' || info.displayType === 'type') {
-    buildTitleText(container, info)
-  } else if (info.displayType === 'rules') {
+  if (info.displayType === 'rules') {
     buildRulesText(container, info)
+  } else {
+    buildTitleText(container, info)
   }
 }
 
 const buildTitleText = (container: Container, info: RawTextBlock) => {
   const maxWidth = resize(info.width)
   const isTitle = info.displayType === 'title'
+  const fontSize = (() => {
+    if (info.displayType === 'title') {
+      return 44
+    } else if (info.displayType === 'type') {
+      return 42
+    } else if (info.displayType === 'flip-type') {
+      return 30
+    }
+    return 10
+  })()
 
   const fontStyle = new TextStyle({
     fontFamily: '华康魏碑 Std W7',
-    fontSize: isTitle ? 44 : 42,
+    fontSize,
     fill: info.color || 0x000,
     letterSpacing: isTitle ? 2 : 0,
   })
@@ -58,7 +74,7 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
 
     const meta: LineMeta = {
       posY: startPoxY,
-      baseFontSize: 35,
+      baseFontSize: getTextFontSize(info.scale),
       content: [],
     }
 
@@ -84,12 +100,12 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
           raw: part,
           text: part.text,
           fontFamily: '方正等细线_GBK_FIX',
-          fontSize: 35,
+          fontSize: meta.baseFontSize,
           italic: !!part.italic,
         } as TextMeta
         if (part.bookFont) {
           sub.fontFamily = 'Magic华文楷体'
-          sub.fontSize = 30
+          sub.fontSize = getBookFontSize(info.scale)
         }
         meta.content.push(sub)
       } else if (isNumberType(part)) {
@@ -98,7 +114,7 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
           raw: part,
           text: part.text,
           fontFamily: '方正等细线_GBK_FIX',
-          fontSize: 28,
+          fontSize: getNumberFontSize(info.scale),
           italic: !!part.italic,
         } as TextMeta)
       } else if (part.type === 'symbol') {
@@ -106,13 +122,13 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
           posX: xOffset,
           raw: part,
           icon: part.text,
-          size: 'normal',
+          size: FONT_SCALE.Normal,
         } as SymbolMeta)
       } else if (part.type === 'flavor') {
         meta.content.push({ raw: part, type: 'flavor' })
-        meta.posY += 20
+        meta.posY += meta.baseFontSize * 0.6
         meta.baseFontSize = 2
-        startPoxY += 35
+        startPoxY += meta.baseFontSize
       }
 
       index++

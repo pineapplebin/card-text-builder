@@ -2,12 +2,14 @@
 import type { Position, RawTextBlock } from '../domain/types'
 import CCard from './CCard.vue'
 import CButton from './CButton.vue'
+import { FONT_SCALE } from '../domain/text/font-size'
 
 const { block } = defineProps<{ block: RawTextBlock }>()
 const emit = defineEmits<{
   (e: 'position', pos: Partial<Position>): void
   (e: 'content', value: string): void
   (e: 'color', value: string): void
+  (e: 'scale', value: FONT_SCALE): void
   (e: 'display-type', value: RawTextBlock['displayType']): void
   (e: 'remove'): void
 }>()
@@ -35,6 +37,10 @@ const handleUpdateDisplayType = (ev: Event) => {
 
 const handleUpdateColor = (ev: Event) => {
   emit('color', getValue(ev) || 0x000)
+}
+
+const handleUpdateScale = (ev: Event) => {
+  emit('scale', +getValue(ev) || FONT_SCALE.Normal)
 }
 </script>
 
@@ -64,11 +70,19 @@ const handleUpdateColor = (ev: Event) => {
           <option value="title">title</option>
           <option value="type">type</option>
           <option value="rules">rules</option>
+          <option value="flip-type">flip-type</option>
         </select>
       </div>
       <div class="field">
         <span>color:</span>
         <input type="text" :value="block.color" @blur="handleUpdateColor" />
+      </div>
+      <div class="field">
+        <span>scale:</span>
+        <select :value="block.scale" @change="handleUpdateScale">
+          <option value="1">normal</option>
+          <option value="2">small</option>
+        </select>
       </div>
     </div>
     <div class="content">
