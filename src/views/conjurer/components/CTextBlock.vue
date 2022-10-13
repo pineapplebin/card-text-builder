@@ -71,6 +71,7 @@ const handleUpdateScale = (ev: Event) => {
           <option value="type">type</option>
           <option value="rules">rules</option>
           <option value="flip-type">flip-type</option>
+          <option value="8th-title">8th-title</option>
         </select>
       </div>
       <div class="field">

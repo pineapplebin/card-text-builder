@@ -43,7 +43,7 @@ PowNum "pow-num"
   }
 
 PureNum "pure-number"
-  = (PowNum / Num / "\u2022")+ {
+  = (PowNum / Num / "\u2022" / "X")+ {
     // \u2022 是 点号
     return {
         type: 'number',

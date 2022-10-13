@@ -17,6 +17,6 @@ export interface RawTextBlock extends Position {
   id: number
   content: string
   color: number | string
-  displayType: 'title' | 'type' | 'rules' | 'flip-type'
+  displayType: 'title' | 'type' | 'rules' | 'flip-type' | '8th-title'
   scale: FONT_SCALE
 }

@@ -1,6 +1,6 @@
 import { Sprite, Texture, TextStyle, Text, TextMetrics } from 'pixi.js'
 import type { RawTextBlock } from '../types'
-import type { FONT_SCALE } from './font-size'
+import { FONT_SCALE, getSymbolIconSize } from './font-size'
 import type { TextMeta } from './types'
 
 const modules = import.meta.glob('../assets/*.svg', { eager: true, as: 'raw' })
@@ -32,21 +32,47 @@ export function getFlavorSprite(width: number) {
 export function getSymbolSprite(key: string, data: { size: FONT_SCALE }) {
   const texture = Texture.from(modules[`../assets/${key}.svg`])
   const sprite = new Sprite(texture)
-  sprite.width = 28
-  sprite.height = 28
+  const size = getSymbolIconSize(data.size)
+  sprite.width = size
+  sprite.height = size
   return sprite
 }
+
+const checkIsBookFont = (r: Record<string, any>) =>
+  'bookFont' in r && !!r.bookFont
 
 export function getTextSprite(meta: TextMeta, info: RawTextBlock) {
   const _p = meta
   const rawType = meta.raw.type
 
   const letterSpacing = (() => {
-    if (rawType === 'text') {
-      if ('bookFont' in _p.raw && _p.raw.bookFont) {
-        return 3
+    let rst = 1
+    switch (info.scale) {
+      case FONT_SCALE.Small: {
+        if (rawType === 'text') {
+          if (checkIsBookFont(_p.raw)) {
+            rst = 2
+          }
+          rst = 1.7
+        }
+        break
       }
-      return 2.2
+      default: {
+        if (rawType === 'text') {
+          if (checkIsBookFont(_p.raw)) {
+            rst = 3
+          }
+          rst = 2.2
+        }
+        break
+      }
+    }
+    return rst
+  })()
+
+  const strokeThickness: number = (() => {
+    if (_p.fontFamily === 'Magic华文楷体') {
+      return 0
     }
     return 1
   })()
@@ -56,9 +82,10 @@ export function getTextSprite(meta: TextMeta, info: RawTextBlock) {
     fontSize: _p.fontSize,
     fontStyle: _p.italic ? 'italic' : 'normal',
     fill: info.color || 0x000,
-    strokeThickness: 'bookFont' in _p.raw && _p.raw.bookFont ? 0 : 1,
+    stroke: info.color || 0x000,
     lineJoin: 'round',
     fontWeight: 'lighter',
+    strokeThickness,
     letterSpacing,
   })
 
@@ -67,3 +94,5 @@ export function getTextSprite(meta: TextMeta, info: RawTextBlock) {
 
   return [text, measure.width] as const
 }
+
+export function getTitleSprite(info: RawTextBlock) {}

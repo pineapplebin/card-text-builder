@@ -5,6 +5,7 @@ import CCard from './components/CCard.vue'
 import CButton from './components/CButton.vue'
 import CTextBlock from './components/CTextBlock.vue'
 import type { RawTextBlock } from './domain/types'
+import MaskBlock from './MaskBlock.vue'
 
 const TEXT_CACHED = 'TEXT_CACHED '
 
@@ -75,6 +76,16 @@ onBeforeUnmount(() => {
         "
         @remove="domain.removeTextBlock(block.id)"
       />
+      <hr />
+      <!-- <MaskBlock
+        :masks="domain.maskList"
+        @update="domain.updateMask($event.index, $event.pos)"
+        @clear="domain.clearMask()"
+      />
+      <hr /> -->
+      <div class="hint">
+        <p>鹏洛客 title y:84</p>
+      </div>
     </div>
   </div>
 </template>
@@ -124,5 +135,19 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.hint {
+  color: white;
+}
+
+.hint > p::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: white;
+  margin-right: 10px;
 }
 </style>

@@ -6,6 +6,7 @@ import {
   BaseTexture,
   Sprite,
 } from 'pixi.js'
+import { MaskAddon } from './addons/mask'
 import { getPrefixPosition } from './preset'
 import { DEFAULT_SETTINGS } from './settings'
 import { buildTextContent } from './text'
@@ -13,7 +14,7 @@ import { FONT_SCALE } from './text/font-size'
 import type { DomainConstructorSettings, Position, RawTextBlock } from './types'
 import { resize, RESOLUTION } from './utils'
 
-export class ConjurerDomain {
+export class ConjurerDomain extends MaskAddon {
   public baseImage: string = ''
   public rawTextList: RawTextBlock[] = []
 
@@ -25,6 +26,7 @@ export class ConjurerDomain {
   protected settings: DomainConstructorSettings = { ...DEFAULT_SETTINGS }
 
   constructor(settings: Partial<DomainConstructorSettings> = {}) {
+    super()
     this.settings = { ...DEFAULT_SETTINGS, ...settings }
   }
 
@@ -44,6 +46,8 @@ export class ConjurerDomain {
       })
       background.scale = { x: 1 / RESOLUTION, y: 1 / RESOLUTION }
       this.pixiApp!.stage.addChildAt(background, 0)
+
+      this.initMaskBlock()
     })
     reader.readAsDataURL(this.file)
   }
@@ -65,7 +69,9 @@ export class ConjurerDomain {
     container.x = 0
     container.y = 0
     this.pixiApp.stage.addChild(container)
+
     this.container = container
+    this.pixiApp.stage.addChild(this.initMaskContainer())
   }
 
   /**
@@ -148,13 +154,6 @@ export class ConjurerDomain {
    */
   public updateTextBlockPosition(id: number, position: Partial<Position>) {
     const { info, container } = this.updateRawTextInfo(id, position)
-
-    console.log(
-      [container.width, resize(info.width)],
-      [container.height, resize(info.height)],
-      [container.x, resize(info.x)],
-      [container.y, resize(info.y)]
-    )
 
     container.x = resize(info.x)
     container.y = resize(info.y)

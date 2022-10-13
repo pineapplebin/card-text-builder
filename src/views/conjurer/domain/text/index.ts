@@ -7,9 +7,11 @@ import { isNumberType } from './utils'
 import { getSymbolSprite, getFlavorSprite, getTextSprite } from './factory'
 import type { LineMeta, TextMeta, SymbolMeta } from './types'
 import {
-  FONT_SCALE,
   getBookFontSize,
   getNumberFontSize,
+  getNumberOffsetX,
+  getNumberOffsetY,
+  getSymbolOffsetY,
   getTextFontSize,
 } from './font-size'
 
@@ -23,24 +25,38 @@ export const buildTextContent = (container: Container, info: RawTextBlock) => {
 
 const buildTitleText = (container: Container, info: RawTextBlock) => {
   const maxWidth = resize(info.width)
-  const isTitle = info.displayType === 'title'
-  const fontSize = (() => {
-    if (info.displayType === 'title') {
-      return 44
-    } else if (info.displayType === 'type') {
-      return 42
-    } else if (info.displayType === 'flip-type') {
-      return 30
+
+  let config: { fontSize: number; letterSpacing: number; fontFamily: string }
+  switch (info.displayType) {
+    case 'title': {
+      config = { fontSize: 44, letterSpacing: 2, fontFamily: '华康魏碑 Std W7' }
+      break
     }
-    return 10
-  })()
+    case 'type': {
+      config = { fontSize: 42, letterSpacing: 0, fontFamily: '华康魏碑 Std W7' }
+      break
+    }
+    case 'flip-type': {
+      config = { fontSize: 30, letterSpacing: 0, fontFamily: '华康魏碑 Std W7' }
+      break
+    }
+    case '8th-title': {
+      config = { fontSize: 40, letterSpacing: 1, fontFamily: '方正大标宋_GBK' }
+      break
+    }
+    default: {
+      config = { fontSize: 10, letterSpacing: 0, fontFamily: '华康魏碑 Std W7' }
+      break
+    }
+  }
 
   const fontStyle = new TextStyle({
-    fontFamily: '华康魏碑 Std W7',
-    fontSize,
+    fontFamily: config.fontFamily,
+    fontSize: config.fontSize,
+    letterSpacing: config.letterSpacing,
     fill: info.color || 0x000,
-    letterSpacing: isTitle ? 2 : 0,
   })
+
   const text = new Text(info.content, fontStyle)
   text.x = 0
   text.y = 0
@@ -82,7 +98,9 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
     for (const part of result) {
       const previous = result[index - 1]
       let xOffset =
-        isNumberType(part) || (previous && isNumberType(previous)) ? 10 : 0
+        isNumberType(part) || (previous && isNumberType(previous))
+          ? getNumberOffsetX(info.scale)
+          : 0
 
       if (index === 0) {
         xOffset = 0
@@ -122,7 +140,7 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
           posX: xOffset,
           raw: part,
           icon: part.text,
-          size: FONT_SCALE.Normal,
+          size: info.scale,
         } as SymbolMeta)
       } else if (part.type === 'flavor') {
         meta.content.push({ raw: part, type: 'flavor' })
@@ -167,7 +185,7 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
         const _p = part as TextMeta
         const [text, measureWidth] = getTextSprite(_p, info)
         text.x = posXOffset + _p.posX
-        text.y = rawType === 'text' ? 0 : 6
+        text.y = rawType === 'text' ? 0 : getNumberOffsetY(info.scale)
         sub.addChild(text)
         // 测量宽度
         posXOffset += measureWidth + _p.posX
@@ -176,7 +194,8 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
         const _p = part as SymbolMeta
         const sprite = getSymbolSprite(_p.icon, _p)
         sprite.x = posXOffset + _p.posX
-        sprite.y = 8
+        sprite.y = getSymbolOffsetY(_p.size)
+        console.log(_p.size, sprite.y)
         sub.addChild(sprite)
         posXOffset += sprite.width + _p.posX
       } else if (rawType === 'flavor') {
@@ -190,9 +209,9 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
     }
 
     // 缩放调整边缘
-    if (posXOffset > maxWidth || maxWidth - posXOffset < 10) {
-      // sub.scale.x = maxWidth / posXOffset
-      sub.width = maxWidth
+    if (sub.width > maxWidth || maxWidth - sub.width < 15) {
+      // sub.width = maxWidth
+      sub.scale.set(maxWidth / posXOffset, 1)
     }
 
     container.addChild(sub)

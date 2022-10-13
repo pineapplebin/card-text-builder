@@ -7,7 +7,7 @@ export enum FONT_SCALE {
 export function getTextFontSize(scale: FONT_SCALE) {
   switch (scale) {
     case FONT_SCALE.Small:
-      return 32
+      return 27
     default:
       return 35
   }
@@ -25,8 +25,43 @@ export function getBookFontSize(scale: FONT_SCALE) {
 export function getNumberFontSize(scale: FONT_SCALE) {
   switch (scale) {
     case FONT_SCALE.Small:
-      return 25
+      return 24
     default:
       return 28
+  }
+}
+
+export function getNumberOffsetY(scale: FONT_SCALE) {
+  switch (scale) {
+    case FONT_SCALE.Small:
+      return 2
+    default:
+      return 6
+  }
+}
+
+export function getNumberOffsetX(scale: FONT_SCALE) {
+  switch (scale) {
+    case FONT_SCALE.Small:
+      return 5
+    default:
+      return 10
+  }
+}
+
+export function getSymbolIconSize(scale: FONT_SCALE) {
+  switch (scale) {
+    case FONT_SCALE.Small:
+      return 24
+    default:
+      return 28
+  }
+}
+export function getSymbolOffsetY(scale: FONT_SCALE) {
+  switch (scale) {
+    case FONT_SCALE.Small:
+      return 4
+    default:
+      return 7
   }
 }
