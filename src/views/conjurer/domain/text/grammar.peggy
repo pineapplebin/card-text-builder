@@ -20,10 +20,10 @@ HansChar "hans-char" = [\u3000-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff
 Char = EngChar / HansChar / [\[\]] / " "
 
 Symbol "symbol"
-  = "{" _ s:([0-9a-zA-Z]+) _ "}" {
+  = "{" _ s:((EngChar / Num)+) _ "}" {
   	return {
       type: "symbol",
-      text: s.join('')
+      text: s.join('').toLowerCase()
     }
   }
 

@@ -145,8 +145,8 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
       } else if (part.type === 'flavor') {
         meta.content.push({ raw: part, type: 'flavor' })
         meta.posY += meta.baseFontSize * 0.6
-        meta.baseFontSize = 2
         startPoxY += meta.baseFontSize
+        meta.baseFontSize = 2
       }
 
       index++
@@ -194,8 +194,7 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
         const _p = part as SymbolMeta
         const sprite = getSymbolSprite(_p.icon, _p)
         sprite.x = posXOffset + _p.posX
-        sprite.y = getSymbolOffsetY(_p.size)
-        console.log(_p.size, sprite.y)
+        sprite.y = getSymbolOffsetY(_p.icon, _p.size)
         sub.addChild(sprite)
         posXOffset += sprite.width + _p.posX
       } else if (rawType === 'flavor') {

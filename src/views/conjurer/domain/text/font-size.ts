@@ -57,7 +57,7 @@ export function getSymbolIconSize(scale: FONT_SCALE) {
       return 28
   }
 }
-export function getSymbolOffsetY(scale: FONT_SCALE) {
+export function getSymbolOffsetY(icon: string, scale: FONT_SCALE) {
   switch (scale) {
     case FONT_SCALE.Small:
       return 4

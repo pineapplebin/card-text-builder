@@ -3,29 +3,14 @@ import type { RawTextBlock } from '../types'
 import { FONT_SCALE, getSymbolIconSize } from './font-size'
 import type { TextMeta } from './types'
 
+import IMG_BAR from '../assets/bar.png'
 const modules = import.meta.glob('../assets/*.svg', { eager: true, as: 'raw' })
 
-function createGradient(width: number) {
-  const canvas = document.createElement('canvas')
-  canvas.width = width
-  canvas.height = 2
-  const ctx = canvas.getContext('2d')
-  if (!ctx) {
-    return
-  }
-  const grd = ctx.createLinearGradient(0, 0, width, 0)
-  grd.addColorStop(0, 'transparent')
-  grd.addColorStop(0.3, '#ccc')
-  grd.addColorStop(0.7, '#ccc')
-  grd.addColorStop(1, 'transparent')
-
-  ctx.fillStyle = grd
-  ctx.fillRect(0, 0, width, 2)
-  return Texture.from(canvas)
-}
-
 export function getFlavorSprite(width: number) {
-  const sprite = new Sprite(createGradient(width))
+  const texture = Texture.from(IMG_BAR)
+  const sprite = new Sprite(texture)
+  sprite.width = width
+  sprite.height = 2
   return sprite
 }
 
@@ -94,5 +79,3 @@ export function getTextSprite(meta: TextMeta, info: RawTextBlock) {
 
   return [text, measure.width] as const
 }
-
-export function getTitleSprite(info: RawTextBlock) {}

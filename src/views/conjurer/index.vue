@@ -5,7 +5,6 @@ import CCard from './components/CCard.vue'
 import CButton from './components/CButton.vue'
 import CTextBlock from './components/CTextBlock.vue'
 import type { RawTextBlock } from './domain/types'
-import MaskBlock from './MaskBlock.vue'
 
 const TEXT_CACHED = 'TEXT_CACHED '
 
