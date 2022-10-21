@@ -15,7 +15,7 @@ _ = (WhiteSpace)*
 
 Num = [0-9]
 
-EngChar = [_a-zA-Z]
+EngChar = [_a-zA-Z\(\)]
 HansChar "hans-char" = [\u3000-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff00-\uff9f]
 Char = EngChar / HansChar / [\[\]] / " "
 
@@ -51,21 +51,28 @@ PureNum "pure-number"
       }
   }
 
-FormatTag = "ib" / "i" / "b"
+FormatTag = "i" / "b"
 
-Formatted "Fomatted"
-  = "<" start:FormatTag ">" _ body:(PureNum / Symbol / Modifier / Char)* _ "</" end:FormatTag ">" {
-    if (start != end) {
-      error('tag start not matching end')
-    }
-
+ItalicFormat "italic-format"
+  = "<i>" _ body:(PureNum / Symbol / Modifier / Char)* _ "</i>" {
     return {
       type: 'formatted',
-      italic: start.indexOf('i') > -1,
-      bookFont: start.indexOf('b') > -1,
+      italic: true,
+      bookFont: false,
       body: body || []
     }
   }
+
+BookFormat "book-format"
+  = "<b>" _ body:(Num / Symbol / Modifier / Char)* _ "</b>" {
+    return {
+      type: 'formatted',
+      italic: false,
+      bookFont: true,
+      body: body || []
+    }
+  }
+
 
 Flavor "flavor"
   = "<f>" {
@@ -74,6 +81,6 @@ Flavor "flavor"
     }
   }
 
-Line = _ body:(Modifier / PureNum / Symbol / Flavor / Formatted / Char)* _ {
+Line = _ body:(Modifier / PureNum / Symbol / Flavor / ItalicFormat / BookFormat / Char)* _ {
 	return body || []
 }

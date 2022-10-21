@@ -44,6 +44,10 @@ const buildTitleText = (container: Container, info: RawTextBlock) => {
       config = { fontSize: 40, letterSpacing: 1, fontFamily: '方正大标宋_GBK' }
       break
     }
+    case 'adventure': {
+      config = { fontSize: 34, letterSpacing: 0, fontFamily: '华康魏碑 Std W7' }
+      break
+    }
     default: {
       config = { fontSize: 10, letterSpacing: 0, fontFamily: '华康魏碑 Std W7' }
       break
@@ -65,6 +69,12 @@ const buildTitleText = (container: Container, info: RawTextBlock) => {
     text.scale.x = maxWidth / measure.width
   }
 
+  // 处理 align
+  if (info.align === 'center') {
+    text.anchor.set(0.5, 0)
+    text.x = +(maxWidth / 2).toPrecision(10)
+  }
+
   container.addChild(text)
 }
 
@@ -80,7 +90,7 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
   for (const line of lines) {
     // 空行 增加下一行间距
     if (!line) {
-      startPoxY += 10
+      startPoxY += 12
       continue
     }
 
@@ -207,10 +217,25 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
       }
     }
 
-    // 缩放调整边缘
-    if (sub.width > maxWidth || maxWidth - sub.width < 15) {
-      // sub.width = maxWidth
-      sub.scale.set(maxWidth / posXOffset, 1)
+    if (info.align === 'center' && sub.width < maxWidth) {
+      // 居中内容
+      const offset = +((maxWidth - sub.width) / 2).toPrecision(10)
+      sub.children.forEach((child) => {
+        child.x += offset
+      })
+    } else if (sub.width > maxWidth || maxWidth - sub.width < 15) {
+      // 缩放调整对齐边缘
+      let delta = 0
+      const lastPart = meta.content[meta.content.length - 1]
+      // 判断最后一个字符是中文逗号或句号，适当延长宽度对齐
+      if (
+        lastPart &&
+        lastPart.raw.type === 'text' &&
+        /[。，]$/.test(lastPart.raw.text)
+      ) {
+        delta = meta.baseFontSize / 1.6
+      }
+      sub.scale.set((maxWidth + delta) / posXOffset, 1)
     }
 
     container.addChild(sub)

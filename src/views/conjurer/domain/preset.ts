@@ -16,7 +16,7 @@ export function getPrefixPosition(
     // 类型
     return {
       x: 128,
-      y: 1189,
+      y: 1192,
       width: 1244,
       height: 114,
       displayType: 'type',

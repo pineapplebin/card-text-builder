@@ -70,6 +70,7 @@ onBeforeUnmount(() => {
         @content="domain.updateTextContent(block.id, $event)"
         @color="domain.updateRawTextInfo(block.id, { color: $event })"
         @scale="domain.updateRawTextInfo(block.id, { scale: $event })"
+        @align="domain.updateRawTextInfo(block.id, { align: $event })"
         @display-type="
           domain.updateRawTextInfo(block.id, { displayType: $event })
         "
@@ -83,7 +84,18 @@ onBeforeUnmount(() => {
       />
       <hr /> -->
       <div class="hint">
-        <p>鹏洛客 title y:84</p>
+        <p>
+          双面牌注意背面是否含有 holo stamps
+          要跟随美版（中文一般有美版一般没有）
+        </p>
+        <p>鹏洛客 title y: 84</p>
+        <p>衍生物 title color: #fde368</p>
+        <p>旧版 无效果 衍生物 type y: 1724</p>
+        <p>旧版 效果 衍生物 type y: 1368</p>
+        <p>历险 title y: 1328, type y: 1420</p>
+        <p>历险 storybook big-type y: 1196 居中</p>
+        <p>传记 type y: 1784</p>
+        <p>DOM 传记 水印透明度: 15</p>
       </div>
     </div>
   </div>

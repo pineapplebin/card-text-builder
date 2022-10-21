@@ -85,6 +85,7 @@ export class ConjurerDomain extends MaskAddon {
       content: '',
       color: '#000',
       scale: FONT_SCALE.Normal,
+      align: 'left',
       ...getPrefixPosition(count),
     }
     this.rawTextList.push(raw)

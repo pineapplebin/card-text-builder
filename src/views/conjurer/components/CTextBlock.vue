@@ -9,8 +9,9 @@ const emit = defineEmits<{
   (e: 'position', pos: Partial<Position>): void
   (e: 'content', value: string): void
   (e: 'color', value: string): void
-  (e: 'scale', value: FONT_SCALE): void
   (e: 'display-type', value: RawTextBlock['displayType']): void
+  (e: 'scale', value: FONT_SCALE): void
+  (e: 'align', value: RawTextBlock['align']): void
   (e: 'remove'): void
 }>()
 
@@ -42,6 +43,10 @@ const handleUpdateColor = (ev: Event) => {
 const handleUpdateScale = (ev: Event) => {
   emit('scale', +getValue(ev) || FONT_SCALE.Normal)
 }
+
+const handleUpdateAlign = (ev: Event) => {
+  emit('align', getValue(ev) || 'left')
+}
 </script>
 
 <template>
@@ -72,6 +77,7 @@ const handleUpdateScale = (ev: Event) => {
           <option value="rules">rules</option>
           <option value="flip-type">flip-type</option>
           <option value="8th-title">8th-title</option>
+          <option value="adventure">adventure</option>
         </select>
       </div>
       <div class="field">
@@ -83,6 +89,15 @@ const handleUpdateScale = (ev: Event) => {
         <select :value="block.scale" @change="handleUpdateScale">
           <option value="1">normal</option>
           <option value="2">small</option>
+          <option value="3">middle</option>
+        </select>
+      </div>
+      <div class="field">
+        <span>align:</span>
+        <select :value="block.align" @change="handleUpdateAlign">
+          <option value="left">left</option>
+          <option value="center">center</option>
+          <option value="right">right</option>
         </select>
       </div>
     </div>
