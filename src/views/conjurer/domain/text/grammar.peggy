@@ -15,7 +15,7 @@ _ = (WhiteSpace)*
 
 Num = [0-9]
 
-EngChar = [_a-zA-Z\(\)]
+EngChar = [_a-zA-Z\(\):,]
 HansChar "hans-char" = [\u3000-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff00-\uff9f]
 Char = EngChar / HansChar / [\[\]] / " "
 
@@ -27,7 +27,7 @@ Symbol "symbol"
     }
   }
 
-ModifierPart = ("+" / "-") Num+
+ModifierPart = ("+" / "-") (Num / "X")+
 
 Modifier "modifier"
   = ModifierPart "/" ModifierPart {

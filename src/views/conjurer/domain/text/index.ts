@@ -1,4 +1,10 @@
-import { TextMetrics, Text, TextStyle, Container } from 'pixi.js'
+import {
+  TextMetrics,
+  Text,
+  TextStyle,
+  Container,
+  type ITextStyle,
+} from 'pixi.js'
 import type { RawTextBlock } from '../types'
 import { resize } from '../utils'
 import { fixed, tail } from '@/tools'
@@ -26,7 +32,7 @@ export const buildTextContent = (container: Container, info: RawTextBlock) => {
 const buildTitleText = (container: Container, info: RawTextBlock) => {
   const maxWidth = resize(info.width)
 
-  let config: { fontSize: number; letterSpacing: number; fontFamily: string }
+  let config: Partial<ITextStyle>
   switch (info.displayType) {
     case 'title': {
       config = { fontSize: 44, letterSpacing: 2, fontFamily: '华康魏碑 Std W7' }
@@ -48,6 +54,26 @@ const buildTitleText = (container: Container, info: RawTextBlock) => {
       config = { fontSize: 34, letterSpacing: 0, fontFamily: '华康魏碑 Std W7' }
       break
     }
+    case '7th-title': {
+      config = {
+        fontSize: 40,
+        letterSpacing: 1,
+        fontFamily: '方正大标宋_GBK',
+        dropShadow: true,
+        dropShadowDistance: 4,
+      }
+      break
+    }
+    case '7th-type': {
+      config = {
+        fontSize: 40,
+        letterSpacing: 0,
+        fontFamily: '华康魏碑 Std W7',
+        dropShadow: true,
+        dropShadowDistance: 4,
+      }
+      break
+    }
     default: {
       config = { fontSize: 10, letterSpacing: 0, fontFamily: '华康魏碑 Std W7' }
       break
@@ -55,9 +81,7 @@ const buildTitleText = (container: Container, info: RawTextBlock) => {
   }
 
   const fontStyle = new TextStyle({
-    fontFamily: config.fontFamily,
-    fontSize: config.fontSize,
-    letterSpacing: config.letterSpacing,
+    ...config,
     fill: info.color || 0x000,
   })
 
@@ -118,8 +142,20 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
       if ('text' in part && part.text[0] === '（') {
         xOffset = 0
       }
-      if ((previous && previous.type === 'symbol') || part.type === 'symbol') {
+      if (previous && previous.type === 'symbol') {
         xOffset = 5
+      }
+      if (part.type === 'symbol') {
+        // 如果前一个字符是 逗号 缩短距离
+        if (
+          previous &&
+          previous.type === 'text' &&
+          /[，]$/.test(previous.text)
+        ) {
+          xOffset = -1 * (meta.baseFontSize * 0.4)
+        } else {
+          xOffset = 5
+        }
       }
 
       if (part.type === 'text') {
@@ -231,7 +267,7 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
       if (
         lastPart &&
         lastPart.raw.type === 'text' &&
-        /[。，]$/.test(lastPart.raw.text)
+        /[。，、]$/.test(lastPart.raw.text)
       ) {
         delta = meta.baseFontSize / 1.6
       }

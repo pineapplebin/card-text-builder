@@ -88,14 +88,17 @@ onBeforeUnmount(() => {
           双面牌注意背面是否含有 holo stamps
           要跟随美版（中文一般有美版一般没有）
         </p>
-        <p>鹏洛客 title y: 84</p>
+        <p>鹏洛客 x: 130, title y: 84, type y: 1190</p>
         <p>衍生物 title color: #fde368</p>
         <p>旧版 无效果 衍生物 type y: 1724</p>
         <p>旧版 效果 衍生物 type y: 1368</p>
+        <p>扩画 短效果 type y: 1284</p>
         <p>历险 title y: 1328, type y: 1420</p>
         <p>历险 storybook big-type y: 1196 居中</p>
         <p>传记 type y: 1784</p>
         <p>DOM 传记 水印透明度: 15</p>
+        <p>OGW 虚色牌框 加多一层 type 和 text, text透明度: 50</p>
+        <p>7th title y: 93, type y: 1157</p>
       </div>
     </div>
   </div>

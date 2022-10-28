@@ -78,6 +78,8 @@ const handleUpdateAlign = (ev: Event) => {
           <option value="flip-type">flip-type</option>
           <option value="8th-title">8th-title</option>
           <option value="adventure">adventure</option>
+          <option value="7th-title">7th-title</option>
+          <option value="7th-type">7th-type</option>
         </select>
       </div>
       <div class="field">

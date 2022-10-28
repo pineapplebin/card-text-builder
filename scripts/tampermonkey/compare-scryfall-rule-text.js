@@ -7,11 +7,16 @@
 // @include      /^https:\/\/scryfall.com\/card\/[\d\w]+\/[\d\w]+\//
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=scryfall.com
 // @grant        GM_xmlhttpRequest
+// @grant        GM_addStyle
 // @connect      *
 // ==/UserScript==
 
 ;(async function () {
   'use strict'
+
+  GM_addStyle(
+    '.pine-hint { background-color: #b80000; color: white; padding: 0 5px; } .pine-italic { font-style: italic; }'
+  )
 
   function log(...args) {
     console.log('%c[monkey]', 'color:blue', ...args)
@@ -52,13 +57,15 @@
   }
   const target = $(parent[0]).find('p.card-text-artist')[0]
 
-  function buildText(text, type) {
+  function buildText(text, type, showHint) {
     const container = document.createElement('div')
     container.className = 'card-text-box'
     const inner = document.createElement('div')
     inner.className = 'card-text-oracle'
     inner.innerHTML =
-      `<pre>${type.toUpperCase()}:L ${text.length}</pre>` +
+      `<pre>${type.toUpperCase()}:L <span class="pine-italic">${
+        text.length
+      }</span> ${showHint ? '<span class="pine-hint">DIFF</span>' : ''}</pre>` +
       text
         .split('\n')
         .map((line) => `<p>${line}</p>`)
@@ -70,7 +77,11 @@
   log(target)
   target.parentNode.insertBefore(buildText(data.oracle_text, 'oracle'), target)
   target.parentNode.insertBefore(
-    buildText(list[0].originalText, 'printed'),
+    buildText(
+      list[0].originalText,
+      'printed',
+      data.oracle_text.length !== list[0].originalText.length
+    ),
     target
   )
 })()

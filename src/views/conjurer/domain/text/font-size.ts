@@ -20,7 +20,7 @@ export function getBookFontSize(scale: FONT_SCALE) {
     case FONT_SCALE.Small:
       return 28
     case FONT_SCALE.Middle:
-      return 30
+      return 29
     default:
       return 32
   }
