@@ -98,7 +98,13 @@ onBeforeUnmount(() => {
         <p>传记 type y: 1784</p>
         <p>DOM 传记 水印透明度: 15</p>
         <p>OGW 虚色牌框 加多一层 type 和 text, text透明度: 50</p>
+        <p>KHM showcase title y: 130, type y: 1231</p>
+        <p>8th title y: 130, type y: 1188</p>
         <p>7th title y: 93, type y: 1157</p>
+      </div>
+      <div class="hint">
+        <p>水印 foretell x:427, y: 1360, scale: 2016.7</p>
+        <p>水印 8th ravnica opacity: 60</p>
       </div>
     </div>
   </div>

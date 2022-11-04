@@ -17,6 +17,7 @@ import {
   getNumberFontSize,
   getNumberOffsetX,
   getNumberOffsetY,
+  getSymbolOffsetX,
   getSymbolOffsetY,
   getTextFontSize,
 } from './font-size'
@@ -143,7 +144,7 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
         xOffset = 0
       }
       if (previous && previous.type === 'symbol') {
-        xOffset = 5
+        xOffset = getSymbolOffsetX(info.scale)
       }
       if (part.type === 'symbol') {
         // 如果前一个字符是 逗号 缩短距离
@@ -154,7 +155,7 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
         ) {
           xOffset = -1 * (meta.baseFontSize * 0.4)
         } else {
-          xOffset = 5
+          xOffset = getSymbolOffsetX(info.scale)
         }
       }
 
@@ -182,6 +183,7 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
           italic: !!part.italic,
         } as TextMeta)
       } else if (part.type === 'symbol') {
+        console.log(part, xOffset)
         meta.content.push({
           posX: xOffset,
           raw: part,
@@ -267,7 +269,7 @@ const buildRulesText = (container: Container, info: RawTextBlock) => {
       if (
         lastPart &&
         lastPart.raw.type === 'text' &&
-        /[。，、]$/.test(lastPart.raw.text)
+        /[。，、」]$/.test(lastPart.raw.text)
       ) {
         delta = meta.baseFontSize / 1.6
       }

@@ -17,7 +17,7 @@ export function getFlavorSprite(width: number) {
 export function getSymbolSprite(key: string, data: { size: FONT_SCALE }) {
   const texture = Texture.from(modules[`../assets/${key}.svg`])
   const sprite = new Sprite(texture)
-  const size = getSymbolIconSize(data.size)
+  const size = getSymbolIconSize(key, data.size)
   sprite.width = size
   sprite.height = size
   return sprite
@@ -29,26 +29,33 @@ const checkIsBookFont = (r: Record<string, any>) =>
 export function getTextSprite(meta: TextMeta, info: RawTextBlock) {
   const _p = meta
   const rawType = meta.raw.type
+  const isBookFont = checkIsBookFont(_p.raw)
 
   const letterSpacing = (() => {
     let rst = 1
+    if (rawType !== 'text') {
+      return rst
+    }
     switch (info.scale) {
       case FONT_SCALE.Small: {
-        if (rawType === 'text') {
-          if (checkIsBookFont(_p.raw)) {
-            rst = 2
-          }
+        if (isBookFont) {
           rst = 1.7
         }
+        rst = 1.7
+      }
+      case FONT_SCALE.Middle:
+      case FONT_SCALE.MiddleS: {
+        if (isBookFont) {
+          rst = 2.4
+        }
+        rst = 2
         break
       }
       default: {
-        if (rawType === 'text') {
-          if (checkIsBookFont(_p.raw)) {
-            rst = 3
-          }
-          rst = 2.2
+        if (checkIsBookFont(_p.raw)) {
+          rst = 3
         }
+        rst = 2.2
         break
       }
     }
