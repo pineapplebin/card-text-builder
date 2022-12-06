@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import ConjurerView from './views/conjurer/index.vue'
+// import ConjurerView from './views/conjurer/index.vue'
+import FabView from './views/fab/index.vue'
 </script>
 
 <template>
-  <ConjurerView />
+  <FabView />
 </template>
 
 <style scoped></style>

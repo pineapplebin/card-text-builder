@@ -1,10 +1,16 @@
 <script lang="ts" setup>
-import type { Position, RawTextBlock } from '../domain/types'
 import CCard from './CCard.vue'
 import CButton from './CButton.vue'
-import { FONT_SCALE } from '../domain/text/font-size'
+import {
+  FONT_SCALE,
+  type Position,
+  type RawTextBlock,
+} from '@/classes/BaseDomain'
 
-const { block } = defineProps<{ block: RawTextBlock }>()
+const { block, options } = defineProps<{
+  block: RawTextBlock
+  options: string[]
+}>()
 const emit = defineEmits<{
   (e: 'position', pos: Partial<Position>): void
   (e: 'content', value: string): void
@@ -72,14 +78,9 @@ const handleUpdateAlign = (ev: Event) => {
       <div class="field">
         <span>type:</span>
         <select :value="block.displayType" @change="handleUpdateDisplayType">
-          <option value="title">title</option>
-          <option value="type">type</option>
-          <option value="rules">rules</option>
-          <option value="flip-type">flip-type</option>
-          <option value="8th-title">8th-title</option>
-          <option value="adventure">adventure</option>
-          <option value="7th-title">7th-title</option>
-          <option value="7th-type">7th-type</option>
+          <option v-for="opt in options" :key="opt" :value="opt">
+            {{ opt }}
+          </option>
         </select>
       </div>
       <div class="field">

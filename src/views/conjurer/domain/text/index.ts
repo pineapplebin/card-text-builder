@@ -5,8 +5,8 @@ import {
   Container,
   type ITextStyle,
 } from 'pixi.js'
-import type { RawTextBlock } from '../types'
-import { resize } from '../utils'
+import type { RawTextBlock } from '@/classes/BaseDomain/types'
+import { resize } from '@/classes/BaseDomain/utils'
 import { fixed, tail } from '@/tools'
 import { parseLineContent } from './parser'
 import { isNumberType } from './utils'

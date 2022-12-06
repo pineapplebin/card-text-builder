@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import { reactive, ref, watch, onMounted, onBeforeUnmount } from 'vue'
-import { ConjurerDomain } from './domain'
+import { FABDomain } from './domain'
 import CCard from '@/components/CCard.vue'
 import CButton from '@/components/CButton.vue'
 import CTextBlock from '@/components/CTextBlock.vue'
 import type { RawTextBlock } from '@/classes/BaseDomain/types'
-import { getPrefixPosition } from './domain/preset'
 
-const TEXT_CACHED = 'TEXT_CACHED '
+const TEXT_CACHED = 'FAB_TEXT_CACHED'
 
 const canvasRef = ref<HTMLCanvasElement>()
-const domain = reactive(new ConjurerDomain({ debug: false }))
+const domain = reactive(new FABDomain({ debug: false }))
 
 watch(domain.rawTextList, (val) => {
   if (val) {
@@ -48,21 +47,7 @@ onBeforeUnmount(() => {
   domain.destroy()
 })
 
-function addRawTextBlock() {
-  const count = domain.rawTextList.length
-  domain.addRawTextBlock(getPrefixPosition(count))
-}
-
-const DISPLAY_TYPE_OPTIONS = [
-  'title',
-  'type',
-  'rules',
-  'flip-type',
-  '8th-title',
-  'adventure',
-  '7th-title',
-  '7th-type',
-]
+const DISPLAY_TYPE_OPTIONS = ['name']
 </script>
 
 <template>
@@ -77,7 +62,7 @@ const DISPLAY_TYPE_OPTIONS = [
         <input type="file" accept="image/jpeg,image/png" @change="handleFile" />
       </CCard>
       <CCard>
-        <CButton @click="addRawTextBlock">增加新文本</CButton>
+        <CButton @click="domain.addRawTextBlock()">增加新文本</CButton>
       </CCard>
       <CTextBlock
         v-for="block in domain.rawTextList"
@@ -95,41 +80,13 @@ const DISPLAY_TYPE_OPTIONS = [
         @remove="domain.removeTextBlock(block.id)"
       />
       <hr />
-      <!-- <MaskBlock
-        :masks="domain.maskList"
-        @update="domain.updateMask($event.index, $event.pos)"
-        @clear="domain.clearMask()"
-      />
-      <hr /> -->
-      <div class="hint">
-        <p>
-          双面牌注意背面是否含有 holo stamps
-          要跟随美版（中文一般有美版一般没有）
-        </p>
-        <p>鹏洛客 x: 130, title y: 84, type y: 1190</p>
-        <p>衍生物 title color: #fde368</p>
-        <p>旧版 无效果 衍生物 type y: 1724</p>
-        <p>旧版 效果 衍生物 type y: 1368</p>
-        <p>扩画 短效果 type y: 1284</p>
-        <p>历险 title y: 1328, type y: 1420</p>
-        <p>历险 storybook big-type y: 1196 居中</p>
-        <p>传记 type y: 1784</p>
-        <p>DOM 传记 水印透明度: 15</p>
-        <p>OGW 虚色牌框 加多一层 type 和 text, text透明度: 50</p>
-        <p>KHM showcase title y: 130, type y: 1231</p>
-        <p>8th title y: 130, type y: 1188</p>
-        <p>7th title y: 93, type y: 1157</p>
-      </div>
-      <div class="hint">
-        <p>水印 foretell x:427, y: 1360, scale: 2016.7</p>
-        <p>水印 8th ravnica opacity: 60</p>
-      </div>
+      <div class="hint"></div>
     </div>
   </div>
 </template>
 
 <style>
-@import './variables.css';
+@import '../conjurer/variables.css';
 </style>
 
 <style scoped>

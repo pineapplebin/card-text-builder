@@ -1,4 +1,4 @@
-import type { Position, RawTextBlock } from './types'
+import type { Position, RawTextBlock } from '@/classes/BaseDomain/types'
 
 export function getPrefixPosition(
   index: number

@@ -1,4 +1,4 @@
-import type { FONT_SCALE } from './text/font-size'
+import type { FONT_SCALE } from './constants'
 
 export interface DomainConstructorSettings {
   debug: boolean
@@ -17,15 +17,7 @@ export interface RawTextBlock extends Position {
   id: number
   content: string
   color: number | string
-  displayType:
-    | 'title'
-    | 'type'
-    | 'rules'
-    | 'flip-type'
-    | '8th-title'
-    | 'adventure'
-    | '7th-title'
-    | '7th-type'
+  displayType: string
   scale: FONT_SCALE
   align: 'left' | 'center' | 'right'
 }
