@@ -57,24 +57,30 @@
   }
   const target = $(parent[0]).find('p.card-text-artist')[0]
 
-  function buildText(text, type, showHint) {
+  function buildNormal(content) {
     const container = document.createElement('div')
     container.className = 'card-text-box'
     const inner = document.createElement('div')
     inner.className = 'card-text-oracle'
-    inner.innerHTML =
-      `<pre>${type.toUpperCase()}:L <span class="pine-italic">${
-        text.length
-      }</span> ${showHint ? '<span class="pine-hint">DIFF</span>' : ''}</pre>` +
-      text
-        .split('\n')
-        .map((line) => `<p>${line}</p>`)
-        .join('')
+    inner.innerHTML = content
     container.appendChild(inner)
     return container
   }
 
+  function buildText(text, type, showHint) {
+    return buildNormal(
+      `<pre>${type.toUpperCase()}:L <span class="pine-italic">${
+        text.length
+      }</span> ${showHint ? '<span class="pine-hint">DIFF</span>' : ''}</pre>` +
+        text
+          .split('\n')
+          .map((line) => `<p>${line}</p>`)
+          .join('')
+    )
+  }
+
   log(target)
+  target.parentNode.insertBefore(buildNormal(data.type_line), target)
   target.parentNode.insertBefore(buildText(data.oracle_text, 'oracle'), target)
   target.parentNode.insertBefore(
     buildText(
