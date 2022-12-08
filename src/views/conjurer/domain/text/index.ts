@@ -1,10 +1,4 @@
-import {
-  TextMetrics,
-  Text,
-  TextStyle,
-  Container,
-  type ITextStyle,
-} from 'pixi.js'
+import { Container, type ITextStyle } from 'pixi.js'
 import type { RawTextBlock } from '@/classes/BaseDomain/types'
 import { resize } from '@/classes/BaseDomain/utils'
 import { fixed, tail } from '@/tools'
@@ -21,6 +15,7 @@ import {
   getSymbolOffsetY,
   getTextFontSize,
 } from './font-size'
+import { buildSingleLineText } from '@/classes/factory/build-text'
 
 export const buildTextContent = (container: Container, info: RawTextBlock) => {
   if (info.displayType === 'rules') {
@@ -80,26 +75,12 @@ const buildTitleText = (container: Container, info: RawTextBlock) => {
       break
     }
   }
+  config = { ...config, fill: info.color || 0x000 }
 
-  const fontStyle = new TextStyle({
-    ...config,
-    fill: info.color || 0x000,
+  const text = buildSingleLineText(info.content, config, {
+    maxWidth,
+    align: info.align,
   })
-
-  const text = new Text(info.content, fontStyle)
-  text.x = 0
-  text.y = 0
-  const measure = TextMetrics.measureText(info.content, fontStyle)
-  if (measure.width > maxWidth) {
-    text.scale.x = maxWidth / measure.width
-  }
-
-  // 处理 align
-  if (info.align === 'center') {
-    text.anchor.set(0.5, 0)
-    text.x = +(maxWidth / 2).toPrecision(10)
-  }
-
   container.addChild(text)
 }
 

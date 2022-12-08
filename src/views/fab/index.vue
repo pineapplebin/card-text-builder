@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { reactive, ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import { FABDomain } from './domain'
+import type { RawTextBlock } from '@/classes/BaseDomain/types'
+import { getPrefixPosition } from './domain/preset'
 import CCard from '@/components/CCard.vue'
 import CButton from '@/components/CButton.vue'
 import CTextBlock from '@/components/CTextBlock.vue'
-import type { RawTextBlock } from '@/classes/BaseDomain/types'
+import CFooter from './components/CFooter.vue'
 
 const TEXT_CACHED = 'FAB_TEXT_CACHED'
 
@@ -40,6 +42,8 @@ onMounted(() => {
         domain.addRawTextBlock({ ...raw, id: 100 + raw.id + list.length })
       })
     }
+
+    domain.initFooterIcon()
   }, 0)
 })
 
@@ -47,7 +51,12 @@ onBeforeUnmount(() => {
   domain.destroy()
 })
 
-const DISPLAY_TYPE_OPTIONS = ['name']
+const DISPLAY_TYPE_OPTIONS = ['name', 'type']
+
+function addRawTextBlock() {
+  const count = domain.rawTextList.length
+  domain.addRawTextBlock(getPrefixPosition(count))
+}
 </script>
 
 <template>
@@ -61,8 +70,14 @@ const DISPLAY_TYPE_OPTIONS = ['name']
       <CCard>
         <input type="file" accept="image/jpeg,image/png" @change="handleFile" />
       </CCard>
+      <CFooter
+        :left-value="domain.footerLeftIcon"
+        :right-value="domain.footerRightIcon"
+        @update-left="domain.updateFooterIcon('left', $event)"
+        @update-right="domain.updateFooterIcon('right', $event)"
+      ></CFooter>
       <CCard>
-        <CButton @click="domain.addRawTextBlock()">增加新文本</CButton>
+        <CButton @click="addRawTextBlock">增加新文本</CButton>
       </CCard>
       <CTextBlock
         v-for="block in domain.rawTextList"

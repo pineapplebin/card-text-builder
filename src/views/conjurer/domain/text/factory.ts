@@ -1,5 +1,5 @@
 import { Sprite, Texture, TextStyle, Text, TextMetrics } from 'pixi.js'
-import type { RawTextBlock } from '../types'
+import type { RawTextBlock } from '@/classes/BaseDomain'
 import { FONT_SCALE, getSymbolIconSize } from './font-size'
 import type { TextMeta } from './types'
 

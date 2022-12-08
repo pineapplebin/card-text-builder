@@ -6,7 +6,6 @@ import {
   BaseTexture,
   Sprite,
 } from 'pixi.js'
-import { MaskAddon } from './addons/mask'
 import { DEFAULT_SETTINGS } from './settings'
 import { FONT_SCALE } from './constants'
 import type { DomainConstructorSettings, Position, RawTextBlock } from './types'
@@ -14,7 +13,7 @@ import { resize, RESOLUTION } from './utils'
 
 export { resize, RawTextBlock, Position, FONT_SCALE }
 
-export class BaseDomain extends MaskAddon {
+export class BaseDomain {
   public baseImage: string = ''
   public rawTextList: RawTextBlock[] = []
 
@@ -26,7 +25,6 @@ export class BaseDomain extends MaskAddon {
   protected settings: DomainConstructorSettings = { ...DEFAULT_SETTINGS }
 
   constructor(settings: Partial<DomainConstructorSettings> = {}) {
-    super()
     this.settings = { ...DEFAULT_SETTINGS, ...settings }
   }
 
@@ -45,9 +43,8 @@ export class BaseDomain extends MaskAddon {
         height: texture.height,
       })
       background.scale = { x: 1 / RESOLUTION, y: 1 / RESOLUTION }
-      this.pixiApp!.stage.addChildAt(background, 0)
-
-      this.initMaskBlock()
+      background.zIndex = 1
+      this.pixiApp!.stage.addChild(background)
     })
     reader.readAsDataURL(this.file)
   }
@@ -64,14 +61,14 @@ export class BaseDomain extends MaskAddon {
       antialias: true,
       resolution: RESOLUTION,
     })
+    this.pixiApp.stage.sortableChildren = true
 
     const container = new Container()
     container.x = 0
     container.y = 0
+    container.zIndex = 10
     this.pixiApp.stage.addChild(container)
-
     this.container = container
-    this.pixiApp.stage.addChild(this.initMaskContainer())
   }
 
   /**
