@@ -1,45 +1,48 @@
-import type { Position, RawTextBlock } from '@/classes/BaseDomain/types'
+import type { RawTextBlock } from '@/classes/BaseDomain/types'
 
-export function getPrefixPosition(
-  index: number
-): Position & Partial<RawTextBlock> {
-  if (index === 0) {
-    // 名字
-    return {
-      x: 0,
-      y: 120,
-      width: 1500,
-      height: 114,
-      displayType: 'name',
-      align: 'center',
-    }
-  } else if (index === 1) {
-    // 类型
-    return {
-      x: 0,
-      y: 1880,
-      width: 1500,
-      height: 114,
-      displayType: 'type',
-      align: 'center',
-    }
-  } else if (index === 2) {
-    // 效果
-    return {
-      x: 129,
-      y: 1324,
-      width: 1242,
-      height: 604,
-      displayType: 'rules',
-    }
-  }
-
-  // 默认情况
-  return {
+export const PRESET_BLOCK: Partial<RawTextBlock>[] = [
+  // 名字
+  {
     x: 0,
-    y: 0,
-    width: 1000,
-    height: 100,
-    displayType: 'rules',
-  }
-}
+    y: 120,
+    width: 1500,
+    height: 114,
+    displayType: 'name',
+    align: 'center',
+  },
+  // 类型
+  {
+    x: 0,
+    y: 1880,
+    width: 1500,
+    height: 114,
+    displayType: 'type',
+    align: 'center',
+  },
+  // 效果
+  {
+    x: 172,
+    y: 1330,
+    width: 1155,
+    height: 510,
+    displayType: 'rule',
+  },
+  // 左数值
+  {
+    x: 234,
+    y: 1910,
+    width: 104,
+    height: 104,
+    displayType: 'number',
+    align: 'center',
+  },
+  // 右数值
+  {
+    x: 1164,
+    y: 1910,
+    width: 104,
+    height: 104,
+    displayType: 'number',
+    align: 'center',
+  },
+]

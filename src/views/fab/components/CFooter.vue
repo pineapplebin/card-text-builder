@@ -25,7 +25,14 @@ const handleUpdateRight = (ev: Event) => {
   emit('update-right', getValue(ev) || 'none')
 }
 
-const ICON_OPTIONS = ['none', 'attack', 'defense', 'life', 'resource']
+const ICON_OPTIONS = [
+  'none',
+  'attack',
+  'defense',
+  'life',
+  'resource',
+  'intellect',
+]
 </script>
 
 <template>

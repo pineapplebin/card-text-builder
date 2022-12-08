@@ -10,6 +10,8 @@ import {
 const { block, options } = defineProps<{
   block: RawTextBlock
   options: string[]
+  title?: string
+  hideRemove?: boolean
 }>()
 const emit = defineEmits<{
   (e: 'position', pos: Partial<Position>): void
@@ -57,6 +59,7 @@ const handleUpdateAlign = (ev: Event) => {
 
 <template>
   <CCard>
+    <strong v-if="title">{{ title }}</strong>
     <div class="position-info">
       <div
         v-for="key in (['x', 'y', 'width', 'height'] as const)"
@@ -113,7 +116,7 @@ const handleUpdateAlign = (ev: Event) => {
         @blur="handleUpdateContent"
       ></textarea>
     </div>
-    <CButton @click="emit('remove')">移除</CButton>
+    <CButton v-if="!hideRemove" @click="emit('remove')">移除</CButton>
   </CCard>
 </template>
 
@@ -134,6 +137,10 @@ const handleUpdateAlign = (ev: Event) => {
 
 .content {
   margin-bottom: 10px;
+}
+
+.content:last-child {
+  margin-bottom: 0;
 }
 
 .content > textarea {

@@ -2,7 +2,7 @@
 import { reactive, ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import { FABDomain } from './domain'
 import type { RawTextBlock } from '@/classes/BaseDomain/types'
-import { getPrefixPosition } from './domain/preset'
+import { PRESET_BLOCK } from './domain/preset'
 import CCard from '@/components/CCard.vue'
 import CButton from '@/components/CButton.vue'
 import CTextBlock from '@/components/CTextBlock.vue'
@@ -36,10 +36,14 @@ onMounted(() => {
   }
   setTimeout(() => {
     const cached = localStorage.getItem(TEXT_CACHED)
-    if (cached) {
+    if (cached && cached !== '[]') {
       const list: RawTextBlock[] = JSON.parse(cached)
       list.forEach((raw) => {
         domain.addRawTextBlock({ ...raw, id: 100 + raw.id + list.length })
+      })
+    } else {
+      PRESET_BLOCK.forEach((block) => {
+        domain.addRawTextBlock({ ...block })
       })
     }
 
@@ -51,11 +55,16 @@ onBeforeUnmount(() => {
   domain.destroy()
 })
 
-const DISPLAY_TYPE_OPTIONS = ['name', 'type']
+const DISPLAY_TYPE_OPTIONS = ['name', 'type', 'rule', 'number']
 
 function addRawTextBlock() {
-  const count = domain.rawTextList.length
-  domain.addRawTextBlock(getPrefixPosition(count))
+  domain.addRawTextBlock({
+    x: 100,
+    y: 100,
+    width: 100,
+    height: 100,
+    displayType: 'title',
+  })
 }
 </script>
 
@@ -95,7 +104,9 @@ function addRawTextBlock() {
         @remove="domain.removeTextBlock(block.id)"
       />
       <hr />
-      <div class="hint"></div>
+      <div class="hint">
+        <p>～</p>
+      </div>
     </div>
   </div>
 </template>

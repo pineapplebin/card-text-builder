@@ -1,9 +1,11 @@
 import type { Container, ITextStyle } from 'pixi.js'
 import { resize, type RawTextBlock } from '@/classes/BaseDomain'
 import { buildSingleLineText } from '@/classes/factory/build-text'
+import { buildRuleText } from './rule'
 
 export function buildTextContent(container: Container, info: RawTextBlock) {
   if (info.displayType === 'rule') {
+    buildRuleText(container, info)
   } else {
     buildTitleText(container, info)
   }
@@ -20,6 +22,14 @@ const buildTitleText = (container: Container, info: RawTextBlock) => {
     }
     case 'type': {
       config = { fontSize: 30, letterSpacing: 0, fontFamily: '华康魏碑 Std W7' }
+      break
+    }
+    case 'number': {
+      config = {
+        fontSize: 38,
+        letterSpacing: -2,
+        fontFamily: '华康魏碑 Std W7',
+      }
       break
     }
     default: {

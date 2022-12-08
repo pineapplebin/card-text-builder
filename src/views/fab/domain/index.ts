@@ -24,10 +24,10 @@ export class FABDomain extends BaseDomain {
         (modules[`./assets/${key}.png`] as any).default
       )
       const sprite = new Sprite(texture)
-      sprite.width = resize(134)
-      sprite.height = resize(134)
-      sprite.x = resize(index === 0 ? 95 : 1271)
-      sprite.y = resize(1865)
+      sprite.width = resize(138)
+      sprite.height = resize(138)
+      sprite.x = resize(index === 0 ? 94 : 1270)
+      sprite.y = resize(1864)
       sprite.zIndex = 0
 
       if (!this.footerIcons[index]) {
