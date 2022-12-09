@@ -4,11 +4,13 @@ import CCard from '@/components/CCard.vue'
 defineProps<{
   leftValue: string
   rightValue: string
+  pitchValue: string
 }>()
 
 const emit = defineEmits<{
   (e: 'update-left', value: string): void
   (e: 'update-right', value: string): void
+  (e: 'update-pitch', value: string): void
 }>()
 
 const getValue = <Ev extends Event>(ev: Ev) => {
@@ -23,6 +25,10 @@ const handleUpdateLeft = (ev: Event) => {
 
 const handleUpdateRight = (ev: Event) => {
   emit('update-right', getValue(ev) || 'none')
+}
+
+const handleUpdatePitch = (ev: Event) => {
+  emit('update-pitch', getValue(ev) || '1')
 }
 
 const ICON_OPTIONS = [
@@ -51,6 +57,18 @@ const ICON_OPTIONS = [
         <select :value="rightValue" @change="handleUpdateRight">
           <option v-for="icon in ICON_OPTIONS" :key="icon" :value="icon">
             {{ icon }}
+          </option>
+        </select>
+      </div>
+      <div class="field">
+        <span>pitch:</span>
+        <select :value="pitchValue" @change="handleUpdatePitch">
+          <option
+            v-for="pitch in ['0', '1', '2', '3']"
+            :key="pitch"
+            :value="pitch"
+          >
+            {{ pitch }}
           </option>
         </select>
       </div>
