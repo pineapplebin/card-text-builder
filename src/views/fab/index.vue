@@ -64,7 +64,7 @@ onBeforeUnmount(() => {
   domain.destroy()
 })
 
-const DISPLAY_TYPE_OPTIONS = ['name', 'type', 'rule', 'number']
+const DISPLAY_TYPE_OPTIONS = ['name', 'type', 'rule', 'number', 'collect']
 
 function addRawTextBlock() {
   domain.addRawTextBlock({
@@ -85,7 +85,7 @@ const currentTitle = computed(() => {
   return PRESET_BLOCK.find((raw) => raw.id === currentId.value)!.name
 })
 const currentBlock = computed(() => {
-  return domain.rawTextList.find((raw) => raw.id === currentId.value)!
+  return domain.rawTextList.find((raw) => raw.id === currentId.value)
 })
 </script>
 
@@ -124,7 +124,6 @@ const currentBlock = computed(() => {
         v-if="currentBlock"
         :block="currentBlock"
         :options="DISPLAY_TYPE_OPTIONS"
-        hide-remove
         @position="domain.updateTextBlockPosition(currentId, $event)"
         @content="domain.updateTextContent(currentId, $event)"
         @color="domain.updateRawTextInfo(currentId, { color: $event })"
@@ -159,6 +158,7 @@ const currentBlock = computed(() => {
       </CCard>
       <div class="hint">
         <p>～</p>
+        <p>©</p>
       </div>
     </div>
   </div>

@@ -40,8 +40,13 @@ export function buildRuleText(container: Container, info: RawTextBlock) {
       lineContainer.addChild(part)
       x += width
       // 换行
-      if (oversize) {
-        queue.unshift([oversize, ...currentLine])
+      if (oversize && currentLine.length) {
+        const oversizeParts = [...currentLine]
+        // =true 时直接换行; =TextPart 时插入换行
+        if (typeof oversize === 'object') {
+          oversizeParts.unshift(oversize)
+        }
+        queue.unshift(oversizeParts)
         return
       }
     } while (currentLine.length)

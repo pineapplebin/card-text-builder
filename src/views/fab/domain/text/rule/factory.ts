@@ -1,13 +1,14 @@
 import { Text, TextStyle, TextMetrics, Texture, Sprite } from 'pixi.js'
-import type { FlattenItem, SymbolPart, TextPart } from './flatten'
+import type { FlattenItem, FlavorPart, SymbolPart, TextPart } from './flatten'
 import type { BuildContext } from './types'
 
+import IMG_BAR from '@/views/conjurer/domain/assets/bar.png'
 const modules = import.meta.glob('../../assets/*.png', { eager: true })
 
 interface BuildResult {
   part: Sprite | Text
   width: number
-  oversize?: TextPart
+  oversize?: TextPart | boolean
 }
 
 export function buildSymbol(
@@ -45,8 +46,8 @@ export function buildText(
     stroke: 0x000,
     lineJoin: 'round',
     fontWeight: 'lighter',
-    letterSpacing: 2,
-    strokeThickness: text.strong ? 2 : 1,
+    letterSpacing: text.book ? 0 : 2,
+    strokeThickness: text.strong ? 2 : text.book ? 0 : 1,
   })
 
   function checkIsOversize(
@@ -99,6 +100,21 @@ export function buildText(
   }
 }
 
+export function buildFlavorLine(
+  flavor: FlavorPart,
+  x: number,
+  context: BuildContext
+): BuildResult {
+  const texture = Texture.from(IMG_BAR)
+  const sprite = new Sprite(texture)
+  sprite.x = 0
+  sprite.y = context.lineHeight / 2
+  sprite.width = context.maxWidth
+  sprite.height = 2
+
+  return { part: sprite, width: context.maxWidth, oversize: true }
+}
+
 export function buildFactory(
   content: FlattenItem,
   x: number,
@@ -108,6 +124,8 @@ export function buildFactory(
     return buildSymbol(content, x, context)
   } else if (content.type === 'text') {
     return buildText(content, x, context)
+  } else if (content.type === 'flavor') {
+    return buildFlavorLine(content, x, context)
   }
-  throw new Error(`unknown type: ${content.type}`)
+  throw new Error(`unknown type: ${content}`)
 }
