@@ -6,6 +6,7 @@ const BACKGROUND_COLOR: Record<string, number> = {
   r: 0x008ace,
   m: 0xc50709,
   l: 0xe69c46,
+  p: 0x23a633,
 }
 
 const RADIUS = 8

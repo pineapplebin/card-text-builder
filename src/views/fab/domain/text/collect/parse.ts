@@ -1,4 +1,4 @@
-const EXP = /^(\{[\d\w]+\})?\s*([\d\w\-]+)\s*(\{[\d]+\})?$/
+const EXP = /^(\{[\d\w]+\})?([\d\w\-\s]+)(\{[\d]+\})?$/
 
 export interface ParseCollectResult {
   rarity?: string

@@ -14,7 +14,8 @@ interface BuildResult {
 export function buildSymbol(
   symbol: SymbolPart,
   x: number,
-  context: BuildContext
+  context: BuildContext,
+  lastContent: FlattenItem | null
 ): BuildResult {
   const texture = Texture.from(
     (modules[`../../assets/${symbol.key}.png`] as any).default
@@ -25,9 +26,11 @@ export function buildSymbol(
   sprite.width = SIZE
   sprite.height = SIZE
 
+  const isLastContentSymbol = !!lastContent && lastContent.type === 'symbol'
   const GAP = 5
-  const partWidth = GAP + sprite.width + GAP
-  sprite.x = x + GAP
+  const previousGap = isLastContentSymbol ? 0 : GAP
+  const partWidth = previousGap + sprite.width + GAP
+  sprite.x = x + previousGap
   return { part: sprite, width: partWidth }
 }
 
@@ -83,7 +86,7 @@ export function buildText(
     } else {
       index--
     }
-  } while (index > 0)
+  } while (index >= 0)
 
   const part = new Text(text.content.slice(0, index + 1), fontStyle)
   part.x = x
@@ -118,10 +121,11 @@ export function buildFlavorLine(
 export function buildFactory(
   content: FlattenItem,
   x: number,
-  context: BuildContext
+  context: BuildContext,
+  lastContent: FlattenItem | null
 ): BuildResult {
   if (content.type === 'symbol') {
-    return buildSymbol(content, x, context)
+    return buildSymbol(content, x, context, lastContent)
   } else if (content.type === 'text') {
     return buildText(content, x, context)
   } else if (content.type === 'flavor') {

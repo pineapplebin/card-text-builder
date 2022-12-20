@@ -63,7 +63,7 @@ export const PRESET_BLOCK: (Partial<RawTextBlock> & { name: string })[] = [
   {
     name: '费用值',
     id: 106,
-    x: 1292,
+    x: 1291,
     y: 142,
     width: 60,
     height: 80,
@@ -73,9 +73,9 @@ export const PRESET_BLOCK: (Partial<RawTextBlock> & { name: string })[] = [
   {
     name: '编号',
     id: 107,
-    x: 373,
+    x: 400,
     y: 1980,
-    width: 753,
+    width: 700,
     height: 36,
     displayType: 'collect',
     color: '#ffffff',

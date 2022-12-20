@@ -29,7 +29,7 @@ const buildTitleText = (container: Container, info: RawTextBlock) => {
     }
     case 'number': {
       config = {
-        fontSize: 38,
+        fontSize: 36,
         letterSpacing: -2,
         fontFamily: '华康魏碑 Std W7',
       }

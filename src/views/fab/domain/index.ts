@@ -56,7 +56,7 @@ export class FABDomain extends BaseDomain {
       const sprite = new Sprite(texture)
       sprite.width = resize(138)
       sprite.height = resize(138)
-      sprite.x = resize(index === 0 ? 94 : 1270)
+      sprite.x = resize(index === 0 ? 93 : 1268)
       sprite.y = resize(1864)
       sprite.zIndex = 0
 
