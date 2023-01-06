@@ -51,7 +51,7 @@ function buildTextObjects(
   const fontStyle: Partial<ITextStyle> = {
     fontFamily: 'Fira Sans',
     fontSize: 16,
-    fontWeight: 'lighter',
+    // fontWeight: 'lighter',
     letterSpacing: 0,
     fill: info.color || 0x000,
   }

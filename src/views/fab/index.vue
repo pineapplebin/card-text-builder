@@ -170,11 +170,12 @@ const currentBlock = computed(() => {
 
 <style scoped>
 .container {
-  --conjurer-background: url(https://cardconjurer.com/img/lowpolyBackground.svg);
+  /* --conjurer-background: url(https://cardconjurer.com/img/lowpolyBackground.svg); */
   position: relative;
   width: 100%;
   min-height: 100%;
-  background-image: var(--conjurer-background);
+  /* background-image: var(--conjurer-background); */
+  background-color: #505050;
   background-size: cover;
   background-repeat: repeat;
   display: flex;

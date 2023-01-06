@@ -134,11 +134,11 @@ const DISPLAY_TYPE_OPTIONS = [
 
 <style scoped>
 .container {
-  --conjurer-background: url(https://cardconjurer.com/img/lowpolyBackground.svg);
+  /* --conjurer-background: url(https://cardconjurer.com/img/lowpolyBackground.svg); */
   position: relative;
   width: 100%;
   min-height: 100%;
-  background-image: var(--conjurer-background);
+  /* background-image: var(--conjurer-background); */
   background-size: cover;
   background-repeat: repeat;
   display: flex;
