@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import CCard from './components/CCard.vue'
-import CButton from './components/CButton.vue'
-import type { Position } from './domain/types'
+import CCard from '@/components/CCard.vue'
+import CButton from '@/components/CButton.vue'
+import type { Position } from '@/classes/BaseDomain'
 
 defineProps<{
   masks: Position[]
