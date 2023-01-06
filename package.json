@@ -1,12 +1,12 @@
 {
-  "name": "mtg-temp",
-  "version": "0.0.0",
+  "name": "card-text-builder",
+  "version": "1.0.0",
   "scripts": {
     "start": "npm run dev",
     "dev": "vite",
     "build": "run-p type-check build-only",
     "preview": "vite preview --port 4173",
-    "build-only": "vite build --base=/MTGCardbuilder/",
+    "build-only": "vite build --base=/card-text-builder/",
     "type-check": "vue-tsc --noEmit",
     "deploy": "npm run build && node ./gh-pages.js"
   },
